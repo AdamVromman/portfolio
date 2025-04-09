@@ -1,0 +1,12 @@
+@theme {
+  --spacing-15: 15px;
+  --spacing-30: 30px;
+  --spacing-60: 60px;
+  --spacing-120: 120px;
+  --spacing-240: 240px;
+
+  --color-white: #eeeeee;
+  --color-black: #111111;
+  --color-project-trainworld: #de2217;
+  --color-project-clubsofa: #3aab94;
+}
