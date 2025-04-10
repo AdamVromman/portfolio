@@ -4,12 +4,11 @@
   @apply bg-white;
   @apply absolute top-0 left-0 w-screen h-screen;
   @apply p-15;
+  @apply flex items-center justify-center;
 }
 
 #background_svg {
-  @apply border-project-trainworld border-2;
   width: calc(100vw - 30px);
-  aspect-ratio: 8 / 5;
 
   .background_svg_line {
     @apply fill-project-trainworld;
