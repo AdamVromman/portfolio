@@ -2,11 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import "../CSS/background.css";
 import gsap from "gsap";
-import { LineDirection, LineType } from "../assets/Constants";
+import { NR_OF_COLUMNS } from "../assets/Constants";
 
 const Background = () => {
-  const NR_OF_COLUMNS = 15;
-
   const backgroundSVGRef = useRef<SVGSVGElement>(null);
   const timelineRef = useRef<GSAPTimeline | null>(null);
 
@@ -17,14 +15,10 @@ const Background = () => {
     { scope: backgroundSVGRef }
   );
 
-  const [tileWidth, setTileWidth] = useState(0);
-
   const calculateTileWidth = () => {
     if (backgroundSVGRef.current) {
       const localTileWidth =
         backgroundSVGRef.current.clientWidth / NR_OF_COLUMNS;
-      setTileWidth(localTileWidth);
-      console.log("Tile Width: ", localTileWidth);
       return localTileWidth;
     }
     return 0;
@@ -37,7 +31,7 @@ const Background = () => {
       const NR_OF_ROWS = Math.floor((window.innerHeight - 30) / localTileWidth);
       backgroundSVGRef.current.setAttribute(
         "height",
-        NR_OF_ROWS * localTileWidth + "px"
+        `${NR_OF_ROWS * localTileWidth}px`
       );
       const svgNS = "http://www.w3.org/2000/svg";
 

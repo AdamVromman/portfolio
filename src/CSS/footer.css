@@ -1,0 +1,6 @@
+@import "./main.css";
+
+#footer {
+  @apply w-full h-96;
+  @apply border-project-trainworld border-2;
+}

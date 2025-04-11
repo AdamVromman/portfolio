@@ -7,3 +7,5 @@ export enum LineType {
   MAIN = "main",
   SUB = "sub",
 }
+
+export const NR_OF_COLUMNS = 15;

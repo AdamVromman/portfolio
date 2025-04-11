@@ -4,7 +4,7 @@
   @apply bg-white;
   @apply absolute top-0 left-0 w-screen h-screen;
   @apply p-15;
-  @apply flex items-center justify-center;
+  @apply flex flex-col items-center justify-start;
 }
 
 #background_svg {

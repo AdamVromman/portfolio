@@ -2,6 +2,7 @@
 @import "./theme.css";
 
 html {
+  @apply bg-white;
 }
 
 body {
