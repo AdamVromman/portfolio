@@ -1,4 +1,4 @@
-@import "./main.css";
+@import "./imports.css";
 
 #footer {
   @apply w-full h-96;

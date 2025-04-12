@@ -1,9 +1,20 @@
-@import "tailwindcss";
-@import "./theme.css";
+@import "./imports.css";
 
 html {
   @apply bg-white;
 }
 
 body {
+  font-family: "Geist", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.half-col-text {
+  @apply text-[2vw];
+}
+
+.full-col-text {
+  @apply text-[4vw];
 }

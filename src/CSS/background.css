@@ -1,16 +1,29 @@
-@import "./main.css";
+@import "./imports.css";
 
 #background {
   @apply bg-white;
-  @apply absolute top-0 left-0 w-screen h-screen;
-  @apply p-15;
+  @apply absolute top-0 left-0;
+  width: calc(100vw - 30px);
+  max-width: calc(100vw - 30px);
+  @apply m-15;
   @apply flex flex-col items-center justify-start;
 }
 
 #background_svg {
-  width: calc(100vw - 30px);
+  @apply w-full h-full;
 
   .background_svg_line {
     @apply fill-project-trainworld;
   }
+}
+
+.background_bouncing-icons {
+  @apply w-full h-full;
+  @apply max-w-full max-h-full overflow-hidden;
+  @apply absolute;
+}
+
+.background_bouncing-icon {
+  @apply absolute;
+  @apply origin-center;
 }

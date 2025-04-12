@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import "../CSS/background.css";
 import gsap from "gsap";
-import { NR_OF_COLUMNS } from "../assets/Constants";
+import { calculateHeight, NR_OF_COLUMNS } from "../assets/Constants";
+import BouncingIcon from "./BouncingIcon";
 
 const Background = () => {
+  const backgroundRef = useRef<HTMLDivElement>(null);
   const backgroundSVGRef = useRef<SVGSVGElement>(null);
   const timelineRef = useRef<GSAPTimeline | null>(null);
 
@@ -29,10 +31,10 @@ const Background = () => {
       backgroundSVGRef.current.textContent = "";
       const localTileWidth = calculateTileWidth();
       const NR_OF_ROWS = Math.floor((window.innerHeight - 30) / localTileWidth);
-      backgroundSVGRef.current.setAttribute(
-        "height",
-        `${NR_OF_ROWS * localTileWidth}px`
-      );
+      // backgroundSVGRef.current.setAttribute(
+      //   "height",
+      //   calculateHeight(localTileWidth)
+      // );
       const svgNS = "http://www.w3.org/2000/svg";
 
       for (let i = 0; i < NR_OF_COLUMNS + 1; i++) {
@@ -146,12 +148,33 @@ const Background = () => {
   });
 
   const onResize = () => {
+    if (backgroundRef.current) {
+      backgroundRef.current.style.height = calculateHeight(
+        calculateTileWidth()
+      );
+    }
     calculateTileWidth();
     drawLines();
+    sizeImages();
+  };
+
+  const sizeImages = () => {
+    const images = document.querySelectorAll(".background_bouncing-icons img");
+    images.forEach((image) => {
+      const tileWidth = calculateTileWidth();
+      image.setAttribute("width", `${tileWidth}px`);
+      image.setAttribute("height", `${tileWidth}px`);
+    });
   };
 
   useEffect(() => {
+    if (backgroundRef.current) {
+      backgroundRef.current.style.height = calculateHeight(
+        calculateTileWidth()
+      );
+    }
     calculateTileWidth();
+    sizeImages();
     drawLines(true);
     window.addEventListener("resize", onResize);
 
@@ -161,8 +184,17 @@ const Background = () => {
   }, []);
 
   return (
-    <div id="background">
+    <div ref={backgroundRef} id="background">
       <svg ref={backgroundSVGRef} id="background_svg"></svg>
+      <div className="background_bouncing-icons">
+        <BouncingIcon>
+          <img
+            width={calculateTileWidth()}
+            src="train-world-logo.svg"
+            alt="Train World Logo"
+          />
+        </BouncingIcon>
+      </div>
     </div>
   );
 };
