@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import "../CSS/background.css";
 import gsap from "gsap";
-import { calculateHeight, getNrOfColumns } from "../assets/Constants";
+import { calculateNrOfRows, getNrOfColumns } from "../assets/Constants";
 import BouncingIcon from "./BouncingIcon";
 
 const Background = () => {
@@ -30,11 +30,7 @@ const Background = () => {
     if (backgroundSVGRef.current) {
       backgroundSVGRef.current.textContent = "";
       const localTileWidth = calculateTileWidth();
-      const NR_OF_ROWS = Math.floor((window.innerHeight - 30) / localTileWidth);
-      // backgroundSVGRef.current.setAttribute(
-      //   "height",
-      //   calculateHeight(localTileWidth)
-      // );
+      const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
       const svgNS = "http://www.w3.org/2000/svg";
 
       for (let i = 0; i < getNrOfColumns() + 1; i++) {
@@ -149,9 +145,9 @@ const Background = () => {
 
   const onResize = () => {
     if (backgroundRef.current) {
-      backgroundRef.current.style.height = calculateHeight(
-        calculateTileWidth()
-      );
+      backgroundRef.current.style.height = `${
+        calculateNrOfRows(calculateTileWidth()) * calculateTileWidth()
+      }px`;
     }
     calculateTileWidth();
     drawLines();
@@ -169,9 +165,9 @@ const Background = () => {
 
   useEffect(() => {
     if (backgroundRef.current) {
-      backgroundRef.current.style.height = calculateHeight(
-        calculateTileWidth()
-      );
+      backgroundRef.current.style.height = `${
+        calculateNrOfRows(calculateTileWidth()) * calculateTileWidth()
+      }px`;
     }
     calculateTileWidth();
     sizeImages();

@@ -14,12 +14,25 @@ const NR_OF_COLUMNS_768 = 9;
 const NR_OF_COLUMNS_1024 = 13;
 const NR_OF_COLUMNS_1280 = 15;
 
-export const calculateHeight = (localTileWidth: number) => {
+export const calculateNrOfRows = (localTileWidth: number) => {
   if (window) {
+    const screenWidth = getScreenWidth();
     const NR_OF_ROWS = Math.floor((window.innerHeight - 30) / localTileWidth);
-    return `${NR_OF_ROWS * localTileWidth}px`;
+    if (screenWidth >= 1280) {
+      return Math.max(NR_OF_ROWS, 5);
+    }
+    if (screenWidth >= 1024) {
+      return Math.max(NR_OF_ROWS, 6);
+    }
+    if (screenWidth >= 768) {
+      return Math.max(NR_OF_ROWS, 7);
+    }
+    if (screenWidth >= 480) {
+      return Math.max(NR_OF_ROWS, 8);
+    }
+    return Math.max(NR_OF_ROWS, 10);
   }
-  return "0px";
+  return 5;
 };
 
 export const getScreenWidth = () => {

@@ -23,7 +23,7 @@
 
   @media screen and (min-width: 480px) {
     grid-row: -3 / -1;
-    grid-column: 1 / 13;
+    grid-column: 1 / -1;
   }
 
   @media screen and (min-width: 768px) {
@@ -95,17 +95,17 @@
 }
 
 .home_grid_text {
-  grid-row: -4 / -5;
+  grid-row: -2 / -4;
   grid-column: 1 / -2;
 
   @media screen and (min-width: 480px) {
-    grid-row: -3 / -4;
+    grid-row: -3 / -5;
     grid-column: 2 / -1;
   }
 
   @media screen and (min-width: 768px) {
     grid-row: -3 / -5;
-    grid-column: -5 / -1;
+    grid-column: -6 / -1;
   }
 
   @media screen and (min-width: 1024px) {
@@ -121,8 +121,29 @@
   @apply flex flex-col items-center justify-center;
 
   p {
-    @apply text-[2.7vw];
-    @apply leading-[3vw];
+    @apply text-[4.7vw];
+    @apply leading-[5.3vw];
     @apply p-5;
+
+    @media screen and (min-width: 480px) {
+      @apply text-[4.3vw];
+      @apply leading-[4.7vw];
+      @apply p-5;
+    }
+    @media screen and (min-width: 768px) {
+      @apply text-[3.2vw];
+      @apply leading-[3.5vw];
+      @apply p-5;
+    }
+    @media screen and (min-width: 1024px) {
+      @apply text-[2.7vw];
+      @apply leading-[3vw];
+      @apply p-5;
+    }
+    @media screen and (min-width: 1280px) {
+      @apply text-[2.7vw];
+      @apply leading-[3vw];
+      @apply p-5;
+    }
   }
 }

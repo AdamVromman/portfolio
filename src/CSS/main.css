@@ -12,7 +12,7 @@ body {
 }
 
 .half-col-text {
-  @apply text-[2vw];
+  @apply text-[5vw] lg:text-[2vw];
 }
 
 .full-col-text {
