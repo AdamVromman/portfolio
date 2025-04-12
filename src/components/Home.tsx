@@ -7,6 +7,7 @@ import {
 } from "../assets/Constants";
 import Footer from "./Footer";
 import Background from "./Background";
+import FlyingObjects from "./FlyingObjects";
 
 const Home = () => {
   const homeGridRef = useRef<HTMLDivElement>(null);
@@ -39,6 +40,10 @@ const Home = () => {
 
   return (
     <div id="home">
+      <FlyingObjects
+        width={homeGridRef.current?.clientWidth}
+        height={homeGridRef.current?.clientHeight}
+      />
       <div ref={homeGridRef} className="home_grid">
         <Background nrOfRows={nrOfRows} />
         <div className="grid_cell home_grid_title">
@@ -99,7 +104,7 @@ const Home = () => {
           </p>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

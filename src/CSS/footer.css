@@ -65,10 +65,10 @@
   @apply flex flex-col justify-self-end;
 
   a {
-    @apply bg-project-trainworld fill-white;
+    @apply bg-active fill-white;
     @apply w-full aspect-square;
     @apply flex justify-center items-center;
-    @apply hover:bg-white hover:fill-project-trainworld;
+    @apply hover:bg-white hover:fill-active;
 
     svg {
       @apply w-4/5;
@@ -92,13 +92,13 @@
   height: calc(50% - 1px);
 
   &:hover {
-    @apply bg-project-trainworld;
+    @apply bg-active;
     @apply text-white;
 
     .footer_grid_back-home_icon {
       @apply bg-white;
       svg {
-        @apply stroke-project-trainworld;
+        @apply stroke-active;
       }
     }
   }
@@ -107,7 +107,7 @@
 .footer_grid_back-home_icon {
   @apply flex justify-center items-center;
   @apply h-full aspect-square;
-  @apply bg-project-trainworld;
+  @apply bg-active;
 
   svg {
     @apply w-4/5;
