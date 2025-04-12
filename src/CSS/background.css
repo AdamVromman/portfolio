@@ -11,7 +11,7 @@
   @apply w-full h-full;
 
   .background_svg_line {
-    @apply fill-project-trainworld;
+    @apply fill-active;
   }
 }
 

@@ -9,7 +9,7 @@
 .home_grid {
   @apply grid w-full gap-[2px];
   @apply p-[2px];
-  @apply relative z-10;
+  @apply relative;
 }
 
 .home_grid_title {
@@ -114,6 +114,13 @@
 
   a {
     @apply uppercase font-semibold;
+
+    &:hover {
+      @apply italic;
+      :root {
+        --color-active: #ff00ff;
+      }
+    }
   }
 
   span {
