@@ -9,7 +9,7 @@ body {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  @apply relative max-w-[1440px] mx-auto;
+  @apply relative max-w-[1920px] mx-auto;
 }
 
 * {
@@ -36,8 +36,8 @@ body {
     @apply leading-[3.5vw];
   }
   @media screen and (min-width: 1280px) {
-    @apply text-[2vw];
-    @apply leading-[2.5vw];
+    font-size: min(2.5vw, 28.8px);
+    line-height: min(2.5vw, 36px);
   }
 }
 

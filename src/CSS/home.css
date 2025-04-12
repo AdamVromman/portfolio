@@ -168,8 +168,8 @@
       @apply p-5;
     }
     @media screen and (min-width: 1280px) {
-      @apply text-[2.7vw];
-      @apply leading-[3vw];
+      font-size: min(2.7vw, 38.8px);
+      line-height: min(3vw, 43.2px);
       @apply p-5;
     }
   }
