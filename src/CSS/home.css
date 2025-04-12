@@ -1,7 +1,7 @@
 @import "./imports.css";
 
 #home {
-  @apply absolute top-0 left-0 w-screen;
+  @apply absolute top-0 left-0 w-full;
   @apply p-15;
   @apply flex flex-col items-center justify-start gap-15;
 }
@@ -9,12 +9,6 @@
 .home_grid {
   @apply grid w-full gap-[2px];
   @apply p-[2px];
-  @apply relative z-10;
-}
-
-.grid_cell {
-  @apply bg-white;
-  @apply overflow-hidden;
   @apply relative z-10;
 }
 
@@ -84,8 +78,10 @@
   @apply self-end;
 
   @media screen and (min-width: 1024px) {
+    @apply self-start;
     grid-row: 1 / 2;
     grid-column: 6 / -1;
+    height: calc(50% - 1px);
   }
   @media screen and (min-width: 1280px) {
     grid-row: 1 / 2;
@@ -172,8 +168,8 @@
       @apply p-5;
     }
     @media screen and (min-width: 1280px) {
-      @apply text-[2.7vw];
-      @apply leading-[3vw];
+      font-size: min(2.7vw, 38.8px);
+      line-height: min(3vw, 43.2px);
       @apply p-5;
     }
   }

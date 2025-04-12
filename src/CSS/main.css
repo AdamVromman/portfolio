@@ -9,6 +9,14 @@ body {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+  @apply relative max-w-[1920px] mx-auto;
+}
+
+* {
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out;
 }
 
 .half-col-text {
@@ -28,11 +36,17 @@ body {
     @apply leading-[3.5vw];
   }
   @media screen and (min-width: 1280px) {
-    @apply text-[2vw];
-    @apply leading-[2.5vw];
+    font-size: min(2.5vw, 28.8px);
+    line-height: min(2.5vw, 36px);
   }
 }
 
 .full-col-text {
   @apply text-[4vw];
+}
+
+.grid_cell {
+  @apply bg-white;
+  @apply overflow-hidden;
+  @apply relative z-10;
 }

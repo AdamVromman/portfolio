@@ -23,7 +23,7 @@ export const calculateNrOfRows = (localTileWidth: number) => {
     const screenWidth = getScreenWidth();
     const NR_OF_ROWS = Math.floor((window.innerHeight - 30) / localTileWidth);
     if (screenWidth >= 1280) {
-      return Math.max(NR_OF_ROWS, 5);
+      return Math.max(NR_OF_ROWS, 7);
     }
     if (screenWidth >= 1024) {
       return Math.max(NR_OF_ROWS, 6);
