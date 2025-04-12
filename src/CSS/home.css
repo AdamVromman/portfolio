@@ -12,12 +12,6 @@
   @apply relative z-10;
 }
 
-.grid_cell {
-  @apply bg-white;
-  @apply overflow-hidden;
-  @apply relative z-10;
-}
-
 .home_grid_title {
   grid-row: -2 / -1;
   grid-column: 2 / -1;
@@ -84,8 +78,10 @@
   @apply self-end;
 
   @media screen and (min-width: 1024px) {
+    @apply self-start;
     grid-row: 1 / 2;
     grid-column: 6 / -1;
+    height: calc(50% - 1px);
   }
   @media screen and (min-width: 1280px) {
     grid-row: 1 / 2;

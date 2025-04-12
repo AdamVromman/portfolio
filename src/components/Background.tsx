@@ -141,11 +141,6 @@ const Background = ({ nrOfRows }: BackgroundProps) => {
   });
 
   const onResize = () => {
-    if (backgroundRef.current) {
-      backgroundRef.current.style.height = `${
-        nrOfRows * calculateTileWidth(backgroundRef.current)
-      }px`;
-    }
     drawLines();
   };
 
@@ -159,12 +154,6 @@ const Background = ({ nrOfRows }: BackgroundProps) => {
   // };
 
   useEffect(() => {
-    if (backgroundRef.current) {
-      backgroundRef.current.style.height = `${
-        nrOfRows * calculateTileWidth(backgroundRef.current)
-      }px`;
-    }
-
     drawLines(true);
     window.addEventListener("resize", onResize);
 
