@@ -182,7 +182,7 @@ const Background = () => {
   return (
     <div ref={backgroundRef} id="background">
       <svg ref={backgroundSVGRef} id="background_svg"></svg>
-      <div className="background_bouncing-icons">
+      {/* <div className="background_bouncing-icons">
         <BouncingIcon>
           <img
             width={calculateTileWidth()}
@@ -190,7 +190,7 @@ const Background = () => {
             alt="Train World Logo"
           />
         </BouncingIcon>
-      </div>
+      </div> */}
     </div>
   );
 };
