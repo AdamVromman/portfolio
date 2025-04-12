@@ -49,24 +49,18 @@
 
   grid-row: 1 / 2;
   grid-column: 1 / 5;
-  @apply self-end;
-  height: calc(50% + 0.5px);
+  @apply self-start;
+  height: calc(50% - 1px);
 
   @media screen and (min-width: 480px) {
     grid-row: 1 / 2;
     grid-column: 1 / 5;
-    @apply self-end;
-    height: calc(50% + 0.5px);
   }
   @media screen and (min-width: 768px) {
     grid-row: 1 / 2;
     grid-column: 1 / 5;
-    @apply self-end;
-    height: calc(50% + 0.5px);
   }
   @media screen and (min-width: 1024px) {
-    @apply self-start;
-    height: calc(50% - 1px);
     grid-row: 1 / 2;
     grid-column: 1 / 6;
   }
@@ -84,21 +78,9 @@
 .home_grid_works {
   grid-row: 1 / 2;
   grid-column: 1 / -1;
-  height: calc(50% - 1px);
-  @apply self-start;
+  height: calc(50% + 0.5px);
+  @apply self-end;
 
-  @media screen and (min-width: 480px) {
-    grid-row: 1 / 2;
-    grid-column: 1 / -1;
-    height: calc(50% - 1px);
-    @apply self-start;
-  }
-  @media screen and (min-width: 768px) {
-    grid-row: 1 / 2;
-    grid-column: 1 / -1;
-    height: calc(50% - 1px);
-    @apply self-start;
-  }
   @media screen and (min-width: 1024px) {
     grid-row: 1 / 2;
     grid-column: 6 / -1;
