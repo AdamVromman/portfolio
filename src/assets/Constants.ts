@@ -19,7 +19,7 @@ export const calculateTileWidth = (container: HTMLElement) => {
 };
 
 export const calculateNrOfRows = (localTileWidth: number) => {
-  if (window) {
+  if (typeof window !== "undefined") {
     const screenWidth = getScreenWidth();
     const NR_OF_ROWS = Math.floor((window.innerHeight - 30) / localTileWidth);
     if (screenWidth >= 1280) {
@@ -40,7 +40,7 @@ export const calculateNrOfRows = (localTileWidth: number) => {
 };
 
 export const getScreenWidth = () => {
-  if (window) {
+  if (typeof window !== "undefined") {
     return window.innerWidth;
   }
   return 0;

@@ -7,9 +7,12 @@ import {
   calculateTileWidth,
   getNrOfColumns,
 } from "../assets/Constants";
-import BouncingIcon from "./BouncingIcon";
 
-const Background = () => {
+interface BackgroundProps {
+  nrOfRows: number;
+}
+
+const Background = ({ nrOfRows }: BackgroundProps) => {
   const backgroundRef = useRef<HTMLDivElement>(null);
   const backgroundSVGRef = useRef<SVGSVGElement>(null);
   const timelineRef = useRef<GSAPTimeline | null>(null);
@@ -25,7 +28,6 @@ const Background = () => {
     if (backgroundSVGRef.current && backgroundRef.current) {
       backgroundSVGRef.current.textContent = "";
       const localTileWidth = calculateTileWidth(backgroundRef.current);
-      const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
       const svgNS = "http://www.w3.org/2000/svg";
 
       for (let i = 0; i < getNrOfColumns() + 1; i++) {
@@ -84,7 +86,7 @@ const Background = () => {
         } else line.setAttribute("height", "100%");
       }
 
-      for (let i = 0; i < NR_OF_ROWS + 1; i++) {
+      for (let i = 0; i < nrOfRows + 1; i++) {
         const line = document.createElementNS(svgNS, "rect");
         line.classList.add("background_svg_line");
         line.classList.add("line_horizontal");
@@ -93,7 +95,7 @@ const Background = () => {
         line.setAttribute("height", "2px");
         line.setAttribute(
           "y",
-          `${localTileWidth * i - (2 / (NR_OF_ROWS + 1)) * i}px`
+          `${localTileWidth * i - (2 / (nrOfRows + 1)) * i}px`
         );
         line.setAttribute("x", "0");
         backgroundSVGRef.current.appendChild(line);
@@ -110,7 +112,7 @@ const Background = () => {
         } else line.setAttribute("width", "100%");
       }
 
-      for (let i = 0; i < NR_OF_ROWS; i++) {
+      for (let i = 0; i < nrOfRows; i++) {
         const line = document.createElementNS(svgNS, "rect");
         line.classList.add("background_svg_line");
         line.classList.add("line_horizontal");
@@ -119,7 +121,7 @@ const Background = () => {
         line.setAttribute("height", "0.5px");
         line.setAttribute(
           "y",
-          `${localTileWidth / 2 + localTileWidth * i - (1 / NR_OF_ROWS) * i}px`
+          `${localTileWidth / 2 + localTileWidth * i - (1 / nrOfRows) * i}px`
         );
         line.setAttribute("x", "0");
         backgroundSVGRef.current.appendChild(line);
@@ -141,8 +143,7 @@ const Background = () => {
   const onResize = () => {
     if (backgroundRef.current) {
       backgroundRef.current.style.height = `${
-        calculateNrOfRows(calculateTileWidth(backgroundRef.current)) *
-        calculateTileWidth(backgroundRef.current)
+        nrOfRows * calculateTileWidth(backgroundRef.current)
       }px`;
     }
     drawLines();
@@ -160,8 +161,7 @@ const Background = () => {
   useEffect(() => {
     if (backgroundRef.current) {
       backgroundRef.current.style.height = `${
-        calculateNrOfRows(calculateTileWidth(backgroundRef.current)) *
-        calculateTileWidth(backgroundRef.current)
+        nrOfRows * calculateTileWidth(backgroundRef.current)
       }px`;
     }
 
@@ -171,7 +171,7 @@ const Background = () => {
     return () => {
       window.removeEventListener("resize", onResize);
     };
-  }, []);
+  }, [nrOfRows]);
 
   return (
     <div ref={backgroundRef} id="background">

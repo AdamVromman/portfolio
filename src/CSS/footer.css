@@ -2,5 +2,4 @@
 
 #footer {
   @apply relative grid w-full gap-[2px];
-  @apply border-project-trainworld border-2;
 }

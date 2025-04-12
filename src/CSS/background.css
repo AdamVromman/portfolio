@@ -5,8 +5,8 @@
   @apply absolute top-0 left-0;
   width: calc(100vw - 30px);
   max-width: calc(100vw - 30px);
-  @apply m-15;
   @apply flex flex-col items-center justify-start;
+  z-index: 0;
 }
 
 #background_svg {
