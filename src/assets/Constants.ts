@@ -14,8 +14,12 @@ const NR_OF_COLUMNS_768 = 9;
 const NR_OF_COLUMNS_1024 = 13;
 const NR_OF_COLUMNS_1280 = 15;
 
+export const calculateTileWidth = (container: HTMLElement) => {
+  return container.clientWidth / getNrOfColumns();
+};
+
 export const calculateNrOfRows = (localTileWidth: number) => {
-  if (window) {
+  if (typeof window !== "undefined") {
     const screenWidth = getScreenWidth();
     const NR_OF_ROWS = Math.floor((window.innerHeight - 30) / localTileWidth);
     if (screenWidth >= 1280) {
@@ -36,7 +40,7 @@ export const calculateNrOfRows = (localTileWidth: number) => {
 };
 
 export const getScreenWidth = () => {
-  if (window) {
+  if (typeof window !== "undefined") {
     return window.innerWidth;
   }
   return 0;

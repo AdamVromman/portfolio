@@ -1,24 +1,23 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../CSS/home.css";
-import { calculateNrOfRows, getNrOfColumns } from "../assets/Constants";
+import {
+  calculateNrOfRows,
+  calculateTileWidth,
+  getNrOfColumns,
+} from "../assets/Constants";
 import Footer from "./Footer";
+import Background from "./Background";
 
 const Home = () => {
   const homeGridRef = useRef<HTMLDivElement>(null);
 
-  const calculateTileWidth = () => {
-    if (homeGridRef.current) {
-      const localTileWidth = homeGridRef.current.clientWidth / getNrOfColumns();
-      return localTileWidth;
-    }
-    return 0;
-  };
+  const [nrOfRows, setNrOfRows] = useState<number>(0);
 
   const drawGrid = () => {
     if (homeGridRef.current) {
-      const localTileWidth = calculateTileWidth();
+      const localTileWidth = calculateTileWidth(homeGridRef.current);
       const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
-      console.log(NR_OF_ROWS);
+      setNrOfRows(NR_OF_ROWS);
       homeGridRef.current.style.height = `${NR_OF_ROWS * localTileWidth}px`;
       homeGridRef.current.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, 1fr)`;
       homeGridRef.current.style.gridTemplateRows = `repeat(${NR_OF_ROWS}, 1fr)`;
@@ -41,6 +40,7 @@ const Home = () => {
   return (
     <div id="home">
       <div ref={homeGridRef} className="home_grid">
+        <Background nrOfRows={nrOfRows} />
         <div className="grid_cell home_grid_title">
           <svg className="md:hidden max-h-full w-fit" viewBox="0 0 641 194">
             <path
