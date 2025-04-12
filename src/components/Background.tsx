@@ -2,7 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import "../CSS/background.css";
 import gsap from "gsap";
-import { calculateNrOfRows, getNrOfColumns } from "../assets/Constants";
+import {
+  calculateNrOfRows,
+  calculateTileWidth,
+  getNrOfColumns,
+} from "../assets/Constants";
 import BouncingIcon from "./BouncingIcon";
 
 const Background = () => {
@@ -17,19 +21,10 @@ const Background = () => {
     { scope: backgroundSVGRef }
   );
 
-  const calculateTileWidth = () => {
-    if (backgroundSVGRef.current) {
-      const localTileWidth =
-        backgroundSVGRef.current.clientWidth / getNrOfColumns();
-      return localTileWidth;
-    }
-    return 0;
-  };
-
   const drawLines = contextSafe((animated: boolean = false) => {
-    if (backgroundSVGRef.current) {
+    if (backgroundSVGRef.current && backgroundRef.current) {
       backgroundSVGRef.current.textContent = "";
-      const localTileWidth = calculateTileWidth();
+      const localTileWidth = calculateTileWidth(backgroundRef.current);
       const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
       const svgNS = "http://www.w3.org/2000/svg";
 
@@ -146,31 +141,30 @@ const Background = () => {
   const onResize = () => {
     if (backgroundRef.current) {
       backgroundRef.current.style.height = `${
-        calculateNrOfRows(calculateTileWidth()) * calculateTileWidth()
+        calculateNrOfRows(calculateTileWidth(backgroundRef.current)) *
+        calculateTileWidth(backgroundRef.current)
       }px`;
     }
-    calculateTileWidth();
     drawLines();
-    sizeImages();
   };
 
-  const sizeImages = () => {
-    const images = document.querySelectorAll(".background_bouncing-icons img");
-    images.forEach((image) => {
-      const tileWidth = calculateTileWidth();
-      image.setAttribute("width", `${tileWidth}px`);
-      image.setAttribute("height", `${tileWidth}px`);
-    });
-  };
+  // const sizeImages = () => {
+  //   const images = document.querySelectorAll(".background_bouncing-icons img");
+  //   images.forEach((image) => {
+  //     const tileWidth = calculateTileWidth(backgroundRef.current);
+  //     image.setAttribute("width", `${tileWidth}px`);
+  //     image.setAttribute("height", `${tileWidth}px`);
+  //   });
+  // };
 
   useEffect(() => {
     if (backgroundRef.current) {
       backgroundRef.current.style.height = `${
-        calculateNrOfRows(calculateTileWidth()) * calculateTileWidth()
+        calculateNrOfRows(calculateTileWidth(backgroundRef.current)) *
+        calculateTileWidth(backgroundRef.current)
       }px`;
     }
-    calculateTileWidth();
-    sizeImages();
+
     drawLines(true);
     window.addEventListener("resize", onResize);
 
@@ -185,7 +179,7 @@ const Background = () => {
       {/* <div className="background_bouncing-icons">
         <BouncingIcon>
           <img
-            width={calculateTileWidth()}
+            width={calculateTileWidth(backgroundRef.current)}
             src="train-world-logo.svg"
             alt="Train World Logo"
           />

@@ -1,22 +1,18 @@
 import { useEffect, useRef } from "react";
 import "../CSS/home.css";
-import { calculateNrOfRows, getNrOfColumns } from "../assets/Constants";
+import {
+  calculateNrOfRows,
+  calculateTileWidth,
+  getNrOfColumns,
+} from "../assets/Constants";
 import Footer from "./Footer";
 
 const Home = () => {
   const homeGridRef = useRef<HTMLDivElement>(null);
 
-  const calculateTileWidth = () => {
-    if (homeGridRef.current) {
-      const localTileWidth = homeGridRef.current.clientWidth / getNrOfColumns();
-      return localTileWidth;
-    }
-    return 0;
-  };
-
   const drawGrid = () => {
     if (homeGridRef.current) {
-      const localTileWidth = calculateTileWidth();
+      const localTileWidth = calculateTileWidth(homeGridRef.current);
       const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
       console.log(NR_OF_ROWS);
       homeGridRef.current.style.height = `${NR_OF_ROWS * localTileWidth}px`;

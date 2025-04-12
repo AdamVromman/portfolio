@@ -14,6 +14,10 @@ const NR_OF_COLUMNS_768 = 9;
 const NR_OF_COLUMNS_1024 = 13;
 const NR_OF_COLUMNS_1280 = 15;
 
+export const calculateTileWidth = (container: HTMLElement) => {
+  return container.clientWidth / getNrOfColumns();
+};
+
 export const calculateNrOfRows = (localTileWidth: number) => {
   if (window) {
     const screenWidth = getScreenWidth();
