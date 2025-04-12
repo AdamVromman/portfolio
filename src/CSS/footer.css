@@ -28,7 +28,8 @@
 
   @media screen and (min-width: 1280px) {
     grid-row: -2 / -1;
-    grid-column: 1 / 13;
+    grid-column: 5 / -1;
+    @apply justify-end;
   }
 }
 
@@ -42,23 +43,32 @@
 }
 
 .grid_cell.footer_grid_contact {
-  @apply bg-project-trainworld fill-white;
-  @apply hover:bg-white hover:fill-project-trainworld;
+  @apply flex flex-col justify-self-end;
+
+  a {
+    @apply bg-project-trainworld fill-white;
+    @apply w-full aspect-square;
+    @apply flex justify-center items-center;
+    @apply hover:bg-white hover:fill-project-trainworld;
+
+    svg {
+      @apply w-4/5;
+    }
+  }
 
   grid-column: -1 / -2;
-  @apply w-1/2 h-1/2;
+  grid-row: -2 / -3;
 
-  @apply flex flex-row justify-center items-center;
+  @apply w-1/2;
 
-  &.linkedin {
-    grid-row: -2 / -3;
-    @apply self-end justify-self-end;
+  @media screen and (min-width: 480px) {
+    grid-row: -3 / -4;
   }
 
-  &.pixelfed {
+  @media screen and (min-width: 1024px) {
     grid-row: -2 / -3;
-    @apply self-start justify-self-end;
   }
+
   svg {
     @apply w-3/5 h-3/5;
   }
