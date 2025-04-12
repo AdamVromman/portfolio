@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import "../CSS/background.css";
 import gsap from "gsap";
-import { calculateHeight, NR_OF_COLUMNS } from "../assets/Constants";
+import { calculateHeight, getNrOfColumns } from "../assets/Constants";
 import BouncingIcon from "./BouncingIcon";
 
 const Background = () => {
@@ -20,7 +20,7 @@ const Background = () => {
   const calculateTileWidth = () => {
     if (backgroundSVGRef.current) {
       const localTileWidth =
-        backgroundSVGRef.current.clientWidth / NR_OF_COLUMNS;
+        backgroundSVGRef.current.clientWidth / getNrOfColumns();
       return localTileWidth;
     }
     return 0;
@@ -37,7 +37,7 @@ const Background = () => {
       // );
       const svgNS = "http://www.w3.org/2000/svg";
 
-      for (let i = 0; i < NR_OF_COLUMNS + 1; i++) {
+      for (let i = 0; i < getNrOfColumns() + 1; i++) {
         const line = document.createElementNS(svgNS, "rect");
         line.classList.add("background_svg_line");
         line.classList.add("line_vertical");
@@ -46,7 +46,7 @@ const Background = () => {
         line.setAttribute("width", "2px");
         line.setAttribute(
           "x",
-          `${localTileWidth * i - (2 / (NR_OF_COLUMNS + 1)) * i}px`
+          `${localTileWidth * i - (2 / (getNrOfColumns() + 1)) * i}px`
         );
         line.setAttribute("y", "0");
         backgroundSVGRef.current.appendChild(line);
@@ -65,7 +65,7 @@ const Background = () => {
         }
       }
 
-      for (let i = 0; i < NR_OF_COLUMNS; i++) {
+      for (let i = 0; i < getNrOfColumns(); i++) {
         const line = document.createElementNS(svgNS, "rect");
         line.classList.add("background_svg_line");
         line.classList.add("line_vertical");
@@ -75,7 +75,7 @@ const Background = () => {
         line.setAttribute(
           "x",
           `${
-            localTileWidth / 2 + localTileWidth * i - (1 / NR_OF_COLUMNS) * i
+            localTileWidth / 2 + localTileWidth * i - (1 / getNrOfColumns()) * i
           }px`
         );
         line.setAttribute("y", "0");
