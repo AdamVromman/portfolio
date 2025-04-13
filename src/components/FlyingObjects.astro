@@ -1,0 +1,124 @@
+---
+
+---
+
+<div id="flying-objects" class="absolute w-full h-full top-0 left-0 p-15 z-10">
+  <div class="w-full h-full" id="canvas-container"></div>
+  <script>
+    import * as THREE from "three";
+    import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    import { calculateNrOfRows, calculateTileWidth } from "../assets/Constants";
+
+    let renderer: THREE.WebGLRenderer,
+      scene: THREE.Scene,
+      camera: THREE.PerspectiveCamera,
+      controls: OrbitControls;
+
+    const canvasContainer = document.getElementById("canvas-container");
+
+    const projects = ["qausal"];
+
+    const createFlyingObject = (scene: THREE.Scene) => {
+      const loader = new DRACOLoader();
+      loader.setDecoderPath("/node_modules/three/examples/jsm/libs/draco/");
+      loader.preload();
+
+      if (scene) {
+        projects.forEach((project) => {
+          loader.load(
+            `/${project}.drc`,
+            (geometry) => {
+              const material = new THREE.MeshStandardMaterial({
+                color: 0x2a35c9,
+                roughness: 0,
+                metalness: 1,
+              });
+              const mesh = new THREE.Mesh(geometry, material);
+              mesh.position.set(0, 0, 0);
+              scene.add(mesh);
+            },
+            (xhr) => {
+              console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        });
+      }
+    };
+
+    const render = () => {
+      if (renderer && scene && camera) renderer.render(scene, camera);
+    };
+
+    const animate = () => {
+      if (controls) {
+        controls.update();
+      }
+      requestAnimationFrame(animate);
+      render();
+    };
+
+    const init = () => {
+      if (canvasContainer) {
+        const localTileWidth = calculateTileWidth(canvasContainer);
+        const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
+        const height = NR_OF_ROWS * localTileWidth;
+
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(
+          75,
+          canvasContainer.clientWidth / height,
+          0.1,
+          1000
+        );
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(0, 0, 1);
+        scene.add(directionalLight);
+
+        const hemisphereLight = new THREE.HemisphereLight(
+          0xffffbb,
+          0x080820,
+          1
+        );
+        scene.add(hemisphereLight);
+
+        createFlyingObject(scene);
+
+        renderer = new THREE.WebGLRenderer({
+          antialias: true,
+          alpha: true,
+        });
+
+        renderer.setSize(canvasContainer.clientWidth, height);
+        canvasContainer.insertAdjacentElement(
+          "afterbegin",
+          renderer.domElement
+        );
+        controls = new OrbitControls(camera, renderer.domElement);
+        controls.autoRotate = true;
+
+        camera.position.set(0.2, 1, 0.2);
+        controls.update();
+      }
+    };
+
+    const onWindowResize = () => {
+      if (renderer && camera && canvasContainer) {
+        const localTileWidth = calculateTileWidth(canvasContainer);
+        const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
+        const height = NR_OF_ROWS * localTileWidth;
+
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(canvasContainer.clientWidth, height);
+      }
+    };
+
+    init();
+    window.addEventListener("resize", onWindowResize);
+  </script>
+</div>
