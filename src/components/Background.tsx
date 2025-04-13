@@ -144,15 +144,6 @@ const Background = ({ nrOfRows }: BackgroundProps) => {
     drawLines();
   };
 
-  // const sizeImages = () => {
-  //   const images = document.querySelectorAll(".background_bouncing-icons img");
-  //   images.forEach((image) => {
-  //     const tileWidth = calculateTileWidth(backgroundRef.current);
-  //     image.setAttribute("width", `${tileWidth}px`);
-  //     image.setAttribute("height", `${tileWidth}px`);
-  //   });
-  // };
-
   useEffect(() => {
     drawLines(true);
     window.addEventListener("resize", onResize);
@@ -165,15 +156,6 @@ const Background = ({ nrOfRows }: BackgroundProps) => {
   return (
     <div ref={backgroundRef} id="background">
       <svg ref={backgroundSVGRef} id="background_svg"></svg>
-      {/* <div className="background_bouncing-icons">
-        <BouncingIcon>
-          <img
-            width={calculateTileWidth(backgroundRef.current)}
-            src="train-world-logo.svg"
-            alt="Train World Logo"
-          />
-        </BouncingIcon>
-      </div> */}
     </div>
   );
 };

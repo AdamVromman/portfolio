@@ -19,5 +19,20 @@ import "../CSS/main.css";
   </head>
   <body>
     <slot />
+    <script>
+      import gsap from "gsap";
+
+      const cells = document.querySelectorAll(".grid_cell");
+
+      cells.forEach((cell, index) => {
+        const element = cell.children[0];
+        gsap.from(element, {
+          duration: 1,
+          y: "-100%",
+          ease: "power4.out",
+          delay: 1,
+        });
+      });
+    </script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -85,7 +85,7 @@ const FlyingObjects = ({ height }: FlyingObjectsProps) => {
         alpha: true,
       });
       setRenderer(renderer);
-      renderer.setSize(window.innerWidth - 30, height);
+      renderer.setSize(window.innerWidth - 30, window.innerHeight - 30);
       canvasRef.current.appendChild(renderer.domElement);
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.autoRotate = true;
@@ -130,7 +130,9 @@ const FlyingObjects = ({ height }: FlyingObjectsProps) => {
     <div
       ref={canvasRef}
       className="absolute w-full h-full top-0 left-0 p-15 z-10"
-    ></div>
+    >
+      <script>console.log("FlyingObjects component loaded");</script>
+    </div>
   );
 };
 

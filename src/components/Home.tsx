@@ -42,7 +42,7 @@ const Home = () => {
 
   return (
     <div id="home">
-      <FlyingObjects height={localHeight} />
+      {/* <FlyingObjects height={localHeight} /> */}
       <div ref={homeGridRef} className="home_grid">
         <Background nrOfRows={nrOfRows} />
         <div className="grid_cell home_grid_title">
