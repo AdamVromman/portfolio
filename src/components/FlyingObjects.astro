@@ -21,7 +21,7 @@
 
     const createFlyingObject = (scene: THREE.Scene) => {
       const loader = new DRACOLoader();
-      loader.setDecoderPath("node_modules/three/examples/jsm/libs/draco/");
+      loader.setDecoderPath("/draco/");
       loader.preload();
 
       if (scene) {
