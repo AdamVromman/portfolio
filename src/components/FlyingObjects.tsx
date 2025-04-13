@@ -1,83 +1,130 @@
-import { useEffect, useRef } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 interface FlyingObjectsProps {
-  width: number;
   height: number;
 }
 
-const FlyingObjects = ({ width, height }: FlyingObjectsProps) => {
+const projects = ["qausal"];
+
+const FlyingObjects = ({ height }: FlyingObjectsProps) => {
   const canvasRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (canvasRef.current) {
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+  const [renderer, setRenderer] = useState<THREE.WebGLRenderer | null>(null);
+  const [scene, setScene] = useState<THREE.Scene | null>(null);
+  const [camera, setCamera] = useState<THREE.PerspectiveCamera | null>(null);
+  const [controls, setControls] = useState<OrbitControls | null>(null);
+  const [flyingObjects, setFlyingObjects] = useState<THREE.Mesh[]>([]);
 
-      const light = new THREE.AmbientLight(0x404040); // soft white light
-      scene.add(light);
+  const createFlyingObject = (scene: THREE.Scene) => {
+    const loader = new DRACOLoader();
+    loader.setDecoderPath("/node_modules/three/examples/jsm/libs/draco/");
+    loader.preload();
 
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-      directionalLight.position.set(5, 5, 5).normalize();
-      scene.add(directionalLight);
+    const meshes: THREE.Mesh[] = [];
 
-      const hemisphereLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
-      scene.add(hemisphereLight);
-
-      const renderer = new THREE.WebGLRenderer({ alpha: true });
-      renderer.setSize(width, height);
-      canvasRef.current.appendChild(renderer.domElement);
-      const controls = new OrbitControls(camera, renderer.domElement);
-
-      // Instantiate a loader
-      const loader = new DRACOLoader();
-
-      // Specify path to a folder containing WASM/JS decoding libraries.
-      loader.setDecoderPath("/node_modules/three/examples/jsm/libs/draco/");
-
-      // Optional: Pre-fetch Draco WASM/JS module.
-      loader.preload();
-
-      // Load a Draco geometry
+    projects.forEach((project, index) => {
       loader.load(
-        // resource URL
-        "/qausal.drc",
-        // called when the resource is loaded
-        function (geometry) {
+        `/${project}.drc`,
+        (geometry) => {
           const material = new THREE.MeshStandardMaterial({
             color: 0x2a35c9,
             roughness: 0,
             metalness: 1,
           });
           const mesh = new THREE.Mesh(geometry, material);
-          scene.add(mesh);
+          mesh.position.set(0, 0, 0);
+          meshes.push(mesh);
+          scene?.add(mesh);
         },
-        // called as loading progresses
-        function (xhr) {
+        (xhr) => {
           console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
         },
-        // called when loading has errors
-        function (error) {
-          console.log("An error happened");
+        (error) => {
+          console.log(error);
         }
       );
+    });
+
+    setFlyingObjects((prev) => [...prev, ...meshes]);
+  };
+
+  const onWindowResize = () => {
+    if (renderer && camera && canvasRef.current) {
+      camera.updateProjectionMatrix();
+
+      renderer.setSize(window.innerWidth - 30, height);
+    }
+  };
+
+  const init = () => {
+    if (canvasRef.current) {
+      const scene = new THREE.Scene();
+      setScene(scene);
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        (window.innerWidth - 30) / (window.innerHeight - 30),
+        0.1,
+        1000
+      );
+      setCamera(camera);
+
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+      directionalLight.position.set(0, 0, 1);
+      scene.add(directionalLight);
+
+      const hemisphereLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
+      scene.add(hemisphereLight);
+
+      createFlyingObject(scene);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
+      setRenderer(renderer);
+      renderer.setSize(window.innerWidth - 30, height);
+      canvasRef.current.appendChild(renderer.domElement);
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.autoRotate = true;
+      setControls(controls);
 
       camera.position.set(0.2, 1, 0.2);
       controls.update();
-
-      const animate = () => {
-        requestAnimationFrame(animate);
-
-        // required if controls.enableDamping or controls.autoRotate are set to true
-        controls.update();
-
-        renderer.render(scene, camera);
-      };
-      renderer.setAnimationLoop(animate);
     }
-  }, [width, height]);
+  };
+
+  const render = () => {
+    if (renderer && scene && camera) renderer.render(scene, camera);
+  };
+
+  const animate = () => {
+    if (controls) {
+      controls.update();
+    }
+    requestAnimationFrame(animate);
+    render();
+  };
+
+  useEffect(() => {
+    onWindowResize();
+  }, [height]);
+
+  useEffect(() => {
+    init();
+    requestAnimationFrame(animate);
+
+    window.addEventListener("resize", onWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", onWindowResize);
+      if (renderer) {
+        renderer.dispose();
+      }
+    };
+  }, []);
 
   return (
     <div

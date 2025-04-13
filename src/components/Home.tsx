@@ -13,6 +13,7 @@ const Home = () => {
   const homeGridRef = useRef<HTMLDivElement>(null);
 
   const [nrOfRows, setNrOfRows] = useState<number>(0);
+  const [localHeight, setLocalHeight] = useState<number>(0);
 
   const drawGrid = () => {
     if (homeGridRef.current) {
@@ -20,6 +21,7 @@ const Home = () => {
       const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
       setNrOfRows(NR_OF_ROWS);
       homeGridRef.current.style.height = `${NR_OF_ROWS * localTileWidth}px`;
+      setLocalHeight(NR_OF_ROWS * localTileWidth);
       homeGridRef.current.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, 1fr)`;
       homeGridRef.current.style.gridTemplateRows = `repeat(${NR_OF_ROWS}, 1fr)`;
     }
@@ -40,10 +42,7 @@ const Home = () => {
 
   return (
     <div id="home">
-      <FlyingObjects
-        width={homeGridRef.current?.clientWidth}
-        height={homeGridRef.current?.clientHeight}
-      />
+      <FlyingObjects height={localHeight} />
       <div ref={homeGridRef} className="home_grid">
         <Background nrOfRows={nrOfRows} />
         <div className="grid_cell home_grid_title">
