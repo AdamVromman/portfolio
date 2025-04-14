@@ -11,53 +11,106 @@
   <div class="relative z-10 w-full h-full" id="canvas-container"></div>
 
   <script>
-    import gsap from "gsap";
     import * as THREE from "three";
     import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
     import { calculateNrOfRows, calculateTileWidth } from "../assets/Constants";
+    import RAPIER from "@dimforge/rapier3d-compat";
+    import Stats from "three/addons/libs/stats.module.js";
+
+    let stats: Stats;
+
+    await RAPIER.init();
+    const gravity = new RAPIER.Vector3(0.0, 0.0, 0.0);
+    const world = new RAPIER.World(gravity);
+    const dynamicBodies: [THREE.Object3D, RAPIER.RigidBody][] = [];
+    const frustumSize = 50;
 
     let renderer: THREE.WebGLRenderer,
       scene: THREE.Scene,
-      camera: THREE.PerspectiveCamera;
+      camera: THREE.OrthographicCamera;
 
     const canvasContainer = document.getElementById("canvas-container");
     const test = document.getElementById("test");
 
     const projects = ["qausal"];
-    const meshes: THREE.Mesh[] = [];
-    const directions: { x: number; y: number }[] = [];
 
-    const moveElement = (element: HTMLElement, x: number, y: number) => {
-      if (canvasContainer) {
-        const tileWidth = calculateTileWidth(canvasContainer);
+    const clock = new THREE.Clock();
+    let delta;
 
-        //const transformedX = Math.floor((x * 100 + 100) / 2);
-        const transformedX = Math.floor(
-          Math.floor(
-            (((x * 100 + 100) / 2 / 100) * (canvasContainer.clientWidth - 30)) /
-              (tileWidth / 2)
-          ) *
-            (tileWidth / 2)
+    const createBox = () => {
+      if (scene) {
+        const restitution = 1;
+        const translation = frustumSize / 2;
+        const zTranslation = 2;
+        const zRestitution = 0.1;
+        const panelWidth = 50;
+        const panelHeight = 0.5;
+
+        const floorBody = world.createRigidBody(
+          RAPIER.RigidBodyDesc.fixed()
+            .setTranslation(0, -translation, 0)
+            .setRotation({ w: 0, x: 0, y: 1, z: 0 })
         );
-        const transformedY = Math.floor(
-          Math.floor(
-            (((y * -100 + 100) / 2 / 100) *
-              (canvasContainer.clientHeight - 30)) /
-              (tileWidth / 2)
-          ) *
-            (tileWidth / 2)
+        const floorShape = RAPIER.ColliderDesc.cuboid(
+          panelWidth,
+          panelHeight,
+          panelWidth
+        ).setRestitution(restitution);
+        world.createCollider(floorShape, floorBody);
+
+        const floorBody2 = world.createRigidBody(
+          RAPIER.RigidBodyDesc.fixed().setTranslation(0, translation, 0)
         );
-        gsap.to(element, {
-          duration: 0.3,
-          left: 15 + transformedX,
-          top: 15 + transformedY,
-          ease: "linear",
-          overwrite: true,
-        });
+        const floorShape2 = RAPIER.ColliderDesc.cuboid(
+          panelWidth,
+          panelHeight,
+          panelWidth
+        ).setRestitution(restitution);
+        world.createCollider(floorShape2, floorBody2);
+
+        const floorBody3 = world.createRigidBody(
+          RAPIER.RigidBodyDesc.fixed().setTranslation(-translation, 0, 0)
+        );
+        const floorShape3 = RAPIER.ColliderDesc.cuboid(
+          panelHeight,
+          panelWidth,
+          panelWidth
+        ).setRestitution(restitution);
+        world.createCollider(floorShape3, floorBody3);
+
+        const floorBody4 = world.createRigidBody(
+          RAPIER.RigidBodyDesc.fixed().setTranslation(translation, 0, 0)
+        );
+        const floorShape4 = RAPIER.ColliderDesc.cuboid(
+          panelHeight,
+          panelWidth,
+          panelWidth
+        ).setRestitution(restitution);
+        world.createCollider(floorShape4, floorBody4);
+
+        const floorBody5 = world.createRigidBody(
+          RAPIER.RigidBodyDesc.fixed().setTranslation(0, 0, -zTranslation)
+        );
+        const floorShape5 = RAPIER.ColliderDesc.cuboid(
+          panelWidth,
+          panelWidth,
+          panelHeight
+        ).setRestitution(zRestitution);
+        world.createCollider(floorShape5, floorBody5);
+
+        const floorBody6 = world.createRigidBody(
+          RAPIER.RigidBodyDesc.fixed().setTranslation(0, 0, zTranslation)
+        );
+        const floorShape6 = RAPIER.ColliderDesc.cuboid(
+          panelWidth,
+          panelWidth,
+          panelHeight
+        ).setRestitution(zRestitution);
+        world.createCollider(floorShape6, floorBody6);
       }
     };
 
-    const createFlyingObject = (scene: THREE.Scene) => {
+    const createFlyingObject = () => {
       const loader = new DRACOLoader();
       loader.setDecoderPath("/draco/");
       loader.preload();
@@ -68,20 +121,38 @@
             `/${project}.drc`,
             (geometry) => {
               geometry.center();
+              geometry.scale(50, 50, 50);
               const material = new THREE.MeshStandardMaterial({
                 color: 0x2a35c9,
                 roughness: 0.1,
                 metalness: 0.7,
               });
               const mesh = new THREE.Mesh(geometry, material);
-              mesh.position.set(
-                -1 + Math.random() * 2,
-                -1 + Math.random() * 2,
-                0
-              );
-              meshes.push(mesh);
+              mesh.position.set(0, 0, 0);
+              mesh.rotation.set(Math.random(), Math.random(), Math.random());
               scene.add(mesh);
-              directions.push(chooseDirection());
+              const projectBody = world.createRigidBody(
+                RAPIER.RigidBodyDesc.dynamic()
+                  .setTranslation(0, 0, 0)
+                  .setCanSleep(false)
+              );
+
+              projectBody.setEnabledTranslations(true, true, false, false);
+              const projectShape = RAPIER.ColliderDesc.cuboid(0.5, 0.5, 0.5)
+                .setMass(100)
+                .setRestitution(0);
+              world.createCollider(projectShape, projectBody);
+
+              projectBody.applyImpulse(
+                new RAPIER.Vector3(
+                  Math.random() * 1000 - 500,
+                  Math.random() * 1000 - 500,
+                  0
+                ),
+                true
+              );
+
+              dynamicBodies.push([mesh, projectBody]);
             },
             (xhr) => {
               console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
@@ -98,32 +169,30 @@
       if (renderer && scene && camera) renderer.render(scene, camera);
     };
 
-    const chooseDirection = () => {
-      const x = 0.5 - Math.random();
-      const y = 0.5 - Math.abs(x);
-      return { x: x / 500, y: y / 500 };
-    };
-
     const animate = () => {
       requestAnimationFrame(animate);
+      stats.update();
 
-      const time = Date.now() * 0.001;
+      delta = clock.getDelta();
+      world.timestep = Math.min(delta, 0.1);
+      world.step();
 
-      meshes.forEach((mesh, index) => {
-        if (mesh) {
-          mesh.rotation.x = time;
-          mesh.rotation.y = time;
-          if (mesh.position.x > 1 || mesh.position.x < -1) {
-            directions[index].x = -directions[index].x;
-          }
-          if (mesh.position.y > 1 || mesh.position.y < -1) {
-            directions[index].y = -directions[index].y;
-          }
-          mesh.position.x += directions[index].x;
-          mesh.position.y += directions[index].y;
-          if (test) moveElement(test, mesh.position.x, mesh.position.y);
+      for (let i = 0, n = dynamicBodies.length; i < n; i++) {
+        const linVel = dynamicBodies[i][1].linvel();
+        console.log(Math.abs(linVel.x) + Math.abs(linVel.y));
+        if (Math.abs(linVel.x) + Math.abs(linVel.y) < 4) {
+          dynamicBodies[i][1].applyImpulse(
+            new RAPIER.Vector3(
+              Math.random() * 1000 - 500,
+              Math.random() * 1000 - 500,
+              0
+            ),
+            true
+          );
         }
-      });
+        dynamicBodies[i][0].position.copy(dynamicBodies[i][1].translation());
+        dynamicBodies[i][0].quaternion.copy(dynamicBodies[i][1].rotation());
+      }
 
       render();
     };
@@ -133,45 +202,46 @@
         const localTileWidth = calculateTileWidth(canvasContainer);
         const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
         const height = NR_OF_ROWS * localTileWidth;
+        const aspect = canvasContainer.clientWidth / height;
+
+        console.log(
+          `localTileWidth: ${localTileWidth}, NR_OF_ROWS: ${NR_OF_ROWS}, height: ${height}, aspect: ${aspect}`
+        );
 
         scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(
-          75,
-          canvasContainer.clientWidth / height,
+        camera = new THREE.OrthographicCamera(
+          (frustumSize * aspect) / -2,
+          (frustumSize * aspect) / 2,
+          frustumSize / 2,
+          frustumSize / -2,
           0.1,
-          1000
+          100
         );
-        camera.position.z = 1.43;
 
-        const light = new THREE.AmbientLight(0xffffff, 5); // soft white light
+        camera.position.set(0, 0, 10);
+        camera.lookAt(0, 0, 0);
+        camera.updateProjectionMatrix();
+
+        const light = new THREE.DirectionalLight(0xffffff, 3);
+        light.position.set(1, 1, 1).normalize();
         scene.add(light);
 
-        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
-        pointLight.position.set(0, 0, 1);
-        scene.add(pointLight);
-
-        const hemisphereLight = new THREE.HemisphereLight(
-          0xffffbb,
-          0x080820,
-          1
-        );
-        scene.add(hemisphereLight);
-
-        createFlyingObject(scene);
+        createFlyingObject();
+        createBox();
 
         renderer = new THREE.WebGLRenderer({
           antialias: true,
           alpha: true,
         });
 
-        renderer.shadowMap.enabled = true;
-        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
         renderer.setSize(canvasContainer.clientWidth, height);
         canvasContainer.insertAdjacentElement(
           "afterbegin",
           renderer.domElement
         );
+
+        stats = new Stats();
+        document.body.appendChild(stats.dom);
       }
     };
 
@@ -191,12 +261,14 @@
       }
     };
 
-    if (test && canvasContainer) {
-      test.style.width = `${calculateTileWidth(canvasContainer)}px`;
-      test.style.height = `${calculateTileWidth(canvasContainer)}px`;
-    }
+    // if (test && canvasContainer) {
+    //   test.style.width = `${calculateTileWidth(canvasContainer)}px`;
+    //   test.style.height = `${calculateTileWidth(canvasContainer)}px`;
+    // }
+
     init();
     requestAnimationFrame(animate);
+
     window.addEventListener("resize", onWindowResize);
   </script>
 </div>
