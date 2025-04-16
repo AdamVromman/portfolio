@@ -37,18 +37,19 @@
     const clock = new THREE.Clock();
     let delta;
 
-    const createBox = () => {
+    const createBox = (height: number) => {
       if (scene) {
         const restitution = 1;
-        const translation = frustumSize / 2;
         const zTranslation = 2;
         const zRestitution = 0.1;
-        const panelWidth = 50;
-        const panelHeight = 0.5;
+        const panelWidth = 100;
+        const panelHeight = 0.1;
+        const heightOffset = 0;
+        const widthOffset = 0;
 
         const floorBody = world.createRigidBody(
           RAPIER.RigidBodyDesc.fixed()
-            .setTranslation(0, -translation, 0)
+            .setTranslation(0, camera.bottom + heightOffset, 0)
             .setRotation({ w: 0, x: 0, y: 1, z: 0 })
         );
         const floorShape = RAPIER.ColliderDesc.cuboid(
@@ -58,55 +59,67 @@
         ).setRestitution(restitution);
         world.createCollider(floorShape, floorBody);
 
-        const floorBody2 = world.createRigidBody(
-          RAPIER.RigidBodyDesc.fixed().setTranslation(0, translation, 0)
+        const roofBody = world.createRigidBody(
+          RAPIER.RigidBodyDesc.fixed().setTranslation(
+            0,
+            camera.top - heightOffset,
+            0
+          )
         );
-        const floorShape2 = RAPIER.ColliderDesc.cuboid(
+        const roofShape = RAPIER.ColliderDesc.cuboid(
           panelWidth,
           panelHeight,
           panelWidth
         ).setRestitution(restitution);
-        world.createCollider(floorShape2, floorBody2);
+        world.createCollider(roofShape, roofBody);
 
-        const floorBody3 = world.createRigidBody(
-          RAPIER.RigidBodyDesc.fixed().setTranslation(-translation, 0, 0)
+        const wallLeftBody = world.createRigidBody(
+          RAPIER.RigidBodyDesc.fixed().setTranslation(
+            camera.left + widthOffset,
+            0,
+            0
+          )
         );
-        const floorShape3 = RAPIER.ColliderDesc.cuboid(
+        const wallLeftShape = RAPIER.ColliderDesc.cuboid(
           panelHeight,
           panelWidth,
           panelWidth
         ).setRestitution(restitution);
-        world.createCollider(floorShape3, floorBody3);
+        world.createCollider(wallLeftShape, wallLeftBody);
 
-        const floorBody4 = world.createRigidBody(
-          RAPIER.RigidBodyDesc.fixed().setTranslation(translation, 0, 0)
+        const wallRightBody = world.createRigidBody(
+          RAPIER.RigidBodyDesc.fixed().setTranslation(
+            camera.right - widthOffset,
+            0,
+            0
+          )
         );
-        const floorShape4 = RAPIER.ColliderDesc.cuboid(
+        const wallRightShape = RAPIER.ColliderDesc.cuboid(
           panelHeight,
           panelWidth,
           panelWidth
         ).setRestitution(restitution);
-        world.createCollider(floorShape4, floorBody4);
+        world.createCollider(wallRightShape, wallRightBody);
 
-        const floorBody5 = world.createRigidBody(
+        const wallBackBody = world.createRigidBody(
           RAPIER.RigidBodyDesc.fixed().setTranslation(0, 0, -zTranslation)
         );
-        const floorShape5 = RAPIER.ColliderDesc.cuboid(
+        const wallBackShape = RAPIER.ColliderDesc.cuboid(
           panelWidth,
           panelWidth,
           panelHeight
         ).setRestitution(zRestitution);
-        world.createCollider(floorShape5, floorBody5);
+        world.createCollider(wallBackShape, wallBackBody);
 
-        const floorBody6 = world.createRigidBody(
+        const wallFrontBody = world.createRigidBody(
           RAPIER.RigidBodyDesc.fixed().setTranslation(0, 0, zTranslation)
         );
-        const floorShape6 = RAPIER.ColliderDesc.cuboid(
+        const wallFrontShape = RAPIER.ColliderDesc.cuboid(
           panelWidth,
           panelWidth,
           panelHeight
         ).setRestitution(zRestitution);
-        world.createCollider(floorShape6, floorBody6);
+        world.createCollider(wallFrontShape, wallFrontBody);
       }
     };
 
@@ -128,13 +141,14 @@
                 metalness: 0.7,
               });
               const mesh = new THREE.Mesh(geometry, material);
-              mesh.position.set(0, 0, 0);
-              mesh.rotation.set(Math.random(), Math.random(), Math.random());
               scene.add(mesh);
               const projectBody = world.createRigidBody(
                 RAPIER.RigidBodyDesc.dynamic()
                   .setTranslation(0, 0, 0)
+                  .setRotation({ w: 0.5, x: 0.5, y: 0, z: 0 })
                   .setCanSleep(false)
+                  .setLinearDamping(0)
+                  .setAngularDamping(0)
               );
 
               projectBody.setEnabledTranslations(true, true, false, false);
@@ -142,6 +156,16 @@
                 .setMass(100)
                 .setRestitution(0);
               world.createCollider(projectShape, projectBody);
+
+              projectBody.applyImpulseAtPoint(
+                new RAPIER.Vector3(
+                  Math.random() * 100,
+                  Math.random() * 100,
+                  Math.random() * 100
+                ),
+                new RAPIER.Vector3(Math.random(), Math.random(), Math.random()),
+                true
+              );
 
               projectBody.applyImpulse(
                 new RAPIER.Vector3(
@@ -179,17 +203,16 @@
 
       for (let i = 0, n = dynamicBodies.length; i < n; i++) {
         const linVel = dynamicBodies[i][1].linvel();
-        console.log(Math.abs(linVel.x) + Math.abs(linVel.y));
-        if (Math.abs(linVel.x) + Math.abs(linVel.y) < 4) {
-          dynamicBodies[i][1].applyImpulse(
-            new RAPIER.Vector3(
-              Math.random() * 1000 - 500,
-              Math.random() * 1000 - 500,
-              0
-            ),
-            true
-          );
-        }
+        // if (Math.abs(linVel.x) + Math.abs(linVel.y) < 4) {
+        //   dynamicBodies[i][1].applyImpulse(
+        //     new RAPIER.Vector3(
+        //       Math.random() * 1000 - 500,
+        //       Math.random() * 1000 - 500,
+        //       0
+        //     ),
+        //     true
+        //   );
+        // }
         dynamicBodies[i][0].position.copy(dynamicBodies[i][1].translation());
         dynamicBodies[i][0].quaternion.copy(dynamicBodies[i][1].rotation());
       }
@@ -204,18 +227,14 @@
         const height = NR_OF_ROWS * localTileWidth;
         const aspect = canvasContainer.clientWidth / height;
 
-        console.log(
-          `localTileWidth: ${localTileWidth}, NR_OF_ROWS: ${NR_OF_ROWS}, height: ${height}, aspect: ${aspect}`
-        );
-
         scene = new THREE.Scene();
         camera = new THREE.OrthographicCamera(
           (frustumSize * aspect) / -2,
           (frustumSize * aspect) / 2,
           frustumSize / 2,
           frustumSize / -2,
-          0.1,
-          100
+          1,
+          20
         );
 
         camera.position.set(0, 0, 10);
@@ -227,7 +246,7 @@
         scene.add(light);
 
         createFlyingObject();
-        createBox();
+        createBox(height);
 
         renderer = new THREE.WebGLRenderer({
           antialias: true,
