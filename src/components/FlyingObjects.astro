@@ -3,17 +3,11 @@
 ---
 
 <div id="flying-objects" class="absolute w-full h-full top-0 left-0 p-15 z-10">
-  <div
-    id="test"
-    class="absolute z-0 top-0 left-0 bg-white border-2 border-project-trainworld"
-  >
-  </div>
   <div class="relative z-10 w-full h-full" id="canvas-container"></div>
 
   <script>
     import * as THREE from "three";
     import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
-    import { calculateNrOfRows, calculateTileWidth } from "../assets/Constants";
     import RAPIER from "@dimforge/rapier3d-compat";
     import Stats from "three/addons/libs/stats.module.js";
 
@@ -24,20 +18,26 @@
     const world = new RAPIER.World(gravity);
     const dynamicBodies: [THREE.Object3D, RAPIER.RigidBody][] = [];
     const frustumSize = 50;
+    let hoveringBody;
+    let previousVel;
+
+    let width: number, height: number;
 
     let renderer: THREE.WebGLRenderer,
       scene: THREE.Scene,
-      camera: THREE.OrthographicCamera;
+      camera: THREE.OrthographicCamera,
+      raycaster: THREE.Raycaster;
+
+    let pointer: THREE.Vector2 = new THREE.Vector2();
 
     const canvasContainer = document.getElementById("canvas-container");
-    const test = document.getElementById("test");
 
     const projects = ["qausal"];
 
     const clock = new THREE.Clock();
     let delta;
 
-    const createBox = (height: number) => {
+    const createBox = () => {
       if (scene) {
         const restitution = 1;
         const zTranslation = 2;
@@ -134,7 +134,7 @@
             `/${project}.drc`,
             (geometry) => {
               geometry.center();
-              geometry.scale(50, 50, 50);
+              geometry.scale(width / 35, width / 35, width / 35);
               const material = new THREE.MeshStandardMaterial({
                 color: 0x2a35c9,
                 roughness: 0.1,
@@ -144,7 +144,11 @@
               scene.add(mesh);
               const projectBody = world.createRigidBody(
                 RAPIER.RigidBodyDesc.dynamic()
-                  .setTranslation(0, 0, 0)
+                  .setTranslation(
+                    camera.right - Math.random() * camera.right,
+                    camera.top - Math.random() * camera.top,
+                    0
+                  )
                   .setRotation({ w: 0.5, x: 0.5, y: 0, z: 0 })
                   .setCanSleep(false)
                   .setLinearDamping(0)
@@ -201,8 +205,38 @@
       world.timestep = Math.min(delta, 0.1);
       world.step();
 
+      // raycaster.setFromCamera(pointer, camera);
+
+      // const intersects = raycaster.intersectObjects(scene.children, false);
+
+      // if (intersects.length > 0) {
+      //   hoveringBody = intersects[0].object;
+      //   const hoveringBodyRigidBody = dynamicBodies.find(
+      //     (body) => body[0] === hoveringBody
+      //   )?.[1];
+
+      //   if (hoveringBody.material) {
+      //     hoveringBody.material.emissive.setHex(0x00ff00);
+      //     if (previousVel) {
+      //       hoveringBodyRigidBody.setLinvel(new RAPIER.Vector3(0, 0, 0), true);
+      //     } else {
+      //       previousVel = hoveringBodyRigidBody?.linvel();
+      //     }
+      //   }
+      // } else {
+      //   if (hoveringBody && hoveringBody.material) {
+      //     hoveringBody.material.emissive.setHex(0x000000);
+      //     const hoveringBodyRigidBody = dynamicBodies.find(
+      //       (body) => body[0] === hoveringBody
+      //     )?.[1];
+      //     if (hoveringBodyRigidBody && previousVel) {
+      //       hoveringBodyRigidBody.setLinvel(previousVel, true);
+      //     }
+      //   }
+      // }
+
       for (let i = 0, n = dynamicBodies.length; i < n; i++) {
-        const linVel = dynamicBodies[i][1].linvel();
+        // const linVel = dynamicBodies[i][1].linvel();
         // if (Math.abs(linVel.x) + Math.abs(linVel.y) < 4) {
         //   dynamicBodies[i][1].applyImpulse(
         //     new RAPIER.Vector3(
@@ -222,9 +256,8 @@
 
     const init = () => {
       if (canvasContainer) {
-        const localTileWidth = calculateTileWidth(canvasContainer);
-        const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
-        const height = NR_OF_ROWS * localTileWidth;
+        height = canvasContainer.clientHeight;
+        width = canvasContainer.clientWidth;
         const aspect = canvasContainer.clientWidth / height;
 
         scene = new THREE.Scene();
@@ -246,7 +279,9 @@
         scene.add(light);
 
         createFlyingObject();
-        createBox(height);
+        createBox();
+
+        raycaster = new THREE.Raycaster();
 
         renderer = new THREE.WebGLRenderer({
           antialias: true,
@@ -254,7 +289,7 @@
         });
 
         renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(canvasContainer.clientWidth, height);
+        renderer.setSize(width, height);
         canvasContainer.insertAdjacentElement(
           "afterbegin",
           renderer.domElement
@@ -265,30 +300,33 @@
       }
     };
 
+    const onPointerMove = (event: Event) => {
+      pointer.x = ((event.clientX - 15) / width) * 2 - 1;
+      pointer.y = -((event.clientY - 15) / height) * 2 + 1;
+    };
+
     const onWindowResize = () => {
       if (renderer && camera && canvasContainer) {
-        const localTileWidth = calculateTileWidth(canvasContainer);
-        const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
-        const height = NR_OF_ROWS * localTileWidth;
-        if (test) {
-          test.style.width = `${localTileWidth}px`;
-          test.style.height = `${localTileWidth}px`;
-        }
+        height = canvasContainer.clientHeight;
+        width = canvasContainer.clientWidth;
+
+        const aspect = width / height;
+
+        camera.left = (frustumSize * aspect) / -2;
+        camera.right = (frustumSize * aspect) / 2;
+        camera.top = frustumSize / 2;
+        camera.bottom = frustumSize / 2;
 
         camera.updateProjectionMatrix();
 
-        renderer.setSize(canvasContainer.clientWidth, height);
+        renderer.setSize(width, height);
       }
     };
-
-    // if (test && canvasContainer) {
-    //   test.style.width = `${calculateTileWidth(canvasContainer)}px`;
-    //   test.style.height = `${calculateTileWidth(canvasContainer)}px`;
-    // }
 
     init();
     requestAnimationFrame(animate);
 
+    window.addEventListener("pointermove", onPointerMove);
     window.addEventListener("resize", onWindowResize);
   </script>
 </div>

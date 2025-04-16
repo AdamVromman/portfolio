@@ -110,7 +110,7 @@
   @apply flex flex-row items-center justify-start;
   @apply gap-15 pl-15;
   @apply min-w-max;
-  animation: example 20s linear infinite;
+  animation: example 20s 1s linear infinite;
 
   a {
     @apply uppercase font-semibold;
