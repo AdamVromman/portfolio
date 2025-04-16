@@ -22,13 +22,47 @@ import "../CSS/main.css";
     <script>
       import gsap from "gsap";
 
-      const cells = document.querySelectorAll(".grid_cell");
+      const cellsBottom = document.querySelectorAll(".grid_cell.bottom");
 
-      cells.forEach((cell, index) => {
+      cellsBottom.forEach((cell, index) => {
+        const element = cell.children[0];
+        gsap.from(element, {
+          duration: 1,
+          y: "100%",
+          ease: "power4.out",
+          delay: 1,
+        });
+      });
+
+      const cellsTop = document.querySelectorAll(".grid_cell.top");
+
+      cellsTop.forEach((cell, index) => {
         const element = cell.children[0];
         gsap.from(element, {
           duration: 1,
           y: "-100%",
+          ease: "power4.out",
+          delay: 1,
+        });
+      });
+      const cellsLeft = document.querySelectorAll(".grid_cell.left");
+
+      cellsLeft.forEach((cell, index) => {
+        const element = cell.children[0];
+        gsap.from(element, {
+          duration: 1,
+          x: "-100%",
+          ease: "power4.out",
+          delay: 1,
+        });
+      });
+      const cellsRight = document.querySelectorAll(".grid_cell.right");
+
+      cellsRight.forEach((cell, index) => {
+        const element = cell.children[0];
+        gsap.from(element, {
+          duration: 1,
+          x: "100%",
           ease: "power4.out",
           delay: 1,
         });

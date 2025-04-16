@@ -46,7 +46,13 @@ body {
 }
 
 .grid_cell {
-  @apply bg-white;
   @apply overflow-hidden;
   @apply relative z-10;
+}
+
+.grid_cell_container {
+  @apply bg-white;
+  @apply w-full h-full;
+  @apply flex items-center justify-center;
+  @apply overflow-hidden;
 }
