@@ -10,6 +10,9 @@ import {
 } from "./Constants";
 import type { FlyingObject, Project } from "./Interfaces";
 import gsap from "gsap";
+import { TextPlugin } from "gsap/TextPlugin";
+
+gsap.registerPlugin(TextPlugin);
 
 export const calculateTileWidth = (container: HTMLElement) => {
   return container.clientWidth / getNrOfColumns();
@@ -80,6 +83,22 @@ export const handleMouseIn = (key: string) => {
       ease: "power3.in",
       overwrite: true,
     });
+
+    // TODO: Add years when hovering?
+
+    // gsap.to(`.grid_cell.${key}`, {
+    //   gridColumn: "1 / -1",
+    //   duration: 0.3,
+    //   ease: "power3.in",
+    //   overwrite: true,
+    // });
+
+    // gsap.to(`.grid_cell.${key} .grid_cell_container.home_grid_work_link span`, {
+    //   text: `${project.name} — ${project.year}`,
+    //   duration: 0.3,
+    //   ease: "power3.in",
+    //   overwrite: true,
+    // });
 
     gsap.fromTo(
       `.grid_cell.bottom:not(.${key}) .grid_cell_container`,
@@ -157,7 +176,7 @@ export const handleMouseOut = (key: string) => {
     gsap.set(`.grid_cell.${key} .grid_cell_container`, { clearProps: "all" });
 
     gsap.fromTo(
-      ".grid_cell.bottom .grid_cell_container",
+      `.grid_cell.bottom:not(.${key}) .grid_cell_container`,
       {
         y: "100%",
       },
@@ -169,7 +188,7 @@ export const handleMouseOut = (key: string) => {
       }
     );
     gsap.fromTo(
-      ".grid_cell.top .grid_cell_container",
+      `.grid_cell.top:not(.${key}) .grid_cell_container`,
       {
         y: "-100%",
       },
@@ -181,7 +200,7 @@ export const handleMouseOut = (key: string) => {
       }
     );
     gsap.fromTo(
-      ".grid_cell.left .grid_cell_container",
+      `.grid_cell.left:not(.${key}) .grid_cell_container`,
       {
         x: "-100%",
       },
@@ -193,7 +212,7 @@ export const handleMouseOut = (key: string) => {
       }
     );
     gsap.fromTo(
-      ".grid_cell.right .grid_cell_container",
+      `.grid_cell.right:not(.${key}) .grid_cell_container`,
       {
         x: "100%",
       },

@@ -11,11 +11,13 @@ export const projects: Project[] = [
     name: "Train World",
     slug: "train-world",
     color: "de2217",
+    year: 2023,
   },
   {
     name: "Club Sofa",
     slug: "club-sofa",
     color: "3aab94",
+    year: 2022,
   },
 ];
 

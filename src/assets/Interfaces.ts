@@ -22,4 +22,5 @@ export interface Project {
   name: string;
   slug: string;
   color: string;
+  year: number;
 }
