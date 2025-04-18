@@ -63,3 +63,25 @@ export const getNrOfColumns = () => {
 
   return NR_OF_COLUMNS;
 };
+
+export interface FlyingObject {
+  mesh: THREE.Object3D;
+  body: RAPIER.RigidBody;
+  element: HTMLAnchorElement;
+}
+
+interface Project {
+  slug: string;
+  color: string;
+}
+
+export const projects: Project[] = [
+  {
+    slug: "train-world",
+    color: "de2217",
+  },
+  {
+    slug: "club-sofa",
+    color: "3aab94",
+  },
+];

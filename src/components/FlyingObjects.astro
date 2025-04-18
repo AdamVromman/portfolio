@@ -1,5 +1,5 @@
 ---
-
+import "../CSS/flying-objects.css";
 ---
 
 <div id="flying-objects" class="absolute w-full h-full top-0 left-0 p-15 z-10">
@@ -11,16 +11,18 @@
     import RAPIER from "@dimforge/rapier3d-compat";
     import Stats from "three/addons/libs/stats.module.js";
     import { RGBELoader } from "three/examples/jsm/Addons.js";
+    import gsap from "gsap";
+    import { projects, type FlyingObject } from "../assets/Constants";
 
     let stats: Stats;
 
     await RAPIER.init();
     const gravity = new RAPIER.Vector3(0.0, 0.0, 0.0);
     const world = new RAPIER.World(gravity);
-    const dynamicBodies: [THREE.Object3D, RAPIER.RigidBody][] = [];
+    const dynamicBodies: FlyingObject[] = [];
     const frustumSize = 50;
-    let hoveringBody;
-    let previousVel;
+    let hoveringBody: FlyingObject | undefined;
+    let previousVel: RAPIER.Vector3 | undefined;
 
     let width: number, height: number;
 
@@ -40,7 +42,7 @@
 
     const createBox = () => {
       if (scene) {
-        const restitution = 1.1;
+        const restitution = 1;
         const zTranslation = 2;
         const zRestitution = 0.1;
         const panelWidth = 100;
@@ -139,133 +141,119 @@
       if (scene) {
         // Train World
 
-        loader.load(
-          "/train-world.drc",
-          (geometry) => {
-            geometry.center();
-            geometry.scale(scale, scale, scale);
-            const material = new THREE.MeshStandardMaterial({
-              color: 0xde2217,
-              roughness: 0,
-              metalness: 1,
-            });
-            const mesh = new THREE.Mesh(geometry, material);
-            scene.add(mesh);
-            const projectBody = world.createRigidBody(
-              RAPIER.RigidBodyDesc.dynamic()
-                .setTranslation(
-                  camera.right - Math.random() * camera.right * 2,
-                  camera.top - Math.random() * camera.top * 2,
-                  -20
-                )
-                .setRotation({ w: 0.5, x: 0.5, y: 0, z: 0 })
-                .setCanSleep(false)
-                .setLinearDamping(0)
-                .setAngularDamping(0)
-            );
+        projects.forEach((project) => {
+          loader.load(
+            `/${project.slug}.drc`,
+            (geometry) => {
+              geometry.center();
+              geometry.scale(scale, scale, scale);
+              const material = new THREE.MeshStandardMaterial({
+                color: new THREE.Color(`#${project.color}`),
+                roughness: 0,
+                metalness: 1,
+              });
+              const mesh = new THREE.Mesh(geometry, material);
+              scene.add(mesh);
+              const projectBody = world.createRigidBody(
+                RAPIER.RigidBodyDesc.dynamic()
+                  .setTranslation(
+                    camera.right - Math.random() * camera.right * 2,
+                    camera.top - Math.random() * camera.top * 2,
+                    -20
+                  )
+                  .setRotation({ w: 0.5, x: 0.5, y: 0, z: 0 })
+                  .setCanSleep(false)
+                  .setLinearDamping(0)
+                  .setAngularDamping(0)
+              );
 
-            projectBody.setEnabledTranslations(true, true, false, false);
-            const projectShape = RAPIER.ColliderDesc.cylinder(
-              0.015 * scale,
-              0.095 * scale
-            )
-              .setMass(100)
-              .setRestitution(1.1);
-            world.createCollider(projectShape, projectBody);
+              projectBody.setEnabledTranslations(true, true, false, false);
 
-            projectBody.applyImpulseAtPoint(
-              new RAPIER.Vector3(
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100
-              ),
-              new RAPIER.Vector3(Math.random(), Math.random(), Math.random()),
-              true
-            );
+              let projectShape;
+              const element = document.createElement("a");
+              element.className = `flying-object-link ${project.slug}`;
+              element.href = "https://www.clubsofa.com";
+              element.target = "_blank";
+              canvasContainer?.appendChild(element);
 
-            projectBody.applyImpulse(
-              new RAPIER.Vector3(
-                Math.random() * 1000 - 500,
-                Math.random() * 1000 - 500,
-                0
-              ),
-              true
-            );
+              if (project.slug === "train-world") {
+                projectShape = RAPIER.ColliderDesc.cylinder(
+                  0.015 * scale,
+                  0.095 * scale
+                );
 
-            dynamicBodies.push([mesh, projectBody]);
-          },
-          (xhr) => {
-            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+                element.style.width = "120px";
+                element.style.height = "120px";
+                element.style.transform = "translate(-50%, -50%)";
+              } else if (project.slug === "club-sofa") {
+                projectShape = RAPIER.ColliderDesc.cylinder(
+                  0.015 * scale,
+                  0.095 * scale
+                );
+                element.style.width = "30px";
+                element.style.height = "30px";
+                element.style.width = "120px";
+                element.style.height = "120px";
+                element.style.transform = "translate(-50%, -50%)";
+              } else {
+                projectShape = RAPIER.ColliderDesc.cylinder(
+                  0.015 * scale,
+                  0.095 * scale
+                );
+                element.style.width = "30px";
+                element.style.height = "30px";
+              }
 
-        // Club Sofa
+              projectShape.setMass(100).setRestitution(1);
+              world.createCollider(projectShape, projectBody);
 
-        loader.load(
-          "/club-sofa.drc",
-          (geometry) => {
-            geometry.center();
-            geometry.scale(scale, scale, scale);
-            const material = new THREE.MeshStandardMaterial({
-              color: 0x3aab94,
-              roughness: 0,
-              metalness: 1,
-            });
-            const mesh = new THREE.Mesh(geometry, material);
-            scene.add(mesh);
-            const projectBody = world.createRigidBody(
-              RAPIER.RigidBodyDesc.dynamic()
-                .setTranslation(
-                  camera.right - Math.random() * camera.right * 2,
-                  camera.top - Math.random() * camera.top * 2,
-                  -20
-                )
-                .setRotation({ w: 0.5, x: 0.5, y: 0, z: 0 })
-                .setCanSleep(false)
-                .setLinearDamping(0)
-                .setAngularDamping(0)
-            );
+              projectBody.applyImpulseAtPoint(
+                new RAPIER.Vector3(
+                  Math.random() * 100,
+                  Math.random() * 100,
+                  Math.random() * 100
+                ),
+                new RAPIER.Vector3(Math.random(), Math.random(), Math.random()),
+                true
+              );
 
-            projectBody.setEnabledTranslations(true, true, false, false);
-            const projectShape = RAPIER.ColliderDesc.cylinder(
-              0.015 * scale,
-              0.095 * scale
-            )
-              .setMass(100)
-              .setRestitution(1.1);
-            world.createCollider(projectShape, projectBody);
+              projectBody.applyImpulse(
+                new RAPIER.Vector3(
+                  Math.random() * 1000 - 500,
+                  Math.random() * 1000 - 500,
+                  0
+                ),
+                true
+              );
 
-            projectBody.applyImpulseAtPoint(
-              new RAPIER.Vector3(
-                Math.random() * 100,
-                Math.random() * 100,
-                Math.random() * 100
-              ),
-              new RAPIER.Vector3(Math.random(), Math.random(), Math.random()),
-              true
-            );
+              const flyingBody = {
+                mesh: mesh,
+                body: projectBody,
+                element: element,
+              };
+              element.addEventListener("mouseenter", (e) => {
+                hoveringBody = flyingBody;
+              });
 
-            projectBody.applyImpulse(
-              new RAPIER.Vector3(
-                Math.random() * 1000 - 500,
-                Math.random() * 1000 - 500,
-                0
-              ),
-              true
-            );
+              element.addEventListener("mouseleave", (e) => {
+                console.log(previousVel);
+                hoveringBody = undefined;
+                if (previousVel) {
+                  flyingBody.body.setLinvel(previousVel, true);
+                  previousVel = undefined;
+                }
+              });
 
-            dynamicBodies.push([mesh, projectBody]);
-          },
-          (xhr) => {
-            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+              dynamicBodies.push(flyingBody);
+            },
+            (xhr) => {
+              console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        });
       }
     };
 
@@ -291,39 +279,27 @@
       world.timestep = Math.min(delta, 0.1);
       world.step();
 
-      // raycaster.setFromCamera(pointer, camera);
-
-      // const intersects = raycaster.intersectObjects(scene.children, false);
-
-      // if (intersects.length > 0) {
-      //   hoveringBody = intersects[0].object;
-      //   const hoveringBodyRigidBody = dynamicBodies.find(
-      //     (body) => body[0] === hoveringBody
-      //   )?.[1];
-
-      //   if (hoveringBody.material) {
-      //     hoveringBody.material.emissive.setHex(0x00ff00);
-      //     if (previousVel) {
-      //       hoveringBodyRigidBody.setLinvel(new RAPIER.Vector3(0, 0, 0), true);
-      //     } else {
-      //       previousVel = hoveringBodyRigidBody?.linvel();
-      //     }
-      //   }
-      // } else {
-      //   if (hoveringBody && hoveringBody.material) {
-      //     hoveringBody.material.emissive.setHex(0x000000);
-      //     const hoveringBodyRigidBody = dynamicBodies.find(
-      //       (body) => body[0] === hoveringBody
-      //     )?.[1];
-      //     if (hoveringBodyRigidBody && previousVel) {
-      //       hoveringBodyRigidBody.setLinvel(previousVel, true);
-      //     }
-      //   }
-      // }
-
       for (let i = 0, n = dynamicBodies.length; i < n; i++) {
-        dynamicBodies[i][0].position.copy(dynamicBodies[i][1].translation());
-        dynamicBodies[i][0].quaternion.copy(dynamicBodies[i][1].rotation());
+        if (dynamicBodies[i] === hoveringBody) {
+          if (previousVel === undefined)
+            previousVel = dynamicBodies[i].body.linvel();
+          dynamicBodies[i].body.setLinvel(new RAPIER.Vector3(0, 0, 0), true);
+        }
+
+        dynamicBodies[i].mesh.position.copy(
+          dynamicBodies[i].body.translation()
+        );
+        dynamicBodies[i].mesh.quaternion.copy(dynamicBodies[i].body.rotation());
+        gsap.set(dynamicBodies[i].element, {
+          x:
+            ((dynamicBodies[i].mesh.position.x + camera.right) /
+              (camera.right * 2)) *
+            width,
+          y:
+            ((dynamicBodies[i].mesh.position.y + camera.bottom) /
+              (camera.bottom * 2)) *
+            height,
+        });
       }
 
       render();
