@@ -47,55 +47,30 @@ import { projects } from "../assets/Constants";
         </svg>
       </div>
     </div>
-    <div class="grid_cell left home_grid_discover-work">
+    <div class="grid_cell right home_grid_discover-work">
       <div class="grid_cell_container">
         <span class="half-col-text">Discover my work:</span>
       </div>
     </div>
-    <div class="grid_cell right home_grid_works">
-      <div class="grid_cell_container">
-        <div class="home_grid_works_container container-1">
-          {
-            projects.map((project, index) => {
-              return (
-                <>
-                  {index !== 0 && <span class="half-col-text">—</span>}
-                  <a
-                    data-slug={project.slug}
-                    class={`half-col-text home_grid_work_link ${project.slug}`}
-                    href={`/${project.slug}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {project.name}
-                  </a>
-                </>
-              );
-            })
-          }
-        </div>
-        <div class="home_grid_works_container container-2">
-          {
-            projects.map((project, index) => {
-              return (
-                <>
-                  <span class="half-col-text">—</span>
-                  <a
-                    data-slug={project.slug}
-                    class={`half-col-text home_grid_work_link ${project.slug}`}
-                    href={`/${project.slug}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {project.name}
-                  </a>
-                </>
-              );
-            })
-          }
-        </div>
-      </div>
-    </div>
+
+    {
+      projects.map((project) => {
+        return (
+          <div class={`grid_cell left home_grid_work ${project.slug}`}>
+            <a
+              data-slug={project.slug}
+              class={`grid_cell_container  home_grid_work_link ${project.slug}`}
+              href={`/${project.slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="half-col-text">{project.name}</span>
+            </a>
+          </div>
+        );
+      })
+    }
+
     <div class="grid_cell top home_grid_text">
       <div class="grid_cell_container">
         <p>
@@ -138,7 +113,7 @@ import { projects } from "../assets/Constants";
   <script>
     import { handleMouseIn, handleMouseOut } from "../assets/Functions";
 
-    const links = document.querySelectorAll(".home_grid_works a");
+    const links = document.querySelectorAll(".home_grid_work_link");
     links.forEach((link) => {
       link.addEventListener("mouseenter", () => {
         const key = link.dataset.slug;

@@ -74,14 +74,15 @@ export const handleMouseIn = (key: string) => {
     (flyingObject) => flyingObject.slug === key
   );
   if (project && flyingObject) {
-    const element = document.querySelector(
-      `.home_grid_work_link.${project.slug}`
-    );
-
-    if (element) element.classList.add("hover");
+    gsap.to(`.grid_cell.${key} .grid_cell_container`, {
+      backgroundColor: "transparent",
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: true,
+    });
 
     gsap.fromTo(
-      ".grid_cell.bottom .grid_cell_container",
+      `.grid_cell.bottom:not(.${key}) .grid_cell_container`,
       {
         y: "0",
       },
@@ -93,7 +94,7 @@ export const handleMouseIn = (key: string) => {
       }
     );
     gsap.fromTo(
-      ".grid_cell.top .grid_cell_container",
+      `.grid_cell.top:not(.${key}) .grid_cell_container`,
       {
         y: "0",
       },
@@ -105,7 +106,7 @@ export const handleMouseIn = (key: string) => {
       }
     );
     gsap.fromTo(
-      ".grid_cell.left .grid_cell_container",
+      `.grid_cell.left:not(.${key}) .grid_cell_container`,
       {
         x: "0",
       },
@@ -117,7 +118,7 @@ export const handleMouseIn = (key: string) => {
       }
     );
     gsap.fromTo(
-      ".grid_cell.right .grid_cell_container",
+      `.grid_cell.right:not(.${key}) .grid_cell_container`,
       {
         x: "0",
       },
@@ -153,11 +154,8 @@ export const handleMouseOut = (key: string) => {
     (flyingObject) => flyingObject.slug === key
   );
   if (project && flyingObject) {
-    const element = document.querySelector(
-      `.home_grid_work_link.${project.slug}`
-    );
+    gsap.set(`.grid_cell.${key} .grid_cell_container`, { clearProps: "all" });
 
-    if (element) element.classList.remove("hover");
     gsap.fromTo(
       ".grid_cell.bottom .grid_cell_container",
       {
