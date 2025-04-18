@@ -2,11 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import "../CSS/background.css";
 import gsap from "gsap";
-import {
-  calculateNrOfRows,
-  calculateTileWidth,
-  getNrOfColumns,
-} from "../assets/Constants";
+import { calculateTileWidth, getNrOfColumns } from "../assets/Constants";
 
 interface BackgroundProps {
   nrOfRows: number;

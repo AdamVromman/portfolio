@@ -1,7 +1,7 @@
 @import "./imports.css";
 
 #home {
-  @apply relative top-0 left-0 w-full;
+  @apply relative top-0 left-0 w-full h-full;
   @apply p-15;
   @apply flex flex-col items-center justify-start gap-15;
 }

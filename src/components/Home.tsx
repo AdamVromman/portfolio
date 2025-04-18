@@ -18,7 +18,7 @@ const Home = () => {
   const drawGrid = () => {
     if (homeGridRef.current) {
       const localTileWidth = calculateTileWidth(homeGridRef.current);
-      const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
+      const NR_OF_ROWS = calculateNrOfRows(localTileWidth, homeGridRef.current);
       setNrOfRows(NR_OF_ROWS);
       homeGridRef.current.style.height = `${NR_OF_ROWS * localTileWidth}px`;
       setLocalHeight(NR_OF_ROWS * localTileWidth);
