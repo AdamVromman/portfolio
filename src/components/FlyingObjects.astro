@@ -10,6 +10,8 @@
     import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
     import RAPIER from "@dimforge/rapier3d-compat";
     import Stats from "three/addons/libs/stats.module.js";
+    import { projects } from "../assets/Constants";
+    import { RGBELoader } from "three/examples/jsm/Addons.js";
 
     let stats: Stats;
 
@@ -31,8 +33,6 @@
     let pointer: THREE.Vector2 = new THREE.Vector2();
 
     const canvasContainer = document.getElementById("canvas-container");
-
-    const projects = ["qausal"];
 
     const clock = new THREE.Clock();
     let delta;
@@ -131,22 +131,22 @@
       if (scene) {
         projects.forEach((project) => {
           loader.load(
-            `/${project}.drc`,
+            `/${project.slug}.drc`,
             (geometry) => {
               geometry.center();
-              geometry.scale(width / 35, width / 35, width / 35);
+              geometry.scale(width / 300, width / 300, width / 300);
               const material = new THREE.MeshStandardMaterial({
-                color: 0x2a35c9,
-                roughness: 0.1,
-                metalness: 0.7,
+                color: project.color,
+                roughness: 0,
+                metalness: 1,
               });
               const mesh = new THREE.Mesh(geometry, material);
               scene.add(mesh);
               const projectBody = world.createRigidBody(
                 RAPIER.RigidBodyDesc.dynamic()
                   .setTranslation(
-                    camera.right - Math.random() * camera.right,
-                    camera.top - Math.random() * camera.top,
+                    camera.right - Math.random() * camera.right * 2,
+                    camera.top - Math.random() * camera.top * 2,
                     0
                   )
                   .setRotation({ w: 0.5, x: 0.5, y: 0, z: 0 })
@@ -163,9 +163,9 @@
 
               projectBody.applyImpulseAtPoint(
                 new RAPIER.Vector3(
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100
+                  Math.random() * 10,
+                  Math.random() * 10,
+                  Math.random() * 10
                 ),
                 new RAPIER.Vector3(Math.random(), Math.random(), Math.random()),
                 true
@@ -236,17 +236,17 @@
       // }
 
       for (let i = 0, n = dynamicBodies.length; i < n; i++) {
-        // const linVel = dynamicBodies[i][1].linvel();
-        // if (Math.abs(linVel.x) + Math.abs(linVel.y) < 4) {
-        //   dynamicBodies[i][1].applyImpulse(
-        //     new RAPIER.Vector3(
-        //       Math.random() * 1000 - 500,
-        //       Math.random() * 1000 - 500,
-        //       0
-        //     ),
-        //     true
-        //   );
-        // }
+        const linVel = dynamicBodies[i][1].linvel();
+        if (Math.abs(linVel.x) + Math.abs(linVel.y) < 4) {
+          dynamicBodies[i][1].applyImpulse(
+            new RAPIER.Vector3(
+              Math.random() * 1000 - 500,
+              Math.random() * 1000 - 500,
+              0
+            ),
+            true
+          );
+        }
         dynamicBodies[i][0].position.copy(dynamicBodies[i][1].translation());
         dynamicBodies[i][0].quaternion.copy(dynamicBodies[i][1].rotation());
       }
@@ -270,13 +270,20 @@
           20
         );
 
+        new RGBELoader()
+          .setPath("/")
+          .load("studio_small_03_4k.hdr", function (texture) {
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            scene.environment = texture;
+          });
+
         camera.position.set(0, 0, 10);
         camera.lookAt(0, 0, 0);
         camera.updateProjectionMatrix();
 
         const light = new THREE.DirectionalLight(0xffffff, 3);
         light.position.set(1, 1, 1).normalize();
-        scene.add(light);
+        //scene.add(light);
 
         createFlyingObject();
         createBox();
@@ -290,6 +297,7 @@
 
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(width, height);
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
         canvasContainer.insertAdjacentElement(
           "afterbegin",
           renderer.domElement

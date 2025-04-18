@@ -1,3 +1,5 @@
+import * as THREE from "three";
+
 export enum LineDirection {
   VERTICAL = "vertical",
   HORIZONTAL = "horizontal",
@@ -60,3 +62,19 @@ export const getNrOfColumns = () => {
 
   return NR_OF_COLUMNS;
 };
+
+interface Project {
+  slug: string;
+  color: THREE.ColorRepresentation;
+}
+
+export const projects: Project[] = [
+  {
+    slug: "train-world",
+    color: new THREE.Color(0xde2217),
+  },
+  {
+    slug: "club-sofa",
+    color: new THREE.Color(0x3aab94),
+  },
+];
