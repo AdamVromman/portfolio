@@ -160,3 +160,30 @@
     }
   }
 }
+
+.grid_cell.home_grid_contact {
+  .grid_cell_container {
+    @apply flex flex-col justify-self-end;
+  }
+
+  a {
+    @apply bg-active fill-white;
+    @apply w-full aspect-square;
+    @apply flex justify-center items-center;
+    @apply hover:bg-white hover:fill-active;
+
+    svg {
+      @apply w-4/5;
+    }
+  }
+
+  grid-column: -1 / -2;
+  grid-row: 1 / 2;
+  @apply justify-self-end;
+
+  @apply w-1/2;
+
+  svg {
+    @apply w-3/5 h-3/5;
+  }
+}
