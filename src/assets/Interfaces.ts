@@ -15,6 +15,7 @@ export interface FlyingObject {
   mesh: THREE.Object3D;
   body: RAPIER.RigidBody;
   element: HTMLAnchorElement;
+  slug: string;
 }
 
 export interface Project {

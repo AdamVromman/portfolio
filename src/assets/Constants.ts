@@ -18,3 +18,5 @@ export const projects: Project[] = [
     color: "3aab94",
   },
 ];
+
+export const dynamicBodies: FlyingObject[] = [];

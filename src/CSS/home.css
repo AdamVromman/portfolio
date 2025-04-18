@@ -118,8 +118,12 @@
   @apply min-w-max;
   animation: example 20s 1s linear infinite;
 
-  a {
+  .home_grid_work_link {
     @apply uppercase font-semibold;
+  }
+
+  .home_grid_work_link.hover {
+    @apply absolute;
   }
 
   span {

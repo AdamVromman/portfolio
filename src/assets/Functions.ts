@@ -5,6 +5,8 @@ import {
   NR_OF_COLUMNS_768,
   NR_OF_COLUMNS_480,
   NR_OF_COLUMNS,
+  projects,
+  dynamicBodies,
 } from "./Constants";
 import type { FlyingObject, Project } from "./Interfaces";
 import gsap from "gsap";
@@ -66,138 +68,158 @@ export const setPreviousVel = (vector: RAPIER.Vector) => {
   previousVel = vector;
 };
 
-export const handleMouseIn = (project: Project, flyingObject: FlyingObject) => {
-  gsap.fromTo(
-    ".grid_cell.bottom .grid_cell_container",
-    {
-      y: "0",
-    },
-    {
-      duration: 0.3,
-      y: "100%",
-      ease: "power3.in",
-      overwrite: true,
-    }
+export const handleMouseIn = (key: string) => {
+  const project = projects.find((project) => project.slug === key);
+  const flyingObject = dynamicBodies.find(
+    (flyingObject) => flyingObject.slug === key
   );
-  gsap.fromTo(
-    ".grid_cell.top .grid_cell_container",
-    {
-      y: "0",
-    },
-    {
-      duration: 0.3,
-      y: "-100%",
-      ease: "power3.in",
-      overwrite: true,
-    }
-  );
-  gsap.fromTo(
-    ".grid_cell.left .grid_cell_container",
-    {
-      x: "0",
-    },
-    {
-      duration: 0.3,
-      x: "-100%",
-      ease: "power3.in",
-      overwrite: true,
-    }
-  );
-  gsap.fromTo(
-    ".grid_cell.right .grid_cell_container",
-    {
-      x: "0",
-    },
-    {
-      duration: 0.3,
-      x: "100%",
-      ease: "power3.in",
-      overwrite: true,
-    }
-  );
-  hoveringBody = flyingObject;
-  gsap.to(`.home_video.${project.slug}`, {
-    delay: 0.3,
-    duration: 0.2,
-    opacity: 1,
-  });
+  if (project && flyingObject) {
+    const element = document.querySelector(
+      `.home_grid_work_link.${project.slug}`
+    );
 
-  gsap.to("#background", {
-    duration: 0.2,
-    opacity: 0.1,
-  });
+    if (element) element.classList.add("hover");
 
-  document.documentElement.style.setProperty(
-    "--color-active",
-    `#${project.color}`
-  );
+    gsap.fromTo(
+      ".grid_cell.bottom .grid_cell_container",
+      {
+        y: "0",
+      },
+      {
+        duration: 0.3,
+        y: "100%",
+        ease: "power3.in",
+        overwrite: true,
+      }
+    );
+    gsap.fromTo(
+      ".grid_cell.top .grid_cell_container",
+      {
+        y: "0",
+      },
+      {
+        duration: 0.3,
+        y: "-100%",
+        ease: "power3.in",
+        overwrite: true,
+      }
+    );
+    gsap.fromTo(
+      ".grid_cell.left .grid_cell_container",
+      {
+        x: "0",
+      },
+      {
+        duration: 0.3,
+        x: "-100%",
+        ease: "power3.in",
+        overwrite: true,
+      }
+    );
+    gsap.fromTo(
+      ".grid_cell.right .grid_cell_container",
+      {
+        x: "0",
+      },
+      {
+        duration: 0.3,
+        x: "100%",
+        ease: "power3.in",
+        overwrite: true,
+      }
+    );
+    hoveringBody = flyingObject;
+    gsap.to(`.home_video.${project.slug}`, {
+      delay: 0.3,
+      duration: 0.2,
+      opacity: 1,
+    });
+
+    gsap.to("#background", {
+      duration: 0.2,
+      opacity: 0.1,
+    });
+
+    document.documentElement.style.setProperty(
+      "--color-active",
+      `#${project.color}`
+    );
+  }
 };
 
-export const handleMouseOut = (
-  project: Project,
-  flyingObject: FlyingObject
-) => {
-  gsap.fromTo(
-    ".grid_cell.bottom .grid_cell_container",
-    {
-      y: "100%",
-    },
-    {
-      duration: 0.3,
-      y: "0",
-      ease: "power3.in",
-      overwrite: true,
-    }
+export const handleMouseOut = (key: string) => {
+  const project = projects.find((project) => project.slug === key);
+  const flyingObject = dynamicBodies.find(
+    (flyingObject) => flyingObject.slug === key
   );
-  gsap.fromTo(
-    ".grid_cell.top .grid_cell_container",
-    {
-      y: "-100%",
-    },
-    {
-      duration: 0.3,
-      y: "0",
-      ease: "power3.in",
-      overwrite: true,
-    }
-  );
-  gsap.fromTo(
-    ".grid_cell.left .grid_cell_container",
-    {
-      x: "-100%",
-    },
-    {
-      duration: 0.3,
-      x: "0",
-      ease: "power3.in",
-      overwrite: true,
-    }
-  );
-  gsap.fromTo(
-    ".grid_cell.right .grid_cell_container",
-    {
-      x: "100%",
-    },
-    {
-      duration: 0.3,
-      x: "0",
-      ease: "power3.in",
-      overwrite: true,
-    }
-  );
-  gsap.to(`.home_video.${project.slug}`, {
-    duration: 0.2,
-    opacity: 0,
-  });
-  gsap.to("#background", {
-    duration: 0.2,
-    opacity: 1,
-  });
-  hoveringBody = undefined;
-  if (previousVel) {
-    flyingObject.body.setLinvel(previousVel, true);
-    previousVel = undefined;
-  }
+  if (project && flyingObject) {
+    const element = document.querySelector(
+      `.home_grid_work_link.${project.slug}`
+    );
 
-  document.documentElement.style.setProperty("--color-active", "#4000ff");
+    if (element) element.classList.remove("hover");
+    gsap.fromTo(
+      ".grid_cell.bottom .grid_cell_container",
+      {
+        y: "100%",
+      },
+      {
+        duration: 0.3,
+        y: "0",
+        ease: "power3.in",
+        overwrite: true,
+      }
+    );
+    gsap.fromTo(
+      ".grid_cell.top .grid_cell_container",
+      {
+        y: "-100%",
+      },
+      {
+        duration: 0.3,
+        y: "0",
+        ease: "power3.in",
+        overwrite: true,
+      }
+    );
+    gsap.fromTo(
+      ".grid_cell.left .grid_cell_container",
+      {
+        x: "-100%",
+      },
+      {
+        duration: 0.3,
+        x: "0",
+        ease: "power3.in",
+        overwrite: true,
+      }
+    );
+    gsap.fromTo(
+      ".grid_cell.right .grid_cell_container",
+      {
+        x: "100%",
+      },
+      {
+        duration: 0.3,
+        x: "0",
+        ease: "power3.in",
+        overwrite: true,
+      }
+    );
+    gsap.to(`.home_video.${project.slug}`, {
+      duration: 0.2,
+      opacity: 0,
+    });
+    gsap.to("#background", {
+      duration: 0.2,
+      opacity: 1,
+    });
+    hoveringBody = undefined;
+    if (previousVel) {
+      flyingObject.body.setLinvel(previousVel, true);
+      previousVel = undefined;
+    }
+
+    document.documentElement.style.setProperty("--color-active", "#4000ff");
+  }
 };

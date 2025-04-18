@@ -61,7 +61,8 @@ import { projects } from "../assets/Constants";
                 <>
                   {index !== 0 && <span class="half-col-text">—</span>}
                   <a
-                    class="half-col-text"
+                    data-slug={project.slug}
+                    class={`half-col-text home_grid_work_link ${project.slug}`}
                     href={`/${project.slug}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -80,7 +81,8 @@ import { projects } from "../assets/Constants";
                 <>
                   <span class="half-col-text">—</span>
                   <a
-                    class={`half-col-text ${project.slug}`}
+                    data-slug={project.slug}
+                    class={`half-col-text home_grid_work_link ${project.slug}`}
                     href={`/${project.slug}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -133,5 +135,20 @@ import { projects } from "../assets/Constants";
     window.addEventListener("resize", handleResize);
   </script>
 
-  <script></script>
+  <script>
+    import { handleMouseIn, handleMouseOut } from "../assets/Functions";
+
+    const links = document.querySelectorAll(".home_grid_works a");
+    links.forEach((link) => {
+      link.addEventListener("mouseenter", () => {
+        const key = link.dataset.slug;
+        handleMouseIn(key);
+      });
+
+      link.addEventListener("mouseleave", () => {
+        const key = link.dataset.slug;
+        handleMouseOut(key);
+      });
+    });
+  </script>
 </div>

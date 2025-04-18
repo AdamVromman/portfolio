@@ -23,7 +23,7 @@ import "../CSS/main.css";
       import gsap from "gsap";
 
       const homeStartupTimeline = gsap
-        .timeline()
+        .timeline({ delay: 0.5 })
         .from(
           ".grid_cell.bottom .grid_cell_container",
           {
@@ -61,11 +61,7 @@ import "../CSS/main.css";
           0
         );
 
-      window.addEventListener("load", () => {
-        console.log("Page loaded");
-        console.log(homeStartupTimeline);
-        homeStartupTimeline.play();
-      });
+      homeStartupTimeline.play();
     </script>
   </body>
 </html>
