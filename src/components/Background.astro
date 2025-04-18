@@ -14,7 +14,12 @@ import "../CSS/background.css";
 
     const background = document.getElementById("background");
     const backgroundSVG = document.getElementById("background_svg");
-    const timeline = gsap.timeline();
+    const timeline = gsap.timeline({
+      delay: 1.5,
+      onComplete: () => {
+        gsap.set("#home_intro", { display: "none" });
+      },
+    });
 
     const drawLines = (animated: boolean = false) => {
       if (background && backgroundSVG) {

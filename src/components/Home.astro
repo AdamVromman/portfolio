@@ -107,16 +107,18 @@ import { projects } from "../assets/Constants";
     </div>
   </div>
   <FlyingObjects />
-  {/* <Footer /> */}
+  <div id="home_intro"></div>
   <script>
     import {
       calculateTileWidth,
       calculateNrOfRows,
       getNrOfColumns,
     } from "../assets/Functions";
+    import gsap from "gsap";
 
     const home = document.getElementById("home");
     const homeGrid = document.getElementById("home_grid");
+
     const drawGrid = () => {
       if (home && homeGrid) {
         const localTileWidth = calculateTileWidth(homeGrid);
@@ -127,10 +129,44 @@ import { projects } from "../assets/Constants";
       }
     };
 
+    const animateIntro = () => {
+      gsap
+        .timeline()
+        .from(
+          "#home_intro",
+          {
+            duration: 1,
+            width: 0,
+            left: "50%",
+            ease: "power4.inOut",
+          },
+          "0"
+        )
+        .from(
+          "#home_intro",
+          {
+            duration: 1,
+            height: 0,
+            top: "50%",
+            ease: "power4.inOut",
+          },
+          ">"
+        )
+        .set(
+          "#home_intro",
+          {
+            borderWidth: "2px",
+            backgroundColor: "transparent",
+          },
+          "<+=0.2"
+        );
+    };
+
     const handleResize = () => {
       drawGrid();
     };
 
+    animateIntro();
     drawGrid();
     window.addEventListener("resize", handleResize);
   </script>

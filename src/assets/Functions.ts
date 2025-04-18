@@ -37,7 +37,7 @@ export const calculateNrOfRows = (localTileWidth: number) => {
     if (screenWidth >= 480) {
       return Math.max(NR_OF_ROWS, 8);
     }
-    return Math.max(NR_OF_ROWS, 10);
+    return Math.max(NR_OF_ROWS, 8);
   }
   return 5;
 };
