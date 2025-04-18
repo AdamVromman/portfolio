@@ -3,5 +3,4 @@
 .flying-object-link {
   @apply absolute w-20 h-20;
   @apply top-0 left-0 origin-center;
-  @apply border-solid border-2 border-gray-300;
 }
