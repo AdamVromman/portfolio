@@ -135,7 +135,9 @@ import "../CSS/background.css";
       }
     };
 
-    drawLines(true);
+    document.addEventListener("assetsloaded", () => {
+      drawLines(true);
+    });
 
     const onResize = () => {
       drawLines();

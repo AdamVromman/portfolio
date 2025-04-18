@@ -19,7 +19,7 @@ import "../CSS/flying-objects.css";
     import Stats from "three/addons/libs/stats.module.js";
     import { RGBELoader } from "three/examples/jsm/Addons.js";
     import gsap from "gsap";
-    import { projects } from "../assets/Constants";
+    import { assetsLoaded, dynamicBodies, projects } from "../assets/Constants";
     import {
       handleMouseIn,
       handleMouseOut,
@@ -36,7 +36,6 @@ import "../CSS/flying-objects.css";
     await RAPIER.init();
     const gravity = new RAPIER.Vector3(0.0, 0.0, 0.0);
     const world = new RAPIER.World(gravity);
-    const dynamicBodies: FlyingObject[] = [];
     const frustumSize = 50;
     let previousVelDecreasing: RAPIER.Vector3 | undefined;
 
@@ -245,19 +244,21 @@ import "../CSS/flying-objects.css";
                 mesh: mesh,
                 body: projectBody,
                 element: element,
+                slug: project.slug,
               };
-              element.addEventListener("mouseenter", () =>
-                handleMouseIn(project, flyingBody)
-              );
+              element.addEventListener("mouseenter", () => {
+                handleMouseIn(project.slug);
+              });
 
               element.addEventListener("mouseleave", () =>
-                handleMouseOut(project, flyingBody)
+                handleMouseOut(project.slug)
               );
 
               dynamicBodies.push(flyingBody);
             },
             (xhr) => {
               console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+              document.dispatchEvent(assetsLoaded);
             },
             (error) => {
               console.log(error);
@@ -396,7 +397,7 @@ import "../CSS/flying-objects.css";
       }
     };
 
-    const onPointerMove = (event: Event) => {
+    const onPointerMove = (event: PointerEvent) => {
       pointer.x = ((event.clientX - 15) / width) * 2 - 1;
       pointer.y = -((event.clientY - 15) / height) * 2 + 1;
     };
