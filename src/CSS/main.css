@@ -15,6 +15,7 @@ body {
   font-style: normal;
   @apply relative max-w-[1920px] mx-auto;
   @apply h-dvh;
+  @apply opacity-0;
 }
 
 * {

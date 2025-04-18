@@ -19,7 +19,7 @@ import "../CSS/flying-objects.css";
     import Stats from "three/addons/libs/stats.module.js";
     import { RGBELoader } from "three/examples/jsm/Addons.js";
     import gsap from "gsap";
-    import { dynamicBodies, projects } from "../assets/Constants";
+    import { assetsLoaded, dynamicBodies, projects } from "../assets/Constants";
     import {
       handleMouseIn,
       handleMouseOut,
@@ -246,7 +246,7 @@ import "../CSS/flying-objects.css";
                 element: element,
                 slug: project.slug,
               };
-              element.addEventListener("mouseenter", (e) => {
+              element.addEventListener("mouseenter", () => {
                 handleMouseIn(project.slug);
               });
 
@@ -258,6 +258,7 @@ import "../CSS/flying-objects.css";
             },
             (xhr) => {
               console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+              document.dispatchEvent(assetsLoaded);
             },
             (error) => {
               console.log(error);
@@ -396,7 +397,7 @@ import "../CSS/flying-objects.css";
       }
     };
 
-    const onPointerMove = (event: Event) => {
+    const onPointerMove = (event: PointerEvent) => {
       pointer.x = ((event.clientX - 15) / width) * 2 - 1;
       pointer.y = -((event.clientY - 15) / height) * 2 + 1;
     };

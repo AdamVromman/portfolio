@@ -116,13 +116,17 @@ import { projects } from "../assets/Constants";
     const links = document.querySelectorAll(".home_grid_work_link");
     links.forEach((link) => {
       link.addEventListener("mouseenter", () => {
-        const key = link.dataset.slug;
-        handleMouseIn(key);
+        if (link instanceof HTMLElement) {
+          const key = link.dataset.slug || "";
+          handleMouseIn(key);
+        }
       });
 
       link.addEventListener("mouseleave", () => {
-        const key = link.dataset.slug;
-        handleMouseOut(key);
+        if (link instanceof HTMLElement) {
+          const key = link.dataset.slug || "";
+          handleMouseOut(key);
+        }
       });
     });
   </script>
