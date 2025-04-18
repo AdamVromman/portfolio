@@ -19,14 +19,17 @@ import "../CSS/flying-objects.css";
     import Stats from "three/addons/libs/stats.module.js";
     import { RGBELoader } from "three/examples/jsm/Addons.js";
     import gsap from "gsap";
+    import { projects } from "../assets/Constants";
     import {
-      calculateNrOfRows,
+      handleMouseIn,
+      handleMouseOut,
+      hoveringBody,
+      previousVel,
+      setPreviousVel,
       calculateTileWidth,
-      homeTimeline,
-      projects,
-      type FlyingObject,
-      type Project,
-    } from "../assets/Constants";
+      calculateNrOfRows,
+    } from "../assets/Functions";
+    import type { FlyingObject } from "../assets/Interfaces";
 
     let stats: Stats;
 
@@ -35,8 +38,6 @@ import "../CSS/flying-objects.css";
     const world = new RAPIER.World(gravity);
     const dynamicBodies: FlyingObject[] = [];
     const frustumSize = 50;
-    let hoveringBody: FlyingObject | undefined;
-    let previousVel: RAPIER.Vector3 | undefined;
     let previousVelDecreasing: RAPIER.Vector3 | undefined;
 
     let width: number, height: number;
@@ -53,45 +54,6 @@ import "../CSS/flying-objects.css";
 
     const clock = new THREE.Clock();
     let delta;
-
-    const handleMouseIn = (project: Project, flyingObject: FlyingObject) => {
-      homeTimeline.reverse();
-      hoveringBody = flyingObject;
-      gsap.to(`.home_video.${project.slug}`, {
-        delay: 0.3,
-        duration: 0.2,
-        opacity: 1,
-      });
-
-      gsap.to("#background", {
-        duration: 0.2,
-        opacity: 0.1,
-      });
-
-      document.documentElement.style.setProperty(
-        "--color-active",
-        `#${project.color}`
-      );
-    };
-
-    const handleMouseOut = (project: Project, flyingObject: FlyingObject) => {
-      homeTimeline.play();
-      gsap.to(`.home_video.${project.slug}`, {
-        duration: 0.2,
-        opacity: 0,
-      });
-      gsap.to("#background", {
-        duration: 0.2,
-        opacity: 1,
-      });
-      hoveringBody = undefined;
-      if (previousVel) {
-        flyingObject.body.setLinvel(previousVel, true);
-        previousVel = undefined;
-      }
-
-      document.documentElement.style.setProperty("--color-active", "#4000ff");
-    };
 
     const createBox = () => {
       if (scene) {
@@ -338,7 +300,7 @@ import "../CSS/flying-objects.css";
       for (let i = 0, n = dynamicBodies.length; i < n; i++) {
         if (dynamicBodies[i] === hoveringBody) {
           if (previousVel === undefined)
-            previousVel = dynamicBodies[i].body.linvel();
+            setPreviousVel(dynamicBodies[i].body.linvel());
           previousVelDecreasing = dynamicBodies[i].body.linvel();
           const vel = previousVelDecreasing
             ? new RAPIER.Vector3(

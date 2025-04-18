@@ -2,6 +2,7 @@
 import FlyingObjects from "./FlyingObjects.astro";
 import "../CSS/home.css";
 import Background from "./Background.astro";
+import { projects } from "../assets/Constants";
 ---
 
 <div id="home">
@@ -54,28 +55,42 @@ import Background from "./Background.astro";
     <div class="grid_cell right home_grid_works">
       <div class="grid_cell_container">
         <div class="home_grid_works_container container-1">
-          <a class="half-col-text">Qausal</a>
-          <span class="half-col-text">—</span>
-          <a class="half-col-text">All eyes on Gaza</a>
-          <span class="half-col-text">—</span>
-          <a class="half-col-text">Transfo Intiem</a>
-          <span class="half-col-text">—</span>
-          <a class="half-col-text">Train World</a>
-          <span class="half-col-text">—</span>
-          <a class="half-col-text">Club Sofa</a>
-          <span class="half-col-text">—</span>
+          {
+            projects.map((project, index) => {
+              return (
+                <>
+                  {index !== 0 && <span class="half-col-text">—</span>}
+                  <a
+                    class="half-col-text"
+                    href={`/${project.slug}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {project.name}
+                  </a>
+                </>
+              );
+            })
+          }
         </div>
         <div class="home_grid_works_container container-2">
-          <a class="half-col-text">Qausal</a>
-          <span class="half-col-text">—</span>
-          <a class="half-col-text">All eyes on Gaza</a>
-          <span class="half-col-text">—</span>
-          <a class="half-col-text">Transfo Intiem</a>
-          <span class="half-col-text">—</span>
-          <a class="half-col-text">Train World</a>
-          <span class="half-col-text">—</span>
-          <a class="half-col-text">Club Sofa</a>
-          <span class="half-col-text">—</span>
+          {
+            projects.map((project, index) => {
+              return (
+                <>
+                  {index !== 0 && <span class="half-col-text">—</span>}
+                  <a
+                    class="half-col-text"
+                    href={`/${project.slug}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {project.name}
+                  </a>
+                </>
+              );
+            })
+          }
         </div>
       </div>
     </div>
@@ -96,7 +111,7 @@ import Background from "./Background.astro";
       calculateTileWidth,
       calculateNrOfRows,
       getNrOfColumns,
-    } from "../assets/Constants";
+    } from "../assets/Functions";
 
     const home = document.getElementById("home");
     const homeGrid = document.getElementById("home_grid");
