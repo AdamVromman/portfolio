@@ -37,7 +37,7 @@ export const calculateNrOfRows = (localTileWidth: number) => {
     if (screenWidth >= 480) {
       return Math.max(NR_OF_ROWS, 8);
     }
-    return Math.max(NR_OF_ROWS, 10);
+    return Math.max(NR_OF_ROWS, 8);
   }
   return 5;
 };
@@ -153,11 +153,13 @@ export const handleMouseIn = (key: string) => {
       delay: 0.3,
       duration: 0.2,
       opacity: 1,
+      overwrite: true,
     });
 
     gsap.to("#background", {
       duration: 0.2,
       opacity: 0.1,
+      overwrite: true,
     });
 
     document.documentElement.style.setProperty(
@@ -173,7 +175,12 @@ export const handleMouseOut = (key: string) => {
     (flyingObject) => flyingObject.slug === key
   );
   if (project && flyingObject) {
-    gsap.set(`.grid_cell.${key} .grid_cell_container`, { clearProps: "all" });
+    gsap.to(`.grid_cell.${key} .grid_cell_container`, {
+      backgroundColor: `var(--color-white)`,
+      duration: 0.1,
+      ease: "power3.out",
+      overwrite: true,
+    });
 
     gsap.fromTo(
       `.grid_cell.bottom:not(.${key}) .grid_cell_container`,
@@ -226,10 +233,12 @@ export const handleMouseOut = (key: string) => {
     gsap.to(`.home_video.${project.slug}`, {
       duration: 0.2,
       opacity: 0,
+      overwrite: true,
     });
     gsap.to("#background", {
       duration: 0.2,
       opacity: 1,
+      overwrite: true,
     });
     hoveringBody = undefined;
     if (previousVel) {

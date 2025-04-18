@@ -18,6 +18,13 @@
   @apply relative;
 }
 
+#home_intro {
+  @apply absolute top-15 left-15 right-15 bottom-15;
+  @apply bg-white;
+  @apply border-1 border-active;
+  @apply z-30;
+}
+
 .home_grid_title {
   grid-row: -2 / -1;
   grid-column: 2 / -1;
