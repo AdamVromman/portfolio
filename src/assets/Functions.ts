@@ -59,47 +59,6 @@ export const getNrOfColumns = () => {
   return NR_OF_COLUMNS;
 };
 
-export const homeTimeline = gsap
-  .timeline({
-    paused: true,
-  })
-  .from(
-    ".grid_cell.bottom .grid_cell_container",
-    {
-      duration: 0.3,
-      y: "100%",
-      ease: "power3.in",
-    },
-    0
-  )
-  .from(
-    ".grid_cell.top .grid_cell_container",
-    {
-      duration: 0.3,
-      y: "-100%",
-      ease: "power3.in",
-    },
-    0
-  )
-  .from(
-    ".grid_cell.left .grid_cell_container",
-    {
-      duration: 0.3,
-      x: "-100%",
-      ease: "power3.in",
-    },
-    0
-  )
-  .from(
-    ".grid_cell.right .grid_cell_container",
-    {
-      duration: 0.3,
-      x: "100%",
-      ease: "power3.in",
-    },
-    0
-  );
-
 export let hoveringBody: FlyingObject | undefined = undefined;
 export let previousVel: RAPIER.Vector3 | undefined = undefined;
 
@@ -108,7 +67,54 @@ export const setPreviousVel = (vector: RAPIER.Vector) => {
 };
 
 export const handleMouseIn = (project: Project, flyingObject: FlyingObject) => {
-  homeTimeline.reverse();
+  gsap.fromTo(
+    ".grid_cell.bottom .grid_cell_container",
+    {
+      y: "0",
+    },
+    {
+      duration: 0.3,
+      y: "100%",
+      ease: "power3.in",
+      overwrite: true,
+    }
+  );
+  gsap.fromTo(
+    ".grid_cell.top .grid_cell_container",
+    {
+      y: "0",
+    },
+    {
+      duration: 0.3,
+      y: "-100%",
+      ease: "power3.in",
+      overwrite: true,
+    }
+  );
+  gsap.fromTo(
+    ".grid_cell.left .grid_cell_container",
+    {
+      x: "0",
+    },
+    {
+      duration: 0.3,
+      x: "-100%",
+      ease: "power3.in",
+      overwrite: true,
+    }
+  );
+  gsap.fromTo(
+    ".grid_cell.right .grid_cell_container",
+    {
+      x: "0",
+    },
+    {
+      duration: 0.3,
+      x: "100%",
+      ease: "power3.in",
+      overwrite: true,
+    }
+  );
   hoveringBody = flyingObject;
   gsap.to(`.home_video.${project.slug}`, {
     delay: 0.3,
@@ -131,7 +137,54 @@ export const handleMouseOut = (
   project: Project,
   flyingObject: FlyingObject
 ) => {
-  homeTimeline.play();
+  gsap.fromTo(
+    ".grid_cell.bottom .grid_cell_container",
+    {
+      y: "100%",
+    },
+    {
+      duration: 0.3,
+      y: "0",
+      ease: "power3.in",
+      overwrite: true,
+    }
+  );
+  gsap.fromTo(
+    ".grid_cell.top .grid_cell_container",
+    {
+      y: "-100%",
+    },
+    {
+      duration: 0.3,
+      y: "0",
+      ease: "power3.in",
+      overwrite: true,
+    }
+  );
+  gsap.fromTo(
+    ".grid_cell.left .grid_cell_container",
+    {
+      x: "-100%",
+    },
+    {
+      duration: 0.3,
+      x: "0",
+      ease: "power3.in",
+      overwrite: true,
+    }
+  );
+  gsap.fromTo(
+    ".grid_cell.right .grid_cell_container",
+    {
+      x: "100%",
+    },
+    {
+      duration: 0.3,
+      x: "0",
+      ease: "power3.in",
+      overwrite: true,
+    }
+  );
   gsap.to(`.home_video.${project.slug}`, {
     duration: 0.2,
     opacity: 0,

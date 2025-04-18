@@ -78,9 +78,9 @@ import { projects } from "../assets/Constants";
             projects.map((project, index) => {
               return (
                 <>
-                  {index !== 0 && <span class="half-col-text">—</span>}
+                  <span class="half-col-text">—</span>
                   <a
-                    class="half-col-text"
+                    class={`half-col-text ${project.slug}`}
                     href={`/${project.slug}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -132,4 +132,6 @@ import { projects } from "../assets/Constants";
     drawGrid();
     window.addEventListener("resize", handleResize);
   </script>
+
+  <script></script>
 </div>

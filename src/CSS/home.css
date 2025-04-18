@@ -120,13 +120,6 @@
 
   a {
     @apply uppercase font-semibold;
-
-    &:hover {
-      @apply italic;
-      :root {
-        --color-active: #ff00ff;
-      }
-    }
   }
 
   span {
