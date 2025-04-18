@@ -2,8 +2,15 @@
 import "../CSS/flying-objects.css";
 ---
 
-<div id="flying-objects" class="absolute w-full h-full top-0 left-0 p-15 z-10">
-  <div class="relative z-10 w-full h-full" id="canvas-container"></div>
+<div
+  id="flying-objects"
+  class="pointer-events-none absolute w-full h-full top-0 left-0 p-15 z-10"
+>
+  <div
+    class="pointer-events-none relative z-10 w-full h-full"
+    id="canvas-container"
+  >
+  </div>
 
   <script>
     import * as THREE from "three";
@@ -12,7 +19,17 @@ import "../CSS/flying-objects.css";
     import Stats from "three/addons/libs/stats.module.js";
     import { RGBELoader } from "three/examples/jsm/Addons.js";
     import gsap from "gsap";
-    import { projects, type FlyingObject } from "../assets/Constants";
+    import { projects } from "../assets/Constants";
+    import {
+      handleMouseIn,
+      handleMouseOut,
+      hoveringBody,
+      previousVel,
+      setPreviousVel,
+      calculateTileWidth,
+      calculateNrOfRows,
+    } from "../assets/Functions";
+    import type { FlyingObject } from "../assets/Interfaces";
 
     let stats: Stats;
 
@@ -21,15 +38,13 @@ import "../CSS/flying-objects.css";
     const world = new RAPIER.World(gravity);
     const dynamicBodies: FlyingObject[] = [];
     const frustumSize = 50;
-    let hoveringBody: FlyingObject | undefined;
-    let previousVel: RAPIER.Vector3 | undefined;
+    let previousVelDecreasing: RAPIER.Vector3 | undefined;
 
     let width: number, height: number;
 
     let renderer: THREE.WebGLRenderer,
       scene: THREE.Scene,
-      camera: THREE.OrthographicCamera,
-      raycaster: THREE.Raycaster;
+      camera: THREE.OrthographicCamera;
 
     let debug;
 
@@ -172,7 +187,7 @@ import "../CSS/flying-objects.css";
               let projectShape;
               const element = document.createElement("a");
               element.className = `flying-object-link ${project.slug}`;
-              element.href = "https://www.clubsofa.com";
+              element.href = `/${project.slug}`;
               element.target = "_blank";
               canvasContainer?.appendChild(element);
 
@@ -231,18 +246,13 @@ import "../CSS/flying-objects.css";
                 body: projectBody,
                 element: element,
               };
-              element.addEventListener("mouseenter", (e) => {
-                hoveringBody = flyingBody;
-              });
+              element.addEventListener("mouseenter", () =>
+                handleMouseIn(project, flyingBody)
+              );
 
-              element.addEventListener("mouseleave", (e) => {
-                console.log(previousVel);
-                hoveringBody = undefined;
-                if (previousVel) {
-                  flyingBody.body.setLinvel(previousVel, true);
-                  previousVel = undefined;
-                }
-              });
+              element.addEventListener("mouseleave", () =>
+                handleMouseOut(project, flyingBody)
+              );
 
               dynamicBodies.push(flyingBody);
             },
@@ -261,19 +271,27 @@ import "../CSS/flying-objects.css";
       if (renderer && scene && camera) renderer.render(scene, camera);
     };
 
+    const decreaseValue = (value: number) => {
+      if (value > 0) {
+        return Math.max(value - 0.05, 0);
+      } else {
+        return Math.min(value + 0.05, 0);
+      }
+    };
+
     const animate = () => {
       requestAnimationFrame(animate);
       stats.update();
 
-      const { vertices, colors } = world.debugRender();
-      debug.geometry.setAttribute(
-        "position",
-        new THREE.BufferAttribute(vertices, 3)
-      );
-      debug.geometry.setAttribute(
-        "color",
-        new THREE.BufferAttribute(colors, 4)
-      );
+      // const { vertices, colors } = world.debugRender();
+      // debug.geometry.setAttribute(
+      //   "position",
+      //   new THREE.BufferAttribute(vertices, 3)
+      // );
+      // debug.geometry.setAttribute(
+      //   "color",
+      //   new THREE.BufferAttribute(colors, 4)
+      // );
 
       delta = clock.getDelta();
       world.timestep = Math.min(delta, 0.1);
@@ -282,8 +300,16 @@ import "../CSS/flying-objects.css";
       for (let i = 0, n = dynamicBodies.length; i < n; i++) {
         if (dynamicBodies[i] === hoveringBody) {
           if (previousVel === undefined)
-            previousVel = dynamicBodies[i].body.linvel();
-          dynamicBodies[i].body.setLinvel(new RAPIER.Vector3(0, 0, 0), true);
+            setPreviousVel(dynamicBodies[i].body.linvel());
+          previousVelDecreasing = dynamicBodies[i].body.linvel();
+          const vel = previousVelDecreasing
+            ? new RAPIER.Vector3(
+                decreaseValue(previousVelDecreasing.x),
+                decreaseValue(previousVelDecreasing.y),
+                0
+              )
+            : dynamicBodies[i].body.linvel();
+          dynamicBodies[i].body.setLinvel(vel, true);
         }
 
         dynamicBodies[i].mesh.position.copy(
@@ -307,6 +333,11 @@ import "../CSS/flying-objects.css";
 
     const init = () => {
       if (canvasContainer) {
+        const localTileWidth = calculateTileWidth(canvasContainer);
+        const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
+
+        canvasContainer.style.height = `${NR_OF_ROWS * localTileWidth}px`;
+
         height = canvasContainer.clientHeight;
         width = canvasContainer.clientWidth;
         const aspect = canvasContainer.clientWidth / height;
@@ -323,7 +354,7 @@ import "../CSS/flying-objects.css";
 
         new RGBELoader()
           .setPath("/")
-          .load("studio_small_03_4k.hdr", function (texture) {
+          .load("background.hdr", function (texture) {
             texture.mapping = THREE.EquirectangularReflectionMapping;
             scene.environment = texture;
           });
@@ -346,8 +377,6 @@ import "../CSS/flying-objects.css";
         debug.frustumCulled = false;
         scene.add(debug);
 
-        raycaster = new THREE.Raycaster();
-
         renderer = new THREE.WebGLRenderer({
           antialias: true,
           alpha: true,
@@ -356,6 +385,7 @@ import "../CSS/flying-objects.css";
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(width, height);
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.domElement.style.pointerEvents = "none";
         canvasContainer.insertAdjacentElement(
           "afterbegin",
           renderer.domElement

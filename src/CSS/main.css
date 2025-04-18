@@ -1,5 +1,9 @@
 @import "./imports.css";
 
+:root {
+  --color-active: #4000ff;
+}
+
 html {
   @apply bg-white;
 }
