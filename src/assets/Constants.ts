@@ -1,3 +1,6 @@
+import type RAPIER from "@dimforge/rapier3d-compat";
+import * as THREE from "three";
+
 export enum LineDirection {
   VERTICAL = "vertical",
   HORIZONTAL = "horizontal",
