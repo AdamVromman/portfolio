@@ -53,6 +53,7 @@ import "../CSS/flying-objects.css";
 
     const clock = new THREE.Clock();
     let delta;
+    let clicked = false;
 
     const createBox = () => {
       if (scene) {
@@ -187,7 +188,6 @@ import "../CSS/flying-objects.css";
               const element = document.createElement("a");
               element.className = `flying-object-link ${project.slug}`;
               element.href = `/${project.slug}`;
-              element.target = "_blank";
               canvasContainer?.appendChild(element);
 
               if (project.slug === "train-world") {
@@ -247,12 +247,26 @@ import "../CSS/flying-objects.css";
                 slug: project.slug,
               };
               element.addEventListener("mouseenter", () => {
-                handleMouseIn(project.slug);
+                console.log("mouseenter", clicked);
+                if (!clicked) {
+                  handleMouseIn(project.slug);
+                } else {
+                  clicked = false;
+                }
               });
 
-              element.addEventListener("mouseleave", () =>
-                handleMouseOut(project.slug)
-              );
+              element.addEventListener("mouseleave", () => {
+                console.log("mouseleave", clicked);
+                if (!clicked) {
+                  console.log("mouseleave");
+                  handleMouseOut(project.slug);
+                }
+              });
+
+              element.addEventListener("click", () => {
+                console.log("clicked", clicked);
+                clicked = true;
+              });
 
               dynamicBodies.push(flyingBody);
             },

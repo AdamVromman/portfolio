@@ -1,5 +1,6 @@
 ---
 import "../CSS/main.css";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
@@ -16,6 +17,7 @@ import "../CSS/main.css";
       href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
       rel="stylesheet"
     />
+    <ClientRouter />
   </head>
   <body>
     <slot />

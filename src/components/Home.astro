@@ -5,7 +5,7 @@ import Background from "./Background.astro";
 import { projects } from "../assets/Constants";
 ---
 
-<div id="home">
+<div id="home" transition:persist>
   <div id="home_grid" class="home_grid">
     <video
       class="home_video train-world"
@@ -61,8 +61,6 @@ import { projects } from "../assets/Constants";
               data-slug={project.slug}
               class={`grid_cell_container  home_grid_work_link ${project.slug}`}
               href={`/${project.slug}`}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               <span class="half-col-text">{project.name}</span>
             </a>
