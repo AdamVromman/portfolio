@@ -2,8 +2,15 @@
 import "../CSS/flying-objects.css";
 ---
 
-<div id="flying-objects" class="absolute w-full h-full top-0 left-0 p-15 z-10">
-  <div class="relative z-10 w-full h-full" id="canvas-container"></div>
+<div
+  id="flying-objects"
+  class="pointer-events-none absolute w-full h-full top-0 left-0 p-15 z-10"
+>
+  <div
+    class="pointer-events-none relative z-10 w-full h-full"
+    id="canvas-container"
+  >
+  </div>
 
   <script>
     import * as THREE from "three";
@@ -15,8 +22,10 @@ import "../CSS/flying-objects.css";
     import {
       calculateNrOfRows,
       calculateTileWidth,
+      homeTimeline,
       projects,
       type FlyingObject,
+      type Project,
     } from "../assets/Constants";
 
     let stats: Stats;
@@ -44,6 +53,45 @@ import "../CSS/flying-objects.css";
 
     const clock = new THREE.Clock();
     let delta;
+
+    const handleMouseIn = (project: Project, flyingObject: FlyingObject) => {
+      homeTimeline.reverse();
+      hoveringBody = flyingObject;
+      gsap.to(`.home_video.${project.slug}`, {
+        delay: 0.3,
+        duration: 0.2,
+        opacity: 1,
+      });
+
+      gsap.to("#background", {
+        duration: 0.2,
+        opacity: 0.1,
+      });
+
+      document.documentElement.style.setProperty(
+        "--color-active",
+        `#${project.color}`
+      );
+    };
+
+    const handleMouseOut = (project: Project, flyingObject: FlyingObject) => {
+      homeTimeline.play();
+      gsap.to(`.home_video.${project.slug}`, {
+        duration: 0.2,
+        opacity: 0,
+      });
+      gsap.to("#background", {
+        duration: 0.2,
+        opacity: 1,
+      });
+      hoveringBody = undefined;
+      if (previousVel) {
+        flyingObject.body.setLinvel(previousVel, true);
+        previousVel = undefined;
+      }
+
+      document.documentElement.style.setProperty("--color-active", "#4000ff");
+    };
 
     const createBox = () => {
       if (scene) {
@@ -236,18 +284,13 @@ import "../CSS/flying-objects.css";
                 body: projectBody,
                 element: element,
               };
-              element.addEventListener("mouseenter", (e) => {
-                hoveringBody = flyingBody;
-              });
+              element.addEventListener("mouseenter", () =>
+                handleMouseIn(project, flyingBody)
+              );
 
-              element.addEventListener("mouseleave", (e) => {
-                console.log(previousVel);
-                hoveringBody = undefined;
-                if (previousVel) {
-                  flyingBody.body.setLinvel(previousVel, true);
-                  previousVel = undefined;
-                }
-              });
+              element.addEventListener("mouseleave", () =>
+                handleMouseOut(project, flyingBody)
+              );
 
               dynamicBodies.push(flyingBody);
             },

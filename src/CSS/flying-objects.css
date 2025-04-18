@@ -3,4 +3,5 @@
 .flying-object-link {
   @apply absolute w-20 h-20;
   @apply top-0 left-0 origin-center;
+  @apply pointer-events-auto;
 }

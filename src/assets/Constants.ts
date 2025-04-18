@@ -1,5 +1,6 @@
 import type RAPIER from "@dimforge/rapier3d-compat";
 import * as THREE from "three";
+import { gsap } from "gsap";
 
 export enum LineDirection {
   VERTICAL = "vertical",
@@ -73,7 +74,7 @@ export interface FlyingObject {
   element: HTMLAnchorElement;
 }
 
-interface Project {
+export interface Project {
   slug: string;
   color: string;
 }
@@ -88,3 +89,44 @@ export const projects: Project[] = [
     color: "3aab94",
   },
 ];
+
+export const homeTimeline = gsap
+  .timeline({
+    paused: true,
+  })
+  .from(
+    ".grid_cell.bottom .grid_cell_container",
+    {
+      duration: 0.3,
+      y: "100%",
+      ease: "power3.in",
+    },
+    0
+  )
+  .from(
+    ".grid_cell.top .grid_cell_container",
+    {
+      duration: 0.3,
+      y: "-100%",
+      ease: "power3.in",
+    },
+    0
+  )
+  .from(
+    ".grid_cell.left .grid_cell_container",
+    {
+      duration: 0.3,
+      x: "-100%",
+      ease: "power3.in",
+    },
+    0
+  )
+  .from(
+    ".grid_cell.right .grid_cell_container",
+    {
+      duration: 0.3,
+      x: "100%",
+      ease: "power3.in",
+    },
+    0
+  );
