@@ -89,8 +89,29 @@ export const handleMouseIn = (key: string) => {
       overwrite: true,
     });
 
-    gsap.to(".grid_cell.home_grid_title h1.page-title", {
+    gsap.to(".grid_cell.home_grid_title .page-title", {
       color: "#eee",
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: true,
+    });
+
+    gsap.to(".grid_cell.home_grid_title .page-title.sub", {
+      color: "#eee",
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: true,
+    });
+
+    gsap.to(".grid_cell.home_grid_title h1.page-title", {
+      y: "-100%",
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: true,
+    });
+
+    gsap.to(`.grid_cell.home_grid_title .page-title.sub.${project.slug}`, {
+      y: "0%",
       duration: 0.3,
       ease: "power3.in",
       overwrite: true,
@@ -174,8 +195,29 @@ export const handleMouseOut = (key: string) => {
       overwrite: true,
     });
 
-    gsap.to(".grid_cell.home_grid_title h1.page-title", {
+    gsap.to(".grid_cell.home_grid_title .page-title", {
       color: "#4000ff",
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: true,
+    });
+
+    gsap.to(".grid_cell.home_grid_title .page-title.sub", {
+      color: "#4000ff",
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: true,
+    });
+
+    gsap.to(".grid_cell.home_grid_title h1.page-title", {
+      y: "0",
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: true,
+    });
+
+    gsap.to(`.grid_cell.home_grid_title .page-title.sub.${project.slug}`, {
+      y: "100%",
       duration: 0.3,
       ease: "power3.in",
       overwrite: true,

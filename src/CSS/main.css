@@ -83,11 +83,16 @@ body {
   @apply overflow-hidden;
 }
 
-h1.page-title {
+.page-title {
   @apply block px-5;
   @apply text-active font-bold uppercase;
 
   .thin {
     @apply font-light;
+  }
+
+  &.sub {
+    @apply absolute;
+    @apply translate-y-full;
   }
 }
