@@ -77,21 +77,24 @@ export const handleMouseIn = (key: string) => {
     (flyingObject) => flyingObject.slug === key
   );
   if (project && flyingObject) {
-    // TODO: Add years when hovering?
+    document.documentElement.style.setProperty(
+      "--color-active",
+      `#${project.color}`
+    );
 
-    // gsap.to(`.grid_cell.ignore-move-out`, {
-    //   gridColumn: "1 / -1",
-    //   duration: 0.3,
-    //   ease: "power3.in",
-    //   overwrite: true,
-    // });
+    gsap.to(".grid_cell.home_grid_title .grid_cell_container", {
+      backgroundColor: `#${project.color}`,
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: true,
+    });
 
-    // gsap.to(`.grid_cell.ignore-move-out .grid_cell_container.home_grid_work_link span`, {
-    //   text: `${project.name} — ${project.year}`,
-    //   duration: 0.3,
-    //   ease: "power3.in",
-    //   overwrite: true,
-    // });
+    gsap.to(".grid_cell.home_grid_title h1.page-title", {
+      color: "#eee",
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: true,
+    });
 
     gsap.fromTo(
       `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
@@ -154,20 +157,30 @@ export const handleMouseIn = (key: string) => {
       opacity: 0.1,
       overwrite: true,
     });
-
-    document.documentElement.style.setProperty(
-      "--color-active",
-      `#${project.color}`
-    );
   }
 };
 
 export const handleMouseOut = (key: string) => {
+  document.documentElement.style.setProperty("--color-active", "#4000ff");
   const project = projects.find((project) => project.slug === key);
   const flyingObject = dynamicBodies.find(
     (flyingObject) => flyingObject.slug === key
   );
   if (project && flyingObject) {
+    gsap.to(".grid_cell.home_grid_title .grid_cell_container", {
+      backgroundColor: "#eee",
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: true,
+    });
+
+    gsap.to(".grid_cell.home_grid_title h1.page-title", {
+      color: "#4000ff",
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: true,
+    });
+
     gsap.fromTo(
       `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
       {
@@ -231,7 +244,5 @@ export const handleMouseOut = (key: string) => {
       flyingObject.body.setLinvel(previousVel, true);
       previousVel = undefined;
     }
-
-    document.documentElement.style.setProperty("--color-active", "#4000ff");
   }
 };
