@@ -28,16 +28,15 @@ import "../CSS/background.css";
         const localTileWidth = calculateTileWidth(background);
         const svgNS = "http://www.w3.org/2000/svg";
 
-        for (let i = 0; i < getNrOfColumns() + 1; i++) {
-          const line = document.createElementNS(svgNS, "rect");
+        for (let i = 0; i < getNrOfColumns() / 2 + 1; i++) {
+          const line = document.createElementNS(svgNS, "line");
           line.classList.add("background_svg_line");
           line.classList.add("line_vertical");
           line.classList.add("line_main");
           line.setAttribute("height", "0");
-          line.setAttribute("width", "2px");
           line.setAttribute(
             "x",
-            `${localTileWidth * i - (2 / (getNrOfColumns() + 1)) * i}px`
+            `${localTileWidth * 2 * i - (2 / (getNrOfColumns() + 1)) * i}px`
           );
           line.setAttribute("y", "0");
           backgroundSVG.appendChild(line);
@@ -56,7 +55,7 @@ import "../CSS/background.css";
           }
         }
 
-        for (let i = 0; i < getNrOfColumns(); i++) {
+        for (let i = 0; i < getNrOfColumns() / 2; i++) {
           const line = document.createElementNS(svgNS, "rect");
           line.classList.add("background_svg_line");
           line.classList.add("line_vertical");
@@ -66,8 +65,8 @@ import "../CSS/background.css";
           line.setAttribute(
             "x",
             `${
-              localTileWidth / 2 +
-              localTileWidth * i -
+              localTileWidth +
+              localTileWidth * 2 * i -
               (1 / getNrOfColumns()) * i
             }px`
           );
@@ -86,7 +85,7 @@ import "../CSS/background.css";
           } else line.setAttribute("height", "100%");
         }
 
-        for (let i = 0; i < nrOfRows + 1; i++) {
+        for (let i = 0; i < nrOfRows / 2 + 1; i++) {
           const line = document.createElementNS(svgNS, "rect");
           line.classList.add("background_svg_line");
           line.classList.add("line_horizontal");
@@ -95,7 +94,7 @@ import "../CSS/background.css";
           line.setAttribute("height", "2px");
           line.setAttribute(
             "y",
-            `${localTileWidth * i - (2 / (nrOfRows + 1)) * i}px`
+            `${localTileWidth * 2 * i - (2 / (nrOfRows + 1)) * i}px`
           );
           line.setAttribute("x", "0");
           backgroundSVG.appendChild(line);
@@ -112,7 +111,7 @@ import "../CSS/background.css";
           } else line.setAttribute("width", "100%");
         }
 
-        for (let i = 0; i < nrOfRows; i++) {
+        for (let i = 0; i < nrOfRows / 2; i++) {
           const line = document.createElementNS(svgNS, "rect");
           line.classList.add("background_svg_line");
           line.classList.add("line_horizontal");
@@ -121,7 +120,7 @@ import "../CSS/background.css";
           line.setAttribute("height", "0.5px");
           line.setAttribute(
             "y",
-            `${localTileWidth / 2 + localTileWidth * i - (1 / nrOfRows) * i}px`
+            `${localTileWidth + localTileWidth * 2 * i - (1 / nrOfRows) * i}px`
           );
           line.setAttribute("x", "0");
           backgroundSVG.appendChild(line);

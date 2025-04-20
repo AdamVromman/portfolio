@@ -11,6 +11,7 @@
 
   .background_svg_line {
     @apply fill-active;
+    @apply stroke-active stroke-2;
   }
 }
 

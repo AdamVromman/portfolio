@@ -1,10 +1,10 @@
 import type { Project, FlyingObject } from "./Interfaces";
 
-export const NR_OF_COLUMNS = 5;
-export const NR_OF_COLUMNS_480 = 7;
-export const NR_OF_COLUMNS_768 = 9;
-export const NR_OF_COLUMNS_1024 = 13;
-export const NR_OF_COLUMNS_1280 = 15;
+export const NR_OF_COLUMNS = 10;
+export const NR_OF_COLUMNS_480 = 14;
+export const NR_OF_COLUMNS_768 = 18;
+export const NR_OF_COLUMNS_1024 = 26;
+export const NR_OF_COLUMNS_1280 = 30;
 
 export const projects: Project[] = [
   {

@@ -22,22 +22,21 @@ export const calculateNrOfRows = (localTileWidth: number) => {
   const container = document.getElementById("home");
   if (container) {
     const screenWidth = getScreenWidth();
-    const NR_OF_ROWS = Math.floor(
-      (container.clientHeight - 30) / localTileWidth
-    );
+    const NR_OF_ROWS =
+      Math.floor((container.clientHeight - 30) / localTileWidth / 2) * 2;
     if (screenWidth >= 1280) {
-      return Math.max(NR_OF_ROWS, 7);
+      return Math.max(NR_OF_ROWS, 14);
     }
     if (screenWidth >= 1024) {
-      return Math.max(NR_OF_ROWS, 6);
+      return Math.max(NR_OF_ROWS, 12);
     }
     if (screenWidth >= 768) {
-      return Math.max(NR_OF_ROWS, 7);
+      return Math.max(NR_OF_ROWS, 14);
     }
     if (screenWidth >= 480) {
-      return Math.max(NR_OF_ROWS, 8);
+      return Math.max(NR_OF_ROWS, 16);
     }
-    return Math.max(NR_OF_ROWS, 8);
+    return Math.max(NR_OF_ROWS, 16);
   }
   return 5;
 };
