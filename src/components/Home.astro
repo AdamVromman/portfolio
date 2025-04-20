@@ -33,7 +33,7 @@ import { projects } from "../assets/Constants";
           projects.map((project) => {
             return (
               <div class={`full-col-text page-title sub ${project.slug}`}>
-                <h2>{project.name}</h2>
+                <h2 style={`color: #${project.color};`}>{project.name}</h2>
               </div>
             );
           })

@@ -84,27 +84,6 @@ export const handleMouseIn = (key: string) => {
       `#${project.color}`
     );
 
-    gsap.to(".grid_cell.home_grid_title .grid_cell_container", {
-      backgroundColor: `#${project.color}`,
-      duration: 0.3,
-      ease: "power3.in",
-      overwrite: true,
-    });
-
-    gsap.to(".grid_cell.home_grid_title .page-title", {
-      color: "#eee",
-      duration: 0.3,
-      ease: "power3.in",
-      overwrite: true,
-    });
-
-    gsap.to(".grid_cell.home_grid_title .page-title.sub", {
-      color: "#eee",
-      duration: 0.3,
-      ease: "power3.in",
-      overwrite: true,
-    });
-
     gsap.to(".grid_cell.home_grid_title h1.page-title", {
       y: "-100%",
       duration: 0.3,
@@ -190,27 +169,6 @@ export const handleMouseOut = (key: string) => {
     (flyingObject) => flyingObject.slug === key
   );
   if (project && flyingObject) {
-    gsap.to(".grid_cell.home_grid_title .grid_cell_container", {
-      backgroundColor: "#eee",
-      duration: 0.3,
-      ease: "power3.in",
-      overwrite: true,
-    });
-
-    gsap.to(".grid_cell.home_grid_title .page-title", {
-      color: "#4000ff",
-      duration: 0.3,
-      ease: "power3.in",
-      overwrite: true,
-    });
-
-    gsap.to(".grid_cell.home_grid_title .page-title.sub", {
-      color: "#4000ff",
-      duration: 0.3,
-      ease: "power3.in",
-      overwrite: true,
-    });
-
     gsap.to(".grid_cell.home_grid_title h1.page-title", {
       y: "0",
       duration: 0.3,
