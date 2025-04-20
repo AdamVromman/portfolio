@@ -10,8 +10,12 @@
   @apply w-full h-full;
 
   .background_svg_line {
-    @apply fill-active;
+    /* @apply fill-active; */
     @apply stroke-active stroke-2;
+
+    &.line_sub {
+      @apply stroke-[0.5px];
+    }
   }
 }
 

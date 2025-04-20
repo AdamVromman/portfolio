@@ -79,7 +79,7 @@ body {
 .grid_cell_container {
   @apply bg-white;
   @apply w-full h-full;
-  @apply flex items-center justify-center;
+  @apply flex items-center;
   @apply overflow-hidden;
 }
 
