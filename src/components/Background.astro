@@ -12,6 +12,7 @@ import "../CSS/background.css";
       getNrOfColumns,
     } from "../assets/Functions";
 
+    const home = document.getElementById("home");
     const background = document.getElementById("background");
     const backgroundSVG = document.getElementById("background_svg");
     const timeline = gsap.timeline({
@@ -22,15 +23,19 @@ import "../CSS/background.css";
     });
 
     const drawLines = (animated: boolean = false) => {
-      if (background && backgroundSVG) {
-        const nrOfRows = calculateNrOfRows(calculateTileWidth(background));
+      if (home && background && backgroundSVG) {
+        const localTileWidth = calculateTileWidth();
+        const nrOfRows = calculateNrOfRows(localTileWidth);
+        console.log("nrOfRows", nrOfRows);
+        console.log("localTileWidth", localTileWidth);
+        background.style.width = `${getNrOfColumns() * localTileWidth}px`;
+        background.style.height = `${nrOfRows * localTileWidth}px`;
         backgroundSVG.textContent = "";
-        const localTileWidth = calculateTileWidth(background);
         const svgNS = "http://www.w3.org/2000/svg";
 
         for (let i = 0; i < getNrOfColumns() / 2 - 1; i++) {
           const line = document.createElementNS(svgNS, "line");
-          const x = `${localTileWidth * 2 + localTileWidth * 2 * i - (2 / (getNrOfColumns() + 1)) * i}px`;
+          const x = `${localTileWidth * 2 + localTileWidth * 2 * i}px`;
           line.classList.add("background_svg_line");
           line.classList.add("line_vertical");
           line.classList.add("line_main");
@@ -56,7 +61,7 @@ import "../CSS/background.css";
 
         for (let i = 0; i < getNrOfColumns() / 2; i++) {
           const line = document.createElementNS(svgNS, "line");
-          const x = `${localTileWidth + localTileWidth * 2 * i - (1 / getNrOfColumns()) * i}px`;
+          const x = `${localTileWidth + localTileWidth * 2 * i}px`;
           line.classList.add("background_svg_line");
           line.classList.add("line_vertical");
           line.classList.add("line_sub");
@@ -80,7 +85,7 @@ import "../CSS/background.css";
 
         for (let i = 0; i < nrOfRows / 2 - 1; i++) {
           const line = document.createElementNS(svgNS, "line");
-          const y = `${localTileWidth * 2 + localTileWidth * 2 * i - (2 / (nrOfRows + 1)) * i}px`;
+          const y = `${localTileWidth * 2 + localTileWidth * 2 * i}px`;
           line.classList.add("background_svg_line");
           line.classList.add("line_horizontal");
           line.classList.add("line_main");
@@ -103,7 +108,7 @@ import "../CSS/background.css";
 
         for (let i = 0; i < nrOfRows / 2; i++) {
           const line = document.createElementNS(svgNS, "line");
-          const y = `${localTileWidth + localTileWidth * 2 * i - (1 / nrOfRows) * i}px`;
+          const y = `${localTileWidth + localTileWidth * 2 * i}px`;
           line.classList.add("background_svg_line");
           line.classList.add("line_horizontal");
           line.classList.add("line_sub");

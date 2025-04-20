@@ -14,29 +14,32 @@ import { TextPlugin } from "gsap/TextPlugin";
 
 gsap.registerPlugin(TextPlugin);
 
-export const calculateTileWidth = (container: HTMLElement) => {
-  return container.clientWidth / getNrOfColumns();
+export const calculateTileWidth = () => {
+  const gridContainer = document.getElementById("grid-container");
+  if (gridContainer)
+    return Math.floor(gridContainer.clientWidth / getNrOfColumns());
+  return 0;
 };
 
 export const calculateNrOfRows = (localTileWidth: number) => {
-  const container = document.getElementById("home");
+  const container = document.getElementById("grid-container");
   if (container) {
     const screenWidth = getScreenWidth();
-    const NR_OF_ROWS =
+    const nrOfRows =
       Math.floor((container.clientHeight - 30) / localTileWidth / 2) * 2;
     if (screenWidth >= 1280) {
-      return Math.max(NR_OF_ROWS, 14);
+      return Math.max(nrOfRows, 14);
     }
     if (screenWidth >= 1024) {
-      return Math.max(NR_OF_ROWS, 12);
+      return Math.max(nrOfRows, 12);
     }
     if (screenWidth >= 768) {
-      return Math.max(NR_OF_ROWS, 14);
+      return Math.max(nrOfRows, 14);
     }
     if (screenWidth >= 480) {
-      return Math.max(NR_OF_ROWS, 16);
+      return Math.max(nrOfRows, 16);
     }
-    return Math.max(NR_OF_ROWS, 16);
+    return Math.max(nrOfRows, 16);
   }
   return 5;
 };

@@ -15,6 +15,7 @@ body {
   font-style: normal;
   @apply relative max-w-[1920px] mx-auto;
   @apply h-dvh;
+  @apply p-15;
 }
 
 * {
@@ -69,6 +70,11 @@ body {
     font-size: min(6vw, 140px);
     line-height: min(6vw, 140px);
   }
+}
+
+#grid-container {
+  @apply w-full h-full;
+  @apply flex flex-col items-center justify-stretch;
 }
 
 .grid_cell {

@@ -7,24 +7,24 @@ import { projects } from "../assets/Constants";
 
 <div id="home" transition:persist>
   <!-- <div id="test_grid"></div> -->
-  <div id="home_intro"></div>
-  <div id="home_grid" class="home_grid">
-    <video
-      class="home_video train-world"
-      src="/FINAL VIDEO_1.webm"
-      autoplay
-      muted
-      loop
-      preload="auto"></video>
-    <video
-      class="home_video club-sofa"
-      src="/FINAL VIDEO_1.webm"
-      autoplay
-      muted
-      loop
-      preload="auto"></video>
+  <!-- <div id="home_intro"></div> -->
+  <video
+    class="home_video train-world"
+    src="/FINAL VIDEO_1.webm"
+    autoplay
+    muted
+    loop
+    preload="auto"></video>
+  <video
+    class="home_video club-sofa"
+    src="/FINAL VIDEO_1.webm"
+    autoplay
+    muted
+    loop
+    preload="auto"></video>
 
-    <Background />
+  <Background />
+  <div id="home_grid" class="home_grid">
     <div class="grid_cell bottom ignore-move-out home_grid_title">
       <div class="grid_cell_container">
         <h1 class="full-col-text page-title">
@@ -115,16 +115,21 @@ import { projects } from "../assets/Constants";
 
     const drawGrid = (firstRender: boolean) => {
       if (home && homeGrid) {
-        const localTileWidth = calculateTileWidth(homeGrid);
-        const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
+        const localTileWidth = calculateTileWidth();
+        const nrOfRows = calculateNrOfRows(localTileWidth);
+
+        console.log("home");
+        console.log("nrOfRows", nrOfRows);
+        console.log("localTileWidth", localTileWidth);
 
         if (firstRender) {
-          animateIntro(NR_OF_ROWS * localTileWidth);
+          animateIntro(nrOfRows * localTileWidth);
         }
 
-        homeGrid.style.height = `${NR_OF_ROWS * localTileWidth}px`;
+        homeGrid.style.width = `${getNrOfColumns() * localTileWidth}px`;
+        homeGrid.style.height = `${nrOfRows * localTileWidth}px`;
         homeGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-        homeGrid.style.gridTemplateRows = `repeat(${NR_OF_ROWS}, ${localTileWidth}px)`;
+        homeGrid.style.gridTemplateRows = `repeat(${nrOfRows}, ${localTileWidth}px)`;
       }
     };
 
@@ -200,5 +205,3 @@ import { projects } from "../assets/Constants";
     });
   </script>
 </div>
--->
-
