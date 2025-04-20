@@ -31,9 +31,9 @@ import { projects } from "../assets/Constants";
         {
           projects.map((project) => {
             return (
-              <h2 class={`full-col-text page-title sub ${project.slug}`}>
-                {project.name}
-              </h2>
+              <div class={`full-col-text page-title sub ${project.slug}`}>
+                <h2>{project.name}</h2>
+              </div>
             );
           })
         }
