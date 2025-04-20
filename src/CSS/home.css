@@ -26,9 +26,9 @@
 }
 
 .home_grid_title {
-  grid-row: -2 / -1;
-  grid-column: 2 / -1;
-  @apply flex flex-row justify-end items-stretch;
+  grid-row: -3 / -1;
+  grid-column: 1 / -1;
+  @apply text-right;
 
   @media screen and (min-width: 480px) {
     grid-row: -3 / -1;
@@ -37,7 +37,12 @@
 
   @media screen and (min-width: 768px) {
     grid-row: -3 / -1;
-    grid-column: 2 / -1;
+    grid-column: 4 / -1;
+    @apply text-left;
+
+    .grid_cell_container {
+      @apply justify-start;
+    }
   }
 
   @media screen and (min-width: 1024px) {
@@ -115,7 +120,7 @@
 }
 
 .home_grid_text {
-  grid-row: -2 / -4;
+  grid-row: -3 / -5;
   grid-column: 1 / -2;
 
   @media screen and (min-width: 480px) {

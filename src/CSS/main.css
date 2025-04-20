@@ -47,7 +47,28 @@ body {
 }
 
 .full-col-text {
-  @apply text-[4vw];
+  @apply text-[17vw];
+  @apply leading-[18vw];
+
+  @media screen and (min-width: 480px) {
+    @apply text-[14vw];
+    @apply leading-[13vw];
+  }
+
+  @media screen and (min-width: 768px) {
+    @apply text-[11vw];
+    @apply leading-[10vw];
+  }
+
+  @media screen and (min-width: 1024px) {
+    @apply text-[8vw];
+    @apply leading-[7vw];
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-size: min(6vw, 140px);
+    line-height: min(6vw, 140px);
+  }
 }
 
 .grid_cell {
@@ -60,4 +81,13 @@ body {
   @apply w-full h-full;
   @apply flex items-center justify-center;
   @apply overflow-hidden;
+}
+
+h1.page-title {
+  @apply block px-5;
+  @apply text-active font-bold uppercase;
+
+  .thin {
+    @apply font-light;
+  }
 }

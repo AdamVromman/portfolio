@@ -77,23 +77,16 @@ export const handleMouseIn = (key: string) => {
     (flyingObject) => flyingObject.slug === key
   );
   if (project && flyingObject) {
-    gsap.to(`.grid_cell.${key} .grid_cell_container`, {
-      backgroundColor: "transparent",
-      duration: 0.3,
-      ease: "power3.in",
-      overwrite: true,
-    });
-
     // TODO: Add years when hovering?
 
-    // gsap.to(`.grid_cell.${key}`, {
+    // gsap.to(`.grid_cell.ignore-move-out`, {
     //   gridColumn: "1 / -1",
     //   duration: 0.3,
     //   ease: "power3.in",
     //   overwrite: true,
     // });
 
-    // gsap.to(`.grid_cell.${key} .grid_cell_container.home_grid_work_link span`, {
+    // gsap.to(`.grid_cell.ignore-move-out .grid_cell_container.home_grid_work_link span`, {
     //   text: `${project.name} — ${project.year}`,
     //   duration: 0.3,
     //   ease: "power3.in",
@@ -101,7 +94,7 @@ export const handleMouseIn = (key: string) => {
     // });
 
     gsap.fromTo(
-      `.grid_cell.bottom:not(.${key}) .grid_cell_container`,
+      `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
       {
         y: "0",
       },
@@ -113,7 +106,7 @@ export const handleMouseIn = (key: string) => {
       }
     );
     gsap.fromTo(
-      `.grid_cell.top:not(.${key}) .grid_cell_container`,
+      `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
       {
         y: "0",
       },
@@ -125,7 +118,7 @@ export const handleMouseIn = (key: string) => {
       }
     );
     gsap.fromTo(
-      `.grid_cell.left:not(.${key}) .grid_cell_container`,
+      `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
       {
         x: "0",
       },
@@ -137,7 +130,7 @@ export const handleMouseIn = (key: string) => {
       }
     );
     gsap.fromTo(
-      `.grid_cell.right:not(.${key}) .grid_cell_container`,
+      `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
       {
         x: "0",
       },
@@ -175,15 +168,8 @@ export const handleMouseOut = (key: string) => {
     (flyingObject) => flyingObject.slug === key
   );
   if (project && flyingObject) {
-    gsap.to(`.grid_cell.${key} .grid_cell_container`, {
-      backgroundColor: `var(--color-white)`,
-      duration: 0.1,
-      ease: "power3.out",
-      overwrite: true,
-    });
-
     gsap.fromTo(
-      `.grid_cell.bottom:not(.${key}) .grid_cell_container`,
+      `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
       {
         y: "100%",
       },
@@ -195,7 +181,7 @@ export const handleMouseOut = (key: string) => {
       }
     );
     gsap.fromTo(
-      `.grid_cell.top:not(.${key}) .grid_cell_container`,
+      `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
       {
         y: "-100%",
       },
@@ -207,7 +193,7 @@ export const handleMouseOut = (key: string) => {
       }
     );
     gsap.fromTo(
-      `.grid_cell.left:not(.${key}) .grid_cell_container`,
+      `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
       {
         x: "-100%",
       },
@@ -219,7 +205,7 @@ export const handleMouseOut = (key: string) => {
       }
     );
     gsap.fromTo(
-      `.grid_cell.right:not(.${key}) .grid_cell_container`,
+      `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
       {
         x: "100%",
       },
