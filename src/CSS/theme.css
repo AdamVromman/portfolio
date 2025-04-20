@@ -5,6 +5,8 @@
   --breakpoint-lg: 1280px;
   --breakpoint-xl: 1440px;
 
+  --spacing-thin: 0.25px;
+  --spacing-thick: 1px;
   --spacing-5: 5px;
   --spacing-15: 15px;
   --spacing-30: 30px;
@@ -15,6 +17,6 @@
   --color-white: #eeeeee;
   --color-black: #111111;
   --color-active: var(--color-active);
-  --color-project-trainworld: #de2217;
-  --color-project-clubsofa: #3aab94;
+  --color-project-train-world: #de2217;
+  --color-project-club-sofa: #3aab94;
 }

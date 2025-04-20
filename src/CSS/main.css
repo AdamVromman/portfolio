@@ -15,6 +15,7 @@ body {
   font-style: normal;
   @apply relative max-w-[1920px] mx-auto;
   @apply h-dvh;
+  @apply p-15;
 }
 
 * {
@@ -47,7 +48,33 @@ body {
 }
 
 .full-col-text {
-  @apply text-[4vw];
+  @apply text-[17vw];
+  @apply leading-[18vw];
+
+  @media screen and (min-width: 480px) {
+    @apply text-[14vw];
+    @apply leading-[13vw];
+  }
+
+  @media screen and (min-width: 768px) {
+    @apply text-[11vw];
+    @apply leading-[10vw];
+  }
+
+  @media screen and (min-width: 1024px) {
+    @apply text-[8vw];
+    @apply leading-[7vw];
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-size: min(6vw, 140px);
+    line-height: min(6vw, 140px);
+  }
+}
+
+#grid-container {
+  @apply w-full h-full;
+  @apply flex flex-col items-center justify-center;
 }
 
 .grid_cell {
@@ -58,6 +85,20 @@ body {
 .grid_cell_container {
   @apply bg-white;
   @apply w-full h-full;
-  @apply flex items-center justify-center;
+  @apply flex items-center;
   @apply overflow-hidden;
+}
+
+.page-title {
+  @apply block px-5;
+  @apply text-[#4000ff] font-bold uppercase;
+
+  .thin {
+    @apply font-light;
+  }
+
+  &.sub {
+    @apply absolute top-0 left-0 right-0 bottom-0;
+    @apply translate-y-full;
+  }
 }

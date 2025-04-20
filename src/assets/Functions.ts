@@ -14,30 +14,32 @@ import { TextPlugin } from "gsap/TextPlugin";
 
 gsap.registerPlugin(TextPlugin);
 
-export const calculateTileWidth = (container: HTMLElement) => {
-  return container.clientWidth / getNrOfColumns();
+export const calculateTileWidth = () => {
+  const gridContainer = document.getElementById("grid-container");
+  if (gridContainer)
+    return Math.floor(gridContainer.clientWidth / getNrOfColumns());
+  return 0;
 };
 
 export const calculateNrOfRows = (localTileWidth: number) => {
-  const container = document.getElementById("home");
+  const container = document.getElementById("grid-container");
   if (container) {
     const screenWidth = getScreenWidth();
-    const NR_OF_ROWS = Math.floor(
-      (container.clientHeight - 30) / localTileWidth
-    );
+    const nrOfRows =
+      Math.floor((container.clientHeight - 30) / localTileWidth / 2) * 2;
     if (screenWidth >= 1280) {
-      return Math.max(NR_OF_ROWS, 7);
+      return Math.max(nrOfRows, 14);
     }
     if (screenWidth >= 1024) {
-      return Math.max(NR_OF_ROWS, 6);
+      return Math.max(nrOfRows, 12);
     }
     if (screenWidth >= 768) {
-      return Math.max(NR_OF_ROWS, 7);
+      return Math.max(nrOfRows, 14);
     }
     if (screenWidth >= 480) {
-      return Math.max(NR_OF_ROWS, 8);
+      return Math.max(nrOfRows, 16);
     }
-    return Math.max(NR_OF_ROWS, 8);
+    return Math.max(nrOfRows, 16);
   }
   return 5;
 };
@@ -77,31 +79,27 @@ export const handleMouseIn = (key: string) => {
     (flyingObject) => flyingObject.slug === key
   );
   if (project && flyingObject) {
-    gsap.to(`.grid_cell.${key} .grid_cell_container`, {
-      backgroundColor: "transparent",
+    document.documentElement.style.setProperty(
+      "--color-active",
+      `#${project.color}`
+    );
+
+    gsap.to(".grid_cell.home_grid_title h1.page-title", {
+      y: "-100%",
       duration: 0.3,
       ease: "power3.in",
       overwrite: true,
     });
 
-    // TODO: Add years when hovering?
-
-    // gsap.to(`.grid_cell.${key}`, {
-    //   gridColumn: "1 / -1",
-    //   duration: 0.3,
-    //   ease: "power3.in",
-    //   overwrite: true,
-    // });
-
-    // gsap.to(`.grid_cell.${key} .grid_cell_container.home_grid_work_link span`, {
-    //   text: `${project.name} — ${project.year}`,
-    //   duration: 0.3,
-    //   ease: "power3.in",
-    //   overwrite: true,
-    // });
+    gsap.to(`.grid_cell.home_grid_title .page-title.sub.${project.slug}`, {
+      y: "0%",
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: true,
+    });
 
     gsap.fromTo(
-      `.grid_cell.bottom:not(.${key}) .grid_cell_container`,
+      `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
       {
         y: "0",
       },
@@ -113,7 +111,7 @@ export const handleMouseIn = (key: string) => {
       }
     );
     gsap.fromTo(
-      `.grid_cell.top:not(.${key}) .grid_cell_container`,
+      `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
       {
         y: "0",
       },
@@ -125,7 +123,7 @@ export const handleMouseIn = (key: string) => {
       }
     );
     gsap.fromTo(
-      `.grid_cell.left:not(.${key}) .grid_cell_container`,
+      `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
       {
         x: "0",
       },
@@ -137,7 +135,7 @@ export const handleMouseIn = (key: string) => {
       }
     );
     gsap.fromTo(
-      `.grid_cell.right:not(.${key}) .grid_cell_container`,
+      `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
       {
         x: "0",
       },
@@ -161,29 +159,32 @@ export const handleMouseIn = (key: string) => {
       opacity: 0.1,
       overwrite: true,
     });
-
-    document.documentElement.style.setProperty(
-      "--color-active",
-      `#${project.color}`
-    );
   }
 };
 
 export const handleMouseOut = (key: string) => {
+  document.documentElement.style.setProperty("--color-active", "#4000ff");
   const project = projects.find((project) => project.slug === key);
   const flyingObject = dynamicBodies.find(
     (flyingObject) => flyingObject.slug === key
   );
   if (project && flyingObject) {
-    gsap.to(`.grid_cell.${key} .grid_cell_container`, {
-      backgroundColor: `var(--color-white)`,
-      duration: 0.1,
-      ease: "power3.out",
+    gsap.to(".grid_cell.home_grid_title h1.page-title", {
+      y: "0",
+      duration: 0.3,
+      ease: "power3.in",
+      overwrite: true,
+    });
+
+    gsap.to(`.grid_cell.home_grid_title .page-title.sub.${project.slug}`, {
+      y: "100%",
+      duration: 0.3,
+      ease: "power3.in",
       overwrite: true,
     });
 
     gsap.fromTo(
-      `.grid_cell.bottom:not(.${key}) .grid_cell_container`,
+      `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
       {
         y: "100%",
       },
@@ -195,7 +196,7 @@ export const handleMouseOut = (key: string) => {
       }
     );
     gsap.fromTo(
-      `.grid_cell.top:not(.${key}) .grid_cell_container`,
+      `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
       {
         y: "-100%",
       },
@@ -207,7 +208,7 @@ export const handleMouseOut = (key: string) => {
       }
     );
     gsap.fromTo(
-      `.grid_cell.left:not(.${key}) .grid_cell_container`,
+      `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
       {
         x: "-100%",
       },
@@ -219,7 +220,7 @@ export const handleMouseOut = (key: string) => {
       }
     );
     gsap.fromTo(
-      `.grid_cell.right:not(.${key}) .grid_cell_container`,
+      `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
       {
         x: "100%",
       },
@@ -245,7 +246,5 @@ export const handleMouseOut = (key: string) => {
       flyingObject.body.setLinvel(previousVel, true);
       previousVel = undefined;
     }
-
-    document.documentElement.style.setProperty("--color-active", "#4000ff");
   }
 };

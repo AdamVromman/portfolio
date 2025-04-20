@@ -12,130 +12,122 @@ import "../CSS/background.css";
       getNrOfColumns,
     } from "../assets/Functions";
 
+    const home = document.getElementById("home");
     const background = document.getElementById("background");
     const backgroundSVG = document.getElementById("background_svg");
     const timeline = gsap.timeline({
       delay: 1.5,
-      onComplete: () => {
-        gsap.set("#home_intro", { display: "none" });
-      },
+      // onComplete: () => {
+      //   gsap.set("#home_intro", { display: "none" });
+      // },
     });
 
     const drawLines = (animated: boolean = false) => {
-      if (background && backgroundSVG) {
-        const nrOfRows = calculateNrOfRows(calculateTileWidth(background));
+      if (home && background && backgroundSVG) {
+        const localTileWidth = calculateTileWidth();
+        const nrOfRows = calculateNrOfRows(localTileWidth);
+        console.log("nrOfRows", nrOfRows);
+        console.log("localTileWidth", localTileWidth);
+        background.style.width = `${getNrOfColumns() * localTileWidth}px`;
+        background.style.height = `${nrOfRows * localTileWidth}px`;
         backgroundSVG.textContent = "";
-        const localTileWidth = calculateTileWidth(background);
         const svgNS = "http://www.w3.org/2000/svg";
 
-        for (let i = 0; i < getNrOfColumns() + 1; i++) {
-          const line = document.createElementNS(svgNS, "rect");
+        for (let i = 0; i < getNrOfColumns() / 2 - 1; i++) {
+          const line = document.createElementNS(svgNS, "line");
+          const x = `${localTileWidth * 2 + localTileWidth * 2 * i}px`;
           line.classList.add("background_svg_line");
           line.classList.add("line_vertical");
           line.classList.add("line_main");
           line.setAttribute("height", "0");
-          line.setAttribute("width", "2px");
-          line.setAttribute(
-            "x",
-            `${localTileWidth * i - (2 / (getNrOfColumns() + 1)) * i}px`
-          );
-          line.setAttribute("y", "0");
+          line.setAttribute("x1", x);
+          line.setAttribute("x2", x);
+          line.setAttribute("y1", "0%");
           backgroundSVG.appendChild(line);
           if (animated) {
             timeline.to(
               line,
               {
                 duration: 1,
-                attr: { height: "100%" },
+                attr: { y2: "100%" },
                 ease: "power4.out",
               },
               "<0.01"
             );
           } else {
-            line.setAttribute("height", "100%");
+            line.setAttribute("y2", "100%");
           }
         }
 
-        for (let i = 0; i < getNrOfColumns(); i++) {
-          const line = document.createElementNS(svgNS, "rect");
+        for (let i = 0; i < getNrOfColumns() / 2; i++) {
+          const line = document.createElementNS(svgNS, "line");
+          const x = `${localTileWidth + localTileWidth * 2 * i}px`;
           line.classList.add("background_svg_line");
           line.classList.add("line_vertical");
           line.classList.add("line_sub");
-          line.setAttribute("height", "0");
-          line.setAttribute("width", "0.5px");
-          line.setAttribute(
-            "x",
-            `${
-              localTileWidth / 2 +
-              localTileWidth * i -
-              (1 / getNrOfColumns()) * i
-            }px`
-          );
-          line.setAttribute("y", "0");
+          line.setAttribute("x1", x);
+          line.setAttribute("x2", x);
+          line.setAttribute("y1", "0");
+          line.setAttribute("stroke-dasharray", "4");
           backgroundSVG.appendChild(line);
           if (animated) {
             timeline.to(
               line,
               {
                 duration: 1,
-                attr: { height: "100%" },
+                attr: { y2: "100%" },
                 ease: "power4.out",
               },
               "<0.01"
             );
-          } else line.setAttribute("height", "100%");
+          } else line.setAttribute("y2", "100%");
         }
 
-        for (let i = 0; i < nrOfRows + 1; i++) {
-          const line = document.createElementNS(svgNS, "rect");
+        for (let i = 0; i < nrOfRows / 2 - 1; i++) {
+          const line = document.createElementNS(svgNS, "line");
+          const y = `${localTileWidth * 2 + localTileWidth * 2 * i}px`;
           line.classList.add("background_svg_line");
           line.classList.add("line_horizontal");
           line.classList.add("line_main");
-          line.setAttribute("width", "0");
-          line.setAttribute("height", "2px");
-          line.setAttribute(
-            "y",
-            `${localTileWidth * i - (2 / (nrOfRows + 1)) * i}px`
-          );
-          line.setAttribute("x", "0");
+          line.setAttribute("y1", y);
+          line.setAttribute("y2", y);
+          line.setAttribute("x1", "0");
           backgroundSVG.appendChild(line);
           if (animated) {
             timeline.to(
               line,
               {
                 duration: 1,
-                attr: { width: "100%" },
+                attr: { x1: "100%" },
                 ease: "power4.out",
               },
               "<0.01"
             );
-          } else line.setAttribute("width", "100%");
+          } else line.setAttribute("x1", "100%");
         }
 
-        for (let i = 0; i < nrOfRows; i++) {
-          const line = document.createElementNS(svgNS, "rect");
+        for (let i = 0; i < nrOfRows / 2; i++) {
+          const line = document.createElementNS(svgNS, "line");
+          const y = `${localTileWidth + localTileWidth * 2 * i}px`;
           line.classList.add("background_svg_line");
           line.classList.add("line_horizontal");
           line.classList.add("line_sub");
-          line.setAttribute("width", "0");
-          line.setAttribute("height", "0.5px");
-          line.setAttribute(
-            "y",
-            `${localTileWidth / 2 + localTileWidth * i - (1 / nrOfRows) * i}px`
-          );
-          line.setAttribute("x", "0");
+          line.setAttribute("stroke-dasharray", "4");
+          line.setAttribute("y1", y);
+          line.setAttribute("y2", y);
+          line.setAttribute("x1", "0");
           backgroundSVG.appendChild(line);
           if (animated) {
             timeline.to(
               line,
               {
                 duration: 1,
-                attr: { width: "100%" },
+                attr: { x2: "100%" },
                 ease: "power4.out",
               },
               "<0.01"
             );
-          } else line.setAttribute("width", "100%");
+          } else line.setAttribute("x2", "100%");
         }
       }
     };
