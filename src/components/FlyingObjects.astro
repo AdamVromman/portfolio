@@ -4,7 +4,7 @@ import "../CSS/flying-objects.css";
 
 <div
   id="flying-objects"
-  class="pointer-events-none absolute w-full h-full top-0 left-0 p-15 z-10"
+  class="pointer-events-none absolute w-full h-full top-0 left-0 z-10"
 >
   <div
     class="pointer-events-none relative z-10 w-full h-full"
@@ -28,6 +28,7 @@ import "../CSS/flying-objects.css";
       setPreviousVel,
       calculateTileWidth,
       calculateNrOfRows,
+      getNrOfColumns,
     } from "../assets/Functions";
 
     let stats: Stats;
@@ -53,6 +54,8 @@ import "../CSS/flying-objects.css";
     const clock = new THREE.Clock();
     let delta;
     let clicked = false;
+
+    let projectsLoaded = 0;
 
     const createBox = () => {
       if (scene) {
@@ -270,8 +273,12 @@ import "../CSS/flying-objects.css";
               dynamicBodies.push(flyingBody);
             },
             (xhr) => {
-              console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-              document.dispatchEvent(assetsLoaded);
+              if (projectsLoaded < projects.length - 1) {
+                projectsLoaded++;
+              } else {
+                console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+                document.dispatchEvent(assetsLoaded);
+              }
             },
             (error) => {
               console.log(error);
@@ -347,10 +354,11 @@ import "../CSS/flying-objects.css";
 
     const init = () => {
       if (canvasContainer) {
-        const localTileWidth = calculateTileWidth(canvasContainer);
+        const localTileWidth = calculateTileWidth();
         const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
 
         canvasContainer.style.height = `${NR_OF_ROWS * localTileWidth}px`;
+        canvasContainer.style.width = `${getNrOfColumns() * localTileWidth}px`;
 
         height = canvasContainer.clientHeight;
         width = canvasContainer.clientWidth;

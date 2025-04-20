@@ -4,6 +4,8 @@
   @apply relative;
   @apply flex flex-col items-center justify-start gap-15;
   @apply border-2 border-active box-content;
+  @apply w-[2px] h-[2px] overflow-hidden;
+  @apply bg-active;
 }
 
 #test_grid {
@@ -18,7 +20,7 @@
 }
 
 .home_grid {
-  @apply grid w-full;
+  @apply grid w-full h-full;
   @apply relative;
 }
 

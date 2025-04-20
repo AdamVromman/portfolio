@@ -74,7 +74,7 @@ body {
 
 #grid-container {
   @apply w-full h-full;
-  @apply flex flex-col items-center justify-stretch;
+  @apply flex flex-col items-center justify-center;
 }
 
 .grid_cell {

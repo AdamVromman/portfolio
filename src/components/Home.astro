@@ -7,7 +7,6 @@ import { projects } from "../assets/Constants";
 
 <div id="home" transition:persist>
   <!-- <div id="test_grid"></div> -->
-  <!-- <div id="home_intro"></div> -->
   <video
     class="home_video train-world"
     src="/FINAL VIDEO_1.webm"
@@ -113,68 +112,70 @@ import { projects } from "../assets/Constants";
     const home = document.getElementById("home");
     const homeGrid = document.getElementById("home_grid");
 
-    const drawGrid = (firstRender: boolean) => {
+    const drawGrid = () => {
       if (home && homeGrid) {
         const localTileWidth = calculateTileWidth();
         const nrOfRows = calculateNrOfRows(localTileWidth);
-
-        console.log("home");
-        console.log("nrOfRows", nrOfRows);
-        console.log("localTileWidth", localTileWidth);
-
-        if (firstRender) {
-          animateIntro(nrOfRows * localTileWidth);
-        }
-
-        homeGrid.style.width = `${getNrOfColumns() * localTileWidth}px`;
-        homeGrid.style.height = `${nrOfRows * localTileWidth}px`;
         homeGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
         homeGrid.style.gridTemplateRows = `repeat(${nrOfRows}, ${localTileWidth}px)`;
       }
     };
 
-    const animateIntro = (height: number) => {
+    const animateIntro = () => {
+      const localTileWidth = calculateTileWidth();
+      const nrOfRows = calculateNrOfRows(localTileWidth);
+
       gsap
         .timeline()
-        .from(
-          "#home_intro",
+        .to(
+          "#home",
           {
             duration: 1,
-            width: 0,
-            left: "50%",
+            width: getNrOfColumns() * localTileWidth,
+            borderRadius: "0px",
+            left: 0,
             ease: "power4.inOut",
           },
           "0"
         )
-        .fromTo(
-          "#home_intro",
+        .to(
+          "#home",
           {
             duration: 1,
-            height: 0,
-            top: "50%",
+            height: nrOfRows * localTileWidth,
+
+            top: 0,
             ease: "power4.inOut",
-          },
-          {
-            height: height,
-            top: 15,
           },
           ">"
         )
-        .set(
-          "#home_intro",
+        .to(
+          "#home",
           {
-            borderWidth: "2px",
+            duration: 0.5,
             backgroundColor: "transparent",
+            ease: "power4.inOut",
           },
-          "<+=0.2"
+          "<+=0.25"
         );
     };
 
     const handleResize = () => {
-      drawGrid(false);
+      if (home) {
+        const localTileWidth = calculateTileWidth();
+        const nrOfRows = calculateNrOfRows(localTileWidth);
+        home.style.width = `${getNrOfColumns() * localTileWidth}px`;
+        home.style.height = `${nrOfRows * localTileWidth}px`;
+      }
+
+      drawGrid();
     };
 
-    drawGrid(true);
+    document.addEventListener("assetsloaded", () => {
+      animateIntro();
+      drawGrid();
+    });
+
     window.addEventListener("resize", handleResize);
   </script>
 
