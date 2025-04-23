@@ -16,7 +16,7 @@ export const projects: Project[] = [
   {
     name: "Club Sofa",
     slug: "club-sofa",
-    color: "3aab94",
+    color: "07d9ae",
     year: 2022,
   },
 ];

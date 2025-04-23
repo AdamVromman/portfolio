@@ -4,8 +4,8 @@ import {
   calculateTileWidth,
   getNrOfColumns,
   getScreenWidth,
-} from "../assets/Constants";
-import Background from "./Background";
+} from "../assets/Functions";
+import Background from "./Background.astro";
 
 interface FooterProps {
   path: string;
@@ -16,7 +16,7 @@ const Footer = ({ path }: FooterProps) => {
 
   const drawGrid = () => {
     if (footerRef.current) {
-      const localTileWidth = calculateTileWidth(footerRef.current);
+      const localTileWidth = calculateTileWidth();
       footerRef.current.style.height = `${getRows() * localTileWidth}px`;
       footerRef.current.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, 1fr)`;
       footerRef.current.style.gridTemplateRows = `repeat(${getRows()}, 1fr)`;
