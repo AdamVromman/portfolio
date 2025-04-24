@@ -10,13 +10,13 @@ export const projects: Project[] = [
   {
     name: "Qausal",
     slug: "qausal",
-    color: "de2217",
+    color: "FF7700",
     year: 2025,
   },
   {
     name: "Transfo Intiem",
     slug: "transfo-intiem",
-    color: "de2217",
+    color: "B87AFF",
     year: 2024,
   },
   {
