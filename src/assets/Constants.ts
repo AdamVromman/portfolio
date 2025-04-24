@@ -8,6 +8,18 @@ export const NR_OF_COLUMNS_1280 = 30;
 
 export const projects: Project[] = [
   {
+    name: "Qausal",
+    slug: "qausal",
+    color: "FF7700",
+    year: 2025,
+  },
+  {
+    name: "Transfo Intiem",
+    slug: "transfo-intiem",
+    color: "B87AFF",
+    year: 2024,
+  },
+  {
     name: "Train World",
     slug: "train-world",
     color: "de2217",
