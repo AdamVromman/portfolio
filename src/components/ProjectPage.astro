@@ -1,0 +1,29 @@
+---
+import "../CSS/project-page.css";
+---
+
+<div id="project-page">
+  <slot />
+</div>
+<script>
+  import {
+    calculateTileWidth,
+    calculateNrOfRows,
+    getNrOfColumns,
+  } from "../assets/Functions";
+
+  console.log("ProjectPage");
+
+  const projectPage = document.getElementById("project-page");
+
+  const drawGrid = () => {
+    if (projectPage) {
+      const localTileWidth = calculateTileWidth();
+      projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
+      projectPage.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
+      projectPage.style.gridTemplateRows = `repeat(500, ${localTileWidth}px)`;
+    }
+  };
+
+  drawGrid();
+</script>

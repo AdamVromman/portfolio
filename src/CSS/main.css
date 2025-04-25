@@ -25,6 +25,14 @@ body {
   transition-timing-function: ease-out;
 }
 
+.page-container {
+  @apply relative;
+  @apply flex flex-col items-center justify-start gap-15;
+  @apply border-2 border-active box-content;
+  @apply w-[2px] h-[2px] overflow-hidden;
+  @apply bg-active;
+}
+
 .half-col-text {
   @apply text-[5.7vw];
   @apply leading-[5.3vw];
@@ -72,9 +80,13 @@ body {
   }
 }
 
+#grid-calculator {
+  @apply absolute inset-15;
+}
+
 #grid-container {
-  @apply w-full h-full;
-  @apply flex flex-col items-center justify-center;
+  @apply w-full;
+  @apply flex flex-col items-center justify-start gap-30;
 }
 
 .grid_cell {

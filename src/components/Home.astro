@@ -5,7 +5,7 @@ import Background from "./Background.astro";
 import { projects } from "../assets/Constants";
 ---
 
-<div id="home" transition:persist>
+<div id="home" class="page-container" transition:persist>
   <!-- <div id="test_grid"></div> -->
   <video
     class="home_video train-world"
@@ -108,6 +108,7 @@ import { projects } from "../assets/Constants";
       calculateTileWidth,
       calculateNrOfRows,
       getNrOfColumns,
+      handleMouseOut,
     } from "../assets/Functions";
     import gsap from "gsap";
 
@@ -115,6 +116,7 @@ import { projects } from "../assets/Constants";
     const homeGrid = document.getElementById("home_grid");
 
     const drawGrid = () => {
+      console.log("drawGrid");
       if (home && homeGrid) {
         const localTileWidth = calculateTileWidth();
         const nrOfRows = calculateNrOfRows(localTileWidth);
@@ -127,10 +129,14 @@ import { projects } from "../assets/Constants";
       const localTileWidth = calculateTileWidth();
       const nrOfRows = calculateNrOfRows(localTileWidth);
 
+      const height = home?.parentElement?.classList.contains("project-page")
+        ? (nrOfRows - 2) * localTileWidth - 2
+        : nrOfRows * localTileWidth;
+
       gsap
         .timeline()
         .to(
-          "#home",
+          ".page-container",
           {
             duration: 1,
             width: getNrOfColumns() * localTileWidth,
@@ -141,10 +147,10 @@ import { projects } from "../assets/Constants";
           "0"
         )
         .to(
-          "#home",
+          ".page-container",
           {
             duration: 1,
-            height: nrOfRows * localTileWidth,
+            height: height,
 
             top: 0,
             ease: "power4.inOut",
@@ -152,7 +158,7 @@ import { projects } from "../assets/Constants";
           ">"
         )
         .to(
-          "#home",
+          ".page-container",
           {
             duration: 0.5,
             backgroundColor: "transparent",
@@ -173,10 +179,31 @@ import { projects } from "../assets/Constants";
       drawGrid();
     };
 
+    const animateProjectPage = () => {
+      if (home && home.parentElement?.classList.contains("project-page")) {
+        const localTileWidth = calculateTileWidth();
+        const nrOfRows = calculateNrOfRows(localTileWidth);
+
+        const timeline = gsap.timeline({});
+
+        timeline.to(".page-container", {
+          duration: 1,
+          height: (nrOfRows - 2) * localTileWidth - 2,
+          ease: "power4.inOut",
+        });
+      }
+    };
+
     document.addEventListener("assetsloaded", () => {
       animateIntro();
       drawGrid();
     });
+
+    document.addEventListener("astro:after-swap", () => {
+      animateProjectPage();
+    });
+
+    animateProjectPage();
 
     window.addEventListener("resize", handleResize);
   </script>
