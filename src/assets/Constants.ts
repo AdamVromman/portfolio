@@ -8,6 +8,12 @@ export const NR_OF_COLUMNS_1280 = 30;
 
 export const projects: Project[] = [
   {
+    name: "All Eyes on Gaza",
+    slug: "all-eyes-on-gaza",
+    color: "FF7700",
+    year: 2025,
+  },
+  {
     name: "Qausal",
     slug: "qausal",
     color: "FF7700",
