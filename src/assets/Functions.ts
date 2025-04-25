@@ -15,14 +15,14 @@ import { TextPlugin } from "gsap/TextPlugin";
 gsap.registerPlugin(TextPlugin);
 
 export const calculateTileWidth = () => {
-  const gridContainer = document.getElementById("grid-container");
+  const gridContainer = document.getElementById("grid-calculator");
   if (gridContainer)
     return Math.floor(gridContainer.clientWidth / getNrOfColumns());
   return 0;
 };
 
 export const calculateNrOfRows = (localTileWidth: number) => {
-  const container = document.getElementById("grid-container");
+  const container = document.getElementById("grid-calculator");
   if (container) {
     const screenWidth = getScreenWidth();
     const nrOfRows =

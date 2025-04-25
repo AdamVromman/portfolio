@@ -1,0 +1,13 @@
+@import "./imports.css";
+
+#project-page {
+  @apply relative;
+  @apply grid;
+  @apply border-2 border-active box-content;
+  @apply overflow-hidden;
+}
+
+.project-page-description {
+  grid-column: 3 / 10;
+  grid-row: 5 / 10;
+}

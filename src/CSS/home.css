@@ -1,13 +1,5 @@
 @import "./imports.css";
 
-#home {
-  @apply relative;
-  @apply flex flex-col items-center justify-start gap-15;
-  @apply border-2 border-active box-content;
-  @apply w-[2px] h-[2px] overflow-hidden;
-  @apply bg-active;
-}
-
 #test_grid {
   @apply grid w-full;
   @apply relative;
@@ -116,6 +108,36 @@
   &.train-world {
     @apply pb-thin pt-thick;
     grid-row: 3 / 4;
+    grid-column: 1 / 6;
+
+    @media screen and (min-width: 480px) {
+      grid-column: 1 / 8;
+    }
+  }
+
+  &.transfo-intiem {
+    @apply pt-thin pb-thick pr-thick;
+    grid-row: 4 / 5;
+    grid-column: 1 / 6;
+
+    @media screen and (min-width: 480px) {
+      grid-column: 1 / 8;
+    }
+  }
+
+  &.all-eyes-on-gaza {
+    @apply pb-thin pt-thick;
+    grid-row: 5 / 6;
+    grid-column: 1 / 6;
+
+    @media screen and (min-width: 480px) {
+      grid-column: 1 / 8;
+    }
+  }
+
+  &.qausal {
+    @apply pt-thin pb-thick pr-thick;
+    grid-row: 6 / 7;
     grid-column: 1 / 6;
 
     @media screen and (min-width: 480px) {

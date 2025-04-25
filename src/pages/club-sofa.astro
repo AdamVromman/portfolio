@@ -1,8 +1,12 @@
 ---
 import Home from "../components/Home.astro";
+import ProjectPage from "../components/ProjectPage.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <Home />
+  <div id="grid-container" class="project-page">
+    <Home />
+    <ProjectPage><div class="project-page-description">test</div></ProjectPage>
+  </div>
 </Layout>
