@@ -2,12 +2,34 @@
 
 #project-page {
   @apply relative;
-  @apply grid;
+
   @apply border-2 border-active box-content;
   @apply overflow-hidden;
 }
 
+#project-page-grid {
+  @apply grid;
+  @apply relative z-10;
+}
+
 .project-page-description {
-  grid-column: 3 / 10;
-  grid-row: 5 / 10;
+  @apply border-2 border-active box-content;
+  grid-column: 3 / 16;
+  grid-row: 3 / 9;
+}
+
+.project-page-image {
+  @apply border-2 border-active box-content;
+  @apply overflow-hidden;
+  img {
+    @apply object-cover;
+    @apply w-full h-full;
+  }
+}
+
+.club-sofa {
+  .image-1 {
+    grid-column: 3 / 10;
+    grid-row: 20 / 25;
+  }
 }

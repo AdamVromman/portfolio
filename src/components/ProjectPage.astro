@@ -1,9 +1,13 @@
 ---
 import "../CSS/project-page.css";
+import ProjectPageBackground from "./ProjectPageBackground.astro";
 ---
 
 <div id="project-page">
-  <slot />
+  <ProjectPageBackground />
+  <div id="project-page-grid">
+    <slot />
+  </div>
 </div>
 <script>
   import {
@@ -12,16 +16,15 @@ import "../CSS/project-page.css";
     getNrOfColumns,
   } from "../assets/Functions";
 
-  console.log("ProjectPage");
-
   const projectPage = document.getElementById("project-page");
+  const projectPageGrid = document.getElementById("project-page-grid");
 
   const drawGrid = () => {
-    if (projectPage) {
+    if (projectPageGrid) {
       const localTileWidth = calculateTileWidth();
-      projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
-      projectPage.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-      projectPage.style.gridTemplateRows = `repeat(500, ${localTileWidth}px)`;
+      projectPageGrid.style.width = `${getNrOfColumns() * localTileWidth}px`;
+      projectPageGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
+      projectPageGrid.style.gridTemplateRows = `repeat(100, ${localTileWidth}px)`;
     }
   };
 

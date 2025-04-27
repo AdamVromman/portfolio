@@ -1,7 +1,7 @@
 ---
 import FlyingObjects from "./FlyingObjects.astro";
 import "../CSS/home.css";
-import Background from "./Background.astro";
+import HomeBackground from "./HomeBackground.astro";
 import { projects } from "../assets/Constants";
 ---
 
@@ -17,14 +17,14 @@ import { projects } from "../assets/Constants";
     preload="auto"></video>
   <video
     class="home_video club-sofa"
-    src="/club-sofa-video.mp4"
+    src="club-sofa/ANIMATION-header.mp4"
     autoplay
     muted
     loop
     playsinline
     preload="auto"></video>
 
-  <Background />
+  <HomeBackground />
   <div id="home_grid" class="home_grid">
     <div class="grid_cell bottom ignore-move-out home_grid_title">
       <div class="grid_cell_container">
@@ -116,8 +116,7 @@ import { projects } from "../assets/Constants";
     const homeGrid = document.getElementById("home_grid");
 
     const drawGrid = () => {
-      console.log("drawGrid");
-      if (home && homeGrid) {
+      if (homeGrid) {
         const localTileWidth = calculateTileWidth();
         const nrOfRows = calculateNrOfRows(localTileWidth);
         homeGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
