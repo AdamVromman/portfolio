@@ -1,14 +1,16 @@
 ---
 import "../CSS/project-page.css";
+import Footer from "./Footer.astro";
 import ProjectPageBackground from "./ProjectPageBackground.astro";
 ---
 
 <div id="project-page">
   <ProjectPageBackground />
-  <div id="project-page_grid">
+  <!-- <div id="project-page_grid">
     <slot />
-  </div>
+  </div> -->
 </div>
+<Footer />
 <script>
   import {
     calculateTileWidth,
@@ -20,13 +22,19 @@ import ProjectPageBackground from "./ProjectPageBackground.astro";
   const projectPageGrid = document.getElementById("project-page_grid");
 
   const drawGrid = () => {
-    if (projectPageGrid) {
+    if (projectPageGrid && projectPage) {
       const localTileWidth = calculateTileWidth();
-      projectPageGrid.style.width = `${getNrOfColumns() * localTileWidth}px`;
+      projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
       projectPageGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
       projectPageGrid.style.gridTemplateRows = `repeat(100, ${localTileWidth}px)`;
     }
   };
+
+  const handleResize = () => {
+    drawGrid();
+  };
+
+  window.addEventListener("resize", handleResize);
 
   drawGrid();
 </script>

@@ -2,28 +2,30 @@
 import "../CSS/background.css";
 ---
 
-<div id="background_project-page">
-  <svg id="background_project-page_svg"
+<div id="background_footer">
+  <svg id="background_footer_svg"
     ><linearGradient id="background-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
       <stop offset="0%" stop-color="#eeeeee" stop-opacity="0"></stop>
       <stop offset="100%" stop-color="#eeeeee" stop-opacity="1"></stop>
     </linearGradient>
-    <g id="background_project-page_lines-group"></g>
+    <g id="background_footer_lines-group"></g>
   </svg>
 </div>
 <script>
-  import { calculateTileWidth, getNrOfColumns } from "../assets/Functions";
+  import {
+    calculateTileWidth,
+    getFooterRows,
+    getNrOfColumns,
+  } from "../assets/Functions";
 
-  const background = document.getElementById("background_project-page");
-  const backgroundSVG = document.getElementById("background_project-page_svg");
-  const linesGroup = document.getElementById(
-    "background_project-page_lines-group"
-  );
+  const background = document.getElementById("background_footer");
+  const backgroundSVG = document.getElementById("background_footer_svg");
+  const linesGroup = document.getElementById("background_footer_lines-group");
 
   const drawLines = () => {
     if (background && backgroundSVG && linesGroup) {
       const localTileWidth = calculateTileWidth();
-      const nrOfRows = 100;
+      const nrOfRows = getFooterRows();
       background.style.width = `${getNrOfColumns() * localTileWidth}px`;
       background.style.height = `${nrOfRows * localTileWidth}px`;
       linesGroup.textContent = "";
@@ -59,26 +61,6 @@ import "../CSS/background.css";
         line.setAttribute("x2", "100%");
       }
 
-      const rect = document.createElementNS(svgNS, "rect");
-      rect.classList.add("background_svg_rect");
-      rect.setAttribute("x", "0");
-      rect.setAttribute("y", "0");
-      rect.setAttribute("width", "100%");
-      rect.setAttribute("height", "720");
-      rect.setAttribute("fill", "url(#background-gradient)");
-
-      linesGroup.appendChild(rect);
-
-      const rect2 = document.createElementNS(svgNS, "rect");
-      rect2.classList.add("background_svg_rect");
-      rect2.setAttribute("x", "0");
-      rect2.setAttribute("y", "720");
-      rect2.setAttribute("width", "100%");
-      rect2.setAttribute("height", "100%");
-      rect2.setAttribute("fill", "#eeeeee");
-
-      linesGroup.appendChild(rect2);
-
       for (let i = 0; i < getNrOfColumns() / 2; i++) {
         const line = document.createElementNS(svgNS, "line");
         const x = `${localTileWidth + localTileWidth * 2 * i}px`;
@@ -112,7 +94,7 @@ import "../CSS/background.css";
   };
 
   document.addEventListener("assetsloaded", () => {
-    console.log("assets loaded");
+    console.log("Assets loaded footer");
     drawLines();
   });
 
