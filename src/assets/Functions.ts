@@ -69,18 +69,18 @@ export const getNrOfColumns = () => {
 export const getFooterRows = () => {
   const width = getScreenWidth();
   if (width >= 1280) {
-    return 3;
+    return 6;
   }
   if (width >= 1024) {
-    return 4;
+    return 8;
   }
   if (width >= 768) {
-    return 5;
+    return 10;
   }
   if (width >= 480) {
-    return 7;
+    return 12;
   }
-  return 7;
+  return 12;
 };
 
 export let hoveringBody: FlyingObject | undefined = undefined;

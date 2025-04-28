@@ -74,8 +74,8 @@ body {
   }
 
   @media screen and (min-width: 1280px) {
-    font-size: min(6vw, 140px);
-    line-height: min(6vw, 140px);
+    font-size: min(6vw, 110px);
+    line-height: min(6vw, 100px);
   }
 }
 
