@@ -1,0 +1,140 @@
+---
+import "../CSS/background.css";
+---
+
+<div id="background">
+  <svg id="background_svg"></svg>
+</div>
+<script>
+  import gsap from "gsap";
+  import {
+    calculateNrOfRows,
+    calculateTileWidth,
+    getNrOfColumns,
+  } from "../assets/Functions";
+  import { selectedProject } from "../assets/Functions";
+
+  const background = document.getElementById("background");
+  const backgroundSVG = document.getElementById("background_svg");
+  const timeline = gsap.timeline({
+    delay: 1.5,
+  });
+
+  const drawLines = (animated: boolean = false) => {
+    if (background && backgroundSVG) {
+      const localTileWidth = calculateTileWidth();
+      const nrOfRows = calculateNrOfRows(localTileWidth);
+      background.style.width = `${getNrOfColumns() * localTileWidth}px`;
+      background.style.height = `${nrOfRows * localTileWidth}px`;
+      backgroundSVG.textContent = "";
+      const svgNS = "http://www.w3.org/2000/svg";
+
+      for (let i = 0; i < getNrOfColumns() / 2 - 1; i++) {
+        const line = document.createElementNS(svgNS, "line");
+        const x = `${localTileWidth * 2 + localTileWidth * 2 * i}px`;
+        line.classList.add("background_svg_line");
+        line.classList.add("line_vertical");
+        line.classList.add("line_main");
+        line.setAttribute("height", "0");
+        line.setAttribute("x1", x);
+        line.setAttribute("x2", x);
+        line.setAttribute("y1", "0%");
+        backgroundSVG.appendChild(line);
+        if (animated) {
+          timeline.to(
+            line,
+            {
+              duration: 1,
+              attr: { y2: "100%" },
+              ease: "power4.out",
+            },
+            "<0.01"
+          );
+        } else {
+          line.setAttribute("y2", "100%");
+        }
+      }
+
+      for (let i = 0; i < getNrOfColumns() / 2; i++) {
+        const line = document.createElementNS(svgNS, "line");
+        const x = `${localTileWidth + localTileWidth * 2 * i}px`;
+        line.classList.add("background_svg_line");
+        line.classList.add("line_vertical");
+        line.classList.add("line_sub");
+        line.setAttribute("x1", x);
+        line.setAttribute("x2", x);
+        line.setAttribute("y1", "0");
+        line.setAttribute("stroke-dasharray", "4");
+        backgroundSVG.appendChild(line);
+        if (animated) {
+          timeline.to(
+            line,
+            {
+              duration: 1,
+              attr: { y2: "100%" },
+              ease: "power4.out",
+            },
+            "<0.01"
+          );
+        } else line.setAttribute("y2", "100%");
+      }
+
+      for (let i = 0; i < nrOfRows / 2 - 1; i++) {
+        const line = document.createElementNS(svgNS, "line");
+        const y = `${localTileWidth * 2 + localTileWidth * 2 * i}px`;
+        line.classList.add("background_svg_line");
+        line.classList.add("line_horizontal");
+        line.classList.add("line_main");
+        line.setAttribute("y1", y);
+        line.setAttribute("y2", y);
+        line.setAttribute("x1", "0");
+        backgroundSVG.appendChild(line);
+        if (animated) {
+          timeline.to(
+            line,
+            {
+              duration: 1,
+              attr: { x2: "100%" },
+              ease: "power4.out",
+            },
+            "<0.01"
+          );
+        } else line.setAttribute("x2", "100%");
+      }
+
+      for (let i = 0; i < nrOfRows / 2; i++) {
+        const line = document.createElementNS(svgNS, "line");
+        const y = `${localTileWidth + localTileWidth * 2 * i}px`;
+        line.classList.add("background_svg_line");
+        line.classList.add("line_horizontal");
+        line.classList.add("line_sub");
+        line.setAttribute("stroke-dasharray", "4");
+        line.setAttribute("y1", y);
+        line.setAttribute("y2", y);
+        line.setAttribute("x1", "0");
+        backgroundSVG.appendChild(line);
+        if (animated) {
+          timeline.to(
+            line,
+            {
+              duration: 1,
+              attr: { x2: "100%" },
+              ease: "power4.out",
+            },
+            "<0.01"
+          );
+        } else line.setAttribute("x2", "100%");
+      }
+    }
+  };
+
+  document.addEventListener("assetsloaded", () => {
+    if (!selectedProject) drawLines(true);
+  });
+
+  const onResize = () => {
+    if (!selectedProject) drawLines();
+  };
+
+  window.addEventListener("resize", onResize);
+</script>

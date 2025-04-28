@@ -5,8 +5,33 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <div id="grid-container" class="project-page">
+  <div id="grid-container" class="project-page club-sofa">
     <Home />
-    <ProjectPage><div class="project-page-description">test</div></ProjectPage>
+    <ProjectPage>
+      <div class="grid_cell project-page_grid_title">
+        <div class="grid_cell_container">
+          <h1 class="full-col-text page-title">Club sofa</h1>
+        </div>
+      </div>
+      <div class="grid_cell project-page_grid_description">
+        <div class="grid_cell_container">
+          <p class="half-col-text">
+            I’m Adam Vromman, a Belgian designer and dev. I mix bold design with
+            clean code—serious about the details, but never too stiff. Two
+            degrees, endless grids, and a love for creative coding.
+          </p>
+        </div>
+      </div>
+      <div class="project-page-image image-1">
+        <img src="/club-sofa/phone.jpg" />
+      </div></ProjectPage
+    >
   </div>
+  <script>
+    import { setSelectedProject, toProjectPage } from "../assets/Functions";
+    import { projects } from "../assets/Constants";
+
+    setSelectedProject(projects[4]);
+    toProjectPage();
+  </script>
 </Layout>

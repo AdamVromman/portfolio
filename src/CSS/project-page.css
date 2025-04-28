@@ -2,12 +2,49 @@
 
 #project-page {
   @apply relative;
-  @apply grid;
+
   @apply border-2 border-active box-content;
   @apply overflow-hidden;
 }
 
-.project-page-description {
-  grid-column: 3 / 10;
-  grid-row: 5 / 10;
+#project-page_grid {
+  @apply grid;
+  @apply relative z-10;
+}
+
+.project-page-cell {
+  @apply overflow-hidden;
+  @apply bg-white;
+}
+
+.project-page_grid_title {
+  grid-column: 1 / 16;
+  grid-row: 1 / 3;
+
+  @apply pb-thick pr-thin;
+}
+
+.project-page_grid_description {
+  grid-column: 3 / 16;
+  grid-row: 5 / 11;
+}
+
+.project-page-image {
+  @apply border-2 border-active box-content;
+  @apply overflow-hidden;
+  img {
+    @apply object-cover;
+    @apply w-full h-full;
+  }
+}
+
+.club-sofa {
+  .image-1 {
+    grid-column: 3 / 10;
+    grid-row: 20 / 25;
+  }
+
+  .page-title {
+    @apply text-project-club-sofa;
+  }
 }

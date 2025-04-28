@@ -1,12 +1,14 @@
 @import "./imports.css";
 
-#background {
+#background,
+#project-page-background {
   @apply absolute top-0 left-0 mx-auto;
   @apply flex flex-col items-center justify-start;
   z-index: 0;
 }
 
-#background_svg {
+#background_svg,
+#project-page-background_svg {
   @apply w-full h-full;
 
   .background_svg_line {
