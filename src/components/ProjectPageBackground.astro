@@ -111,10 +111,7 @@ import "../CSS/background.css";
     }
   };
 
-  document.addEventListener("assetsloaded", () => {
-    console.log("assets loaded");
-    drawLines();
-  });
+  drawLines();
 
   const onResize = () => {
     drawLines();
