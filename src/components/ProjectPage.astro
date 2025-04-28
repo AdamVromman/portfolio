@@ -20,13 +20,19 @@ import ProjectPageBackground from "./ProjectPageBackground.astro";
   const projectPageGrid = document.getElementById("project-page_grid");
 
   const drawGrid = () => {
-    if (projectPageGrid) {
+    if (projectPageGrid && projectPage) {
       const localTileWidth = calculateTileWidth();
-      projectPageGrid.style.width = `${getNrOfColumns() * localTileWidth}px`;
+      projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
       projectPageGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
       projectPageGrid.style.gridTemplateRows = `repeat(100, ${localTileWidth}px)`;
     }
   };
+
+  const handleResize = () => {
+    drawGrid();
+  };
+
+  window.addEventListener("resize", handleResize);
 
   drawGrid();
 </script>
