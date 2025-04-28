@@ -193,19 +193,19 @@ export const handleMouseIn = (key: string) => {
           },
           "<"
         )
-        .fromTo(
-          `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
-          {
-            y: "0",
-          },
-          {
-            duration: 0.3,
-            y: "100%",
-            ease: "power3.in",
-            overwrite: true,
-          },
-          "<"
-        )
+        // .fromTo(
+        //   `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
+        //   {
+        //     y: "0",
+        //   },
+        //   {
+        //     duration: 0.3,
+        //     y: "100%",
+        //     ease: "power3.in",
+        //     overwrite: true,
+        //   },
+        //   "<"
+        // )
         .fromTo(
           `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
           {
@@ -310,19 +310,19 @@ export const handleMouseOut = (key: string) => {
           },
           "<"
         )
-        .fromTo(
-          `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
-          {
-            y: "100%",
-          },
-          {
-            duration: 0.3,
-            y: "0",
-            ease: "power3.in",
-            overwrite: true,
-          },
-          "<"
-        )
+        // .fromTo(
+        //   `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
+        //   {
+        //     y: "100%",
+        //   },
+        //   {
+        //     duration: 0.3,
+        //     y: "0",
+        //     ease: "power3.in",
+        //     overwrite: true,
+        //   },
+        //   "<"
+        // )
         .fromTo(
           `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
           {

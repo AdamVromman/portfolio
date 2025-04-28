@@ -63,17 +63,17 @@ import { ClientRouter } from "astro:transitions";
             ease: "power4.out",
           },
           0
-        )
-        .from(
-          "#flying-objects",
-          {
-            scale: 0,
-            opacity: 0,
-            duration: 1,
-            ease: "power4.out",
-          },
-          0
         );
+      // .from(
+      //   "#flying-objects",
+      //   {
+      //     scale: 0,
+      //     opacity: 0,
+      //     duration: 1,
+      //     ease: "power4.out",
+      //   },
+      //   0
+      // );
 
       document.addEventListener("assetsloaded", () => {
         document.body.style.opacity = "1";
