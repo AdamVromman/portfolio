@@ -68,9 +68,79 @@ export const getNrOfColumns = () => {
 
 export let hoveringBody: FlyingObject | undefined = undefined;
 export let previousVel: RAPIER.Vector3 | undefined = undefined;
+export let selectedProject: Project | undefined = undefined;
+
+export const setSelectedProject = (project: Project | undefined) => {
+  selectedProject = project;
+};
 
 export const setPreviousVel = (vector: RAPIER.Vector) => {
   previousVel = vector;
+};
+
+export const toProjectPage = () => {
+  console.log("toProjectPage");
+  if (selectedProject) {
+    document.documentElement.style.setProperty(
+      "--color-active",
+      `#${selectedProject.color}`
+    );
+    const timeline = gsap.timeline();
+
+    timeline
+      .to(
+        `.grid_cell.bottom .grid_cell_container`,
+        {
+          duration: 0.3,
+          y: "100%",
+          ease: "power3.in",
+        },
+        "0"
+      )
+      .to(
+        `.grid_cell.top .grid_cell_container`,
+        {
+          duration: 0.3,
+          y: "-100%",
+          ease: "power3.in",
+        },
+        "<"
+      )
+      .to(
+        `.grid_cell.left .grid_cell_container`,
+        {
+          duration: 0.3,
+          x: "-100%",
+          ease: "power3.in",
+        },
+        "<"
+      )
+      .to(
+        `.grid_cell.right .grid_cell_container`,
+        {
+          duration: 0.3,
+          x: "100%",
+          ease: "power3.in",
+        },
+        "<"
+      )
+      .to(
+        `.home_video.${selectedProject.slug}`,
+        {
+          delay: 0.3,
+          duration: 0.2,
+          opacity: 1,
+        },
+        "<"
+      )
+      .to(
+        `#flying-objects`,
+        {
+          scale: 0,
+        },
+        "<"
+      );
+  }
 };
 
 export const handleMouseIn = (key: string) => {
@@ -79,6 +149,8 @@ export const handleMouseIn = (key: string) => {
     (flyingObject) => flyingObject.slug === key
   );
   if (project && flyingObject) {
+    hoveringBody = flyingObject;
+
     document.documentElement.style.setProperty(
       "--color-active",
       `#${project.color}`
@@ -146,7 +218,6 @@ export const handleMouseIn = (key: string) => {
         overwrite: true,
       }
     );
-    hoveringBody = flyingObject;
     gsap.to(`.home_video.${project.slug}`, {
       delay: 0.3,
       duration: 0.2,
@@ -163,88 +234,90 @@ export const handleMouseIn = (key: string) => {
 };
 
 export const handleMouseOut = (key: string) => {
-  document.documentElement.style.setProperty("--color-active", "#4000ff");
-  const project = projects.find((project) => project.slug === key);
-  const flyingObject = dynamicBodies.find(
-    (flyingObject) => flyingObject.slug === key
-  );
-  if (project && flyingObject) {
-    gsap.to(".grid_cell.home_grid_title h1.page-title", {
-      y: "0",
-      duration: 0.3,
-      ease: "power3.in",
-      overwrite: true,
-    });
+  if (!selectedProject) {
+    document.documentElement.style.setProperty("--color-active", "#4000ff");
+    const project = projects.find((project) => project.slug === key);
+    const flyingObject = dynamicBodies.find(
+      (flyingObject) => flyingObject.slug === key
+    );
+    if (project && flyingObject) {
+      gsap.to(".grid_cell.home_grid_title h1.page-title", {
+        y: "0",
+        duration: 0.3,
+        ease: "power3.in",
+        overwrite: true,
+      });
 
-    gsap.to(`.grid_cell.home_grid_title .page-title.sub.${project.slug}`, {
-      y: "100%",
-      duration: 0.3,
-      ease: "power3.in",
-      overwrite: true,
-    });
-
-    gsap.fromTo(
-      `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
-      {
+      gsap.to(`.grid_cell.home_grid_title .page-title.sub.${project.slug}`, {
         y: "100%",
-      },
-      {
         duration: 0.3,
-        y: "0",
         ease: "power3.in",
         overwrite: true,
-      }
-    );
-    gsap.fromTo(
-      `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
-      {
-        y: "-100%",
-      },
-      {
-        duration: 0.3,
-        y: "0",
-        ease: "power3.in",
+      });
+
+      gsap.fromTo(
+        `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
+        {
+          y: "100%",
+        },
+        {
+          duration: 0.3,
+          y: "0",
+          ease: "power3.in",
+          overwrite: true,
+        }
+      );
+      gsap.fromTo(
+        `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
+        {
+          y: "-100%",
+        },
+        {
+          duration: 0.3,
+          y: "0",
+          ease: "power3.in",
+          overwrite: true,
+        }
+      );
+      gsap.fromTo(
+        `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
+        {
+          x: "-100%",
+        },
+        {
+          duration: 0.3,
+          x: "0",
+          ease: "power3.in",
+          overwrite: true,
+        }
+      );
+      gsap.fromTo(
+        `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
+        {
+          x: "100%",
+        },
+        {
+          duration: 0.3,
+          x: "0",
+          ease: "power3.in",
+          overwrite: true,
+        }
+      );
+      gsap.to(`.home_video.${project.slug}`, {
+        duration: 0.2,
+        opacity: 0,
         overwrite: true,
-      }
-    );
-    gsap.fromTo(
-      `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
-      {
-        x: "-100%",
-      },
-      {
-        duration: 0.3,
-        x: "0",
-        ease: "power3.in",
+      });
+      gsap.to("#background", {
+        duration: 0.2,
+        opacity: 1,
         overwrite: true,
+      });
+      hoveringBody = undefined;
+      if (previousVel) {
+        flyingObject.body.setLinvel(previousVel, true);
+        previousVel = undefined;
       }
-    );
-    gsap.fromTo(
-      `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
-      {
-        x: "100%",
-      },
-      {
-        duration: 0.3,
-        x: "0",
-        ease: "power3.in",
-        overwrite: true,
-      }
-    );
-    gsap.to(`.home_video.${project.slug}`, {
-      duration: 0.2,
-      opacity: 0,
-      overwrite: true,
-    });
-    gsap.to("#background", {
-      duration: 0.2,
-      opacity: 1,
-      overwrite: true,
-    });
-    hoveringBody = undefined;
-    if (previousVel) {
-      flyingObject.body.setLinvel(previousVel, true);
-      previousVel = undefined;
     }
   }
 };

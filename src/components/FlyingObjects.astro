@@ -247,7 +247,6 @@ import "../CSS/flying-objects.css";
                 slug: project.slug,
               };
               element.addEventListener("mouseenter", () => {
-                console.log("mouseenter", clicked);
                 if (!clicked) {
                   handleMouseIn(project.slug);
                 } else {
@@ -256,15 +255,12 @@ import "../CSS/flying-objects.css";
               });
 
               element.addEventListener("mouseleave", () => {
-                console.log("mouseleave", clicked);
                 if (!clicked) {
-                  console.log("mouseleave");
                   handleMouseOut(project.slug);
                 }
               });
 
               element.addEventListener("click", () => {
-                console.log("clicked", clicked);
                 clicked = true;
               });
 

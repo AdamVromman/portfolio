@@ -24,6 +24,7 @@ import { ClientRouter } from "astro:transitions";
     <slot />
     <script>
       import gsap from "gsap";
+      import { selectedProject } from "../assets/Functions";
 
       const homeStartupTimeline = gsap
         .timeline({ delay: 2, paused: true })
@@ -76,7 +77,7 @@ import { ClientRouter } from "astro:transitions";
 
       document.addEventListener("assetsloaded", () => {
         document.body.style.opacity = "1";
-        homeStartupTimeline.play();
+        if (!selectedProject) homeStartupTimeline.play();
       });
     </script>
   </body>

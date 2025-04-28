@@ -23,8 +23,6 @@ import "../CSS/background.css";
     if (background && backgroundSVG) {
       const localTileWidth = calculateTileWidth();
       const nrOfRows = calculateNrOfRows(localTileWidth);
-      console.log("nrOfRows", nrOfRows);
-      console.log("localTileWidth", localTileWidth);
       background.style.width = `${getNrOfColumns() * localTileWidth}px`;
       background.style.height = `${nrOfRows * localTileWidth}px`;
       backgroundSVG.textContent = "";

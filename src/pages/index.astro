@@ -7,4 +7,9 @@ import Layout from "../layouts/Layout.astro";
   <div id="grid-container">
     <Home />
   </div>
+  <script>
+    import { setSelectedProject } from "../assets/Functions";
+
+    setSelectedProject(undefined);
+  </script>
 </Layout>
