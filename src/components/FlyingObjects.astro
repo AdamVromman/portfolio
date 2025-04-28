@@ -452,6 +452,12 @@ import "../CSS/flying-objects.css";
 
     const onWindowResize = () => {
       if (renderer && camera && canvasContainer) {
+        const localTileWidth = calculateTileWidth();
+        const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
+
+        canvasContainer.style.height = `${NR_OF_ROWS * localTileWidth}px`;
+        canvasContainer.style.width = `${getNrOfColumns() * localTileWidth}px`;
+
         height = canvasContainer.clientHeight;
         width = canvasContainer.clientWidth;
 
@@ -460,7 +466,17 @@ import "../CSS/flying-objects.css";
         camera.left = (frustumSize * aspect) / -2;
         camera.right = (frustumSize * aspect) / 2;
         camera.top = frustumSize / 2;
-        camera.bottom = frustumSize / 2;
+        camera.bottom = frustumSize / -2;
+
+        leftWall?.body.setTranslation(
+          new RAPIER.Vector3(camera.left, 0, 0),
+          true
+        );
+
+        rightWall?.body.setTranslation(
+          new RAPIER.Vector3(camera.right, 0, 0),
+          true
+        );
 
         camera.updateProjectionMatrix();
 
