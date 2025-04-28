@@ -2,7 +2,7 @@
 
 #project-page {
   @apply relative;
-
+  @apply opacity-0;
   @apply border-2 border-active box-content;
   @apply overflow-hidden;
 }

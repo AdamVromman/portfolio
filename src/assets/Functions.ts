@@ -98,6 +98,9 @@ export const setPreviousVel = (vector: RAPIER.Vector) => {
 export const toProjectPage = () => {
   console.log("toProjectPage");
   if (selectedProject) {
+    const localTileWidth = calculateTileWidth();
+    const nrOfRows = calculateNrOfRows(localTileWidth);
+
     document.documentElement.style.setProperty(
       "--color-active",
       `#${selectedProject.color}`
@@ -106,49 +109,12 @@ export const toProjectPage = () => {
 
     timeline
       .to(
-        `.grid_cell.bottom .grid_cell_container`,
-        {
-          duration: 0.3,
-          y: "100%",
-          ease: "power3.in",
-        },
-        "0"
-      )
-      .to(
-        `.grid_cell.top .grid_cell_container`,
-        {
-          duration: 0.3,
-          y: "-100%",
-          ease: "power3.in",
-        },
-        "<"
-      )
-      .to(
-        `.grid_cell.left .grid_cell_container`,
-        {
-          duration: 0.3,
-          x: "-100%",
-          ease: "power3.in",
-        },
-        "<"
-      )
-      .to(
-        `.grid_cell.right .grid_cell_container`,
-        {
-          duration: 0.3,
-          x: "100%",
-          ease: "power3.in",
-        },
-        "<"
-      )
-      .to(
         `.home_video.${selectedProject.slug}`,
         {
-          delay: 0.3,
           duration: 0.2,
           opacity: 1,
         },
-        "<"
+        "0"
       )
       .to(
         `#flying-objects`,
@@ -160,17 +126,33 @@ export const toProjectPage = () => {
       .fromTo(
         "#project-page",
         {
-          opacity: 0,
           y: "50",
         },
         {
-          opacity: 1,
           y: "0",
           duration: 0.5,
           ease: "power4.out",
-        }
-      ),
-      "<-=0.5";
+        },
+        "<"
+      )
+      .to(
+        ".page-container",
+        {
+          duration: 1,
+          height: (nrOfRows - 2) * localTileWidth - 2,
+          ease: "power4.inOut",
+        },
+        "<"
+      )
+      .to(
+        "#project-page",
+        {
+          opacity: 1,
+          duration: 0.2,
+          ease: "power4.out",
+        },
+        "<+=0.25"
+      );
   }
 };
 
@@ -211,19 +193,19 @@ export const handleMouseIn = (key: string) => {
           },
           "<"
         )
-        .fromTo(
-          `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
-          {
-            y: "0",
-          },
-          {
-            duration: 0.3,
-            y: "100%",
-            ease: "power3.in",
-            overwrite: true,
-          },
-          "<"
-        )
+        // .fromTo(
+        //   `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
+        //   {
+        //     y: "0",
+        //   },
+        //   {
+        //     duration: 0.3,
+        //     y: "100%",
+        //     ease: "power3.in",
+        //     overwrite: true,
+        //   },
+        //   "<"
+        // )
         .fromTo(
           `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
           {
@@ -328,19 +310,19 @@ export const handleMouseOut = (key: string) => {
           },
           "<"
         )
-        .fromTo(
-          `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
-          {
-            y: "100%",
-          },
-          {
-            duration: 0.3,
-            y: "0",
-            ease: "power3.in",
-            overwrite: true,
-          },
-          "<"
-        )
+        // .fromTo(
+        //   `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
+        //   {
+        //     y: "100%",
+        //   },
+        //   {
+        //     duration: 0.3,
+        //     y: "0",
+        //     ease: "power3.in",
+        //     overwrite: true,
+        //   },
+        //   "<"
+        // )
         .fromTo(
           `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
           {
