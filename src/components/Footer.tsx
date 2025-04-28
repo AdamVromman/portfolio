@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import "../CSS/footer.css";
 import {
   calculateTileWidth,
+  getFooterRows,
   getNrOfColumns,
   getScreenWidth,
 } from "../assets/Functions";
@@ -17,9 +18,9 @@ const Footer = ({ path }: FooterProps) => {
   const drawGrid = () => {
     if (footerRef.current) {
       const localTileWidth = calculateTileWidth();
-      footerRef.current.style.height = `${getRows() * localTileWidth}px`;
+      footerRef.current.style.height = `${getFooterRows() * localTileWidth}px`;
       footerRef.current.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, 1fr)`;
-      footerRef.current.style.gridTemplateRows = `repeat(${getRows()}, 1fr)`;
+      footerRef.current.style.gridTemplateRows = `repeat(${getFooterRows()}, 1fr)`;
     }
   };
 
@@ -36,23 +37,6 @@ const Footer = ({ path }: FooterProps) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const getRows = () => {
-    const width = getScreenWidth();
-    if (width >= 1280) {
-      return 3;
-    }
-    if (width >= 1024) {
-      return 4;
-    }
-    if (width >= 768) {
-      return 5;
-    }
-    if (width >= 480) {
-      return 7;
-    }
-    return 7;
-  };
 
   return (
     <footer ref={footerRef} id="footer" className="footer_grid">

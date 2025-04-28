@@ -66,6 +66,23 @@ export const getNrOfColumns = () => {
   return NR_OF_COLUMNS;
 };
 
+export const getFooterRows = () => {
+  const width = getScreenWidth();
+  if (width >= 1280) {
+    return 3;
+  }
+  if (width >= 1024) {
+    return 4;
+  }
+  if (width >= 768) {
+    return 5;
+  }
+  if (width >= 480) {
+    return 7;
+  }
+  return 7;
+};
+
 export let hoveringBody: FlyingObject | undefined = undefined;
 export let previousVel: RAPIER.Vector3 | undefined = undefined;
 export let selectedProject: Project | undefined = undefined;
@@ -257,7 +274,7 @@ export const handleMouseIn = (key: string) => {
           "<"
         )
         .to(
-          ".background_svg_line.line_vertical:not(.background_project-page)",
+          ".background_svg_line.line_vertical:not(.not-animated)",
           {
             duration: 0.5,
             attr: { y2: "0%" },
@@ -267,7 +284,7 @@ export const handleMouseIn = (key: string) => {
           "<"
         )
         .to(
-          ".background_svg_line.line_horizontal:not(.background_project-page)",
+          ".background_svg_line.line_horizontal:not(.not-animated)",
           {
             duration: 0.5,
             attr: { x2: "0%" },
@@ -374,7 +391,7 @@ export const handleMouseOut = (key: string) => {
           "<"
         )
         .to(
-          ".background_svg_line.line_vertical:not(.background_project-page)",
+          ".background_svg_line.line_vertical:not(.not-animated)",
           {
             duration: 0.5,
             attr: { y2: "100%" },
@@ -384,7 +401,7 @@ export const handleMouseOut = (key: string) => {
           "<"
         )
         .to(
-          ".background_svg_line.line_horizontal:not(.background_project-page)",
+          ".background_svg_line.line_horizontal:not(.not-animated)",
           {
             duration: 0.5,
             attr: { x2: "100%" },

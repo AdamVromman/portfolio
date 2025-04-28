@@ -1,8 +1,13 @@
 @import "./imports.css";
 
 #footer {
-  @apply relative grid w-full gap-[2px];
-  @apply p-[2px];
+  @apply relative;
+  @apply border-2 border-active box-content;
+  @apply overflow-hidden;
+}
+
+#footer_grid {
+  @apply grid;
 }
 
 .footer_grid_title {
