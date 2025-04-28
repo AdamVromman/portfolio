@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@dimforge/rapier3d": "^0.16.0",
     "@dimforge/rapier3d-compat": "^0.15.1",
     "@gsap/react": "^2.1.2",
     "@tailwindcss/vite": "^4.1.3",

@@ -98,6 +98,11 @@
   resolved "https://registry.yarnpkg.com/@dimforge/rapier3d-compat/-/rapier3d-compat-0.15.1.tgz#bf87279c33100211c51cadaa26364bf872a4667e"
   integrity sha512-4XVdIGLTK7IeLX5K5AtlUSq39GeGMjVBtn86NH6AmzDzFkM6YbnMYVnxKGL2/nFEwLGs6Zv/ihYOYWd1D1cn5Q==
 
+"@dimforge/rapier3d@^0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@dimforge/rapier3d/-/rapier3d-0.16.0.tgz#f9af0c0f008d82930a6e2dd98086e25e4f1cdc4e"
+  integrity sha512-WsCU92NhagX3JBHxSjB2CDEtbZDH3TS1DJ3Y+P8pB29cOX1RhE9yVeBtBAcNEN/WE9cuibNThz6+NpvdEPFQ1w==
+
 "@emnapi/runtime@^1.2.0":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@emnapi/runtime/-/runtime-1.4.1.tgz#79e54e3cc7f1955b3080f6e1e0e111e06114e114"

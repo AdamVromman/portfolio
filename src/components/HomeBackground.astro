@@ -12,6 +12,7 @@ import "../CSS/background.css";
     calculateTileWidth,
     getNrOfColumns,
   } from "../assets/Functions";
+  import { selectedProject } from "../assets/Functions";
 
   const background = document.getElementById("background");
   const backgroundSVG = document.getElementById("background_svg");
@@ -93,12 +94,12 @@ import "../CSS/background.css";
             line,
             {
               duration: 1,
-              attr: { x1: "100%" },
+              attr: { x2: "100%" },
               ease: "power4.out",
             },
             "<0.01"
           );
-        } else line.setAttribute("x1", "100%");
+        } else line.setAttribute("x2", "100%");
       }
 
       for (let i = 0; i < nrOfRows / 2; i++) {
@@ -128,11 +129,11 @@ import "../CSS/background.css";
   };
 
   document.addEventListener("assetsloaded", () => {
-    drawLines(true);
+    if (!selectedProject) drawLines(true);
   });
 
   const onResize = () => {
-    drawLines();
+    if (!selectedProject) drawLines();
   };
 
   window.addEventListener("resize", onResize);

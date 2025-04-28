@@ -144,92 +144,125 @@ export const toProjectPage = () => {
 };
 
 export const handleMouseIn = (key: string) => {
-  const project = projects.find((project) => project.slug === key);
-  const flyingObject = dynamicBodies.find(
-    (flyingObject) => flyingObject.slug === key
-  );
-  if (project && flyingObject) {
-    hoveringBody = flyingObject;
-
-    document.documentElement.style.setProperty(
-      "--color-active",
-      `#${project.color}`
+  if (!selectedProject) {
+    const project = projects.find((project) => project.slug === key);
+    const flyingObject = dynamicBodies.find(
+      (flyingObject) => flyingObject.slug === key
     );
+    if (project && flyingObject) {
+      hoveringBody = flyingObject;
 
-    gsap.to(".grid_cell.home_grid_title h1.page-title", {
-      y: "-100%",
-      duration: 0.3,
-      ease: "power3.in",
-      overwrite: true,
-    });
+      const timeline = gsap.timeline();
 
-    gsap.to(`.grid_cell.home_grid_title .page-title.sub.${project.slug}`, {
-      y: "0%",
-      duration: 0.3,
-      ease: "power3.in",
-      overwrite: true,
-    });
+      document.documentElement.style.setProperty(
+        "--color-active",
+        `#${project.color}`
+      );
 
-    gsap.fromTo(
-      `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
-      {
-        y: "0",
-      },
-      {
-        duration: 0.3,
-        y: "100%",
-        ease: "power3.in",
-        overwrite: true,
-      }
-    );
-    gsap.fromTo(
-      `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
-      {
-        y: "0",
-      },
-      {
-        duration: 0.3,
-        y: "-100%",
-        ease: "power3.in",
-        overwrite: true,
-      }
-    );
-    gsap.fromTo(
-      `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
-      {
-        x: "0",
-      },
-      {
-        duration: 0.3,
-        x: "-100%",
-        ease: "power3.in",
-        overwrite: true,
-      }
-    );
-    gsap.fromTo(
-      `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
-      {
-        x: "0",
-      },
-      {
-        duration: 0.3,
-        x: "100%",
-        ease: "power3.in",
-        overwrite: true,
-      }
-    );
-    gsap.to(`.home_video.${project.slug}`, {
-      delay: 0.3,
-      duration: 0.2,
-      opacity: 1,
-      overwrite: true,
-    });
-
-    gsap.to("#background", {
-      duration: 0.2,
-      opacity: 0.1,
-      overwrite: true,
-    });
+      timeline
+        .to(
+          ".grid_cell.home_grid_title h1.page-title",
+          {
+            y: "-100%",
+            duration: 0.3,
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "0"
+        )
+        .to(
+          `.grid_cell.home_grid_title .page-title.sub.${project.slug}`,
+          {
+            y: "0%",
+            duration: 0.3,
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "<"
+        )
+        .fromTo(
+          `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
+          {
+            y: "0",
+          },
+          {
+            duration: 0.3,
+            y: "100%",
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "<"
+        )
+        .fromTo(
+          `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
+          {
+            y: "0",
+          },
+          {
+            duration: 0.3,
+            y: "-100%",
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "<"
+        )
+        .fromTo(
+          `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
+          {
+            x: "0",
+          },
+          {
+            duration: 0.3,
+            x: "-100%",
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "<"
+        )
+        .fromTo(
+          `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
+          {
+            x: "0",
+          },
+          {
+            duration: 0.3,
+            x: "100%",
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "<"
+        )
+        .to(
+          `.home_video.${project.slug}`,
+          {
+            delay: 0.3,
+            duration: 0.2,
+            opacity: 1,
+            overwrite: true,
+          },
+          "<"
+        )
+        .to(
+          ".background_svg_line.line_vertical",
+          {
+            duration: 0.5,
+            attr: { y2: "0%" },
+            ease: "power4.out",
+            overwrite: true,
+          },
+          "<"
+        )
+        .to(
+          ".background_svg_line.line_horizontal",
+          {
+            duration: 0.5,
+            attr: { x2: "0%" },
+            ease: "power4.out",
+            overwrite: true,
+          },
+          "<"
+        );
+    }
   }
 };
 
@@ -241,78 +274,120 @@ export const handleMouseOut = (key: string) => {
       (flyingObject) => flyingObject.slug === key
     );
     if (project && flyingObject) {
-      gsap.to(".grid_cell.home_grid_title h1.page-title", {
-        y: "0",
-        duration: 0.3,
-        ease: "power3.in",
-        overwrite: true,
-      });
+      const timeline = gsap.timeline();
 
-      gsap.to(`.grid_cell.home_grid_title .page-title.sub.${project.slug}`, {
-        y: "100%",
-        duration: 0.3,
-        ease: "power3.in",
-        overwrite: true,
-      });
+      timeline
+        .to(
+          ".grid_cell.home_grid_title h1.page-title",
+          {
+            y: "0",
+            duration: 0.3,
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "0"
+        )
+        .to(
+          `.grid_cell.home_grid_title .page-title.sub.${project.slug}`,
+          {
+            y: "100%",
+            duration: 0.3,
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "<"
+        )
+        .fromTo(
+          `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
+          {
+            y: "100%",
+          },
+          {
+            duration: 0.3,
+            y: "0",
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "<"
+        )
+        .fromTo(
+          `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
+          {
+            y: "-100%",
+          },
+          {
+            duration: 0.3,
+            y: "0",
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "<"
+        )
+        .fromTo(
+          `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
+          {
+            x: "-100%",
+          },
+          {
+            duration: 0.3,
+            x: "0",
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "<"
+        )
+        .fromTo(
+          `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
+          {
+            x: "100%",
+          },
+          {
+            duration: 0.3,
+            x: "0",
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "<"
+        )
 
-      gsap.fromTo(
-        `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
-        {
-          y: "100%",
-        },
-        {
-          duration: 0.3,
-          y: "0",
-          ease: "power3.in",
-          overwrite: true,
-        }
-      );
-      gsap.fromTo(
-        `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
-        {
-          y: "-100%",
-        },
-        {
-          duration: 0.3,
-          y: "0",
-          ease: "power3.in",
-          overwrite: true,
-        }
-      );
-      gsap.fromTo(
-        `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
-        {
-          x: "-100%",
-        },
-        {
-          duration: 0.3,
-          x: "0",
-          ease: "power3.in",
-          overwrite: true,
-        }
-      );
-      gsap.fromTo(
-        `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
-        {
-          x: "100%",
-        },
-        {
-          duration: 0.3,
-          x: "0",
-          ease: "power3.in",
-          overwrite: true,
-        }
-      );
-      gsap.to(`.home_video.${project.slug}`, {
-        duration: 0.2,
-        opacity: 0,
-        overwrite: true,
-      });
-      gsap.to("#background", {
-        duration: 0.2,
-        opacity: 1,
-        overwrite: true,
-      });
+        .to(
+          "#background",
+          {
+            duration: 0.2,
+            opacity: 1,
+            overwrite: true,
+          },
+          "<"
+        )
+        .to(
+          ".background_svg_line.line_vertical",
+          {
+            duration: 0.5,
+            attr: { y2: "100%" },
+            ease: "power4.out",
+            overwrite: true,
+          },
+          "<"
+        )
+        .to(
+          ".background_svg_line.line_horizontal",
+          {
+            duration: 0.5,
+            attr: { x2: "100%" },
+            ease: "power4.out",
+            overwrite: true,
+          },
+          "<"
+        )
+        .to(
+          `.home_video.${project.slug}`,
+          {
+            duration: 0.2,
+            opacity: 0,
+            overwrite: true,
+          },
+          ">"
+        );
       hoveringBody = undefined;
       if (previousVel) {
         flyingObject.body.setLinvel(previousVel, true);
