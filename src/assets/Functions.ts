@@ -139,7 +139,21 @@ export const toProjectPage = () => {
           scale: 0,
         },
         "<"
-      );
+      )
+      .fromTo(
+        "#project-page",
+        {
+          opacity: 0,
+          y: "50",
+        },
+        {
+          opacity: 1,
+          y: "0",
+          duration: 0.5,
+          ease: "power4.out",
+        }
+      ),
+      "<-=0.5";
   }
 };
 
@@ -243,7 +257,7 @@ export const handleMouseIn = (key: string) => {
           "<"
         )
         .to(
-          ".background_svg_line.line_vertical",
+          ".background_svg_line.line_vertical:not(.background_project-page)",
           {
             duration: 0.5,
             attr: { y2: "0%" },
@@ -253,7 +267,7 @@ export const handleMouseIn = (key: string) => {
           "<"
         )
         .to(
-          ".background_svg_line.line_horizontal",
+          ".background_svg_line.line_horizontal:not(.background_project-page)",
           {
             duration: 0.5,
             attr: { x2: "0%" },
@@ -360,7 +374,7 @@ export const handleMouseOut = (key: string) => {
           "<"
         )
         .to(
-          ".background_svg_line.line_vertical",
+          ".background_svg_line.line_vertical:not(.background_project-page)",
           {
             duration: 0.5,
             attr: { y2: "100%" },
@@ -370,7 +384,7 @@ export const handleMouseOut = (key: string) => {
           "<"
         )
         .to(
-          ".background_svg_line.line_horizontal",
+          ".background_svg_line.line_horizontal:not(.background_project-page)",
           {
             duration: 0.5,
             attr: { x2: "100%" },

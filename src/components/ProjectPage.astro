@@ -3,14 +3,9 @@ import "../CSS/project-page.css";
 import ProjectPageBackground from "./ProjectPageBackground.astro";
 ---
 
-<style>
-  :root {
-    --color-active: #07d9ae;
-  }
-</style>
 <div id="project-page">
   <ProjectPageBackground />
-  <div id="project-page-grid">
+  <div id="project-page_grid">
     <slot />
   </div>
 </div>
@@ -22,7 +17,7 @@ import ProjectPageBackground from "./ProjectPageBackground.astro";
   } from "../assets/Functions";
 
   const projectPage = document.getElementById("project-page");
-  const projectPageGrid = document.getElementById("project-page-grid");
+  const projectPageGrid = document.getElementById("project-page_grid");
 
   const drawGrid = () => {
     if (projectPageGrid) {

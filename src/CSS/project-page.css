@@ -7,7 +7,7 @@
   @apply overflow-hidden;
 }
 
-#project-page-grid {
+#project-page_grid {
   @apply grid;
   @apply relative z-10;
 }
