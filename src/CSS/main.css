@@ -81,7 +81,7 @@ body {
 
 #grid-calculator {
   @apply absolute inset-15;
-  @apply h-dvh;
+  @apply h-lvh;
 }
 
 #grid-container {
