@@ -83,6 +83,12 @@ export const getFooterRows = () => {
   return 12;
 };
 
+export const getProjectRowsPerScreenSize = (key: string) => {
+  switch (key) {
+    case "club-sofa":
+  }
+};
+
 export let hoveringBody: FlyingObject | undefined = undefined;
 export let previousVel: RAPIER.Vector3 | undefined = undefined;
 export let selectedProject: Project | undefined = undefined;
