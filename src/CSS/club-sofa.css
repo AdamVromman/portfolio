@@ -57,7 +57,7 @@
 
   .video-1 {
     grid-column: 2 / -2;
-    grid-row: 24 / 30;
+    grid-row: 23 / 27;
 
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 26 / 32;
@@ -66,7 +66,7 @@
 
   .video-2 {
     grid-column: 1 / -1;
-    grid-row: 32 / 36;
+    grid-row: 28 / 34;
 
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 34 / 42;
@@ -74,8 +74,9 @@
   }
 
   .paragraph-1 {
-    grid-column: 2 / -2;
-    grid-row: 38 / 46;
+    grid-column: 1 / -1;
+    grid-row: 34 / 38;
+    @apply p-thin;
 
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 44 / 50;

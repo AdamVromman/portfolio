@@ -32,6 +32,29 @@ body {
   @apply bg-active;
 }
 
+.quarter-col-text {
+  @apply text-[3vw];
+  @apply leading-[4.5vw];
+  @apply p-5;
+
+  @media (min-width: theme(--breakpoint-xs)) {
+    @apply text-[8vw];
+    @apply leading-[9vw];
+  }
+  @media (min-width: theme(--breakpoint-sm)) {
+    @apply text-[6vw];
+    @apply leading-[7vw];
+  }
+  @media (min-width: theme(--breakpoint-md)) {
+    @apply text-[4.5vw];
+    @apply leading-[5.5vw];
+  }
+  @media (min-width: theme(--breakpoint-lg)) {
+    font-size: min(3.5vw, 40px);
+    line-height: min(3.5vw, 50px);
+  }
+}
+
 .half-col-text {
   @apply text-[5.3vw];
   @apply leading-[5.7vw];

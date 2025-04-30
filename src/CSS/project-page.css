@@ -89,6 +89,5 @@
 .project-page_grid_paragraph {
   & p {
     @apply p-15;
-    @apply text-[16px] leading-[20px];
   }
 }
