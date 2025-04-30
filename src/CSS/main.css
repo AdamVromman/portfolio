@@ -32,9 +32,9 @@ body {
   @apply bg-active;
 }
 
-.quarter-col-text {
-  @apply text-[3vw];
-  @apply leading-[4.5vw];
+.third-col-text {
+  @apply text-[3.8vw];
+  @apply leading-[5.2vw];
   @apply p-5;
 
   @media (min-width: theme(--breakpoint-xs)) {
