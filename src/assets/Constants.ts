@@ -6,16 +6,27 @@ export const NR_OF_COLUMNS_768 = 18;
 export const NR_OF_COLUMNS_1024 = 26;
 export const NR_OF_COLUMNS_1280 = 30;
 
+export const ROWS_PER_PROJECT_PER_SCREENSIZE = new Map<
+  string,
+  { xs: number; sm: number; md: number; lg: number; xl: number }
+>([
+  ["club-sofa", { xs: 129, sm: 131, md: 5, lg: 5, xl: 5 }],
+  ["train-world", { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 }],
+  ["transfo-intiem", { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 }],
+  ["all-eyes-on-gaza", { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 }],
+  ["qausal", { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 }],
+]);
+
 export const projects: Project[] = [
   {
-    name: "All Eyes on Gaza",
-    slug: "all-eyes-on-gaza",
+    name: "Qausal",
+    slug: "qausal",
     color: "FF7700",
     year: 2025,
   },
   {
-    name: "Qausal",
-    slug: "qausal",
+    name: "All Eyes on Gaza",
+    slug: "all-eyes-on-gaza",
     color: "FF7700",
     year: 2025,
   },

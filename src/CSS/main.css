@@ -32,23 +32,47 @@ body {
   @apply bg-active;
 }
 
-.half-col-text {
-  @apply text-[5.7vw];
-  @apply leading-[5.3vw];
+.quarter-col-text {
+  @apply text-[3vw];
+  @apply leading-[4.5vw];
+  @apply p-5;
 
-  @media screen and (min-width: 480px) {
+  @media (min-width: theme(--breakpoint-xs)) {
+    @apply text-[8vw];
+    @apply leading-[9vw];
+  }
+  @media (min-width: theme(--breakpoint-sm)) {
+    @apply text-[6vw];
+    @apply leading-[7vw];
+  }
+  @media (min-width: theme(--breakpoint-md)) {
+    @apply text-[4.5vw];
+    @apply leading-[5.5vw];
+  }
+  @media (min-width: theme(--breakpoint-lg)) {
+    font-size: min(3.5vw, 40px);
+    line-height: min(3.5vw, 50px);
+  }
+}
+
+.half-col-text {
+  @apply text-[5.3vw];
+  @apply leading-[5.7vw];
+  @apply p-5;
+
+  @media (min-width: theme(--breakpoint-xs)) {
     @apply text-[4.8vw];
     @apply leading-[5.5vw];
   }
-  @media screen and (min-width: 768px) {
+  @media (min-width: theme(--breakpoint-sm)) {
     @apply text-[4vw];
     @apply leading-[4.5vw];
   }
-  @media screen and (min-width: 1024px) {
+  @media (min-width: theme(--breakpoint-md)) {
     @apply text-[3vw];
     @apply leading-[3.5vw];
   }
-  @media screen and (min-width: 1280px) {
+  @media (min-width: theme(--breakpoint-lg)) {
     font-size: min(2.5vw, 28.8px);
     line-height: min(2.5vw, 36px);
   }
@@ -58,22 +82,22 @@ body {
   @apply text-[17vw];
   @apply leading-[18vw];
 
-  @media screen and (min-width: 480px) {
+  @media (min-width: theme(--breakpoint-xs)) {
     @apply text-[14vw];
     @apply leading-[13vw];
   }
 
-  @media screen and (min-width: 768px) {
+  @media (min-width: theme(--breakpoint-sm)) {
     @apply text-[11vw];
     @apply leading-[10vw];
   }
 
-  @media screen and (min-width: 1024px) {
+  @media (min-width: theme(--breakpoint-md)) {
     @apply text-[8vw];
     @apply leading-[7vw];
   }
 
-  @media screen and (min-width: 1280px) {
+  @media (min-width: theme(--breakpoint-lg)) {
     font-size: min(6vw, 110px);
     line-height: min(6vw, 100px);
   }

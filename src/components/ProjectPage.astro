@@ -2,6 +2,8 @@
 import "../CSS/project-page.css";
 import Footer from "./Footer.astro";
 import ProjectPageBackground from "./ProjectPageBackground.astro";
+
+const { slug } = Astro.props;
 ---
 
 <div id="project-page">
@@ -10,12 +12,21 @@ import ProjectPageBackground from "./ProjectPageBackground.astro";
     <slot />
   </div>
 </div>
+<video
+  class="border-solid border-2 border-active"
+  id="project-page_video"
+  autoplay
+  loop
+  muted
+  playsinline
+  src={`/${slug}/ANIMATION-header.mp4`}></video>
 <Footer />
 <script>
   import {
     calculateTileWidth,
     calculateNrOfRows,
     getNrOfColumns,
+    getProjectRowsPerScreenSize,
   } from "../assets/Functions";
 
   const projectPage = document.getElementById("project-page");
@@ -26,7 +37,7 @@ import ProjectPageBackground from "./ProjectPageBackground.astro";
       const localTileWidth = calculateTileWidth();
       projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
       projectPageGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-      projectPageGrid.style.gridTemplateRows = `repeat(131, ${localTileWidth}px)`;
+      projectPageGrid.style.gridTemplateRows = `repeat(${getProjectRowsPerScreenSize()}, ${localTileWidth}px)`;
     }
   };
 

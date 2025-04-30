@@ -1,5 +1,7 @@
 ---
 import "../CSS/background.css";
+
+const { slug } = Astro.props;
 ---
 
 <div id="background_project-page">
@@ -12,7 +14,11 @@ import "../CSS/background.css";
   </svg>
 </div>
 <script>
-  import { calculateTileWidth, getNrOfColumns } from "../assets/Functions";
+  import {
+    calculateTileWidth,
+    getNrOfColumns,
+    getProjectRowsPerScreenSize,
+  } from "../assets/Functions";
 
   const background = document.getElementById("background_project-page");
   const backgroundSVG = document.getElementById("background_project-page_svg");
@@ -23,7 +29,7 @@ import "../CSS/background.css";
   const drawLines = () => {
     if (background && backgroundSVG && linesGroup) {
       const localTileWidth = calculateTileWidth();
-      const nrOfRows = 131;
+      const nrOfRows = getProjectRowsPerScreenSize();
       background.style.width = `${getNrOfColumns() * localTileWidth}px`;
       background.style.height = `${nrOfRows * localTileWidth}px`;
       linesGroup.textContent = "";
