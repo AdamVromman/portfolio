@@ -26,6 +26,7 @@ const { slug } = Astro.props;
     calculateTileWidth,
     calculateNrOfRows,
     getNrOfColumns,
+    getProjectRowsPerScreenSize,
   } from "../assets/Functions";
 
   const projectPage = document.getElementById("project-page");
@@ -36,7 +37,7 @@ const { slug } = Astro.props;
       const localTileWidth = calculateTileWidth();
       projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
       projectPageGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-      projectPageGrid.style.gridTemplateRows = `repeat(131, ${localTileWidth}px)`;
+      projectPageGrid.style.gridTemplateRows = `repeat(${getProjectRowsPerScreenSize()}, ${localTileWidth}px)`;
     }
   };
 

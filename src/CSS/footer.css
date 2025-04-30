@@ -17,15 +17,15 @@
 
   @apply pt-thick;
 
-  @media screen and (min-width: 480px) {
+  @media (min-width: theme(--breakpoint-xs)) {
     grid-column: 3 / -1;
   }
 
-  @media screen and (min-width: 768px) {
+  @media (min-width: theme(--breakpoint-sm)) {
     grid-column: 7 / -1;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media (min-width: theme(--breakpoint-md)) {
     .grid_cell_container {
       @apply justify-end;
     }
@@ -33,7 +33,7 @@
     grid-column: 7 / -1;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media (min-width: theme(--breakpoint-lg)) {
     grid-column: -17 / -1;
   }
 }
@@ -44,22 +44,22 @@
 
   @apply p-thick pl-0;
 
-  @media screen and (min-width: 480px) {
+  @media (min-width: theme(--breakpoint-xs)) {
     grid-row: -5 / -10;
     grid-column: 1 / 9;
   }
 
-  @media screen and (min-width: 768px) {
+  @media (min-width: theme(--breakpoint-sm)) {
     grid-row: -1 / -7;
     grid-column: 1 / 7;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media (min-width: theme(--breakpoint-md)) {
     grid-row: -3 / -7;
     grid-column: 1 / 11;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media (min-width: theme(--breakpoint-lg)) {
     grid-row: -1 / -4;
     grid-column: 1 / 11;
   }
@@ -102,7 +102,7 @@
 
   @apply pb-thin pr-thick;
 
-  @media screen and (min-width: 480px) {
+  @media (min-width: theme(--breakpoint-xs)) {
     grid-column: 1 / 8;
   }
 

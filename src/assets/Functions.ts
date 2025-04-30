@@ -7,6 +7,7 @@ import {
   NR_OF_COLUMNS,
   projects,
   dynamicBodies,
+  ROWS_PER_PROJECT_PER_SCREENSIZE,
 } from "./Constants";
 import type { FlyingObject, Project } from "./Interfaces";
 import gsap from "gsap";
@@ -83,10 +84,23 @@ export const getFooterRows = () => {
   return 12;
 };
 
-export const getProjectRowsPerScreenSize = (key: string) => {
-  switch (key) {
-    case "club-sofa":
+export const getProjectRowsPerScreenSize = () => {
+  const key = document.getElementById("grid-container")?.classList[1];
+  const screenWidth = getScreenWidth();
+  if (key) {
+    if (screenWidth >= 1280) {
+      return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.xl || 0;
+    } else if (screenWidth >= 1024) {
+      return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.lg || 0;
+    } else if (screenWidth >= 768) {
+      return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.md || 0;
+    } else if (screenWidth >= 480) {
+      return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.sm || 0;
+    }
+
+    return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.xs || 0;
   }
+  return 0;
 };
 
 export let hoveringBody: FlyingObject | undefined = undefined;
