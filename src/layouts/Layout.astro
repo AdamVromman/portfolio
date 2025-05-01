@@ -87,5 +87,31 @@ const { slug } = Astro.props;
         if (!selectedProject) homeStartupTimeline.play();
       });
     </script>
+    <script>
+      document.addEventListener("assetsloaded", () => {
+        const justifiedParagraphs = document.querySelectorAll<HTMLElement>(
+          ".justified-paragraph"
+        );
+
+        console.log("Justified paragraphs:", justifiedParagraphs);
+
+        justifiedParagraphs.forEach((paragraph) => {
+          const height = paragraph.getBoundingClientRect().height;
+          const parentHeight =
+            paragraph.parentElement?.getBoundingClientRect().height ?? 0;
+
+          const heightDiff = parentHeight - height;
+          console.log(
+            "Height difference:",
+            heightDiff,
+            "Parent height:",
+            parentHeight,
+            "Paragraph height:",
+            height
+          );
+          paragraph.style.padding = `${heightDiff / 4}px`;
+        });
+      });
+    </script>
   </body>
 </html>
