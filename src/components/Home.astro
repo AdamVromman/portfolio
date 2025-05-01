@@ -177,29 +177,10 @@ import { projects } from "../assets/Constants";
       drawGrid();
     };
 
-    const animateProjectPage = () => {
-      // if (home && selectedProject) {
-      //   const localTileWidth = calculateTileWidth();
-      //   const nrOfRows = calculateNrOfRows(localTileWidth);
-      //   const timeline = gsap.timeline({});
-      //   timeline.to(".page-container", {
-      //     duration: 1,
-      //     height: (nrOfRows - 2) * localTileWidth - 2,
-      //     ease: "power4.inOut",
-      //   });
-      // }
-    };
-
     document.addEventListener("assetsloaded", () => {
       animateIntro();
       drawGrid();
     });
-
-    document.addEventListener("astro:after-swap", () => {
-      animateProjectPage();
-    });
-
-    animateProjectPage();
 
     window.addEventListener("resize", handleResize);
   </script>

@@ -136,13 +136,6 @@ export const toProjectPage = () => {
         },
         "0"
       )
-      .to(
-        `#flying-objects`,
-        {
-          scale: 0,
-        },
-        "<"
-      )
       .fromTo(
         "#project-page",
         {
@@ -428,4 +421,10 @@ export const handleMouseOut = (key: string) => {
       }
     }
   }
+};
+
+export const isHomePage = () => {
+  return !document
+    .getElementById("grid-container")
+    ?.classList.contains("project-page");
 };
