@@ -46,8 +46,8 @@ body {
     @apply leading-[3.4vw];
   }
   @media (min-width: theme(--breakpoint-md)) {
-    @apply text-[4.5vw];
-    @apply leading-[5.5vw];
+    @apply text-[1.7vw];
+    @apply leading-[2.3vw];
   }
   @media (min-width: theme(--breakpoint-lg)) {
     font-size: min(3.5vw, 40px);

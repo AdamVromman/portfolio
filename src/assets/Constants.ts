@@ -10,7 +10,7 @@ export const ROWS_PER_PROJECT_PER_SCREENSIZE = new Map<
   string,
   { xs: number; sm: number; md: number; lg: number; xl: number }
 >([
-  ["club-sofa", { xs: 115, sm: 138, md: 121, lg: 5, xl: 5 }],
+  ["club-sofa", { xs: 115, sm: 138, md: 121, lg: 109, xl: 5 }],
   ["train-world", { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 }],
   ["transfo-intiem", { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 }],
   ["all-eyes-on-gaza", { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 }],
