@@ -35,7 +35,6 @@ body {
 .third-col-text {
   @apply text-[3.8vw];
   @apply leading-[5.2vw];
-  @apply p-5;
 
   @media (min-width: theme(--breakpoint-xs)) {
     @apply text-[3.8vw];
@@ -58,7 +57,6 @@ body {
 .half-col-text {
   @apply text-[5.3vw];
   @apply leading-[5.7vw];
-  @apply p-5;
 
   @media (min-width: theme(--breakpoint-xs)) {
     @apply text-[4.8vw];
@@ -137,4 +135,8 @@ body {
     @apply absolute top-0 left-0 right-0 bottom-0;
     @apply translate-y-full;
   }
+}
+
+.justified-paragraph {
+  @apply w-full;
 }

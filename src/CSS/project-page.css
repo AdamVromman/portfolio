@@ -101,8 +101,4 @@
   @media (min-width: theme(--breakpoint-sm)) {
     grid-column: 4 / -4;
   }
-
-  & p {
-    @apply p-15;
-  }
 }

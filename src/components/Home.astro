@@ -6,47 +6,21 @@ import { projects } from "../assets/Constants";
 ---
 
 <div id="home" class="page-container" transition:persist>
-  <!-- <div id="test_grid"></div> -->
-  <video
-    class="home_video all-eyes-on-gaza"
-    src="/FINAL VIDEO_1.webm"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"></video>
-  <video
-    class="home_video qausal"
-    src="/FINAL VIDEO_1.webm"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"></video>
-  <video
-    class="home_video transfo-intiem"
-    src="/FINAL VIDEO_1.webm"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"></video>
-  <video
-    class="home_video train-world"
-    src="/FINAL VIDEO_1.webm"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"></video>
-  <video
-    class="home_video club-sofa"
-    src="club-sofa/ANIMATION-header.mp4"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"></video>
+  {
+    projects.map((project) => {
+      return (
+        <video
+          class={`home_video ${project.slug}`}
+          src={`/${project.slug}/ANIMATION-header.webm`}
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        />
+      );
+    })
+  }
 
   <HomeBackground />
   <div id="home_grid" class="home_grid">
@@ -90,7 +64,7 @@ import { projects } from "../assets/Constants";
 
     <div class="grid_cell left home_grid_text">
       <div class="grid_cell_container">
-        <p>
+        <p class="justified-paragraph">
           I’m Adam Vromman, a Belgian designer and dev. I mix bold design with
           clean code—serious about the details, but never too stiff. Two
           degrees, endless grids, and a love for creative coding.

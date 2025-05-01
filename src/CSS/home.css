@@ -184,27 +184,22 @@
   p {
     @apply text-[4.7vw];
     @apply leading-[5.3vw];
-    @apply p-5;
 
     @media (min-width: theme(--breakpoint-xs)) {
       @apply text-[4.3vw];
       @apply leading-[4.7vw];
-      @apply p-5;
     }
     @media (min-width: theme(--breakpoint-sm)) {
       @apply text-[3.2vw];
       @apply leading-[3.5vw];
-      @apply p-5;
     }
     @media (min-width: theme(--breakpoint-md)) {
       @apply text-[2.7vw];
       @apply leading-[3vw];
-      @apply p-5;
     }
     @media (min-width: theme(--breakpoint-lg)) {
       font-size: min(2.7vw, 38.8px);
       line-height: min(3vw, 43.2px);
-      @apply p-5;
     }
   }
 }

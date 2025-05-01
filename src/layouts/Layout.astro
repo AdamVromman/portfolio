@@ -1,6 +1,9 @@
 ---
+import Home from "../components/Home.astro";
 import "../CSS/main.css";
 import { ClientRouter } from "astro:transitions";
+
+const { slug } = Astro.props;
 ---
 
 <!doctype html>
@@ -21,7 +24,11 @@ import { ClientRouter } from "astro:transitions";
   </head>
   <body>
     <div id="grid-calculator"></div>
-    <slot />
+    <div id="grid-container" class={slug ? "project-page " + slug : ""}>
+      <Home />
+      <slot />
+    </div>
+
     <script>
       import gsap from "gsap";
       import { selectedProject } from "../assets/Functions";
@@ -78,6 +85,32 @@ import { ClientRouter } from "astro:transitions";
       document.addEventListener("assetsloaded", () => {
         document.body.style.opacity = "1";
         if (!selectedProject) homeStartupTimeline.play();
+      });
+    </script>
+    <script>
+      document.addEventListener("assetsloaded", () => {
+        const justifiedParagraphs = document.querySelectorAll<HTMLElement>(
+          ".justified-paragraph"
+        );
+
+        console.log("Justified paragraphs:", justifiedParagraphs);
+
+        justifiedParagraphs.forEach((paragraph) => {
+          const height = paragraph.getBoundingClientRect().height;
+          const parentHeight =
+            paragraph.parentElement?.getBoundingClientRect().height ?? 0;
+
+          const heightDiff = parentHeight - height;
+          console.log(
+            "Height difference:",
+            heightDiff,
+            "Parent height:",
+            parentHeight,
+            "Paragraph height:",
+            height
+          );
+          paragraph.style.padding = `${heightDiff / 4}px`;
+        });
       });
     </script>
   </body>
