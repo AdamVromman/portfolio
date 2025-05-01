@@ -137,9 +137,11 @@ export const toProjectPage = () => {
         "0"
       )
       .to(
-        `#flying-objects`,
+        ".page-container",
         {
-          scale: 0,
+          duration: 1,
+          height: (nrOfRows - 2) * localTileWidth - 2,
+          ease: "power4.inOut",
         },
         "<"
       )
@@ -153,25 +155,16 @@ export const toProjectPage = () => {
           duration: 0.5,
           ease: "power4.out",
         },
-        "<"
-      )
-      .to(
-        ".page-container",
-        {
-          duration: 1,
-          height: (nrOfRows - 2) * localTileWidth - 2,
-          ease: "power4.inOut",
-        },
-        "<"
+        ">+=0.5"
       )
       .to(
         "#project-page",
         {
           opacity: 1,
-          duration: 0.2,
+          duration: 0.5,
           ease: "power4.out",
         },
-        "<+=0.25"
+        "<"
       );
   }
 };
@@ -428,4 +421,10 @@ export const handleMouseOut = (key: string) => {
       }
     }
   }
+};
+
+export const isHomePage = () => {
+  return !document
+    .getElementById("grid-container")
+    ?.classList.contains("project-page");
 };
