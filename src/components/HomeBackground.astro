@@ -3,7 +3,10 @@ import "../CSS/background.css";
 ---
 
 <div id="background">
-  <svg id="background_svg"></svg>
+  <svg id="background_svg">
+    <g id="starting-animation-dots"></g>
+    <g id="background_home_lines-group"></g>
+  </svg>
 </div>
 <script>
   import gsap from "gsap";
@@ -19,14 +22,78 @@ import "../CSS/background.css";
   const timeline = gsap.timeline({
     delay: 1.5,
   });
+  const linesGroup = document.getElementById("background_home_lines-group");
+
+  // const drawDots = () => {
+  //   const svgNS = "http://www.w3.org/2000/svg";
+  //   const localTileWidth = calculateTileWidth();
+  //   const nrOfRows = calculateNrOfRows(localTileWidth);
+  //   const nrOfColumns = getNrOfColumns();
+  //   const dotsGroup = document.getElementById("starting-animation-dots");
+  //   const dotsAmount = getNrOfColumns() * nrOfRows;
+
+  //   let counterRows = 0;
+  //   let counterColumns = 0;
+
+  //   if (dotsGroup) {
+  //     for (let i = 0; i < nrOfColumns + nrOfRows - 2; i++) {
+  //       const dot = document.createElementNS(svgNS, "circle");
+  //       dot.classList.add("background_svg_dot");
+  //       dot.setAttribute("cx", `${localTileWidth * i}px`);
+  //       dot.setAttribute("cy", `${localTileWidth * i}px`);
+  //       dot.setAttribute("r", "4px");
+  //       dotsGroup.appendChild(dot);
+  //     }
+  //     //   while (counterRows < nrOfRows || counterColumns < nrOfColumns) {
+  //     //     console.log("counterRows", counterRows);
+  //     //     console.log("counterColumns", counterColumns);
+
+  //     //     for (let j = 0; j < Math.max(counterRows, counterColumns) + 1; j++) {
+  //     //       const dot = document.createElementNS(svgNS, "circle");
+  //     //       dot.classList.add("background_svg_dot");
+  //     //       dot.setAttribute("cx", `${localTileWidth * j}px`);
+  //     //       dot.setAttribute(
+  //     //         "cy",
+  //     //         `${localTileWidth * (Math.max(counterRows, counterColumns) - j)}px`
+  //     //       );
+  //     //       dot.setAttribute("r", "4px");
+  //     //       dotsGroup.appendChild(dot);
+  //     //     }
+  //     //     if (counterRows < nrOfRows) counterRows++;
+  //     //     if (counterColumns < nrOfColumns) counterColumns++;
+  //     //   }
+
+  //     //   while (counterRows > 0 || counterColumns > 0) {
+  //     //     console.log("counterRows", counterRows);
+  //     //     console.log("counterColumns", counterColumns);
+
+  //     //     for (let j = 0; j < Math.min(counterRows, counterColumns) + 1; j++) {
+  //     //       const dot = document.createElementNS(svgNS, "circle");
+  //     //       dot.classList.add("background_svg_dot");
+  //     //       dot.setAttribute(
+  //     //         "cx",
+  //     //         `${localTileWidth * (nrOfRows - counterRows + j)}px`
+  //     //       );
+  //     //       dot.setAttribute(
+  //     //         "cy",
+  //     //         `${localTileWidth * (Math.min(counterRows, counterColumns) - j)}px`
+  //     //       );
+  //     //       dot.setAttribute("r", "4px");
+  //     //       dotsGroup.appendChild(dot);
+  //     //     }
+  //     //     if (counterRows > 0) counterRows--;
+  //     //     if (counterColumns > 0) counterColumns--;
+  //     //   }
+  //   }
+  // };
 
   const drawLines = (animated: boolean = false) => {
-    if (background && backgroundSVG) {
+    if (background && backgroundSVG && linesGroup) {
       const localTileWidth = calculateTileWidth();
       const nrOfRows = calculateNrOfRows(localTileWidth);
       background.style.width = `${getNrOfColumns() * localTileWidth}px`;
       background.style.height = `${nrOfRows * localTileWidth}px`;
-      backgroundSVG.textContent = "";
+      linesGroup.textContent = "";
       const svgNS = "http://www.w3.org/2000/svg";
 
       for (let i = 0; i < getNrOfColumns() / 2 - 1; i++) {
@@ -39,7 +106,7 @@ import "../CSS/background.css";
         line.setAttribute("x1", x);
         line.setAttribute("x2", x);
         line.setAttribute("y1", "0%");
-        backgroundSVG.appendChild(line);
+        linesGroup.appendChild(line);
         if (animated) {
           timeline.to(
             line,
@@ -65,7 +132,7 @@ import "../CSS/background.css";
         line.setAttribute("x2", x);
         line.setAttribute("y1", "0");
         line.setAttribute("stroke-dasharray", "4");
-        backgroundSVG.appendChild(line);
+        linesGroup.appendChild(line);
         if (animated) {
           timeline.to(
             line,
@@ -88,7 +155,7 @@ import "../CSS/background.css";
         line.setAttribute("y1", y);
         line.setAttribute("y2", y);
         line.setAttribute("x1", "0");
-        backgroundSVG.appendChild(line);
+        linesGroup.appendChild(line);
         if (animated) {
           timeline.to(
             line,
@@ -112,7 +179,7 @@ import "../CSS/background.css";
         line.setAttribute("y1", y);
         line.setAttribute("y2", y);
         line.setAttribute("x1", "0");
-        backgroundSVG.appendChild(line);
+        linesGroup.appendChild(line);
         if (animated) {
           timeline.to(
             line,
@@ -135,6 +202,8 @@ import "../CSS/background.css";
   const onResize = () => {
     if (!selectedProject) drawLines();
   };
+
+  //drawDots();
 
   window.addEventListener("resize", onResize);
 </script>

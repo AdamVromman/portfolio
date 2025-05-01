@@ -131,39 +131,43 @@ import { projects } from "../assets/Constants";
         ? (nrOfRows - 2) * localTileWidth - 2
         : nrOfRows * localTileWidth;
 
-      gsap
-        .timeline()
-        .to(
-          ".page-container",
-          {
-            duration: 1,
-            width: getNrOfColumns() * localTileWidth,
-            borderRadius: "0px",
-            left: 0,
-            ease: "power4.inOut",
-          },
-          "0"
-        )
-        .to(
-          ".page-container",
-          {
-            duration: 1,
-            height: height,
+      gsap.set(".page-container", {
+        width: getNrOfColumns() * localTileWidth,
+        height: height,
+        left: 0,
+        top: 0,
+      });
 
-            top: 0,
-            ease: "power4.inOut",
-          },
-          ">"
-        )
-        .to(
-          ".page-container",
-          {
-            duration: 0.5,
-            backgroundColor: "transparent",
-            ease: "power4.inOut",
-          },
-          "<+=0.25"
-        );
+      // gsap
+      //   .timeline()
+      //   .to(
+      //     ".page-container",
+      //     {
+      //       duration: 0.5,
+      //       scaleX: 1,
+      //       scaleY: 0.005,
+      //       ease: "power4.out",
+      //     },
+      //     "0"
+      //   )
+      //   .to(
+      //     ".page-container",
+      //     {
+      //       duration: 0.5,
+      //       scaleY: 1,
+      //       ease: "power3.out",
+      //     },
+      //     ">"
+      //   )
+      //   .to(
+      //     ".page-container",
+      //     {
+      //       duration: 0.5,
+      //       backgroundColor: "transparent",
+      //       ease: "power4.inOut",
+      //     },
+      //     "<+=0.25"
+      //   );
     };
 
     const handleResize = () => {

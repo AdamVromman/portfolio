@@ -27,9 +27,9 @@ body {
 .page-container {
   @apply relative;
   @apply flex flex-col items-center justify-start gap-15;
-  @apply border-2 border-active box-content;
+  @apply border-active box-content;
   @apply w-[2px] h-[2px] overflow-hidden;
-  @apply bg-active;
+  /* @apply bg-active; */
 }
 
 .third-col-text {
