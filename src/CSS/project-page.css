@@ -19,15 +19,8 @@
 
 .project-page_grid_title {
   grid-column: 1 / -1;
-  grid-row: 1 / 3;
 
   @apply pb-thick;
-
-  @media (min-width: theme(--breakpoint-lg)) {
-    grid-column: 1 / 16;
-    grid-row: 1 / 3;
-    @apply pb-thick pr-thin;
-  }
 }
 
 .project-page_grid_category {
@@ -48,16 +41,32 @@
   &.ux {
     grid-column: -3 / -1;
     @apply pl-thick;
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-column: -5 / -3;
+    }
   }
 
   &.design {
     grid-column: -4 / -1;
     @apply pl-thin;
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-column: -6 / -3;
+    }
   }
 }
 
 .project-page_grid_description {
   grid-column: 1 / -1;
+
+  @media (min-width: theme(--breakpoint-sm)) {
+    grid-column: 1 / -7;
+  }
+
+  @media (min-width: theme(--breakpoint-md)) {
+    grid-column: 3 / 17;
+  }
 
   @apply py-thick;
 }
@@ -87,6 +96,12 @@
 }
 
 .project-page_grid_paragraph {
+  grid-column: 2 / -2;
+
+  @media (min-width: theme(--breakpoint-sm)) {
+    grid-column: 4 / -4;
+  }
+
   & p {
     @apply p-15;
   }

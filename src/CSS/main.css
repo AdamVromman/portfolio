@@ -38,20 +38,20 @@ body {
   @apply p-5;
 
   @media (min-width: theme(--breakpoint-xs)) {
-    @apply text-[8vw];
-    @apply leading-[9vw];
+    @apply text-[3.8vw];
+    @apply leading-[5.2vw];
   }
   @media (min-width: theme(--breakpoint-sm)) {
-    @apply text-[6vw];
-    @apply leading-[7vw];
+    @apply text-[2.2vw];
+    @apply leading-[3.4vw];
   }
   @media (min-width: theme(--breakpoint-md)) {
-    @apply text-[4.5vw];
-    @apply leading-[5.5vw];
+    @apply text-[1.7vw];
+    @apply leading-[2.3vw];
   }
   @media (min-width: theme(--breakpoint-lg)) {
-    font-size: min(3.5vw, 40px);
-    line-height: min(3.5vw, 50px);
+    font-size: min(1.2vw, 30px);
+    line-height: min(1.5vw, 40px);
   }
 }
 
