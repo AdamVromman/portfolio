@@ -50,8 +50,8 @@ body {
     @apply leading-[2.3vw];
   }
   @media (min-width: theme(--breakpoint-lg)) {
-    font-size: min(3.5vw, 40px);
-    line-height: min(3.5vw, 50px);
+    font-size: min(1.2vw, 30px);
+    line-height: min(1.5vw, 40px);
   }
 }
 
