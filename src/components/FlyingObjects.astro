@@ -38,6 +38,8 @@ import "../CSS/flying-objects.css";
     const world = new RAPIER.World(gravity);
     const frustumSize = 50;
     let previousVelDecreasing: RAPIER.Vector3 | undefined;
+    let time = 0;
+    let movedWalls = false;
 
     let leftWall:
       | {
@@ -47,6 +49,20 @@ import "../CSS/flying-objects.css";
       | undefined = undefined;
 
     let rightWall:
+      | {
+          body: RAPIER.RigidBody;
+          shape: RAPIER.ColliderDesc;
+        }
+      | undefined = undefined;
+
+    let topWall:
+      | {
+          body: RAPIER.RigidBody;
+          shape: RAPIER.ColliderDesc;
+        }
+      | undefined = undefined;
+
+    let bottomWall:
       | {
           body: RAPIER.RigidBody;
           shape: RAPIER.ColliderDesc;
@@ -80,32 +96,40 @@ import "../CSS/flying-objects.css";
         const panelHeight = 0.1;
         const heightOffset = 0;
 
-        const floorBody = world.createRigidBody(
-          RAPIER.RigidBodyDesc.fixed()
+        const bottomBody = world.createRigidBody(
+          RAPIER.RigidBodyDesc.kinematicPositionBased()
             .setTranslation(0, camera.bottom + heightOffset, 0)
             .setRotation({ w: 0, x: 0, y: 1, z: 0 })
             .setLinearDamping(0)
             .setAngularDamping(0)
         );
-        const floorShape = RAPIER.ColliderDesc.cuboid(
+        const bottomShape = RAPIER.ColliderDesc.cuboid(
           panelWidth,
           panelHeight,
           panelWidth
         ).setRestitution(restitution);
-        world.createCollider(floorShape, floorBody);
+        world.createCollider(bottomShape, bottomBody);
+        bottomWall = {
+          body: bottomBody,
+          shape: bottomShape,
+        };
 
-        const roofBody = world.createRigidBody(
-          RAPIER.RigidBodyDesc.fixed()
+        const topBody = world.createRigidBody(
+          RAPIER.RigidBodyDesc.kinematicPositionBased()
             .setTranslation(0, camera.top - heightOffset, 0)
             .setLinearDamping(0)
             .setAngularDamping(0)
         );
-        const roofShape = RAPIER.ColliderDesc.cuboid(
+        const topShape = RAPIER.ColliderDesc.cuboid(
           panelWidth,
           panelHeight,
           panelWidth
         ).setRestitution(restitution);
-        world.createCollider(roofShape, roofBody);
+        world.createCollider(topShape, topBody);
+        topWall = {
+          body: topBody,
+          shape: topShape,
+        };
 
         const wallBackBody = world.createRigidBody(
           RAPIER.RigidBodyDesc.fixed()
@@ -132,6 +156,34 @@ import "../CSS/flying-objects.css";
           panelHeight
         ).setRestitution(zRestitution);
         world.createCollider(wallFrontShape, wallFrontBody);
+
+        const wallLeftBody = world.createRigidBody(
+          RAPIER.RigidBodyDesc.kinematicPositionBased()
+            .setTranslation(camera.left - 20, 0, 0)
+            .setLinearDamping(0)
+            .setAngularDamping(0)
+        );
+        const wallLeftShape = RAPIER.ColliderDesc.cuboid(
+          0.1,
+          100,
+          100
+        ).setRestitution(1);
+        world.createCollider(wallLeftShape, wallLeftBody);
+        leftWall = { body: wallLeftBody, shape: wallLeftShape };
+
+        const wallRightBody = world.createRigidBody(
+          RAPIER.RigidBodyDesc.kinematicPositionBased()
+            .setTranslation(camera.right + 20, 0, 0)
+            .setLinearDamping(0)
+            .setAngularDamping(0)
+        );
+        const wallRightShape = RAPIER.ColliderDesc.cuboid(
+          0.1,
+          100,
+          100
+        ).setRestitution(1);
+        world.createCollider(wallRightShape, wallRightBody);
+        rightWall = { body: wallRightBody, shape: wallLeftShape };
       }
     };
 
@@ -162,8 +214,7 @@ import "../CSS/flying-objects.css";
                 RAPIER.RigidBodyDesc.dynamic()
                   .setTranslation(
                     even ? camera.left - 10 : camera.right + 10,
-                    (camera.top * 2) / (projects.length / 2) -
-                      index * ((camera.top * 2) / (projects.length + 1)),
+                    camera.top * Math.random(),
                     -20
                   )
                   .setRotation({ w: 0.5, x: 0.5, y: 0, z: 0 })
@@ -209,16 +260,6 @@ import "../CSS/flying-objects.css";
 
               projectShape.setMass(100).setRestitution(1);
               world.createCollider(projectShape, projectBody);
-
-              projectBody.applyImpulse(
-                new RAPIER.Vector3(
-                  (even ? 1 : -1) * 300,
-                  ((index - Math.floor((projects.length - 1) / 2)) * 300) /
-                    (projects.length - 1),
-                  0
-                ),
-                true
-              );
 
               projectBody.applyImpulseAtPoint(
                 new RAPIER.Vector3(
@@ -303,46 +344,25 @@ import "../CSS/flying-objects.css";
       );
 
       delta = clock.getDelta();
+      time += Math.min(delta, 0.1);
       world.timestep = Math.min(delta, 0.1);
       world.step();
 
-      if (!rightWall && !leftWall && dynamicBodies.length === projects.length) {
-        if (
-          dynamicBodies.every((body) => {
-            return (
-              body.body.translation().x > camera.left &&
-              body.body.translation().x < camera.right
-            );
-          })
-        ) {
-          const wallLeftBody = world.createRigidBody(
-            RAPIER.RigidBodyDesc.fixed()
-              .setTranslation(camera.left, 0, 0)
-              .setLinearDamping(0)
-              .setAngularDamping(0)
+      if (time <= 10) {
+        if (leftWall) {
+          leftWall.body.setNextKinematicTranslation(
+            new RAPIER.Vector3(camera.left - 20 + time * 2, 0, 0)
           );
-          const wallLeftShape = RAPIER.ColliderDesc.cuboid(
-            0.1,
-            100,
-            100
-          ).setRestitution(1);
-          world.createCollider(wallLeftShape, wallLeftBody);
-          leftWall = { body: wallLeftBody, shape: wallLeftShape };
-
-          const wallRightBody = world.createRigidBody(
-            RAPIER.RigidBodyDesc.fixed()
-              .setTranslation(camera.right, 0, 0)
-              .setLinearDamping(0)
-              .setAngularDamping(0)
-          );
-          const wallRightShape = RAPIER.ColliderDesc.cuboid(
-            0.1,
-            100,
-            100
-          ).setRestitution(1);
-          world.createCollider(wallRightShape, wallRightBody);
-          rightWall = { body: wallRightBody, shape: wallLeftShape };
         }
+
+        if (rightWall) {
+          rightWall.body.setNextKinematicTranslation(
+            new RAPIER.Vector3(camera.right + 20 - time * 2, 0, 0)
+          );
+        }
+      } else if (time < 11) {
+        console.log("moved walls");
+        movedWalls = true;
       }
 
       for (let i = 0, n = dynamicBodies.length; i < n; i++) {
@@ -468,14 +488,21 @@ import "../CSS/flying-objects.css";
         camera.top = frustumSize / 2;
         camera.bottom = frustumSize / -2;
 
-        leftWall?.body.setTranslation(
-          new RAPIER.Vector3(camera.left, 0, 0),
-          true
-        );
+        if (movedWalls)
+          leftWall?.body.setNextKinematicTranslation(
+            new RAPIER.Vector3(camera.left, 0, 0)
+          );
 
-        rightWall?.body.setTranslation(
-          new RAPIER.Vector3(camera.right, 0, 0),
-          true
+        if (movedWalls)
+          rightWall?.body.setNextKinematicTranslation(
+            new RAPIER.Vector3(camera.right, 0, 0)
+          );
+
+        topWall?.body.setNextKinematicTranslation(
+          new RAPIER.Vector3(0, camera.top, 0)
+        );
+        bottomWall?.body.setNextKinematicTranslation(
+          new RAPIER.Vector3(0, camera.bottom, 0)
         );
 
         camera.updateProjectionMatrix();
@@ -485,6 +512,7 @@ import "../CSS/flying-objects.css";
     };
 
     init();
+
     requestAnimationFrame(animate);
 
     window.addEventListener("pointermove", onPointerMove);

@@ -1,6 +1,9 @@
 ---
+import Home from "../components/Home.astro";
 import "../CSS/main.css";
 import { ClientRouter } from "astro:transitions";
+
+const { slug } = Astro.props;
 ---
 
 <!doctype html>
@@ -21,7 +24,11 @@ import { ClientRouter } from "astro:transitions";
   </head>
   <body>
     <div id="grid-calculator"></div>
-    <slot />
+    <div id="grid-container" class={slug ? "project-page " + slug : ""}>
+      <Home />
+      <slot />
+    </div>
+
     <script>
       import gsap from "gsap";
       import { selectedProject } from "../assets/Functions";

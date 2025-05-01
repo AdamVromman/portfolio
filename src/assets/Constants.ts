@@ -18,24 +18,24 @@ export const ROWS_PER_PROJECT_PER_SCREENSIZE = new Map<
 ]);
 
 export const projects: Project[] = [
-  {
-    name: "Qausal",
-    slug: "qausal",
-    color: "FF7700",
-    year: 2025,
-  },
-  {
-    name: "All Eyes on Gaza",
-    slug: "all-eyes-on-gaza",
-    color: "FF7700",
-    year: 2025,
-  },
-  {
-    name: "Transfo Intiem",
-    slug: "transfo-intiem",
-    color: "B87AFF",
-    year: 2024,
-  },
+  // {
+  //   name: "Qausal",
+  //   slug: "qausal",
+  //   color: "FF7700",
+  //   year: 2025,
+  // },
+  // {
+  //   name: "All Eyes on Gaza",
+  //   slug: "all-eyes-on-gaza",
+  //   color: "FF7700",
+  //   year: 2025,
+  // },
+  // {
+  //   name: "Transfo Intiem",
+  //   slug: "transfo-intiem",
+  //   color: "B87AFF",
+  //   year: 2024,
+  // },
   {
     name: "Train World",
     slug: "train-world",

@@ -1,116 +1,111 @@
 ---
-import Home from "../components/Home.astro";
 import ProjectPage from "../components/ProjectPage.astro";
 import Layout from "../layouts/Layout.astro";
 import "../CSS/club-sofa.css";
 ---
 
-<Layout>
-  <div id="grid-container" class="project-page club-sofa">
-    <Home />
-    <ProjectPage slug="club-sofa">
-      <div class="grid_cell project-page_grid_title">
-        <div class="grid_cell_container">
-          <h1 class="full-col-text page-title">Club sofa</h1>
-        </div>
+<Layout slug="club-sofa">
+  <ProjectPage slug="club-sofa">
+    <div class="grid_cell project-page_grid_title">
+      <div class="grid_cell_container">
+        <h1 class="full-col-text page-title">Club sofa</h1>
       </div>
-      <div class="grid_cell project-page_grid_category ux first">
-        <div class="grid_cell_container">
-          <span class="half-col-text">UX</span>
-        </div>
+    </div>
+    <div class="grid_cell project-page_grid_category ux first">
+      <div class="grid_cell_container">
+        <span class="half-col-text">UX</span>
       </div>
-      <div class="grid_cell project-page_grid_category design second">
-        <div class="grid_cell_container">
-          <span class="half-col-text">Design</span>
-        </div>
+    </div>
+    <div class="grid_cell project-page_grid_category design second">
+      <div class="grid_cell_container">
+        <span class="half-col-text">Design</span>
       </div>
-      <div class="grid_cell project-page_grid_description">
-        <div class="grid_cell_container">
-          <p class="half-col-text">
-            With Club Sofa, I tried to create a fun and light brand, composed of
-            some communicative illustrations, a few soft colours and a simple
-            yet strong logo to wrap both the branding and the application
-            together.
-          </p>
-        </div>
+    </div>
+    <div class="grid_cell project-page_grid_description">
+      <div class="grid_cell_container">
+        <p class="half-col-text">
+          With Club Sofa, I tried to create a fun and light brand, composed of
+          some communicative illustrations, a few soft colours and a simple yet
+          strong logo to wrap both the branding and the application together.
+        </p>
       </div>
-      <div class="grid_cell project-page_grid_icon">
-        <div class="grid_cell_container"></div>
+    </div>
+    <div class="grid_cell project-page_grid_icon">
+      <div class="grid_cell_container"></div>
+    </div>
+    <div class="project-page-image image-1">
+      <img src="/club-sofa/logo-still.webp" />
+    </div>
+    <div class="project-page-video video-1">
+      <video
+        src="/club-sofa/ANIMATION-logotype.webm"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-video video-2 full-width">
+      <video
+        src="/club-sofa/ANIMATION-icons.webm"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="grid_cell project-page_grid_paragraph paragraph-1">
+      <div class="grid_cell_container">
+        <p class="third-col-text">
+          For me, the main challenge lay in finding a balance between my own
+          vision and ideas for the brand and what the intended audience would
+          be. I had to go for something that encompasses both the fun, summer-y,
+          party music aspect of cocktails and the luxurious, premium
+          ingredients, rich-people one.
+        </p>
       </div>
-      <div class="project-page-image image-1">
-        <img src="/club-sofa/logo-still.webp" />
+    </div>
+    <div class="project-page-image image-2 border">
+      <img src="/club-sofa/phone.webp" />
+    </div>
+    <div class="grid_cell project-page_grid_screen-collection">
+      <div class="grid_cell_container"></div>
+    </div>
+    <div class="project-page-image image-3 border">
+      <img src="/club-sofa/phone-2.webp" />
+    </div>
+    <div class="grid_cell project-page_grid_paragraph paragraph-2">
+      <div class="grid_cell_container">
+        <p class="third-col-text">
+          As a delivery service, another important aspect was the packaging. I
+          had a lot of fun coming up with different designs for the differently
+          themed boxes and seeing my vision come to live when I applied them to
+          some mock-ups. I think the combination of physical design with
+          application design made the assignment so engaging.
+        </p>
       </div>
-      <div class="project-page-video video-1">
-        <video
-          src="/club-sofa/ANIMATION-logotype.webm"
-          autoplay
-          loop
-          muted
-          playsinline></video>
-      </div>
-      <div class="project-page-video video-2 full-width">
-        <video
-          src="/club-sofa/ANIMATION-icons.webm"
-          autoplay
-          loop
-          muted
-          playsinline></video>
-      </div>
-      <div class="grid_cell project-page_grid_paragraph paragraph-1">
-        <div class="grid_cell_container">
-          <p class="third-col-text">
-            For me, the main challenge lay in finding a balance between my own
-            vision and ideas for the brand and what the intended audience would
-            be. I had to go for something that encompasses both the fun,
-            summer-y, party music aspect of cocktails and the luxurious, premium
-            ingredients, rich-people one.
-          </p>
-        </div>
-      </div>
-      <div class="project-page-image image-2 border">
-        <img src="/club-sofa/phone.webp" />
-      </div>
-      <div class="grid_cell project-page_grid_screen-collection">
-        <div class="grid_cell_container"></div>
-      </div>
-      <div class="project-page-image image-3 border">
-        <img src="/club-sofa/phone-2.webp" />
-      </div>
-      <div class="grid_cell project-page_grid_paragraph paragraph-2">
-        <div class="grid_cell_container">
-          <p class="third-col-text">
-            As a delivery service, another important aspect was the packaging. I
-            had a lot of fun coming up with different designs for the
-            differently themed boxes and seeing my vision come to live when I
-            applied them to some mock-ups. I think the combination of physical
-            design with application design made the assignment so engaging.
-          </p>
-        </div>
-      </div>
-      <div class="project-page-video video-3">
-        <video
-          src="/club-sofa/ANIMATION-boxes.webm"
-          autoplay
-          loop
-          muted
-          playsinline></video>
-      </div>
-      <div class="project-page-image image-4 border">
-        <img src="/club-sofa/boxes.webp" />
-      </div>
-      <div class="project-page-image image-5 full-width">
-        <img src="/club-sofa/box-1.webp" />
-      </div>
-      <div class="project-page-image image-6 border">
-        <img src="/club-sofa/ipad.webp" />
-      </div>
-    </ProjectPage>
-  </div>
+    </div>
+    <div class="project-page-video video-3">
+      <video
+        src="/club-sofa/ANIMATION-boxes.webm"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-image image-4 border">
+      <img src="/club-sofa/boxes.webp" />
+    </div>
+    <div class="project-page-image image-5 full-width">
+      <img src="/club-sofa/box-1.webp" />
+    </div>
+    <div class="project-page-image image-6 border">
+      <img src="/club-sofa/ipad.webp" />
+    </div>
+  </ProjectPage>
   <script>
     import { setSelectedProject, toProjectPage } from "../assets/Functions";
     import { projects } from "../assets/Constants";
 
-    setSelectedProject(projects[4]);
+    setSelectedProject(projects[0]);
     toProjectPage();
   </script>
 </Layout>
