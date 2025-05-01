@@ -19,9 +19,6 @@ import "../CSS/background.css";
 
   const background = document.getElementById("background");
   const backgroundSVG = document.getElementById("background_svg");
-  const timeline = gsap.timeline({
-    delay: 1.5,
-  });
   const linesGroup = document.getElementById("background_home_lines-group");
 
   // const drawDots = () => {
@@ -96,101 +93,104 @@ import "../CSS/background.css";
       linesGroup.textContent = "";
       const svgNS = "http://www.w3.org/2000/svg";
 
-      for (let i = 0; i < getNrOfColumns() / 2 - 1; i++) {
+      for (let i = 0; i < getNrOfColumns() / 2 + 1; i++) {
         const line = document.createElementNS(svgNS, "line");
-        const x = `${localTileWidth * 2 + localTileWidth * 2 * i}px`;
+        const x = `${(getNrOfColumns() / 2) * localTileWidth + (i % 2 === 0 ? -1 : 1) * localTileWidth * i - (i % 2 === 0 ? localTileWidth : 0)}px`;
         line.classList.add("background_svg_line");
         line.classList.add("line_vertical");
         line.classList.add("line_main");
         line.setAttribute("height", "0");
         line.setAttribute("x1", x);
         line.setAttribute("x2", x);
-        line.setAttribute("y1", "0%");
+        line.setAttribute("y1", "50%");
+        line.setAttribute("y2", "50%");
         linesGroup.appendChild(line);
-        if (animated) {
-          timeline.to(
-            line,
-            {
-              duration: 1,
-              attr: { y2: "100%" },
-              ease: "power4.out",
-            },
-            "<0.01"
-          );
-        } else {
-          line.setAttribute("y2", "100%");
-        }
       }
 
       for (let i = 0; i < getNrOfColumns() / 2; i++) {
         const line = document.createElementNS(svgNS, "line");
-        const x = `${localTileWidth + localTileWidth * 2 * i}px`;
+        const x = `${(getNrOfColumns() / 2) * localTileWidth + (i % 2 === 0 ? -1 : 1) * localTileWidth * i + (i % 2 === 0 ? 0 : localTileWidth)}px`;
         line.classList.add("background_svg_line");
         line.classList.add("line_vertical");
         line.classList.add("line_sub");
         line.setAttribute("x1", x);
         line.setAttribute("x2", x);
-        line.setAttribute("y1", "0");
+        line.setAttribute("y1", "50%");
+        line.setAttribute("y2", "50%");
         line.setAttribute("stroke-dasharray", "4");
         linesGroup.appendChild(line);
-        if (animated) {
-          timeline.to(
-            line,
-            {
-              duration: 1,
-              attr: { y2: "100%" },
-              ease: "power4.out",
-            },
-            "<0.01"
-          );
-        } else line.setAttribute("y2", "100%");
       }
 
-      for (let i = 0; i < nrOfRows / 2 - 1; i++) {
+      for (let i = 0; i < nrOfRows / 2 + 1; i++) {
         const line = document.createElementNS(svgNS, "line");
-        const y = `${localTileWidth * 2 + localTileWidth * 2 * i}px`;
+        const y = `${Math.floor(nrOfRows / 2) * localTileWidth + (i % 2 === 0 ? -1 : 1) * i * localTileWidth - (i % 2 === 0 ? localTileWidth : 0) + (nrOfRows % 2 === 0 ? localTileWidth : 0)}px`;
         line.classList.add("background_svg_line");
         line.classList.add("line_horizontal");
         line.classList.add("line_main");
         line.setAttribute("y1", y);
         line.setAttribute("y2", y);
-        line.setAttribute("x1", "0");
+        line.setAttribute("x1", "50%");
+        line.setAttribute("x2", "50%");
         linesGroup.appendChild(line);
-        if (animated) {
-          timeline.to(
-            line,
-            {
-              duration: 1,
-              attr: { x2: "100%" },
-              ease: "power4.out",
-            },
-            "<0.01"
-          );
-        } else line.setAttribute("x2", "100%");
       }
 
       for (let i = 0; i < nrOfRows / 2; i++) {
         const line = document.createElementNS(svgNS, "line");
-        const y = `${localTileWidth + localTileWidth * 2 * i}px`;
+        const y = `${Math.floor(nrOfRows / 2) * localTileWidth + (i % 2 === 0 ? -1 : 1) * i * localTileWidth - (i % 2 === 0 ? 0 : localTileWidth) + (nrOfRows % 2 === 0 ? localTileWidth : 0)}px`;
+
         line.classList.add("background_svg_line");
         line.classList.add("line_horizontal");
         line.classList.add("line_sub");
         line.setAttribute("stroke-dasharray", "4");
         line.setAttribute("y1", y);
         line.setAttribute("y2", y);
-        line.setAttribute("x1", "0");
+        line.setAttribute("x1", "50%");
+        line.setAttribute("x2", "50%");
         linesGroup.appendChild(line);
-        if (animated) {
-          timeline.to(
-            line,
-            {
-              duration: 1,
-              attr: { x2: "100%" },
-              ease: "power4.out",
-            },
-            "<0.01"
-          );
-        } else line.setAttribute("x2", "100%");
+      }
+
+      if (animated) {
+        const duration = 1;
+        const stagger = 0.08;
+        const delay = 0;
+        const ease = "power2.inOut";
+        gsap.to(".background_svg_line.line_vertical.line_main", {
+          duration: duration,
+          attr: { y2: "100%", y1: "0%" },
+          ease: ease,
+          stagger: stagger,
+          delay: delay,
+        });
+        gsap.to(".background_svg_line.line_vertical.line_sub", {
+          duration: duration,
+          attr: { y2: "100%", y1: "0%" },
+          ease: ease,
+          stagger: stagger,
+          delay: delay,
+        });
+
+        gsap.to(".background_svg_line.line_horizontal.line_main", {
+          duration: duration,
+          attr: { x2: "100%", x1: "0%" },
+          ease: ease,
+          stagger: stagger,
+          delay: delay,
+        });
+        gsap.to(".background_svg_line.line_horizontal.line_sub", {
+          duration: duration,
+          attr: { x2: "100%", x1: "0%" },
+          ease: ease,
+          stagger: stagger,
+          delay: delay,
+        });
+      } else {
+        gsap.set(".background_svg_line.line_vertical", {
+          attr: { y2: "100%", y1: "0%" },
+        });
+
+        gsap.set(".background_svg_line.line_horizontal", {
+          attr: { x2: "100%", x1: "0%" },
+        });
       }
     }
   };
