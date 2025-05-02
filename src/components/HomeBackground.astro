@@ -115,7 +115,7 @@ import "../CSS/background.css";
   const animateIntro = () => {
     const duration = 0.75;
 
-    const stagger = {
+    const stagger: gsap.StaggerVars = {
       each: 0.05,
       from: "center",
       ease: "power1.out",
