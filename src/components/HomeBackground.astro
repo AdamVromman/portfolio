@@ -46,7 +46,7 @@ import "../CSS/background.css";
     }
   };
 
-  const drawLines = (animated: boolean = false) => {
+  const drawLines = () => {
     if (background && backgroundSVG && linesGroup) {
       const localTileWidth = calculateTileWidth();
       const nrOfRows = calculateNrOfRows(localTileWidth);
@@ -55,57 +55,49 @@ import "../CSS/background.css";
       linesGroup.textContent = "";
       const svgNS = "http://www.w3.org/2000/svg";
 
-      for (let i = 0; i < getNrOfColumns() / 2 + 1; i++) {
+      for (let i = 0; i < getNrOfColumns() / 2 - 1; i++) {
         const line = document.createElementNS(svgNS, "line");
-        //const x = `${(getNrOfColumns() / 2) * localTileWidth + (i % 2 === 0 ? -1 : 1) * localTileWidth * i - (i % 2 === 0 ? localTileWidth : 0)}px`;
-        const randomStartPoint = Math.random() * 100;
-        const x = `${localTileWidth * 2 * i}px`;
+        const x = `${localTileWidth * 2 * (i + 1)}px`;
         line.classList.add("background_svg_line");
         line.classList.add("line_vertical");
         line.classList.add("line_main");
         line.setAttribute("height", "0");
         line.setAttribute("x1", x);
         line.setAttribute("x2", x);
-        line.setAttribute("y1", `${50}%`);
-        line.setAttribute("y2", `${50}%`);
+        line.setAttribute("y1", "50%");
+        line.setAttribute("y2", "50%");
         linesGroup.appendChild(line);
       }
 
       for (let i = 0; i < getNrOfColumns() / 2; i++) {
         const line = document.createElementNS(svgNS, "line");
-        //const x = `${(getNrOfColumns() / 2) * localTileWidth + (i % 2 === 0 ? -1 : 1) * localTileWidth * i + (i % 2 === 0 ? 0 : localTileWidth)}px`;
-        const randomStartPoint = Math.random() * 100;
         const x = `${localTileWidth + localTileWidth * 2 * i}px`;
         line.classList.add("background_svg_line");
         line.classList.add("line_vertical");
         line.classList.add("line_sub");
         line.setAttribute("x1", x);
         line.setAttribute("x2", x);
-        line.setAttribute("y1", `${50}%`);
-        line.setAttribute("y2", `${50}%`);
+        line.setAttribute("y1", "50%");
+        line.setAttribute("y2", "50%");
         line.setAttribute("stroke-dasharray", "4");
         linesGroup.appendChild(line);
       }
 
-      for (let i = 0; i < nrOfRows / 2 + 1; i++) {
+      for (let i = 0; i < nrOfRows / 2 - 1; i++) {
         const line = document.createElementNS(svgNS, "line");
-        //const y = `${Math.floor(nrOfRows / 2) * localTileWidth + (i % 2 === 0 ? -1 : 1) * i * localTileWidth - (i % 2 === 0 ? localTileWidth : 0) + (nrOfRows % 2 === 0 ? localTileWidth : 0)}px`;
-        const randomStartPoint = Math.random() * 100;
-        const y = `${localTileWidth * 2 * i}px`;
+        const y = `${localTileWidth * 2 * (i + 1)}px`;
         line.classList.add("background_svg_line");
         line.classList.add("line_horizontal");
         line.classList.add("line_main");
         line.setAttribute("y1", y);
         line.setAttribute("y2", y);
-        line.setAttribute("x1", `${50}%`);
-        line.setAttribute("x2", `${50}%`);
+        line.setAttribute("x1", "50%");
+        line.setAttribute("x2", "50%");
         linesGroup.appendChild(line);
       }
 
       for (let i = 0; i < nrOfRows / 2; i++) {
         const line = document.createElementNS(svgNS, "line");
-        //const y = `${Math.floor(nrOfRows / 2) * localTileWidth + (i % 2 === 0 ? -1 : 1) * i * localTileWidth - (i % 2 === 0 ? 0 : localTileWidth) + (nrOfRows % 2 === 0 ? localTileWidth : 0)}px`;
-        const randomStartPoint = Math.random() * 100;
         const y = `${localTileWidth + localTileWidth * 2 * i}px`;
         line.classList.add("background_svg_line");
         line.classList.add("line_horizontal");
@@ -113,8 +105,8 @@ import "../CSS/background.css";
         line.setAttribute("stroke-dasharray", "4");
         line.setAttribute("y1", y);
         line.setAttribute("y2", y);
-        line.setAttribute("x1", `${50}%`);
-        line.setAttribute("x2", `${50}%`);
+        line.setAttribute("x1", "50%");
+        line.setAttribute("x2", "50%");
         linesGroup.appendChild(line);
       }
     }
@@ -143,7 +135,7 @@ import "../CSS/background.css";
           },
           ease: "elastic.out",
         },
-        "0"
+        ">"
       )
       .to(
         ".background_svg_dot.background_svg_dot_even",
@@ -218,7 +210,7 @@ import "../CSS/background.css";
           y: "100%",
           ease: "power4.out",
         },
-        ">"
+        "<"
       )
       .from(
         ".grid_cell.top .grid_cell_container",
@@ -251,7 +243,7 @@ import "../CSS/background.css";
 
   document.addEventListener("assetsloaded", () => {
     if (!selectedProject) {
-      drawLines(true);
+      drawLines();
       animateIntro();
     }
   });

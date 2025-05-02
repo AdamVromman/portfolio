@@ -88,7 +88,7 @@ const { slug } = Astro.props;
       });
     </script> -->
     <script>
-      document.addEventListener("assetsloaded", () => {
+      const justifyParagraphs = () => {
         const justifiedParagraphs = document.querySelectorAll<HTMLElement>(
           ".justified-paragraph"
         );
@@ -101,7 +101,11 @@ const { slug } = Astro.props;
           const heightDiff = parentHeight - height;
           paragraph.style.padding = `${heightDiff / 4}px`;
         });
-      });
+      };
+
+      document.addEventListener("assetsloaded", justifyParagraphs);
+      window.addEventListener("resize", justifyParagraphs);
+      document.addEventListener("astro:after-swap", justifyParagraphs);
     </script>
   </body>
 </html>
