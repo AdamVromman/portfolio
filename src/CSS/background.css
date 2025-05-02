@@ -20,6 +20,10 @@
     &.line_sub {
       @apply stroke-[0.5px];
     }
+
+    &.line_thicker {
+      @apply stroke-[4px];
+    }
   }
 
   .background_svg_dot {
