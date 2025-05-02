@@ -272,9 +272,14 @@ export const handleMouseIn = (key: string) => {
           ".background_svg_line.line_vertical:not(.not-animated)",
           {
             duration: 0.5,
-            attr: { y2: "0%" },
+            attr: { y2: "50%", y1: "50%" },
             ease: "power4.out",
             overwrite: true,
+            stagger: {
+              each: 0.01,
+              from: "center",
+              ease: "power1.out",
+            },
           },
           "<"
         )
@@ -282,9 +287,14 @@ export const handleMouseIn = (key: string) => {
           ".background_svg_line.line_horizontal:not(.not-animated)",
           {
             duration: 0.5,
-            attr: { x2: "0%" },
+            attr: { x2: "50%", x1: "50%" },
             ease: "power4.out",
             overwrite: true,
+            stagger: {
+              each: 0.01,
+              from: "center",
+              ease: "power1.out",
+            },
           },
           "<"
         );
@@ -389,9 +399,14 @@ export const handleMouseOut = (key: string) => {
           ".background_svg_line.line_vertical:not(.not-animated)",
           {
             duration: 0.5,
-            attr: { y2: "100%" },
+            attr: { y2: "100%", y1: "0%" },
             ease: "power4.out",
             overwrite: true,
+            stagger: {
+              each: 0.01,
+              from: "center",
+              ease: "power1.out",
+            },
           },
           "<"
         )
@@ -399,9 +414,14 @@ export const handleMouseOut = (key: string) => {
           ".background_svg_line.line_horizontal:not(.not-animated)",
           {
             duration: 0.5,
-            attr: { x2: "100%" },
+            attr: { x2: "100%", x1: "0%" },
             ease: "power4.out",
             overwrite: true,
+            stagger: {
+              each: 0.01,
+              from: "center",
+              ease: "power1.out",
+            },
           },
           "<"
         )

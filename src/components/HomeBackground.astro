@@ -66,8 +66,8 @@ import "../CSS/background.css";
         line.setAttribute("height", "0");
         line.setAttribute("x1", x);
         line.setAttribute("x2", x);
-        line.setAttribute("y1", `${randomStartPoint}%`);
-        line.setAttribute("y2", `${randomStartPoint}%`);
+        line.setAttribute("y1", `${50}%`);
+        line.setAttribute("y2", `${50}%`);
         linesGroup.appendChild(line);
       }
 
@@ -81,8 +81,8 @@ import "../CSS/background.css";
         line.classList.add("line_sub");
         line.setAttribute("x1", x);
         line.setAttribute("x2", x);
-        line.setAttribute("y1", `${randomStartPoint}%`);
-        line.setAttribute("y2", `${randomStartPoint}%`);
+        line.setAttribute("y1", `${50}%`);
+        line.setAttribute("y2", `${50}%`);
         line.setAttribute("stroke-dasharray", "4");
         linesGroup.appendChild(line);
       }
@@ -97,8 +97,8 @@ import "../CSS/background.css";
         line.classList.add("line_main");
         line.setAttribute("y1", y);
         line.setAttribute("y2", y);
-        line.setAttribute("x1", `${randomStartPoint}%`);
-        line.setAttribute("x2", `${randomStartPoint}%`);
+        line.setAttribute("x1", `${50}%`);
+        line.setAttribute("x2", `${50}%`);
         linesGroup.appendChild(line);
       }
 
@@ -113,8 +113,8 @@ import "../CSS/background.css";
         line.setAttribute("stroke-dasharray", "4");
         line.setAttribute("y1", y);
         line.setAttribute("y2", y);
-        line.setAttribute("x1", `${randomStartPoint}%`);
-        line.setAttribute("x2", `${randomStartPoint}%`);
+        line.setAttribute("x1", `${50}%`);
+        line.setAttribute("x2", `${50}%`);
         linesGroup.appendChild(line);
       }
     }
@@ -124,8 +124,9 @@ import "../CSS/background.css";
     const duration = 0.75;
 
     const stagger = {
-      each: 0.1,
+      each: 0.05,
       from: "center",
+      ease: "power1.out",
     };
     const ease = "power1.inOut";
     gsap
@@ -136,7 +137,7 @@ import "../CSS/background.css";
           duration: 1,
           attr: { r: `1px` },
           stagger: {
-            each: 0.005,
+            each: 0.003,
             from: "random",
             ease: "power1.in",
           },
@@ -148,9 +149,9 @@ import "../CSS/background.css";
         ".background_svg_dot.background_svg_dot_even",
         {
           duration: 1,
-          attr: { r: `2px` },
+          attr: { r: `1px` },
           stagger: {
-            each: 0.005,
+            each: 0.003,
             from: "random",
             ease: "power1.in",
           },
