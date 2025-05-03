@@ -28,84 +28,50 @@ const { slug } = Astro.props;
       <Home />
       <slot />
     </div>
+    <script>
+      import { projects } from "../assets/Constants";
+      import {
+        justifyParagraphs,
+        loadHomePage,
+        loadProjectPage,
+        navigateToHomePage,
+        navigateToProjectPage,
+        selectedProject,
+        setSelectedProject,
+      } from "../assets/Functions";
 
-    <!-- <script>
-      import gsap from "gsap";
-      import { selectedProject } from "../assets/Functions";
-
-      const homeStartupTimeline = gsap
-        .timeline({ delay: 2.5, paused: true })
-        .from(
-          ".grid_cell.bottom .grid_cell_container",
-          {
-            duration: 1,
-            y: "100%",
-            ease: "power4.out",
-          },
-          0
-        )
-        .from(
-          ".grid_cell.top .grid_cell_container",
-          {
-            duration: 1,
-            y: "-100%",
-            ease: "power4.out",
-          },
-          0
-        )
-        .from(
-          ".grid_cell.left .grid_cell_container",
-          {
-            duration: 1,
-            x: "-100%",
-            ease: "power4.out",
-          },
-          0
-        )
-        .from(
-          ".grid_cell.right .grid_cell_container",
-          {
-            duration: 1,
-            x: "100%",
-            ease: "power4.out",
-          },
-          0
-        );
-      // .from(
-      //   "#flying-objects",
-      //   {
-      //     scale: 0,
-      //     opacity: 0,
-      //     duration: 1,
-      //     ease: "power4.out",
-      //   },
-      //   0
-      // );
+      window.addEventListener("resize", justifyParagraphs);
 
       document.addEventListener("assetsloaded", () => {
-        document.body.style.opacity = "1";
-        //if (!selectedProject) homeStartupTimeline.play();
+        const gridContainer = document.getElementById("grid-container");
+        if (gridContainer && gridContainer.classList.contains("project-page")) {
+          const slug = gridContainer.classList[1];
+          const project = projects.find((p) => p.slug === slug);
+          if (project) {
+            setSelectedProject(project);
+            loadProjectPage();
+          }
+        } else {
+          setSelectedProject(undefined);
+          loadHomePage();
+        }
+        justifyParagraphs();
       });
-    </script> -->
-    <script>
-      const justifyParagraphs = () => {
-        const justifiedParagraphs = document.querySelectorAll<HTMLElement>(
-          ".justified-paragraph"
-        );
-
-        justifiedParagraphs.forEach((paragraph) => {
-          const height = paragraph.getBoundingClientRect().height;
-          const parentHeight =
-            paragraph.parentElement?.getBoundingClientRect().height ?? 0;
-
-          const heightDiff = parentHeight - height;
-          paragraph.style.padding = `${heightDiff / 4}px`;
-        });
-      };
-
-      document.addEventListener("assetsloaded", justifyParagraphs);
-      window.addEventListener("resize", justifyParagraphs);
-      document.addEventListener("astro:after-swap", justifyParagraphs);
+      document.addEventListener("astro:after-swap", () => {
+        const gridContainer = document.getElementById("grid-container");
+        if (gridContainer && gridContainer.classList.contains("project-page")) {
+          const slug = gridContainer.classList[1];
+          const project = projects.find((p) => p.slug === slug);
+          if (project) {
+            setSelectedProject(project);
+            navigateToProjectPage();
+          }
+        } else {
+          setSelectedProject(undefined);
+          navigateToHomePage();
+        }
+        justifyParagraphs();
+      });
     </script>
   </body>
 </html>

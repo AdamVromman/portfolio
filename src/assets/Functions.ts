@@ -67,6 +67,21 @@ export const getNrOfColumns = () => {
   return NR_OF_COLUMNS;
 };
 
+export const justifyParagraphs = () => {
+  const justifiedParagraphs = document.querySelectorAll<HTMLElement>(
+    ".justified-paragraph"
+  );
+
+  justifiedParagraphs.forEach((paragraph) => {
+    const height = paragraph.getBoundingClientRect().height;
+    const parentHeight =
+      paragraph.parentElement?.getBoundingClientRect().height ?? 0;
+
+    const heightDiff = parentHeight - height;
+    paragraph.style.padding = `${heightDiff / 4}px`;
+  });
+};
+
 export const getFooterRows = () => {
   const width = getScreenWidth();
   if (width >= 1280) {
@@ -115,8 +130,138 @@ export const setPreviousVel = (vector: RAPIER.Vector) => {
   previousVel = vector;
 };
 
-export const toProjectPage = () => {
-  console.log("toProjectPage");
+export const loadHomePage = () => {
+  console.log("loadHomePage");
+  const duration = 0.75;
+
+  const stagger: gsap.StaggerVars = {
+    each: 0.05,
+    from: "center",
+    ease: "power1.out",
+  };
+  const ease = "power1.inOut";
+  gsap
+    .timeline()
+    .to(
+      ".background_svg_dot.background_svg_dot_odd",
+      {
+        duration: 1,
+        attr: { r: `1px` },
+        stagger: {
+          each: 0.003,
+          from: "random",
+          ease: "power1.in",
+        },
+        ease: "elastic.out",
+      },
+      ">"
+    )
+    .to(
+      ".background_svg_dot.background_svg_dot_even",
+      {
+        duration: 1,
+        attr: { r: `1px` },
+        stagger: {
+          each: 0.003,
+          from: "random",
+          ease: "power1.in",
+        },
+        ease: "elastic.out",
+      },
+      "<"
+    )
+    .to(
+      ".background_svg_line.line_vertical.line_main",
+      {
+        duration: duration,
+        attr: { y2: "100%", y1: "0%" },
+        ease: ease,
+        stagger: stagger,
+      },
+      ">-=1"
+    )
+    .to(
+      ".background_svg_line.line_vertical.line_sub",
+      {
+        duration: duration,
+        attr: { y2: "100%", y1: "0%" },
+        ease: ease,
+        stagger: stagger,
+      },
+      "<"
+    )
+    .to(
+      ".background_svg_line.line_horizontal.line_main",
+      {
+        duration: duration,
+        attr: { x2: "100%", x1: "0%" },
+        ease: ease,
+        stagger: stagger,
+      },
+      "<"
+    )
+    .to(
+      ".background_svg_line.line_horizontal.line_sub",
+      {
+        duration: duration,
+        attr: { x2: "100%", x1: "0%" },
+        ease: ease,
+        stagger: stagger,
+      },
+      "<"
+    )
+    .to(
+      ".background_svg_dot",
+      {
+        duration: 0.5,
+        attr: { r: `0` },
+        stagger: {
+          amount: 0.5,
+          from: "random",
+        },
+      },
+      ">"
+    )
+    .from(
+      ".grid_cell.bottom .grid_cell_container",
+      {
+        duration: 1,
+        y: "100%",
+        ease: "power4.out",
+      },
+      "<"
+    )
+    .from(
+      ".grid_cell.top .grid_cell_container",
+      {
+        duration: 1,
+        y: "-100%",
+        ease: "power4.out",
+      },
+      "<"
+    )
+    .from(
+      ".grid_cell.left .grid_cell_container",
+      {
+        duration: 1,
+        x: "-100%",
+        ease: "power4.out",
+      },
+      "<+=0.5"
+    )
+    .from(
+      ".grid_cell.right .grid_cell_container",
+      {
+        duration: 1,
+        x: "100%",
+        ease: "power4.out",
+      },
+      "<"
+    );
+};
+
+export const loadProjectPage = () => {
+  console.log("loadProjectPage");
   if (selectedProject) {
     const localTileWidth = calculateTileWidth();
     const nrOfRows = calculateNrOfRows(localTileWidth);
@@ -125,7 +270,7 @@ export const toProjectPage = () => {
       "--color-active",
       `#${selectedProject.color}`
     );
-    const timeline = gsap.timeline();
+    const timeline = gsap.timeline({ onComplete: justifyParagraphs });
 
     timeline
       .to(
@@ -148,14 +293,72 @@ export const toProjectPage = () => {
       .fromTo(
         "#project-page",
         {
-          y: "50",
+          y: "200",
         },
         {
           y: "0",
           duration: 0.5,
           ease: "power4.out",
         },
-        ">+=0.5"
+        "<"
+      )
+      .to(
+        "#project-page",
+        {
+          opacity: 1,
+          duration: 0.5,
+          ease: "power4.out",
+        },
+        "<"
+      );
+  }
+};
+
+export const navigateToHomePage = () => {
+  console.log("navigateToHomePage");
+};
+
+export const navigateToProjectPage = () => {
+  console.log("navigateToProjectPage");
+  if (selectedProject) {
+    const localTileWidth = calculateTileWidth();
+    const nrOfRows = calculateNrOfRows(localTileWidth);
+
+    document.documentElement.style.setProperty(
+      "--color-active",
+      `#${selectedProject.color}`
+    );
+    const timeline = gsap.timeline({ onComplete: justifyParagraphs });
+
+    timeline
+      .to(
+        `.home_video.${selectedProject.slug}`,
+        {
+          duration: 0.2,
+          opacity: 1,
+        },
+        "0"
+      )
+      .to(
+        ".page-container",
+        {
+          duration: 1,
+          height: (nrOfRows - 2) * localTileWidth - 2,
+          ease: "power4.inOut",
+        },
+        "<"
+      )
+      .fromTo(
+        "#project-page",
+        {
+          y: "200",
+        },
+        {
+          y: "0",
+          duration: 0.5,
+          ease: "power4.out",
+        },
+        "<"
       )
       .to(
         "#project-page",

@@ -28,6 +28,7 @@ import "../CSS/background.css";
     const nrOfColumns = getNrOfColumns();
     const dotsGroup = document.getElementById("starting-animation-dots");
     if (dotsGroup) {
+      dotsGroup.textContent = "";
       for (let i = 0; i < nrOfRows; i++) {
         for (let j = 0; j < nrOfColumns; j++) {
           const dot = document.createElementNS(svgNS, "circle");
@@ -112,145 +113,12 @@ import "../CSS/background.css";
     }
   };
 
-  const animateIntro = () => {
-    const duration = 0.75;
-
-    const stagger: gsap.StaggerVars = {
-      each: 0.05,
-      from: "center",
-      ease: "power1.out",
-    };
-    const ease = "power1.inOut";
-    gsap
-      .timeline()
-      .to(
-        ".background_svg_dot.background_svg_dot_odd",
-        {
-          duration: 1,
-          attr: { r: `1px` },
-          stagger: {
-            each: 0.003,
-            from: "random",
-            ease: "power1.in",
-          },
-          ease: "elastic.out",
-        },
-        ">"
-      )
-      .to(
-        ".background_svg_dot.background_svg_dot_even",
-        {
-          duration: 1,
-          attr: { r: `1px` },
-          stagger: {
-            each: 0.003,
-            from: "random",
-            ease: "power1.in",
-          },
-          ease: "elastic.out",
-        },
-        "<"
-      )
-      .to(
-        ".background_svg_line.line_vertical.line_main",
-        {
-          duration: duration,
-          attr: { y2: "100%", y1: "0%" },
-          ease: ease,
-          stagger: stagger,
-        },
-        ">-=1"
-      )
-      .to(
-        ".background_svg_line.line_vertical.line_sub",
-        {
-          duration: duration,
-          attr: { y2: "100%", y1: "0%" },
-          ease: ease,
-          stagger: stagger,
-        },
-        "<"
-      )
-      .to(
-        ".background_svg_line.line_horizontal.line_main",
-        {
-          duration: duration,
-          attr: { x2: "100%", x1: "0%" },
-          ease: ease,
-          stagger: stagger,
-        },
-        "<"
-      )
-      .to(
-        ".background_svg_line.line_horizontal.line_sub",
-        {
-          duration: duration,
-          attr: { x2: "100%", x1: "0%" },
-          ease: ease,
-          stagger: stagger,
-        },
-        "<"
-      )
-      .to(
-        ".background_svg_dot",
-        {
-          duration: 0.5,
-          attr: { r: `0` },
-          stagger: {
-            amount: 0.5,
-            from: "random",
-          },
-        },
-        ">"
-      )
-      .from(
-        ".grid_cell.bottom .grid_cell_container",
-        {
-          duration: 1,
-          y: "100%",
-          ease: "power4.out",
-        },
-        "<"
-      )
-      .from(
-        ".grid_cell.top .grid_cell_container",
-        {
-          duration: 1,
-          y: "-100%",
-          ease: "power4.out",
-        },
-        "<"
-      )
-      .from(
-        ".grid_cell.left .grid_cell_container",
-        {
-          duration: 1,
-          x: "-100%",
-          ease: "power4.out",
-        },
-        "<+=0.5"
-      )
-      .from(
-        ".grid_cell.right .grid_cell_container",
-        {
-          duration: 1,
-          x: "100%",
-          ease: "power4.out",
-        },
-        "<"
-      );
-  };
-
-  document.addEventListener("assetsloaded", () => {
-    if (!selectedProject) {
-      drawLines();
-      animateIntro();
-    }
-  });
+  document.addEventListener("assetsloaded", () => {});
 
   const onResize = () => {
+    drawLines();
+    drawDots();
     if (!selectedProject) {
-      drawLines();
       gsap.set(".background_svg_line.line_vertical", {
         attr: { y2: "100%", y1: "0%" },
       });
@@ -261,6 +129,7 @@ import "../CSS/background.css";
     }
   };
 
+  drawLines();
   drawDots();
 
   window.addEventListener("resize", onResize);

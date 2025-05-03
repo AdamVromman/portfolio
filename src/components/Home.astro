@@ -123,52 +123,15 @@ import { projects } from "../assets/Constants";
       }
     };
 
-    const animateIntro = () => {
-      const localTileWidth = calculateTileWidth();
-      const nrOfRows = calculateNrOfRows(localTileWidth);
+    // const animateIntro = () => {
+    //   const localTileWidth = calculateTileWidth();
+    //   const nrOfRows = calculateNrOfRows(localTileWidth);
 
-      const height = home?.parentElement?.classList.contains("project-page")
-        ? (nrOfRows - 2) * localTileWidth - 2
-        : nrOfRows * localTileWidth;
+    //   const height = home?.parentElement?.classList.contains("project-page")
+    //     ? (nrOfRows - 2) * localTileWidth - 2
+    //     : nrOfRows * localTileWidth;
 
-      gsap.set(".page-container", {
-        width: getNrOfColumns() * localTileWidth,
-        height: height,
-        left: 0,
-        top: 0,
-      });
-
-      // gsap
-      //   .timeline()
-      //   .to(
-      //     ".page-container",
-      //     {
-      //       duration: 0.5,
-      //       scaleX: 1,
-      //       scaleY: 0.005,
-      //       ease: "power4.out",
-      //     },
-      //     "0"
-      //   )
-      //   .to(
-      //     ".page-container",
-      //     {
-      //       duration: 0.5,
-      //       scaleY: 1,
-      //       ease: "power3.out",
-      //     },
-      //     ">"
-      //   )
-      //   .to(
-      //     ".page-container",
-      //     {
-      //       duration: 0.5,
-      //       backgroundColor: "transparent",
-      //       ease: "power4.inOut",
-      //     },
-      //     "<+=0.25"
-      //   );
-    };
+    // };
 
     const handleResize = () => {
       if (home) {
@@ -182,9 +145,9 @@ import { projects } from "../assets/Constants";
     };
 
     document.addEventListener("assetsloaded", () => {
-      animateIntro();
-      drawGrid();
+      //animateIntro();
     });
+    drawGrid();
 
     window.addEventListener("resize", handleResize);
   </script>
