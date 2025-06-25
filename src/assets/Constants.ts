@@ -12,7 +12,7 @@ export const ROWS_PER_PROJECT_PER_SCREENSIZE = new Map<
 >([
   ["club-sofa", { xs: 113, sm: 131, md: 121, lg: 113, xl: 111 }],
   ["train-world", { xs: 115, sm: 138, md: 121, lg: 109, xl: 107 }],
-  ["transfo-intiem", { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 }],
+  ["transfo-intiem", { xs: 115, sm: 138, md: 121, lg: 109, xl: 107 }],
   ["all-eyes-on-gaza", { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 }],
   ["qausal", { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 }],
 ]);
