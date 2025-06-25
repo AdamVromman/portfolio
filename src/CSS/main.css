@@ -15,6 +15,7 @@ body {
   font-style: normal;
   @apply relative max-w-[1920px] mx-auto;
   @apply p-15;
+  @apply flex flex-col items-center justify-start;
 }
 
 * {

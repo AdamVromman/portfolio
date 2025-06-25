@@ -1,8 +1,116 @@
 ---
-import Home from "../components/Home.astro";
+import ProjectPage from "../components/ProjectPage.astro";
 import Layout from "../layouts/Layout.astro";
+import "../CSS/train-world.css";
 ---
 
-<Layout>
-  <Home />
+<Layout slug="train-world">
+  <ProjectPage slug="train-world">
+    <div class="grid_cell project-page_grid_title">
+      <div class="grid_cell_container">
+        <h1 class="full-col-text page-title">Train world</h1>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_category ux first">
+      <div class="grid_cell_container">
+        <span class="half-col-text">Design</span>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_category design second">
+      <div class="grid_cell_container">
+        <span class="half-col-text">Dev</span>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_description">
+      <div class="grid_cell_container">
+        <p class="half-col-text justified-paragraph">
+          During my second year, I created this website to recount—through
+          illustration, interaction and animation—a forgotten tale. I just
+          called it a love letter to the Belgian postal trains.
+        </p>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_icon">
+      <div class="grid_cell_container"></div>
+    </div>
+    <div class="project-page-video video-1 border">
+      <video
+        src="/train-world/ANIMATION-train-cart-double.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-image image-1">
+      <img src="/train-world/train-cart-single.webp" />
+    </div>
+    <div class="project-page-video video-2">
+      <video
+        src="/train-world/ANIMATION-loading.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="grid_cell project-page_grid_paragraph paragraph-1">
+      <div class="grid_cell_container">
+        <p class="third-col-text justified-paragraph">
+          For me, the main challenge lay in finding a balance between my own
+          vision and ideas for the brand and what the intended audience would
+          be. I had to go for something that encompasses both the fun, summer-y,
+          party music aspect of cocktails and the luxurious, premium
+          ingredients, rich-people one.
+        </p>
+      </div>
+    </div>
+    <div class="project-page-image image-2">
+      <img src="/train-world/iphone.webp" />
+    </div>
+    <div class="project-page-image image-3">
+      <img src="/train-world/macBook.webp" />
+    </div>
+    <div class="project-page-video video-3 border">
+      <video
+        src="/train-world/ANIMATION-clouds.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-video video-4 border">
+      <video
+        src="/train-world/ANIMATION-trees.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="grid_cell project-page_grid_paragraph paragraph-2">
+      <div class="grid_cell_container">
+        <p class="third-col-text justified-paragraph">
+          As a delivery service, another important aspect was the packaging. I
+          had a lot of fun coming up with different designs for the differently
+          themed boxes and seeing my vision come to live when I applied them to
+          some mock-ups. I think the combination of physical design with
+          application design made the assignment so engaging.
+        </p>
+      </div>
+    </div>
+    <div class="project-page-video video-5">
+      <video
+        src="/train-world/ANIMATION-illustrations.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-video video-6">
+      <video
+        src="/train-world/ANIMATION-labels.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+  </ProjectPage>
 </Layout>

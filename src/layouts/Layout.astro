@@ -29,6 +29,20 @@ const { slug } = Astro.props;
       <slot />
     </div>
     <script>
+      import { calculateTileWidth, getNrOfColumns } from "../assets/Functions";
+
+      const sizeGrid = () => {
+        const gridContainer = document.getElementById("grid-container");
+        if (gridContainer) {
+          const localTileWidth = calculateTileWidth();
+          gridContainer.style.width = `${getNrOfColumns() * localTileWidth}px`;
+        }
+      };
+
+      sizeGrid();
+      window.addEventListener("resize", sizeGrid);
+    </script>
+    <script>
       import { projects } from "../assets/Constants";
       import {
         justifyParagraphs,

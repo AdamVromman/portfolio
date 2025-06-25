@@ -5,6 +5,10 @@
   @apply relative;
 }
 
+#home {
+  @apply w-full h-full;
+}
+
 .home_video {
   @apply w-full h-full object-cover;
   @apply opacity-0;
