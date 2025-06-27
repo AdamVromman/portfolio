@@ -1,12 +1,12 @@
 @import "./imports.css";
 
-#footer {
+.footer {
   @apply relative;
   @apply border-2 border-active box-content;
   @apply overflow-hidden;
 }
 
-#footer_grid {
+.footer_grid {
   @apply grid;
 }
 

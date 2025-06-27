@@ -2,13 +2,13 @@
 import "../CSS/background.css";
 ---
 
-<div id="background_footer">
-  <svg id="background_footer_svg"
+<div class="background_footer">
+  <svg class="background_footer_svg"
     ><linearGradient id="background-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
       <stop offset="0%" stop-color="#eeeeee" stop-opacity="0"></stop>
       <stop offset="100%" stop-color="#eeeeee" stop-opacity="1"></stop>
     </linearGradient>
-    <g id="background_footer_lines-group"></g>
+    <g class="background_footer_lines-group"></g>
   </svg>
 </div>
 <script>
@@ -18,12 +18,14 @@ import "../CSS/background.css";
     getNrOfColumns,
   } from "../assets/Functions";
 
-  const background = document.getElementById("background_footer");
-  const backgroundSVG = document.getElementById("background_footer_svg");
-  const linesGroup = document.getElementById("background_footer_lines-group");
+  const backgrounds = document.getElementsByClassName("background_footer");
 
   const drawLines = () => {
-    if (background && backgroundSVG && linesGroup) {
+    for (let background of backgrounds as HTMLCollectionOf<HTMLElement>) {
+      const linesGroup = background.querySelector(
+        ".background_footer_lines-group"
+      );
+
       const localTileWidth = calculateTileWidth();
       const nrOfRows = getFooterRows();
       background.style.width = `${getNrOfColumns() * localTileWidth}px`;
@@ -100,4 +102,5 @@ import "../CSS/background.css";
   };
 
   window.addEventListener("resize", onResize);
+  document.addEventListener("astro:after-swap", drawLines);
 </script>

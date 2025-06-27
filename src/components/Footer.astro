@@ -3,8 +3,8 @@ import "../CSS/footer.css";
 import FooterBackground from "./FooterBackground.astro";
 ---
 
-<footer id="footer">
-  <div id="footer_grid">
+<footer class="footer">
+  <div class="footer_grid">
     <a href="/" class="grid_cell footer_grid_back-home">
       <div class="grid_cell_container">
         <div class="footer_grid_back-home_icon">
@@ -67,11 +67,11 @@ import FooterBackground from "./FooterBackground.astro";
     getNrOfColumns,
   } from "../assets/Functions";
 
-  const footer = document.getElementById("footer");
-  const footerGrid = document.getElementById("footer_grid");
+  const footers = document.getElementsByClassName("footer");
 
   const drawGrid = () => {
-    if (footer && footerGrid) {
+    for (let footer of footers as HTMLCollectionOf<HTMLElement>) {
+      const footerGrid = footer.querySelector(".footer_grid");
       const localTileWidth = calculateTileWidth();
       footer.style.width = `${getNrOfColumns() * localTileWidth}px`;
       footer.style.height = `${getFooterRows() * localTileWidth}px`;
@@ -86,4 +86,5 @@ import FooterBackground from "./FooterBackground.astro";
 
   drawGrid();
   window.addEventListener("resize", handleResize);
+  document.addEventListener("astro:after-swap", drawGrid);
 </script>
