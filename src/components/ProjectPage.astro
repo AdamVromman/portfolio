@@ -6,15 +6,15 @@ import ProjectPageBackground from "./ProjectPageBackground.astro";
 const { slug } = Astro.props;
 ---
 
-<div id="project-page">
+<div id={`project-page-${slug}`} class="project-page-container">
   <ProjectPageBackground />
-  <div id="project-page_grid">
+  <div id={`project-page_grid-${slug}`} class="project-page_grid">
     <slot />
   </div>
 </div>
 <video
-  class="border-solid border-2 border-active"
-  id="project-page_video"
+  class="project-page_video border-solid border-2 border-active"
+  id={`project-page_video-${slug}`}
   autoplay
   loop
   muted
@@ -28,16 +28,24 @@ const { slug } = Astro.props;
     getNrOfColumns,
     getProjectRowsPerScreenSize,
   } from "../assets/Functions";
+  import ProjectPageBackground from "./ProjectPageBackground.astro";
 
-  const projectPage = document.getElementById("project-page");
-  const projectPageGrid = document.getElementById("project-page_grid");
+  const slug = window.location.pathname.split("/")[1];
+  const projectPages = document.getElementsByClassName(
+    "project-page-container"
+  );
 
   const drawGrid = () => {
-    if (projectPageGrid && projectPage) {
-      const localTileWidth = calculateTileWidth();
-      projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
-      projectPageGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-      projectPageGrid.style.gridTemplateRows = `repeat(${getProjectRowsPerScreenSize()}, ${localTileWidth}px)`;
+    for (let projectPage of projectPages as HTMLCollectionOf<HTMLElement>) {
+      if (projectPage) {
+        const projectPageGrid = projectPage.querySelector(".project-page_grid");
+        const localTileWidth = calculateTileWidth();
+        projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
+        if (projectPageGrid) {
+          projectPageGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
+          projectPageGrid.style.gridTemplateRows = `repeat(${getProjectRowsPerScreenSize()}, ${localTileWidth}px)`;
+        }
+      }
     }
   };
 
@@ -46,6 +54,7 @@ const { slug } = Astro.props;
   };
 
   window.addEventListener("resize", handleResize);
+  document.addEventListener("astro:after-swap", drawGrid);
 
   drawGrid();
 </script>

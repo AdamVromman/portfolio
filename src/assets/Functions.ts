@@ -281,17 +281,8 @@ export const loadProjectPage = () => {
         },
         "0"
       )
-      .to(
-        ".page-container",
-        {
-          duration: 1,
-          height: (nrOfRows - 2) * localTileWidth - 2,
-          ease: "power4.inOut",
-        },
-        "<"
-      )
       .fromTo(
-        "#project-page",
+        `#project-page-${selectedProject.slug}`,
         {
           y: "200",
         },
@@ -303,7 +294,7 @@ export const loadProjectPage = () => {
         "<"
       )
       .to(
-        "#project-page",
+        `#project-page-${selectedProject.slug}`,
         {
           opacity: 1,
           duration: 0.5,
@@ -316,6 +307,127 @@ export const loadProjectPage = () => {
 
 export const navigateToHomePage = () => {
   console.log("navigateToHomePage");
+  const localTileWidth = calculateTileWidth();
+  const nrOfRows = calculateNrOfRows(localTileWidth);
+
+  if (!selectedProject) {
+    document.documentElement.style.setProperty("--color-active", "#4000ff");
+    const timeline = gsap.timeline();
+
+    timeline
+      .set(
+        `.home_video`,
+        {
+          opacity: 0,
+          overwrite: true,
+        },
+        ">"
+      )
+      .to(
+        ".grid_cell.home_grid_title h1.page-title",
+        {
+          y: "0",
+          duration: 0.3,
+          ease: "power3.in",
+          overwrite: true,
+        },
+        "0"
+      )
+      // .fromTo(
+      //   `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
+      //   {
+      //     y: "100%",
+      //   },
+      //   {
+      //     duration: 0.3,
+      //     y: "0",
+      //     ease: "power3.in",
+      //     overwrite: true,
+      //   },
+      //   "<"
+      // )
+      .fromTo(
+        `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
+        {
+          y: "-100%",
+        },
+        {
+          duration: 0.3,
+          y: "0",
+          ease: "power3.in",
+          overwrite: true,
+        },
+        "<"
+      )
+      .fromTo(
+        `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
+        {
+          x: "-100%",
+        },
+        {
+          duration: 0.3,
+          x: "0",
+          ease: "power3.in",
+          overwrite: true,
+        },
+        "<"
+      )
+      .fromTo(
+        `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
+        {
+          x: "100%",
+        },
+        {
+          duration: 0.3,
+          x: "0",
+          ease: "power3.in",
+          overwrite: true,
+        },
+        "<"
+      )
+
+      .to(
+        "#background",
+        {
+          duration: 0.2,
+          opacity: 1,
+          overwrite: true,
+        },
+        "<"
+      )
+      .to(
+        ".background_svg_line.line_vertical:not(.not-animated)",
+        {
+          duration: 1,
+          opacity: 1,
+          attr: { y2: "100%", y1: "0%" },
+          ease: "power4.out",
+          overwrite: true,
+          // stagger: {
+          //   each: 0.01,
+          //   from: "random",
+          //   ease: "power1.out",
+          // },
+        },
+        "<"
+      )
+      .to(
+        ".background_svg_line.line_horizontal:not(.not-animated)",
+        {
+          duration: 1,
+          opacity: 1,
+          attr: { x2: "100%", x1: "0%" },
+          ease: "power4.out",
+          overwrite: true,
+          // stagger: {
+          //   each: 0.01,
+          //   from: "random",
+          //   ease: "power1.out",
+          // },
+        },
+        "<"
+      );
+  }
 };
 
 export const navigateToProjectPage = () => {
@@ -330,45 +442,18 @@ export const navigateToProjectPage = () => {
     );
     const timeline = gsap.timeline({ onComplete: justifyParagraphs });
 
-    timeline
-      .to(
-        `.home_video.${selectedProject.slug}`,
-        {
-          duration: 0.2,
-          opacity: 1,
-        },
-        "0"
-      )
-      .to(
-        ".page-container",
-        {
-          duration: 1,
-          height: (nrOfRows - 2) * localTileWidth - 2,
-          ease: "power4.inOut",
-        },
-        "<"
-      )
-      .fromTo(
-        "#project-page",
-        {
-          y: "200",
-        },
-        {
-          y: "0",
-          duration: 0.5,
-          ease: "power4.out",
-        },
-        "<"
-      )
-      .to(
-        "#project-page",
-        {
-          opacity: 1,
-          duration: 0.5,
-          ease: "power4.out",
-        },
-        "<"
-      );
+    timeline.fromTo(
+      `#project-page-${selectedProject.slug}`,
+      {
+        y: "100vw",
+      },
+      {
+        y: "0",
+        duration: 0.5,
+        ease: "power4.out",
+      },
+      "<"
+    );
   }
 };
 
@@ -462,44 +547,45 @@ export const handleMouseIn = (key: string) => {
           "<"
         )
         .to(
-          `.home_video.${project.slug}`,
-          {
-            delay: 0.3,
-            duration: 0.2,
-            opacity: 1,
-            overwrite: true,
-          },
-          "<"
-        )
-        .to(
           ".background_svg_line.line_vertical:not(.not-animated)",
           {
-            duration: 0.5,
+            duration: 1,
+            opacity: 0,
             attr: { y2: "50%", y1: "50%" },
             ease: "power4.out",
             overwrite: true,
-            stagger: {
-              each: 0.01,
-              from: "center",
-              ease: "power1.out",
-            },
+            // stagger: {
+            //   each: 0.01,
+            //   from: "start",
+            //   ease: "power1.out",
+            // },
           },
           "<"
         )
         .to(
           ".background_svg_line.line_horizontal:not(.not-animated)",
           {
-            duration: 0.5,
+            duration: 1,
+            opacity: 0,
             attr: { x2: "50%", x1: "50%" },
             ease: "power4.out",
             overwrite: true,
-            stagger: {
-              each: 0.01,
-              from: "center",
-              ease: "power1.out",
-            },
+            // stagger: {
+            //   each: 0.01,
+            //   from: "start",
+            //   ease: "power1.out",
+            // },
           },
           "<"
+        )
+        .to(
+          `.home_video.${project.slug}`,
+          {
+            duration: 0.2,
+            opacity: 1,
+            overwrite: true,
+          },
+          ">"
         );
     }
   }
@@ -516,6 +602,15 @@ export const handleMouseOut = (key: string) => {
       const timeline = gsap.timeline();
 
       timeline
+        .to(
+          `.home_video.${project.slug}`,
+          {
+            duration: 0.2,
+            opacity: 0,
+            overwrite: true,
+          },
+          ">"
+        )
         .to(
           ".grid_cell.home_grid_title h1.page-title",
           {
@@ -601,41 +696,34 @@ export const handleMouseOut = (key: string) => {
         .to(
           ".background_svg_line.line_vertical:not(.not-animated)",
           {
-            duration: 0.5,
+            duration: 1,
+            opacity: 1,
             attr: { y2: "100%", y1: "0%" },
             ease: "power4.out",
             overwrite: true,
-            stagger: {
-              each: 0.01,
-              from: "center",
-              ease: "power1.out",
-            },
+            // stagger: {
+            //   each: 0.01,
+            //   from: "random",
+            //   ease: "power1.out",
+            // },
           },
           "<"
         )
         .to(
           ".background_svg_line.line_horizontal:not(.not-animated)",
           {
-            duration: 0.5,
+            duration: 1,
+            opacity: 1,
             attr: { x2: "100%", x1: "0%" },
             ease: "power4.out",
             overwrite: true,
-            stagger: {
-              each: 0.01,
-              from: "center",
-              ease: "power1.out",
-            },
+            // stagger: {
+            //   each: 0.01,
+            //   from: "random",
+            //   ease: "power1.out",
+            // },
           },
           "<"
-        )
-        .to(
-          `.home_video.${project.slug}`,
-          {
-            duration: 0.2,
-            opacity: 0,
-            overwrite: true,
-          },
-          ">"
         );
       hoveringBody = undefined;
       if (previousVel) {

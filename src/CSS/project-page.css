@@ -18,14 +18,13 @@
   }
 }
 
-#project-page {
+.project-page-container {
   @apply relative;
-  @apply opacity-0;
   @apply border-2 border-active box-content;
   @apply overflow-hidden;
 }
 
-#project-page_grid {
+.project-page_grid {
   @apply grid;
   @apply relative z-10;
 }
