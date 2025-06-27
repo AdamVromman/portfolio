@@ -95,7 +95,7 @@
 
     @media (min-width: theme(--breakpoint-lg)) {
       grid-column: 4 / -4;
-      grid-row: 14 / 24;
+      grid-row: 13 / 24;
     }
   }
 
