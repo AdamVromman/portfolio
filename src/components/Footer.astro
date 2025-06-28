@@ -71,12 +71,14 @@ import FooterBackground from "./FooterBackground.astro";
 
   const drawGrid = () => {
     for (let footer of footers as HTMLCollectionOf<HTMLElement>) {
-      const footerGrid = footer.querySelector(".footer_grid");
+      const footerGrid = footer.querySelector(".footer_grid") as HTMLElement;
       const localTileWidth = calculateTileWidth();
       footer.style.width = `${getNrOfColumns() * localTileWidth}px`;
       footer.style.height = `${getFooterRows() * localTileWidth}px`;
-      footerGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-      footerGrid.style.gridTemplateRows = `repeat(${getFooterRows()}, ${localTileWidth}px)`;
+      if (footerGrid) {
+        footerGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
+        footerGrid.style.gridTemplateRows = `repeat(${getFooterRows()}, ${localTileWidth}px)`;
+      }
     }
   };
 

@@ -1,5 +1,4 @@
 ---
-import Home from "../components/Home.astro";
 import "../CSS/main.css";
 import { ClientRouter } from "astro:transitions";
 
@@ -25,7 +24,6 @@ const { slug } = Astro.props;
   <body>
     <div id="grid-calculator"></div>
     <div id="grid-container" class={slug ? "project-page " + slug : ""}>
-      <Home />
       <slot />
     </div>
     <script>
@@ -89,3 +87,31 @@ const { slug } = Astro.props;
     </script>
   </body>
 </html>
+<style is:global>
+  @keyframes shrink {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes goUp {
+    0% {
+      transform: translateY(-100vw);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes goDown {
+    0% {
+      transform: translateY(100vw);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+</style>

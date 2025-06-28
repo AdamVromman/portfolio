@@ -9,12 +9,6 @@
   @apply w-full h-full;
 }
 
-.home_video {
-  @apply w-full h-full object-cover;
-  @apply opacity-0;
-  @apply absolute top-0 left-0;
-}
-
 .home_grid {
   @apply grid w-full h-full;
   @apply relative;
@@ -233,4 +227,17 @@
   svg {
     @apply w-3/5 h-3/5;
   }
+}
+
+.grid_cell.home_grid_videos {
+  grid-column: 1 / -1;
+  grid-row: 5 / 11;
+  @apply relative;
+}
+
+.home_video {
+  @apply w-full h-full object-cover;
+  @apply opacity-100;
+  @apply translate-y-full;
+  @apply absolute top-0 left-0;
 }

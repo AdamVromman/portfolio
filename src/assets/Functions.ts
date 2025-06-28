@@ -273,14 +273,6 @@ export const loadProjectPage = () => {
     const timeline = gsap.timeline({ onComplete: justifyParagraphs });
 
     timeline
-      .to(
-        `.home_video.${selectedProject.slug}`,
-        {
-          duration: 0.2,
-          opacity: 1,
-        },
-        "0"
-      )
       .fromTo(
         `#project-page-${selectedProject.slug}`,
         {
@@ -315,14 +307,6 @@ export const navigateToHomePage = () => {
     const timeline = gsap.timeline();
 
     timeline
-      .set(
-        `.home_video`,
-        {
-          opacity: 0,
-          overwrite: true,
-        },
-        ">"
-      )
       .to(
         ".grid_cell.home_grid_title h1.page-title",
         {
@@ -442,14 +426,12 @@ export const navigateToProjectPage = () => {
     );
     const timeline = gsap.timeline({ onComplete: justifyParagraphs });
 
-    timeline.fromTo(
-      `#project-page-${selectedProject.slug}`,
+    timeline.to(
+      `.home_animation`,
       {
-        y: "100vw",
-      },
-      {
-        y: "0",
-        duration: 0.5,
+        width: "0",
+        height: "0",
+        duration: 1,
         ease: "power4.out",
       },
       "<"
@@ -474,26 +456,26 @@ export const handleMouseIn = (key: string) => {
       );
 
       timeline
-        .to(
-          ".grid_cell.home_grid_title h1.page-title",
-          {
-            y: "-100%",
-            duration: 0.3,
-            ease: "power3.in",
-            overwrite: true,
-          },
-          "0"
-        )
-        .to(
-          `.grid_cell.home_grid_title .page-title.sub.${project.slug}`,
-          {
-            y: "0%",
-            duration: 0.3,
-            ease: "power3.in",
-            overwrite: true,
-          },
-          "<"
-        )
+        // .to(
+        //   ".grid_cell.home_grid_title h1.page-title",
+        //   {
+        //     y: "-100%",
+        //     duration: 0.3,
+        //     ease: "power3.in",
+        //     overwrite: true,
+        //   },
+        //   "0"
+        // )
+        // .to(
+        //   `.grid_cell.home_grid_title .page-title.sub.${project.slug}`,
+        //   {
+        //     y: "0%",
+        //     duration: 0.3,
+        //     ease: "power3.in",
+        //     overwrite: true,
+        //   },
+        //   "<"
+        // )
         // .fromTo(
         //   `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
         //   {
@@ -507,82 +489,82 @@ export const handleMouseIn = (key: string) => {
         //   },
         //   "<"
         // )
-        .fromTo(
-          `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
-          {
-            y: "0",
-          },
-          {
-            duration: 0.3,
-            y: "-100%",
-            ease: "power3.in",
-            overwrite: true,
-          },
-          "<"
-        )
-        .fromTo(
-          `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
-          {
-            x: "0",
-          },
-          {
-            duration: 0.3,
-            x: "-100%",
-            ease: "power3.in",
-            overwrite: true,
-          },
-          "<"
-        )
-        .fromTo(
-          `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
-          {
-            x: "0",
-          },
-          {
-            duration: 0.3,
-            x: "100%",
-            ease: "power3.in",
-            overwrite: true,
-          },
-          "<"
-        )
-        .to(
-          ".background_svg_line.line_vertical:not(.not-animated)",
-          {
-            duration: 1,
-            opacity: 0,
-            attr: { y2: "50%", y1: "50%" },
-            ease: "power4.out",
-            overwrite: true,
-            // stagger: {
-            //   each: 0.01,
-            //   from: "start",
-            //   ease: "power1.out",
-            // },
-          },
-          "<"
-        )
-        .to(
-          ".background_svg_line.line_horizontal:not(.not-animated)",
-          {
-            duration: 1,
-            opacity: 0,
-            attr: { x2: "50%", x1: "50%" },
-            ease: "power4.out",
-            overwrite: true,
-            // stagger: {
-            //   each: 0.01,
-            //   from: "start",
-            //   ease: "power1.out",
-            // },
-          },
-          "<"
-        )
+        // .fromTo(
+        //   `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
+        //   {
+        //     y: "0",
+        //   },
+        //   {
+        //     duration: 0.3,
+        //     y: "-100%",
+        //     ease: "power3.in",
+        //     overwrite: true,
+        //   },
+        //   "<"
+        // )
+        // .fromTo(
+        //   `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
+        //   {
+        //     x: "0",
+        //   },
+        //   {
+        //     duration: 0.3,
+        //     x: "-100%",
+        //     ease: "power3.in",
+        //     overwrite: true,
+        //   },
+        //   "<"
+        // )
+        // .fromTo(
+        //   `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
+        //   {
+        //     x: "0",
+        //   },
+        //   {
+        //     duration: 0.3,
+        //     x: "100%",
+        //     ease: "power3.in",
+        //     overwrite: true,
+        //   },
+        //   "<"
+        // )
+        // .to(
+        //   ".background_svg_line.line_vertical:not(.not-animated)",
+        //   {
+        //     duration: 1,
+        //     opacity: 0,
+        //     attr: { y2: "50%", y1: "50%" },
+        //     ease: "power4.out",
+        //     overwrite: true,
+        //     // stagger: {
+        //     //   each: 0.01,
+        //     //   from: "start",
+        //     //   ease: "power1.out",
+        //     // },
+        //   },
+        //   "<"
+        // )
+        // .to(
+        //   ".background_svg_line.line_horizontal:not(.not-animated)",
+        //   {
+        //     duration: 1,
+        //     opacity: 0,
+        //     attr: { x2: "50%", x1: "50%" },
+        //     ease: "power4.out",
+        //     overwrite: true,
+        //     // stagger: {
+        //     //   each: 0.01,
+        //     //   from: "start",
+        //     //   ease: "power1.out",
+        //     // },
+        //   },
+        //   "<"
+        // )
         .to(
           `.home_video.${project.slug}`,
           {
-            duration: 0.2,
-            opacity: 1,
+            duration: 0.3,
+            y: "0%",
             overwrite: true,
           },
           ">"
@@ -601,130 +583,129 @@ export const handleMouseOut = (key: string) => {
     if (project && flyingObject) {
       const timeline = gsap.timeline();
 
-      timeline
-        .to(
-          `.home_video.${project.slug}`,
-          {
-            duration: 0.2,
-            opacity: 0,
-            overwrite: true,
-          },
-          ">"
-        )
-        .to(
-          ".grid_cell.home_grid_title h1.page-title",
-          {
-            y: "0",
-            duration: 0.3,
-            ease: "power3.in",
-            overwrite: true,
-          },
-          "0"
-        )
-        .to(
-          `.grid_cell.home_grid_title .page-title.sub.${project.slug}`,
-          {
-            y: "100%",
-            duration: 0.3,
-            ease: "power3.in",
-            overwrite: true,
-          },
-          "<"
-        )
-        // .fromTo(
-        //   `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
-        //   {
-        //     y: "100%",
-        //   },
-        //   {
-        //     duration: 0.3,
-        //     y: "0",
-        //     ease: "power3.in",
-        //     overwrite: true,
-        //   },
-        //   "<"
-        // )
-        .fromTo(
-          `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
-          {
-            y: "-100%",
-          },
-          {
-            duration: 0.3,
-            y: "0",
-            ease: "power3.in",
-            overwrite: true,
-          },
-          "<"
-        )
-        .fromTo(
-          `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
-          {
-            x: "-100%",
-          },
-          {
-            duration: 0.3,
-            x: "0",
-            ease: "power3.in",
-            overwrite: true,
-          },
-          "<"
-        )
-        .fromTo(
-          `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
-          {
-            x: "100%",
-          },
-          {
-            duration: 0.3,
-            x: "0",
-            ease: "power3.in",
-            overwrite: true,
-          },
-          "<"
-        )
+      timeline.to(
+        `.home_video.${project.slug}`,
+        {
+          duration: 0.3,
+          y: "100%",
+          overwrite: true,
+        },
+        ">"
+      );
+      // .to(
+      //   ".grid_cell.home_grid_title h1.page-title",
+      //   {
+      //     y: "0",
+      //     duration: 0.3,
+      //     ease: "power3.in",
+      //     overwrite: true,
+      //   },
+      //   "0"
+      // )
+      // .to(
+      //   `.grid_cell.home_grid_title .page-title.sub.${project.slug}`,
+      //   {
+      //     y: "100%",
+      //     duration: 0.3,
+      //     ease: "power3.in",
+      //     overwrite: true,
+      //   },
+      //   "<"
+      // )
+      // .fromTo(
+      //   `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
+      //   {
+      //     y: "100%",
+      //   },
+      //   {
+      //     duration: 0.3,
+      //     y: "0",
+      //     ease: "power3.in",
+      //     overwrite: true,
+      //   },
+      //   "<"
+      // )
+      // .fromTo(
+      //   `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
+      //   {
+      //     y: "-100%",
+      //   },
+      //   {
+      //     duration: 0.3,
+      //     y: "0",
+      //     ease: "power3.in",
+      //     overwrite: true,
+      //   },
+      //   "<"
+      // )
+      // .fromTo(
+      //   `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
+      //   {
+      //     x: "-100%",
+      //   },
+      //   {
+      //     duration: 0.3,
+      //     x: "0",
+      //     ease: "power3.in",
+      //     overwrite: true,
+      //   },
+      //   "<"
+      // )
+      // .fromTo(
+      //   `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
+      //   {
+      //     x: "100%",
+      //   },
+      //   {
+      //     duration: 0.3,
+      //     x: "0",
+      //     ease: "power3.in",
+      //     overwrite: true,
+      //   },
+      //   "<"
+      // )
 
-        .to(
-          "#background",
-          {
-            duration: 0.2,
-            opacity: 1,
-            overwrite: true,
-          },
-          "<"
-        )
-        .to(
-          ".background_svg_line.line_vertical:not(.not-animated)",
-          {
-            duration: 1,
-            opacity: 1,
-            attr: { y2: "100%", y1: "0%" },
-            ease: "power4.out",
-            overwrite: true,
-            // stagger: {
-            //   each: 0.01,
-            //   from: "random",
-            //   ease: "power1.out",
-            // },
-          },
-          "<"
-        )
-        .to(
-          ".background_svg_line.line_horizontal:not(.not-animated)",
-          {
-            duration: 1,
-            opacity: 1,
-            attr: { x2: "100%", x1: "0%" },
-            ease: "power4.out",
-            overwrite: true,
-            // stagger: {
-            //   each: 0.01,
-            //   from: "random",
-            //   ease: "power1.out",
-            // },
-          },
-          "<"
-        );
+      // .to(
+      //   "#background",
+      //   {
+      //     duration: 0.2,
+      //     opacity: 1,
+      //     overwrite: true,
+      //   },
+      //   "<"
+      // )
+      // .to(
+      //   ".background_svg_line.line_vertical:not(.not-animated)",
+      //   {
+      //     duration: 1,
+      //     opacity: 1,
+      //     attr: { y2: "100%", y1: "0%" },
+      //     ease: "power4.out",
+      //     overwrite: true,
+      //     // stagger: {
+      //     //   each: 0.01,
+      //     //   from: "random",
+      //     //   ease: "power1.out",
+      //     // },
+      //   },
+      //   "<"
+      // )
+      // .to(
+      //   ".background_svg_line.line_horizontal:not(.not-animated)",
+      //   {
+      //     duration: 1,
+      //     opacity: 1,
+      //     attr: { x2: "100%", x1: "0%" },
+      //     ease: "power4.out",
+      //     overwrite: true,
+      //     // stagger: {
+      //     //   each: 0.01,
+      //     //   from: "random",
+      //     //   ease: "power1.out",
+      //     // },
+      //   },
+      //   "<"
+      // );
       hoveringBody = undefined;
       if (previousVel) {
         flyingObject.body.setLinvel(previousVel, true);

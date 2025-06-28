@@ -3,25 +3,32 @@ import FlyingObjects from "./FlyingObjects.astro";
 import "../CSS/home.css";
 import HomeBackground from "./HomeBackground.astro";
 import { projects } from "../assets/Constants";
+
+const anim = {
+  old: {
+    name: "shrink",
+    duration: "0.5s",
+    easing: "ease-in",
+    direction: "reverse",
+  },
+  new: {
+    name: "shrink",
+    duration: "0.5s",
+    easing: "ease-in-out",
+  },
+};
+
+const customTransition = {
+  forwards: anim,
+  backwards: anim,
+};
 ---
 
-<div id="home" class="page-container" transition:persist>
-  {
-    projects.map((project) => {
-      return (
-        <video
-          class={`home_video ${project.slug}`}
-          src={`/${project.slug}/ANIMATION-header.mp4`}
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="auto"
-        />
-      );
-    })
-  }
-
+<div
+  id="home"
+  class="page-container home_animation"
+  transition:animate={customTransition}
+>
   <HomeBackground />
   <div id="home_grid" class="home_grid">
     <div class="grid_cell bottom ignore-move-out home_grid_title">
@@ -45,7 +52,6 @@ import { projects } from "../assets/Constants";
         <span class="half-col-text">Discover my work:</span>
       </div>
     </div>
-
     {
       projects.map((project) => {
         return (
@@ -97,6 +103,23 @@ import { projects } from "../assets/Constants";
           ></path>
         </svg>
       </a>
+    </div>
+    <div class="grid_cell home_grid_videos">
+      {
+        projects.map((project) => {
+          return (
+            <video
+              class={`home_video ${project.slug}`}
+              src={`/${project.slug}/ANIMATION-header.mp4`}
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+            />
+          );
+        })
+      }
     </div>
   </div>
   <FlyingObjects />

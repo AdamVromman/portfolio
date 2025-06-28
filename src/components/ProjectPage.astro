@@ -4,9 +4,59 @@ import Footer from "./Footer.astro";
 import ProjectPageBackground from "./ProjectPageBackground.astro";
 
 const { slug } = Astro.props;
+const anim = {
+  old: {
+    name: "goUp",
+    duration: "0.5s",
+    easing: "ease-in",
+    direction: "reverse",
+  },
+  new: {
+    name: "goUp",
+    duration: "0.5s",
+    easing: "ease-in-out",
+  },
+};
+
+const customTransition = {
+  forwards: anim,
+  backwards: anim,
+};
+
+const anim2 = {
+  old: {
+    name: "goDown",
+    duration: "0.5s",
+    easing: "ease-in",
+    direction: "reverse",
+  },
+  new: {
+    name: "goDown",
+    duration: "0.5s",
+    easing: "ease-in-out",
+  },
+};
+
+const customTransition2 = {
+  forwards: anim2,
+  backwards: anim2,
+};
 ---
 
-<div id={`project-page-${slug}`} class="project-page-container">
+<video
+  transition:animate={customTransition}
+  class="project-page_video border-solid border-2 border-active"
+  id={`project-page_video-${slug}`}
+  autoplay
+  loop
+  muted
+  playsinline
+  src={`/${slug}/ANIMATION-header.mp4`}></video>
+<div
+  transition:animate={customTransition2}
+  id={`project-page-${slug}`}
+  class="project-page-container"
+>
   <ProjectPageBackground />
   <div id={`project-page_grid-${slug}`} class="project-page_grid">
     <slot />
@@ -38,7 +88,9 @@ const { slug } = Astro.props;
   const drawGrid = () => {
     for (let projectPage of projectPages as HTMLCollectionOf<HTMLElement>) {
       if (projectPage) {
-        const projectPageGrid = projectPage.querySelector(".project-page_grid");
+        const projectPageGrid = projectPage.querySelector(
+          ".project-page_grid"
+        ) as HTMLElement;
         const localTileWidth = calculateTileWidth();
         projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
         if (projectPageGrid) {

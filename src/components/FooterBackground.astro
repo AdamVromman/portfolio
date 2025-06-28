@@ -24,7 +24,7 @@ import "../CSS/background.css";
     for (let background of backgrounds as HTMLCollectionOf<HTMLElement>) {
       const linesGroup = background.querySelector(
         ".background_footer_lines-group"
-      );
+      ) as HTMLElement;
 
       const localTileWidth = calculateTileWidth();
       const nrOfRows = getFooterRows();
