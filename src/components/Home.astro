@@ -24,13 +24,9 @@ const customTransition = {
 };
 ---
 
-<div
-  id="home"
-  class="page-container home_animation"
-  transition:animate={customTransition}
->
+<div class="page-container home" transition:animate={customTransition}>
   <HomeBackground />
-  <div id="home_grid" class="home_grid">
+  <div class="home_grid">
     <div class="grid_cell bottom ignore-move-out home_grid_title">
       <div class="grid_cell_container">
         <h1 class="full-col-text page-title">
@@ -129,35 +125,24 @@ const customTransition = {
       calculateTileWidth,
       calculateNrOfRows,
       getNrOfColumns,
-      handleMouseOut,
-      selectedProject,
     } from "../assets/Functions";
-    import gsap from "gsap";
 
-    const home = document.getElementById("home");
-    const homeGrid = document.getElementById("home_grid");
+    const homes = document.getElementsByClassName("home");
 
     const drawGrid = () => {
-      if (homeGrid) {
-        const localTileWidth = calculateTileWidth();
-        const nrOfRows = calculateNrOfRows(localTileWidth);
-        homeGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-        homeGrid.style.gridTemplateRows = `repeat(${nrOfRows}, ${localTileWidth}px)`;
+      for (let home of homes) {
+        const homeGrid = home.querySelector(".home_grid") as HTMLElement;
+        if (homeGrid) {
+          const localTileWidth = calculateTileWidth();
+          const nrOfRows = calculateNrOfRows(localTileWidth);
+          homeGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
+          homeGrid.style.gridTemplateRows = `repeat(${nrOfRows}, ${localTileWidth}px)`;
+        }
       }
     };
 
-    // const animateIntro = () => {
-    //   const localTileWidth = calculateTileWidth();
-    //   const nrOfRows = calculateNrOfRows(localTileWidth);
-
-    //   const height = home?.parentElement?.classList.contains("project-page")
-    //     ? (nrOfRows - 2) * localTileWidth - 2
-    //     : nrOfRows * localTileWidth;
-
-    // };
-
     const handleResize = () => {
-      if (home) {
+      for (let home of homes as HTMLCollectionOf<HTMLElement>) {
         const localTileWidth = calculateTileWidth();
         const nrOfRows = calculateNrOfRows(localTileWidth);
         home.style.width = `${getNrOfColumns() * localTileWidth}px`;

@@ -1,6 +1,6 @@
 @import "./imports.css";
 
-#home .grid_cell {
+.home .grid_cell {
   &.left .grid_cell_container {
     @apply -translate-x-full;
   }

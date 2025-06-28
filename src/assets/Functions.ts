@@ -426,16 +426,16 @@ export const navigateToProjectPage = () => {
     );
     const timeline = gsap.timeline({ onComplete: justifyParagraphs });
 
-    timeline.to(
-      `.home_animation`,
-      {
-        width: "0",
-        height: "0",
-        duration: 1,
-        ease: "power4.out",
-      },
-      "<"
-    );
+    // timeline.to(
+    //   `.home_animation`,
+    //   {
+    //     width: "0",
+    //     height: "0",
+    //     duration: 1,
+    //     ease: "power4.out",
+    //   },
+    //   "<"
+    // );
   }
 };
 

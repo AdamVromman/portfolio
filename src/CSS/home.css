@@ -5,7 +5,7 @@
   @apply relative;
 }
 
-#home {
+.home {
   @apply w-full h-full;
 }
 
