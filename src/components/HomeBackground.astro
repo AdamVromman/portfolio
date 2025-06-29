@@ -17,17 +17,17 @@ import "../CSS/background.css";
   } from "../assets/Functions";
   import { selectedProject } from "../assets/Functions";
 
-  const background = document.getElementById("background");
-  const backgroundSVG = document.getElementById("background_svg");
-  const linesGroup = document.getElementById("background_home_lines-group");
+  const backgrounds = document.getElementsByClassName("background");
 
   const drawDots = () => {
     const svgNS = "http://www.w3.org/2000/svg";
     const localTileWidth = calculateTileWidth();
     const nrOfRows = calculateNrOfRows(localTileWidth);
     const nrOfColumns = getNrOfColumns();
-    const dotsGroup = document.getElementById("starting-animation-dots");
-    if (dotsGroup) {
+    const dotsGroups = document.getElementsByClassName(
+      "starting-animation-dots"
+    );
+    for (let dotsGroup of dotsGroups as HTMLCollectionOf<HTMLElement>) {
       dotsGroup.textContent = "";
       for (let i = 0; i < nrOfRows; i++) {
         for (let j = 0; j < nrOfColumns; j++) {
@@ -48,7 +48,10 @@ import "../CSS/background.css";
   };
 
   const drawLines = () => {
-    if (background && backgroundSVG && linesGroup) {
+    for (let background of backgrounds as HTMLCollectionOf<HTMLElement>) {
+      const linesGroup = background.querySelector(
+        ".background_home_lines-group"
+      ) as HTMLElement;
       const localTileWidth = calculateTileWidth();
       const nrOfRows = calculateNrOfRows(localTileWidth);
       background.style.width = `${getNrOfColumns() * localTileWidth}px`;

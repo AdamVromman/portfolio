@@ -1,6 +1,6 @@
 @import "./imports.css";
 
-#background,
+.background,
 .background_project-page,
 .background_footer {
   @apply absolute top-0 left-0 mx-auto;
@@ -8,7 +8,7 @@
   z-index: 0;
 }
 
-#background_svg,
+.background_svg,
 .background_project-page_svg,
 .background_footer_svg {
   @apply w-full h-full;

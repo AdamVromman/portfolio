@@ -371,7 +371,7 @@ export const navigateToHomePage = () => {
       )
 
       .to(
-        "#background",
+        ".background",
         {
           duration: 0.2,
           opacity: 1,
