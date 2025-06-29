@@ -191,7 +191,7 @@ import "../CSS/flying-objects.css";
 
     const createFlyingObject = () => {
       const loader = new DRACOLoader();
-      loader.setDecoderPath("/draco/");
+      loader.setDecoderPath("/assets/draco/");
       loader.preload();
 
       const scale = (width + height) / 50;
@@ -199,7 +199,7 @@ import "../CSS/flying-objects.css";
       if (scene) {
         projects.forEach((project, index) => {
           loader.load(
-            `/${project.slug}.drc`,
+            `/assets/${project.slug}.drc`,
             (geometry) => {
               const even = index % 2 === 0;
 
@@ -425,7 +425,7 @@ import "../CSS/flying-objects.css";
 
         new RGBELoader()
           .setPath("/")
-          .load("background.hdr", function (texture) {
+          .load("assets/background.hdr", function (texture) {
             texture.mapping = THREE.EquirectangularReflectionMapping;
             scene.environment = texture;
           });
