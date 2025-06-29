@@ -135,6 +135,8 @@ const customTransition = {
         if (homeGrid) {
           const localTileWidth = calculateTileWidth();
           const nrOfRows = calculateNrOfRows(localTileWidth);
+          console.log("homeGrid");
+          console.log(localTileWidth, nrOfRows);
           homeGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
           homeGrid.style.gridTemplateRows = `repeat(${nrOfRows}, ${localTileWidth}px)`;
         }
@@ -158,32 +160,33 @@ const customTransition = {
     drawGrid();
 
     window.addEventListener("resize", handleResize);
-  </script>
-
-  <script>
-    import { handleMouseIn, handleMouseOut } from "../assets/Functions";
-
-    const links = document.querySelectorAll(".home_grid_work_link");
-    links.forEach((link) => {
-      link.addEventListener("mouseenter", (e) => {
-        if (link instanceof HTMLElement) {
-          const key = link.dataset.slug || "";
-          const element = e.target as HTMLElement;
-          element.parentElement?.classList.add("ignore-move-out");
-          element.style.opacity = "0";
-          handleMouseIn(key);
-        }
-      });
-
-      link.addEventListener("mouseleave", (e) => {
-        if (link instanceof HTMLElement) {
-          const key = link.dataset.slug || "";
-          handleMouseOut(key);
-          const element = e.target as HTMLElement;
-          element.parentElement?.classList.remove("ignore-move-out");
-          element.style.opacity = "1";
-        }
-      });
-    });
+    document.addEventListener("astro:after-swap", drawGrid);
   </script>
 </div>
+
+<script>
+  import { handleMouseIn, handleMouseOut } from "../assets/Functions";
+
+  const links = document.querySelectorAll(".home_grid_work_link");
+  links.forEach((link) => {
+    link.addEventListener("mouseenter", (e) => {
+      if (link instanceof HTMLElement) {
+        const key = link.dataset.slug || "";
+        const element = e.target as HTMLElement;
+        element.parentElement?.classList.add("ignore-move-out");
+        element.style.opacity = "0";
+        handleMouseIn(key);
+      }
+    });
+
+    link.addEventListener("mouseleave", (e) => {
+      if (link instanceof HTMLElement) {
+        const key = link.dataset.slug || "";
+        handleMouseOut(key);
+        const element = e.target as HTMLElement;
+        element.parentElement?.classList.remove("ignore-move-out");
+        element.style.opacity = "1";
+      }
+    });
+  });
+</script>
