@@ -25,13 +25,6 @@ body {
   transition-timing-function: ease-out;
 }
 
-.page-container {
-  @apply relative;
-  @apply flex flex-col items-center justify-start gap-15;
-  @apply border-active border-2 box-content;
-  @apply overflow-hidden;
-}
-
 .third-col-text {
   @apply text-[3.8vw];
   @apply leading-[5.2vw];
@@ -103,7 +96,8 @@ body {
 
 #grid-calculator {
   @apply absolute inset-15;
-  @apply h-lvh;
+  /* @apply h-lvh; */
+  height: calc(100lvh - 30px);
 }
 
 #grid-container {

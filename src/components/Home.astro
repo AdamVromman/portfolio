@@ -3,28 +3,9 @@ import FlyingObjects from "./FlyingObjects.astro";
 import "../CSS/home.css";
 import HomeBackground from "./HomeBackground.astro";
 import { projects } from "../assets/Constants";
-
-const anim = {
-  old: {
-    name: "shrink",
-    duration: "0.5s",
-    easing: "ease-in",
-    direction: "reverse",
-  },
-  new: {
-    name: "shrink",
-    duration: "0.5s",
-    easing: "ease-in-out",
-  },
-};
-
-const customTransition = {
-  forwards: anim,
-  backwards: anim,
-};
 ---
 
-<div class="page-container home" transition:animate={customTransition}>
+<div class="page-container home">
   <HomeBackground />
   <div class="home_grid">
     <div class="grid_cell bottom ignore-move-out home_grid_title">
@@ -135,8 +116,7 @@ const customTransition = {
         if (homeGrid) {
           const localTileWidth = calculateTileWidth();
           const nrOfRows = calculateNrOfRows(localTileWidth);
-          console.log("homeGrid");
-          console.log(localTileWidth, nrOfRows);
+
           homeGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
           homeGrid.style.gridTemplateRows = `repeat(${nrOfRows}, ${localTileWidth}px)`;
         }

@@ -1,12 +1,46 @@
 ---
+import Home from "../components/Home.astro";
 import "../CSS/main.css";
-import { ClientRouter } from "astro:transitions";
+import { ClientRouter, slide } from "astro:transitions";
 
 const { slug } = Astro.props;
+
+const anim = {
+  old: {
+    name: "pageTransitionOut",
+    duration: "1s",
+    easing: "ease-in",
+  },
+  new: {
+    name: "pageTransitionIn",
+    duration: "1s",
+    easing: "ease-in-out",
+  },
+};
+
+const anim2 = {
+  old: {
+    name: "pageTransitionIn",
+    duration: "1s",
+    easing: "ease-in-out",
+    direction: "reverse",
+  },
+  new: {
+    name: "pageTransitionOut",
+    duration: "1s",
+    easing: "ease-in-out",
+    direction: "reverse",
+  },
+};
+
+const customTransition = {
+  forwards: anim,
+  backwards: anim2,
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" transition:animate={customTransition}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -54,7 +88,10 @@ const { slug } = Astro.props;
 
       window.addEventListener("resize", justifyParagraphs);
 
+      let firstLoad = true;
+
       document.addEventListener("assetsloaded", () => {
+        firstLoad = false;
         const gridContainer = document.getElementById("grid-container");
         if (gridContainer && gridContainer.classList.contains("project-page")) {
           const slug = gridContainer.classList[1];
@@ -69,44 +106,40 @@ const { slug } = Astro.props;
         }
         justifyParagraphs();
       });
-      document.addEventListener("astro:after-swap", () => {
-        const gridContainer = document.getElementById("grid-container");
-        if (gridContainer && gridContainer.classList.contains("project-page")) {
-          const slug = gridContainer.classList[1];
-          const project = projects.find((p) => p.slug === slug);
-          if (project) {
-            setSelectedProject(project);
-            navigateToProjectPage();
+      document.addEventListener("astro:page-load", () => {
+        if (!firstLoad) {
+          const gridContainer = document.getElementById("grid-container");
+          if (
+            gridContainer &&
+            gridContainer.classList.contains("project-page")
+          ) {
+            const slug = gridContainer.classList[1];
+            const project = projects.find((p) => p.slug === slug);
+            if (project) {
+              setSelectedProject(project);
+              navigateToProjectPage();
+            }
+          } else {
+            setSelectedProject(undefined);
+            navigateToHomePage();
           }
-        } else {
-          setSelectedProject(undefined);
-          navigateToHomePage();
+          justifyParagraphs();
         }
-        justifyParagraphs();
       });
     </script>
   </body>
 </html>
 <style is:global>
-  @keyframes shrink {
+  @keyframes pageTransitionOut {
     0% {
-      transform: scale(0);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-
-  @keyframes goUp {
-    0% {
-      transform: translateY(-100vw);
-    }
-    100% {
       transform: translateY(0);
     }
+    100% {
+      transform: translateY(-100vw);
+    }
   }
 
-  @keyframes goDown {
+  @keyframes pageTransitionIn {
     0% {
       transform: translateY(100vw);
     }

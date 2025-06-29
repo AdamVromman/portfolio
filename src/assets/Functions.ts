@@ -132,6 +132,9 @@ export const setPreviousVel = (vector: RAPIER.Vector) => {
 
 export const loadHomePage = () => {
   console.log("loadHomePage");
+
+  const localTileWidth = calculateTileWidth();
+  const nrOfRows = calculateNrOfRows(localTileWidth);
   const duration = 0.75;
 
   const stagger: gsap.StaggerVars = {
@@ -309,8 +312,6 @@ export const loadProjectPage = () => {
 
 export const navigateToHomePage = () => {
   console.log("navigateToHomePage");
-  const localTileWidth = calculateTileWidth();
-  const nrOfRows = calculateNrOfRows(localTileWidth);
 
   if (!selectedProject) {
     document.documentElement.style.setProperty("--color-active", "#4000ff");
@@ -427,25 +428,11 @@ export const navigateToHomePage = () => {
 export const navigateToProjectPage = () => {
   console.log("navigateToProjectPage");
   if (selectedProject) {
-    const localTileWidth = calculateTileWidth();
-    const nrOfRows = calculateNrOfRows(localTileWidth);
-
     document.documentElement.style.setProperty(
       "--color-active",
       `#${selectedProject.color}`
     );
     const timeline = gsap.timeline({ onComplete: justifyParagraphs });
-
-    // timeline.to(
-    //   `.home_animation`,
-    //   {
-    //     width: "0",
-    //     height: "0",
-    //     duration: 1,
-    //     ease: "power4.out",
-    //   },
-    //   "<"
-    // );
   }
 };
 
@@ -726,7 +713,5 @@ export const handleMouseOut = (key: string) => {
 };
 
 export const isHomePage = () => {
-  return !document
-    .getElementById("grid-container")
-    ?.classList.contains("project-page");
+  return !document.getElementById("grid-container") !== undefined;
 };
