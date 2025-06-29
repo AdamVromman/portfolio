@@ -40,7 +40,7 @@ const customTransition = {
 ---
 
 <!doctype html>
-<html lang="en" transition:animate={customTransition}>
+<html lang="en" transition:animate="none">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -55,7 +55,7 @@ const customTransition = {
     />
     <ClientRouter />
   </head>
-  <body>
+  <body transition:animate={customTransition}>
     <div id="grid-calculator"></div>
     <div id="grid-container" class={slug ? "project-page " + slug : ""}>
       <slot />
@@ -135,13 +135,13 @@ const customTransition = {
       transform: translateY(0);
     }
     100% {
-      transform: translateY(-100vw);
+      transform: translateY(-100%);
     }
   }
 
   @keyframes pageTransitionIn {
     0% {
-      transform: translateY(100vw);
+      transform: translateY(100%);
     }
     100% {
       transform: translateY(0);
