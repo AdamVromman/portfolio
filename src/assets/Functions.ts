@@ -143,6 +143,16 @@ export const loadHomePage = () => {
   gsap
     .timeline()
     .to(
+      ".home",
+      {
+        duration: 1,
+        width: "100%",
+        height: "100%",
+        ease: "power3.out",
+      },
+      ">"
+    )
+    .to(
       ".background_svg_dot.background_svg_dot_odd",
       {
         duration: 1,
@@ -154,7 +164,7 @@ export const loadHomePage = () => {
         },
         ease: "elastic.out",
       },
-      ">"
+      "<"
     )
     .to(
       ".background_svg_dot.background_svg_dot_even",
