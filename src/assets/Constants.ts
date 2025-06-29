@@ -24,30 +24,30 @@ export const projects: Project[] = [
     color: "07d9ae",
     year: 2022,
   },
-  // {
-  //   name: "Train World",
-  //   slug: "train-world",
-  //   color: "de2217",
-  //   year: 2023,
-  // },
-  // {
-  //   name: "Transfo Intiem",
-  //   slug: "transfo-intiem",
-  //   color: "B87AFF",
-  //   year: 2024,
-  // },
+  {
+    name: "Train World",
+    slug: "train-world",
+    color: "de2217",
+    year: 2023,
+  },
+  {
+    name: "Transfo Intiem",
+    slug: "transfo-intiem",
+    color: "B87AFF",
+    year: 2024,
+  },
   // {
   //   name: "All Eyes on Gaza",
   //   slug: "all-eyes-on-gaza",
   //   color: "FF7700",
   //   year: 2025,
   // },
-  // {
-  //   name: "Qausal",
-  //   slug: "qausal",
-  //   color: "FF7700",
-  //   year: 2025,
-  // },
+  {
+    name: "Qausal",
+    slug: "qausal",
+    color: "FF7700",
+    year: 2025,
+  },
 ];
 
 export const dynamicBodies: FlyingObject[] = [];
