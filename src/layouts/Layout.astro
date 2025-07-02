@@ -40,7 +40,7 @@ const customTransition = {
 ---
 
 <!doctype html>
-<html lang="en" transition:animate="none">
+<html lang="en" transition:animate={customTransition}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -55,9 +55,10 @@ const customTransition = {
     />
     <ClientRouter />
   </head>
-  <body transition:animate={customTransition}>
+  <body>
     <div id="grid-calculator"></div>
     <div id="grid-container" class={slug ? "project-page " + slug : ""}>
+      <Home />
       <slot />
     </div>
     <script>
@@ -75,6 +76,7 @@ const customTransition = {
       window.addEventListener("resize", sizeGrid);
     </script>
     <script>
+      import gsap from "gsap";
       import { projects } from "../assets/Constants";
       import {
         justifyParagraphs,
@@ -91,6 +93,7 @@ const customTransition = {
       let firstLoad = true;
 
       document.addEventListener("assetsloaded", () => {
+        console.log("Assets loaded");
         firstLoad = false;
         const gridContainer = document.getElementById("grid-container");
         if (gridContainer && gridContainer.classList.contains("project-page")) {
@@ -107,6 +110,11 @@ const customTransition = {
         justifyParagraphs();
       });
       document.addEventListener("astro:page-load", () => {
+        gsap.to("body", {
+          duration: 0.2,
+          opacity: 1,
+          ease: "power3.out",
+        });
         if (!firstLoad) {
           const gridContainer = document.getElementById("grid-container");
           if (
@@ -132,19 +140,40 @@ const customTransition = {
 <style is:global>
   @keyframes pageTransitionOut {
     0% {
-      transform: translateY(0);
+      transform: scale(1);
+      opacity: 1;
+      filter: blur(0px);
     }
     100% {
-      transform: translateY(-100%);
+      opacity: 0;
+      filter: blur(10px);
+      transform: scale(0.9);
     }
   }
 
   @keyframes pageTransitionIn {
     0% {
-      transform: translateY(100%);
+      opacity: 0;
+      filter: blur(10px);
+      transform: scale(0.9);
     }
     100% {
-      transform: translateY(0);
+      transform: scale(1);
+      opacity: 1;
+      filter: blur(0px);
+    }
+  }
+
+  @keyframes homeOut {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+      filter: blur(0px);
+    }
+    100% {
+      transform: scale(2);
+      opacity: 0;
+      filter: blur(10px);
     }
   }
 </style>

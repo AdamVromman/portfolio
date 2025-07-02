@@ -1,4 +1,9 @@
 @import "./imports.css";
+
+.home {
+  @apply hidden;
+}
+
 .train-world {
   .project-page_grid_title {
     grid-row: 1 / 5;

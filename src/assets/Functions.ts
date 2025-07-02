@@ -295,6 +295,15 @@ export const loadProjectPage = () => {
     const timeline = gsap.timeline({ onComplete: justifyParagraphs });
 
     timeline
+      .to(
+        "body",
+        {
+          duration: 0.2,
+          opacity: 1,
+          ease: "power3.out",
+        },
+        "0"
+      )
       .fromTo(
         `#project-page-${selectedProject.slug}`,
         {

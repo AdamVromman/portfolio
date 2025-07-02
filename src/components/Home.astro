@@ -3,9 +3,46 @@ import FlyingObjects from "./FlyingObjects.astro";
 import "../CSS/home.css";
 import HomeBackground from "./HomeBackground.astro";
 import { projects } from "../assets/Constants";
+
+const anim = {
+  old: {
+    name: "homeOut",
+    duration: "0.3s",
+    easing: "ease-in",
+  },
+  new: {
+    name: "homeOut",
+    duration: "1s",
+    easing: "ease-in-out",
+  },
+};
+
+const anim2 = {
+  old: {
+    name: "pageTransitionIn",
+    duration: "1s",
+    easing: "ease-in-out",
+    direction: "reverse",
+  },
+  new: {
+    name: "homeOut",
+    duration: "0.4s",
+    easing: "ease-out",
+    direction: "reverse",
+  },
+};
+
+const customTransition = {
+  forwards: anim,
+  backwards: anim2,
+};
 ---
 
-<div class="page-container home">
+<div
+  class="page-container home"
+  transition:persist
+  transition:animate={customTransition}
+>
   <HomeBackground />
   <div class="home_grid">
     <div class="grid_cell bottom ignore-move-out home_grid_title">

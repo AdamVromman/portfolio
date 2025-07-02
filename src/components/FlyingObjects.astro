@@ -199,7 +199,7 @@ import "../CSS/flying-objects.css";
       if (scene) {
         projects.forEach((project, index) => {
           loader.load(
-            `/assets/new-${project.slug}.drc`,
+            `/assets/${project.slug}.drc`,
             (geometry) => {
               const even = index % 2 === 0;
 
@@ -234,7 +234,8 @@ import "../CSS/flying-objects.css";
               canvasContainer?.appendChild(element);
 
               if (project.slug === "train-world") {
-                projectShape = RAPIER.ColliderDesc.cylinder(
+                projectShape = RAPIER.ColliderDesc.cuboid(
+                  0.15 * scale,
                   0.015 * scale,
                   0.095 * scale
                 );
