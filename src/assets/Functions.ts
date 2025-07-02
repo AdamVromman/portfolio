@@ -38,7 +38,7 @@ export const calculateNrOfRows = (localTileWidth: number) => {
       return Math.max(nrOfRows, 14);
     }
     if (screenWidth >= 480) {
-      return Math.max(nrOfRows, 16);
+      return Math.max(nrOfRows, 22);
     }
     return Math.max(nrOfRows, 16);
   }
@@ -145,6 +145,15 @@ export const loadHomePage = () => {
   const ease = "power1.inOut";
   gsap
     .timeline()
+    .to(
+      "body",
+      {
+        duration: 0.2,
+        opacity: 1,
+        ease: "power3.out",
+      },
+      "0"
+    )
     .to(
       ".home",
       {

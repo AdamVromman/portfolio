@@ -234,9 +234,31 @@
 }
 
 .grid_cell.home_grid_videos {
+  @apply relative;
+
+  video {
+    @apply border-2 border-active;
+  }
+
   grid-column: 1 / -1;
   grid-row: 5 / 11;
-  @apply relative;
+
+  @media (min-width: theme(--breakpoint-xs)) {
+    grid-column: 5 / -1;
+    grid-row: -17 / -11;
+  }
+  @media (min-width: theme(--breakpoint-sm)) {
+    grid-column: -11 / -1;
+    grid-row: -11 / -5;
+  }
+  @media (min-width: theme(--breakpoint-md)) {
+    grid-column: -15 / -1;
+    grid-row: -11 / -3;
+  }
+  @media (min-width: theme(--breakpoint-lg)) {
+    grid-column: -15 / -1;
+    grid-row: -13 / -5;
+  }
 }
 
 .home_video {
