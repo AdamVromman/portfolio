@@ -194,12 +194,12 @@ import "../CSS/flying-objects.css";
       loader.setDecoderPath("/assets/draco/");
       loader.preload();
 
-      const scale = (width + height) / 50;
+      const scale = (Math.min(width, 1000) + Math.min(height, 500)) / 40;
 
       if (scene) {
         projects.forEach((project, index) => {
           loader.load(
-            `/assets/${project.slug}.drc`,
+            `/assets/new-${project.slug}.drc`,
             (geometry) => {
               const even = index % 2 === 0;
 

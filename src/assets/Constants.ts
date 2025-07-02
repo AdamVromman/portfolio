@@ -36,12 +36,12 @@ export const projects: Project[] = [
     color: "B87AFF",
     year: 2024,
   },
-  // {
-  //   name: "All Eyes on Gaza",
-  //   slug: "all-eyes-on-gaza",
-  //   color: "FF7700",
-  //   year: 2025,
-  // },
+  {
+    name: "All Eyes on Gaza",
+    slug: "all-eyes-on-gaza",
+    color: "009736",
+    year: 2025,
+  },
   {
     name: "Qausal",
     slug: "qausal",
