@@ -42,7 +42,7 @@
 
 .project-page_grid_category {
   .grid_cell_container {
-    @apply justify-end;
+    @apply justify-end pr-15;
   }
 
   &.first {

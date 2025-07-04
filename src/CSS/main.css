@@ -134,4 +134,5 @@ body {
 
 .justified-paragraph {
   @apply w-full;
+  @apply p-30;
 }
