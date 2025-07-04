@@ -14,6 +14,7 @@ const anim = {
   new: {
     name: "pageTransitionIn",
     duration: "1s",
+    delay: "0.3s",
     easing: "ease-in-out",
   },
 };
@@ -155,7 +156,7 @@ const customTransition = {
     0% {
       opacity: 0;
       filter: blur(10px);
-      transform: scale(0.9);
+      transform: scale(2);
     }
     100% {
       transform: scale(1);
@@ -171,7 +172,7 @@ const customTransition = {
       filter: blur(0px);
     }
     100% {
-      transform: scale(2);
+      transform: scale(0.9);
       opacity: 0;
       filter: blur(10px);
     }

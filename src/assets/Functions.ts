@@ -471,26 +471,26 @@ export const handleMouseIn = (key: string) => {
       );
 
       timeline
-        // .to(
-        //   ".grid_cell.home_grid_title h1.page-title",
-        //   {
-        //     y: "-100%",
-        //     duration: 0.3,
-        //     ease: "power3.in",
-        //     overwrite: true,
-        //   },
-        //   "0"
-        // )
-        // .to(
-        //   `.grid_cell.home_grid_title .page-title.sub.${project.slug}`,
-        //   {
-        //     y: "0%",
-        //     duration: 0.3,
-        //     ease: "power3.in",
-        //     overwrite: true,
-        //   },
-        //   "<"
-        // )
+        .to(
+          ".grid_cell.home_grid_title h1.page-title",
+          {
+            y: "-100%",
+            duration: 0.3,
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "0"
+        )
+        .to(
+          `.grid_cell.home_grid_title .page-title.sub.${project.slug}`,
+          {
+            y: "0%",
+            duration: 0.3,
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "<"
+        )
         // .fromTo(
         //   `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
         //   {
@@ -598,35 +598,36 @@ export const handleMouseOut = (key: string) => {
     if (project && flyingObject) {
       const timeline = gsap.timeline();
 
-      timeline.to(
-        `.home_video.${project.slug}`,
-        {
-          duration: 0.3,
-          y: "100%",
-          overwrite: true,
-        },
-        ">"
-      );
-      // .to(
-      //   ".grid_cell.home_grid_title h1.page-title",
-      //   {
-      //     y: "0",
-      //     duration: 0.3,
-      //     ease: "power3.in",
-      //     overwrite: true,
-      //   },
-      //   "0"
-      // )
-      // .to(
-      //   `.grid_cell.home_grid_title .page-title.sub.${project.slug}`,
-      //   {
-      //     y: "100%",
-      //     duration: 0.3,
-      //     ease: "power3.in",
-      //     overwrite: true,
-      //   },
-      //   "<"
-      // )
+      timeline
+        .to(
+          `.home_video.${project.slug}`,
+          {
+            duration: 0.3,
+            y: "100%",
+            overwrite: true,
+          },
+          ">"
+        )
+        .to(
+          ".grid_cell.home_grid_title h1.page-title",
+          {
+            y: "0",
+            duration: 0.3,
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "0"
+        )
+        .to(
+          `.grid_cell.home_grid_title .page-title.sub.${project.slug}`,
+          {
+            y: "100%",
+            duration: 0.3,
+            ease: "power3.in",
+            overwrite: true,
+          },
+          "<"
+        );
       // .fromTo(
       //   `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
       //   {
