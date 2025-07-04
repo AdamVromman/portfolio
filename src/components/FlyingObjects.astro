@@ -199,7 +199,7 @@ import "../CSS/flying-objects.css";
       if (scene) {
         projects.forEach((project, index) => {
           loader.load(
-            `/assets/${project.slug}.drc`,
+            `/assets/${project.slug}/${project.slug}.drc`,
             (geometry) => {
               const even = index % 2 === 0;
 
