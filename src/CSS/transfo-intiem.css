@@ -73,11 +73,15 @@
     }
 
     @media (min-width: theme(--breakpoint-md)) {
-      grid-row: 5 / 13;
+      grid-row: 7 / 15;
     }
 
     @media (min-width: theme(--breakpoint-lg)) {
       grid-row: 5 / 11;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-row: 7 / 13;
     }
   }
 
@@ -91,6 +95,16 @@
 
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 14 / 24;
+    }
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 18 / 32;
+      grid-column: 2 / -6;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-row: 16 / 30;
+      grid-column: 4 / -6;
     }
   }
 
@@ -106,6 +120,16 @@
       grid-row: 25 / 32;
       grid-column: 2 / 10;
     }
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 34 / 42;
+      grid-column: 2 / 12;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-row: 32 / 40;
+      grid-column: 4 / 14;
+    }
   }
 
   .video-2 {
@@ -119,6 +143,16 @@
     @media (min-width: theme(--breakpoint-sm)) {
       grid-row: 25 / 36;
       grid-column: 11 / -2;
+    }
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 34 / 45;
+      grid-column: 14 / -2;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-row: 32 / 42;
+      grid-column: 16 / -4;
     }
   }
 
@@ -134,6 +168,16 @@
       grid-row: 33 / 37;
       grid-column: 2 / 10;
     }
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 43 / 48;
+      grid-column: 2 / 12;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-row: 40 / 44;
+      grid-column: 4 / 14;
+    }
   }
 
   .video-4 {
@@ -147,6 +191,16 @@
     @media (min-width: theme(--breakpoint-sm)) {
       grid-row: 38 / 46;
       grid-column: 4 / -2;
+    }
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 50 / 62;
+      grid-column: 2 / -2;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-row: 46 / 58;
+      grid-column: 4 / -4;
     }
   }
 
@@ -162,6 +216,16 @@
       grid-row: 47 / 54;
       grid-column: -10 / -2;
     }
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 64 / 70;
+      grid-column: -12 / -2;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-row: 60 / 66;
+      grid-column: -16 / -4;
+    }
   }
 
   .image-1 {
@@ -175,6 +239,21 @@
     @media (min-width: theme(--breakpoint-sm)) {
       grid-row: 47 / 54;
       grid-column: 2 / -11;
+    }
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 34 / 42;
+      grid-column: 2 / 10;
+    }
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 64 / 74;
+      grid-column: 2 / 14;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-row: 60 / 70;
+      grid-column: 4 / -16;
     }
   }
 
@@ -190,6 +269,16 @@
       grid-row: 55 / 63;
       grid-column: 2 / -2;
     }
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 76 / 84;
+      grid-column: -16 / -2;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-row: 72 / 80;
+      grid-column: -18 / -4;
+    }
   }
 
   .image-2 {
@@ -203,6 +292,16 @@
     @media (min-width: theme(--breakpoint-sm)) {
       grid-row: 64 / 72;
       grid-column: 2 / 14;
+    }
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 76 / 84;
+      grid-column: 2 / 10;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-row: 72 / 80;
+      grid-column: 4 / 12;
     }
   }
 
@@ -218,6 +317,16 @@
       grid-row: 73 / 82;
       grid-column: -13 / -2;
     }
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 86 / 100;
+      grid-column: 2 / 18;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-row: 82 / 96;
+      grid-column: 4 / 18;
+    }
   }
 
   .video-7 {
@@ -231,6 +340,16 @@
     @media (min-width: theme(--breakpoint-sm)) {
       grid-row: 83 / 93;
       grid-column: 2 / -2;
+    }
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 102 / 114;
+      grid-column: 2 / -2;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-row: 98 / 110;
+      grid-column: 4 / -4;
     }
   }
 }
