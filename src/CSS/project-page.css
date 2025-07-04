@@ -72,6 +72,15 @@
       grid-column: -6 / -3;
     }
   }
+
+  &.dev {
+    grid-column: -4 / -1;
+    @apply pl-thin;
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-column: -5 / -3;
+    }
+  }
 }
 
 .project-page_grid_description {
