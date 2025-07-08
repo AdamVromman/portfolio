@@ -38,6 +38,7 @@
   grid-column: 1 / -1;
 
   @apply pb-thick;
+  @apply text-active;
 }
 
 .project-page_grid_category {
