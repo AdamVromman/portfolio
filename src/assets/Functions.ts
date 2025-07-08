@@ -192,58 +192,58 @@ export const loadHomePage = () => {
       },
       "<"
     )
-    .to(
-      ".background_svg_line.line_vertical.line_main",
-      {
-        duration: duration,
-        attr: { y2: "100%", y1: "0%" },
-        ease: ease,
-        stagger: stagger,
-      },
-      ">-=1"
-    )
-    .to(
-      ".background_svg_line.line_vertical.line_sub",
-      {
-        duration: duration,
-        attr: { y2: "100%", y1: "0%" },
-        ease: ease,
-        stagger: stagger,
-      },
-      "<"
-    )
-    .to(
-      ".background_svg_line.line_horizontal.line_main",
-      {
-        duration: duration,
-        attr: { x2: "100%", x1: "0%" },
-        ease: ease,
-        stagger: stagger,
-      },
-      "<"
-    )
-    .to(
-      ".background_svg_line.line_horizontal.line_sub",
-      {
-        duration: duration,
-        attr: { x2: "100%", x1: "0%" },
-        ease: ease,
-        stagger: stagger,
-      },
-      "<"
-    )
-    .to(
-      ".background_svg_dot",
-      {
-        duration: 0.5,
-        attr: { r: `0` },
-        stagger: {
-          amount: 0.5,
-          from: "random",
-        },
-      },
-      ">"
-    )
+    // .to(
+    //   ".background_svg_line.line_vertical.line_main",
+    //   {
+    //     duration: duration,
+    //     attr: { y2: "100%", y1: "0%" },
+    //     ease: ease,
+    //     stagger: stagger,
+    //   },
+    //   ">-=1"
+    // )
+    // .to(
+    //   ".background_svg_line.line_vertical.line_sub",
+    //   {
+    //     duration: duration,
+    //     attr: { y2: "100%", y1: "0%" },
+    //     ease: ease,
+    //     stagger: stagger,
+    //   },
+    //   "<"
+    // )
+    // .to(
+    //   ".background_svg_line.line_horizontal.line_main",
+    //   {
+    //     duration: duration,
+    //     attr: { x2: "100%", x1: "0%" },
+    //     ease: ease,
+    //     stagger: stagger,
+    //   },
+    //   "<"
+    // )
+    // .to(
+    //   ".background_svg_line.line_horizontal.line_sub",
+    //   {
+    //     duration: duration,
+    //     attr: { x2: "100%", x1: "0%" },
+    //     ease: ease,
+    //     stagger: stagger,
+    //   },
+    //   "<"
+    // )
+    // .to(
+    //   ".background_svg_dot",
+    //   {
+    //     duration: 0.5,
+    //     attr: { r: `0` },
+    //     stagger: {
+    //       amount: 0.5,
+    //       from: "random",
+    //     },
+    //   },
+    //   ">"
+    // )
     .from(
       ".grid_cell.bottom .grid_cell_container",
       {
