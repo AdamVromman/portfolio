@@ -4,6 +4,10 @@
   @apply hidden;
 }
 
+.page-title {
+  @apply text-project-qausal;
+}
+
 .qausal {
   .project-page_grid_title {
     grid-row: 1 / 3;

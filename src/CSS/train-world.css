@@ -4,6 +4,10 @@
   @apply hidden;
 }
 
+.page-title {
+  @apply text-project-train-world;
+}
+
 .train-world {
   .project-page_grid_title {
     grid-row: 1 / 5;

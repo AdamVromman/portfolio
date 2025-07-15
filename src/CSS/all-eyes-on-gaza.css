@@ -4,6 +4,10 @@
   @apply hidden;
 }
 
+.page-title {
+  @apply text-project-all-eyes-on-gaza;
+}
+
 .all-eyes-on-gaza {
   .project-page-video video,
   .project-page-image img {
