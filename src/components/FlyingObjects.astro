@@ -201,105 +201,123 @@ import "../CSS/flying-objects.css";
           loader.load(
             `/assets/${project.slug}/${project.slug}.drc`,
             (geometry) => {
-              const even = index % 2 === 0;
+              loader.load(
+                `/assets/${project.slug}/${project.slug}-bounding-box.drc`,
+                (box) => {
+                  const even = index % 2 === 0;
 
-              geometry.center();
-              geometry.scale(scale, scale, scale);
-              const material = new THREE.MeshStandardMaterial({
-                color: new THREE.Color(`#${project.color}`),
-                roughness: 0,
-                metalness: 1,
-              });
-              const mesh = new THREE.Mesh(geometry, material);
-              scene.add(mesh);
-              const projectBody = world.createRigidBody(
-                RAPIER.RigidBodyDesc.dynamic()
-                  .setTranslation(
-                    even ? camera.left - 10 : camera.right + 10,
-                    camera.top * Math.random(),
-                    -20
-                  )
-                  .setRotation({ w: 0.5, x: 0.5, y: 0, z: 0 })
-                  .setCanSleep(false)
-                  .setLinearDamping(0)
-                  .setAngularDamping(0)
-              );
+                  geometry.center();
+                  geometry.scale(scale, scale, scale);
+                  const material = new THREE.MeshStandardMaterial({
+                    color: new THREE.Color(`#${project.color}`),
+                    roughness: 0,
+                    metalness: 1,
+                  });
+                  const mesh = new THREE.Mesh(geometry, material);
+                  scene.add(mesh);
+                  const projectBody = world.createRigidBody(
+                    RAPIER.RigidBodyDesc.dynamic()
+                      .setTranslation(
+                        even ? camera.left - 10 : camera.right + 10,
+                        camera.top - 8 - 8 * index,
+                        -20
+                      )
+                      .setRotation({ w: 0.5, x: 0.5, y: 0, z: 0 })
+                      .setCanSleep(false)
+                      .setLinearDamping(0)
+                      .setAngularDamping(0)
+                  );
 
-              projectBody.setEnabledTranslations(true, true, false, false);
+                  projectBody.setEnabledTranslations(true, true, false, false);
 
-              let projectShape;
-              const element = document.createElement("a");
-              element.className = `flying-object-link ${project.slug}`;
-              element.href = `/${project.slug}`;
-              canvasContainer?.appendChild(element);
+                  let projectShape;
+                  const element = document.createElement("a");
+                  element.className = `flying-object-link ${project.slug}`;
+                  element.href = `/${project.slug}`;
+                  canvasContainer?.appendChild(element);
+                  console.log(scale);
+                  box.center();
+                  box.scale(scale, scale, scale);
 
-              if (project.slug === "train-world") {
-                projectShape = RAPIER.ColliderDesc.cuboid(
-                  0.15 * scale,
-                  0.015 * scale,
-                  0.095 * scale
-                );
+                  projectShape = RAPIER.ColliderDesc.trimesh(
+                    box.attributes.position.array,
+                    box.index?.array || []
+                  );
 
-                element.style.width = "120px";
-                element.style.height = "120px";
-                element.style.transform = "translate(-50%, -50%)";
-              } else if (project.slug === "club-sofa") {
-                projectShape = RAPIER.ColliderDesc.cylinder(
-                  0.015 * scale,
-                  0.095 * scale
-                );
-                element.style.width = "120px";
-                element.style.height = "120px";
-                element.style.transform = "translate(-50%, -50%)";
-              } else {
-                projectShape = RAPIER.ColliderDesc.cylinder(
-                  0.015 * scale,
-                  0.095 * scale
-                );
-                element.style.width = "120px";
-                element.style.height = "120px";
-                element.style.transform = "translate(-50%, -50%)";
-              }
+                  if (project.slug === "train-world") {
+                    // projectShape = RAPIER.ColliderDesc.cuboid(
+                    //   0.21 * scale,
+                    //   0.015 * scale,
+                    //   0.13 * scale
+                    // );
 
-              projectShape.setMass(100).setRestitution(1);
-              world.createCollider(projectShape, projectBody);
+                    element.style.width = "120px";
+                    element.style.height = "120px";
+                    element.style.transform = "translate(-50%, -50%)";
+                  } else if (project.slug === "club-sofa") {
+                    // projectShape = RAPIER.ColliderDesc.cylinder(
+                    //   0.015 * scale,
+                    //   0.095 * scale
+                    // );
 
-              projectBody.applyImpulseAtPoint(
-                new RAPIER.Vector3(
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100
-                ),
-                new RAPIER.Vector3(Math.random(), Math.random(), Math.random()),
-                true
-              );
+                    element.style.width = "120px";
+                    element.style.height = "120px";
+                    element.style.transform = "translate(-50%, -50%)";
+                  } else {
+                    // projectShape = RAPIER.ColliderDesc.cylinder(
+                    //   0.015 * scale,
+                    //   0.095 * scale
+                    // );
+                    element.style.width = "120px";
+                    element.style.height = "120px";
+                    element.style.transform = "translate(-50%, -50%)";
+                  }
 
-              const flyingBody = {
-                mesh: mesh,
-                body: projectBody,
-                element: element,
-                slug: project.slug,
-              };
-              element.addEventListener("mouseenter", () => {
-                if (!clicked) {
-                  handleMouseIn(project.slug);
-                } else {
-                  clicked = false;
+                  projectShape.setMass(100).setRestitution(1);
+                  world.createCollider(projectShape, projectBody);
+
+                  projectBody.applyImpulseAtPoint(
+                    new RAPIER.Vector3(
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100
+                    ),
+                    new RAPIER.Vector3(
+                      Math.random(),
+                      Math.random(),
+                      Math.random()
+                    ),
+                    true
+                  );
+
+                  const flyingBody = {
+                    mesh: mesh,
+                    body: projectBody,
+                    element: element,
+                    slug: project.slug,
+                  };
+                  element.addEventListener("mouseenter", () => {
+                    if (!clicked) {
+                      handleMouseIn(project.slug);
+                    } else {
+                      clicked = false;
+                    }
+                  });
+
+                  element.addEventListener("mouseleave", () => {
+                    if (!clicked) {
+                      handleMouseOut(project.slug);
+                    }
+                  });
+
+                  element.addEventListener("click", () => {
+                    console.log("clicked", clicked);
+                    clicked = true;
+                  });
+
+                  dynamicBodies.push(flyingBody);
                 }
-              });
-
-              element.addEventListener("mouseleave", () => {
-                if (!clicked) {
-                  handleMouseOut(project.slug);
-                }
-              });
-
-              element.addEventListener("click", () => {
-                console.log("clicked", clicked);
-                clicked = true;
-              });
-
-              dynamicBodies.push(flyingBody);
+              );
             },
             (xhr) => {
               console.log(
@@ -336,15 +354,15 @@ import "../CSS/flying-objects.css";
       if (playing) requestAnimationFrame(animate);
       stats.update();
 
-      const { vertices, colors } = world.debugRender();
-      debug.geometry.setAttribute(
-        "position",
-        new THREE.BufferAttribute(vertices, 3)
-      );
-      debug.geometry.setAttribute(
-        "color",
-        new THREE.BufferAttribute(colors, 4)
-      );
+      // const { vertices, colors } = world.debugRender();
+      // debug.geometry.setAttribute(
+      //   "position",
+      //   new THREE.BufferAttribute(vertices, 3)
+      // );
+      // debug.geometry.setAttribute(
+      //   "color",
+      //   new THREE.BufferAttribute(colors, 4)
+      // );
 
       delta = clock.getDelta();
       time += Math.min(delta, 0.1);
