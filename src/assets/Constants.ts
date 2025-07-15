@@ -14,7 +14,7 @@ export const ROWS_PER_PROJECT_PER_SCREENSIZE = new Map<
   ["train-world", { xs: 98, sm: 110, md: 84, lg: 113, xl: 111 }],
   ["transfo-intiem", { xs: 98, sm: 120, md: 93, lg: 115, xl: 111 }],
   ["all-eyes-on-gaza", { xs: 101, sm: 114, md: 117, lg: 139, xl: 145 }],
-  ["qausal", { xs: 90, sm: 120, md: 93, lg: 115, xl: 111 }],
+  ["qausal", { xs: 94, sm: 116, md: 115, lg: 115, xl: 111 }],
 ]);
 
 export const projects: Project[] = [
