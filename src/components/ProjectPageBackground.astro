@@ -14,7 +14,7 @@ const { slug } = Astro.props;
     <g class="background_project-page_lines-group"></g>
   </svg>
 </div>
-<script>
+<!-- <script>
   import {
     calculateTileWidth,
     getNrOfColumns,
@@ -32,7 +32,7 @@ const { slug } = Astro.props;
           ".background_project-page_lines-group"
         );
 
-        const localTileWidth = calculateTileWidth();
+        const localTileWidth = calculateTileWidth("ProjectPage.drawLines");
         const nrOfRows = getProjectRowsPerScreenSize();
         background.style.width = `${getNrOfColumns() * localTileWidth}px`;
         background.style.height = `${nrOfRows * localTileWidth}px`;
@@ -129,5 +129,7 @@ const { slug } = Astro.props;
   };
 
   window.addEventListener("resize", onResize);
-  document.addEventListener("astro:after-swap", drawLines);
-</script>
+  window.addEventListener("astro:page-load", () => {
+    drawLines();
+  });
+</script> -->

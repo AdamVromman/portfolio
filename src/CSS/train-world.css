@@ -1,9 +1,5 @@
 @import "./imports.css";
 
-.home {
-  @apply hidden;
-}
-
 .page-title {
   @apply text-project-train-world;
 }

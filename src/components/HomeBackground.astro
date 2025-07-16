@@ -8,115 +8,18 @@ import "../CSS/background.css";
     <g class="background_home_lines-group"></g>
   </svg>
 </div>
-<script>
+<!-- <script>
   import gsap from "gsap";
   import {
     calculateNrOfRows,
     calculateTileWidth,
     getNrOfColumns,
+    loadHomePage,
   } from "../assets/Functions";
   import { selectedProject } from "../assets/Functions";
 
   const backgrounds = document.getElementsByClassName("background");
 
-  const drawDots = () => {
-    const svgNS = "http://www.w3.org/2000/svg";
-    const localTileWidth = calculateTileWidth();
-    const nrOfRows = calculateNrOfRows(localTileWidth);
-    const nrOfColumns = getNrOfColumns();
-    const dotsGroups = document.getElementsByClassName(
-      "starting-animation-dots"
-    );
-    for (let dotsGroup of dotsGroups as HTMLCollectionOf<HTMLElement>) {
-      dotsGroup.textContent = "";
-      for (let i = 0; i < nrOfRows; i++) {
-        for (let j = 0; j < nrOfColumns; j++) {
-          const dot = document.createElementNS(svgNS, "circle");
-          dot.classList.add("background_svg_dot");
-          if (i % 2 === 0 || j % 2 === 0) {
-            dot.classList.add("background_svg_dot_even");
-          } else {
-            dot.classList.add("background_svg_dot_odd");
-          }
-          dot.setAttribute("cx", `${j * localTileWidth}px`);
-          dot.setAttribute("cy", `${i * localTileWidth}px`);
-          dot.setAttribute("r", `0`);
-          dotsGroup.appendChild(dot);
-        }
-      }
-    }
-  };
-
-  const drawLines = () => {
-    for (let background of backgrounds as HTMLCollectionOf<HTMLElement>) {
-      const linesGroup = background.querySelector(
-        ".background_home_lines-group"
-      ) as HTMLElement;
-      const localTileWidth = calculateTileWidth();
-      const nrOfRows = calculateNrOfRows(localTileWidth);
-      background.style.width = `${getNrOfColumns() * localTileWidth}px`;
-      background.style.height = `${nrOfRows * localTileWidth}px`;
-      linesGroup.textContent = "";
-      const svgNS = "http://www.w3.org/2000/svg";
-
-      for (let i = 0; i < getNrOfColumns() / 2 - 1; i++) {
-        const line = document.createElementNS(svgNS, "line");
-        const x = `${localTileWidth * 2 * (i + 1)}px`;
-        line.classList.add("background_svg_line");
-        line.classList.add("line_vertical");
-        line.classList.add("line_main");
-        line.setAttribute("height", "0");
-        line.setAttribute("x1", x);
-        line.setAttribute("x2", x);
-        line.setAttribute("y1", "50%");
-        line.setAttribute("y2", "50%");
-        linesGroup.appendChild(line);
-      }
-
-      for (let i = 0; i < getNrOfColumns() / 2; i++) {
-        const line = document.createElementNS(svgNS, "line");
-        const x = `${localTileWidth + localTileWidth * 2 * i}px`;
-        line.classList.add("background_svg_line");
-        line.classList.add("line_vertical");
-        line.classList.add("line_sub");
-        line.setAttribute("x1", x);
-        line.setAttribute("x2", x);
-        line.setAttribute("y1", "50%");
-        line.setAttribute("y2", "50%");
-        line.setAttribute("stroke-dasharray", "4");
-        linesGroup.appendChild(line);
-      }
-
-      for (let i = 0; i < nrOfRows / 2 - 1; i++) {
-        const line = document.createElementNS(svgNS, "line");
-        const y = `${localTileWidth * 2 * (i + 1)}px`;
-        line.classList.add("background_svg_line");
-        line.classList.add("line_horizontal");
-        line.classList.add("line_main");
-        line.setAttribute("y1", y);
-        line.setAttribute("y2", y);
-        line.setAttribute("x1", "50%");
-        line.setAttribute("x2", "50%");
-        linesGroup.appendChild(line);
-      }
-
-      for (let i = 0; i < nrOfRows / 2; i++) {
-        const line = document.createElementNS(svgNS, "line");
-        const y = `${localTileWidth + localTileWidth * 2 * i}px`;
-        line.classList.add("background_svg_line");
-        line.classList.add("line_horizontal");
-        line.classList.add("line_sub");
-        line.setAttribute("stroke-dasharray", "4");
-        line.setAttribute("y1", y);
-        line.setAttribute("y2", y);
-        line.setAttribute("x1", "50%");
-        line.setAttribute("x2", "50%");
-        linesGroup.appendChild(line);
-      }
-    }
-  };
-
-  document.addEventListener("assetsloaded", () => drawLines());
 
   const onResize = () => {
     drawLines();
@@ -132,9 +35,12 @@ import "../CSS/background.css";
     }
   };
 
-  drawLines();
-  drawDots();
+  const drawHome = () => {
+    drawLines();
+    drawDots();
+  };
+
+  drawHome();
 
   window.addEventListener("resize", onResize);
-  document.addEventListener("astro:after-swap", drawLines);
-</script>
+</script> -->

@@ -1,21 +1,9 @@
 @import "./imports.css";
 
-.home .grid_cell {
-  &.left .grid_cell_container {
-    @apply -translate-x-full;
-  }
-
-  &.right .grid_cell_container {
-    @apply translate-x-full;
-  }
-
-  &.top .grid_cell_container {
-    @apply -translate-y-full;
-  }
-
-  &.bottom .grid_cell_container {
-    @apply translate-y-full;
-  }
+.project-page {
+  @apply absolute;
+  @apply top-[15px];
+  @apply flex flex-col items-center gap-15;
 }
 
 .project-page-container {

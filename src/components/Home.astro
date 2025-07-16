@@ -3,47 +3,9 @@ import FlyingObjects from "./FlyingObjects.astro";
 import "../CSS/home.css";
 import HomeBackground from "./HomeBackground.astro";
 import { projects } from "../assets/Constants";
-
-const anim = {
-  old: {
-    name: "homeOut",
-    duration: "0.3s",
-    easing: "ease-in",
-  },
-  new: {
-    name: "homeOut",
-    duration: "1s",
-    easing: "ease-in-out",
-  },
-};
-
-const anim2 = {
-  old: {
-    name: "pageTransitionIn",
-    duration: "1s",
-    easing: "ease-in-out",
-    direction: "reverse",
-  },
-  new: {
-    name: "homeOut",
-    duration: "0.4s",
-    delay: "0.3s",
-    easing: "ease-out",
-    direction: "reverse",
-  },
-};
-
-const customTransition = {
-  forwards: anim,
-  backwards: anim2,
-};
 ---
 
-<div
-  class="page-container home"
-  transition:persist
-  transition:animate={customTransition}
->
+<div class="page-container home" transition:persist>
   <HomeBackground />
   <div class="home_grid">
     <div class="grid_cell bottom ignore-move-out home_grid_title">
@@ -137,48 +99,6 @@ const customTransition = {
     </div>
   </div>
   <FlyingObjects />
-
-  <script>
-    import {
-      calculateTileWidth,
-      calculateNrOfRows,
-      getNrOfColumns,
-    } from "../assets/Functions";
-
-    const homes = document.getElementsByClassName("home");
-
-    const drawGrid = () => {
-      for (let home of homes) {
-        const homeGrid = home.querySelector(".home_grid") as HTMLElement;
-        if (homeGrid) {
-          const localTileWidth = calculateTileWidth();
-          const nrOfRows = calculateNrOfRows(localTileWidth);
-
-          homeGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-          homeGrid.style.gridTemplateRows = `repeat(${nrOfRows}, ${localTileWidth}px)`;
-        }
-      }
-    };
-
-    const handleResize = () => {
-      for (let home of homes as HTMLCollectionOf<HTMLElement>) {
-        const localTileWidth = calculateTileWidth();
-        const nrOfRows = calculateNrOfRows(localTileWidth);
-        home.style.width = `${getNrOfColumns() * localTileWidth}px`;
-        home.style.height = `${nrOfRows * localTileWidth}px`;
-      }
-
-      drawGrid();
-    };
-
-    document.addEventListener("assetsloaded", () => {
-      //animateIntro();
-    });
-    drawGrid();
-
-    window.addEventListener("resize", handleResize);
-    document.addEventListener("astro:after-swap", drawGrid);
-  </script>
 </div>
 
 <script>

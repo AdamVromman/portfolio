@@ -26,7 +26,7 @@ import "../CSS/background.css";
         ".background_footer_lines-group"
       ) as HTMLElement;
 
-      const localTileWidth = calculateTileWidth();
+      const localTileWidth = calculateTileWidth("FooterBackground.drawLines");
       const nrOfRows = getFooterRows();
       background.style.width = `${getNrOfColumns() * localTileWidth}px`;
       background.style.height = `${nrOfRows * localTileWidth}px`;

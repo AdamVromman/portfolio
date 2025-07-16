@@ -6,65 +6,32 @@ import ProjectPageBackground from "./ProjectPageBackground.astro";
 const { slug } = Astro.props;
 ---
 
-<video
-  class="project-page_video border-solid border-2 border-active"
-  id={`project-page_video-${slug}`}
-  autoplay
-  loop
-  muted
-  playsinline
-  src={`/assets/${slug}/ANIMATION-header.mp4`}></video>
-<div id={`project-page-${slug}`} class="project-page-container">
-  <ProjectPageBackground />
-  <div id={`project-page_grid-${slug}`} class="project-page_grid">
-    <slot />
+<div class="project-page">
+  <video
+    class="project-page_video border-solid border-2 border-active"
+    id={`project-page_video-${slug}`}
+    autoplay
+    loop
+    muted
+    playsinline
+    src={`/assets/${slug}/ANIMATION-header.mp4`}></video>
+  <div
+    id={`project-page-${slug}`}
+    data-slug={slug}
+    class="project-page-container"
+  >
+    <ProjectPageBackground />
+    <div id={`project-page_grid-${slug}`} class="project-page_grid">
+      <slot />
+    </div>
   </div>
+  <video
+    class="project-page_video border-solid border-2 border-active"
+    id={`project-page_video-${slug}`}
+    autoplay
+    loop
+    muted
+    playsinline
+    src={`/assets/${slug}/ANIMATION-header.mp4`}></video>
+  <Footer />
 </div>
-<video
-  class="project-page_video border-solid border-2 border-active"
-  id={`project-page_video-${slug}`}
-  autoplay
-  loop
-  muted
-  playsinline
-  src={`/assets/${slug}/ANIMATION-header.mp4`}></video>
-<Footer />
-<script>
-  import {
-    calculateTileWidth,
-    calculateNrOfRows,
-    getNrOfColumns,
-    getProjectRowsPerScreenSize,
-  } from "../assets/Functions";
-  import ProjectPageBackground from "./ProjectPageBackground.astro";
-
-  const slug = window.location.pathname.split("/")[1];
-  const projectPages = document.getElementsByClassName(
-    "project-page-container"
-  );
-
-  const drawGrid = () => {
-    for (let projectPage of projectPages as HTMLCollectionOf<HTMLElement>) {
-      if (projectPage) {
-        const projectPageGrid = projectPage.querySelector(
-          ".project-page_grid"
-        ) as HTMLElement;
-        const localTileWidth = calculateTileWidth();
-        projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
-        if (projectPageGrid) {
-          projectPageGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-          projectPageGrid.style.gridTemplateRows = `repeat(${getProjectRowsPerScreenSize()}, ${localTileWidth}px)`;
-        }
-      }
-    }
-  };
-
-  const handleResize = () => {
-    drawGrid();
-  };
-
-  window.addEventListener("resize", handleResize);
-  document.addEventListener("astro:after-swap", drawGrid);
-
-  drawGrid();
-</script>

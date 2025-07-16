@@ -1,10 +1,5 @@
 @import "./imports.css";
 
-#test_grid {
-  @apply grid w-full;
-  @apply relative;
-}
-
 .home {
   @apply w-full h-full;
   @apply relative;

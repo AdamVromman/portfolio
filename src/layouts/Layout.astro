@@ -4,44 +4,10 @@ import "../CSS/main.css";
 import { ClientRouter, slide } from "astro:transitions";
 
 const { slug } = Astro.props;
-
-const anim = {
-  old: {
-    name: "pageTransitionOut",
-    duration: "1s",
-    easing: "ease-in",
-  },
-  new: {
-    name: "pageTransitionIn",
-    duration: "1s",
-    delay: "0.3s",
-    easing: "ease-in-out",
-  },
-};
-
-const anim2 = {
-  old: {
-    name: "pageTransitionIn",
-    duration: "1s",
-    easing: "ease-in-out",
-    direction: "reverse",
-  },
-  new: {
-    name: "pageTransitionOut",
-    duration: "1s",
-    easing: "ease-in-out",
-    direction: "reverse",
-  },
-};
-
-const customTransition = {
-  forwards: anim,
-  backwards: anim2,
-};
 ---
 
 <!doctype html>
-<html lang="en" transition:animate="none">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -56,129 +22,95 @@ const customTransition = {
     />
     <ClientRouter />
   </head>
-  <body>
-    <div id="grid-calculator" transition:animate="none"></div>
-    <div
-      id="grid-container"
-      transition:animate={customTransition}
-      class={slug ? "project-page " + slug : ""}
-    >
+  <body transition:persist>
+    <div id="grid-calculator"></div>
+    <div id="grid-container" class={`${slug ? slug : ""}`}>
       <Home />
       <slot />
     </div>
     <script>
-      import { calculateTileWidth, getNrOfColumns } from "../assets/Functions";
-
-      const sizeGrid = () => {
-        const gridContainer = document.getElementById("grid-container");
-        if (gridContainer) {
-          const localTileWidth = calculateTileWidth();
-          gridContainer.style.width = `${getNrOfColumns() * localTileWidth}px`;
-        }
-      };
-
-      sizeGrid();
-      window.addEventListener("resize", sizeGrid);
-    </script>
-    <script>
       import gsap from "gsap";
       import { projects } from "../assets/Constants";
       import {
-        justifyParagraphs,
+        calculateTileWidth,
+        drawProjectPageGrid,
+        getNrOfColumns,
         loadHomePage,
         loadProjectPage,
         navigateToHomePage,
         navigateToProjectPage,
-        selectedProject,
         setSelectedProject,
       } from "../assets/Functions";
 
-      window.addEventListener("resize", justifyParagraphs);
-
-      let firstLoad = true;
-
-      document.addEventListener("assetsloaded", () => {
-        console.log("Assets loaded");
-        firstLoad = false;
+      const sizeGrid = () => {
         const gridContainer = document.getElementById("grid-container");
-        if (gridContainer && gridContainer.classList.contains("project-page")) {
-          const slug = gridContainer.classList[1];
-          const project = projects.find((p) => p.slug === slug);
-          if (project) {
-            setSelectedProject(project);
-            loadProjectPage();
-          }
-        } else {
-          setSelectedProject(undefined);
-          loadHomePage();
+        if (gridContainer) {
+          const localTileWidth = calculateTileWidth("Layout.sizeGrid");
+          gridContainer.style.width = `${getNrOfColumns() * localTileWidth}px`;
         }
-        justifyParagraphs();
-      });
-      document.addEventListener("astro:page-load", () => {
-        gsap.to("body", {
-          duration: 0.2,
+      };
+
+      const analyseURL = (url: string) => {
+        const urlParts = url.split("/");
+        const lastPart = urlParts[urlParts.length - 1];
+        return lastPart;
+      };
+
+      const handleResize = () => {
+        sizeGrid();
+        drawProjectPageGrid();
+      };
+
+      sizeGrid();
+
+      window.addEventListener("resize", handleResize);
+
+      document.addEventListener("astro:after-swap", () => {
+        console.log("astro:after-swap event triggered");
+
+        gsap.set("body", {
           opacity: 1,
-          ease: "power3.out",
+          ease: "power2.inOut",
         });
-        if (!firstLoad) {
-          const gridContainer = document.getElementById("grid-container");
-          if (
-            gridContainer &&
-            gridContainer.classList.contains("project-page")
-          ) {
-            const slug = gridContainer.classList[1];
-            const project = projects.find((p) => p.slug === slug);
-            if (project) {
-              setSelectedProject(project);
-              navigateToProjectPage();
-            }
-          } else {
-            setSelectedProject(undefined);
-            navigateToHomePage();
-          }
-          justifyParagraphs();
+
+        const url = analyseURL(window.location.href);
+        const project = projects.find((p) => p.slug === url);
+        if (url === "about") {
+          console.log("About page navigated");
+        } else if (project) {
+          console.log(`Project page navigated for: ${url}`);
+          setSelectedProject(project);
+          navigateToProjectPage();
+        } else {
+          console.log("Home page navigated");
+          setSelectedProject(undefined);
+          navigateToHomePage();
+        }
+      });
+
+      window.addEventListener("load", () => {
+        console.log("load event triggered");
+
+        gsap.to("body", {
+          duration: 0.5,
+          opacity: 1,
+          ease: "power2.inOut",
+        });
+
+        const url = analyseURL(window.location.href);
+        const project = projects.find((p) => p.slug === url);
+        if (url === "about") {
+          console.log("About page loaded");
+        } else if (project) {
+          console.log(`Project page loaded for: ${url}`);
+          setSelectedProject(project);
+          loadProjectPage();
+        } else {
+          console.log("Home page loaded");
+          loadHomePage();
+          setSelectedProject(undefined);
         }
       });
     </script>
   </body>
 </html>
-<style is:global>
-  @keyframes pageTransitionOut {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-      filter: blur(0px);
-    }
-    100% {
-      opacity: 0;
-      filter: blur(10px);
-      transform: scale(0.9);
-    }
-  }
-
-  @keyframes pageTransitionIn {
-    0% {
-      opacity: 0;
-      filter: blur(10px);
-      transform: scale(2);
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-      filter: blur(0px);
-    }
-  }
-
-  @keyframes homeOut {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-      filter: blur(0px);
-    }
-    100% {
-      transform: scale(0.9);
-      opacity: 0;
-      filter: blur(10px);
-    }
-  }
-</style>

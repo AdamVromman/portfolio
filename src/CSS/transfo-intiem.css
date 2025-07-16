@@ -1,9 +1,5 @@
 @import "./imports.css";
 
-.home {
-  @apply hidden;
-}
-
 .transfo-intiem {
   .project-page_grid_title {
     grid-row: 1 / 5;

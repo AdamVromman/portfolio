@@ -235,7 +235,6 @@ import "../CSS/flying-objects.css";
                   element.className = `flying-object-link ${project.slug}`;
                   element.href = `/${project.slug}`;
                   canvasContainer?.appendChild(element);
-                  console.log(scale);
                   box.center();
                   box.scale(scale, scale, scale);
 
@@ -311,7 +310,6 @@ import "../CSS/flying-objects.css";
                   });
 
                   element.addEventListener("click", () => {
-                    console.log("clicked", clicked);
                     clicked = true;
                   });
 
@@ -382,7 +380,6 @@ import "../CSS/flying-objects.css";
           );
         }
       } else if (time < 11) {
-        console.log("moved walls");
         movedWalls = true;
       }
 
@@ -419,8 +416,6 @@ import "../CSS/flying-objects.css";
           true
         );
 
-        console.log(dynamicBodies[i].body.linvel());
-
         dynamicBodies[i].mesh.position.copy(
           dynamicBodies[i].body.translation()
         );
@@ -442,7 +437,7 @@ import "../CSS/flying-objects.css";
 
     const init = () => {
       if (canvasContainer) {
-        const localTileWidth = calculateTileWidth();
+        const localTileWidth = calculateTileWidth("FlyingObjects.init");
         const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
 
         canvasContainer.style.height = `${NR_OF_ROWS * localTileWidth}px`;
@@ -515,7 +510,9 @@ import "../CSS/flying-objects.css";
 
     const onWindowResize = () => {
       if (renderer && camera && canvasContainer) {
-        const localTileWidth = calculateTileWidth();
+        const localTileWidth = calculateTileWidth(
+          "FlyingObjects.onWindowResize"
+        );
         const NR_OF_ROWS = calculateNrOfRows(localTileWidth);
 
         canvasContainer.style.height = `${NR_OF_ROWS * localTileWidth}px`;
