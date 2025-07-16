@@ -240,8 +240,8 @@ import "../CSS/flying-objects.css";
                   box.scale(scale, scale, scale);
 
                   projectShape = RAPIER.ColliderDesc.trimesh(
-                    box.attributes.position.array,
-                    box.index?.array || []
+                    box.attributes.position.array as Float32Array,
+                    box.index?.array as Uint32Array
                   );
 
                   if (project.slug === "train-world") {
@@ -400,6 +400,26 @@ import "../CSS/flying-objects.css";
             : dynamicBodies[i].body.linvel();
           dynamicBodies[i].body.setLinvel(vel, true);
         }
+
+        dynamicBodies[i].body.setLinvel(
+          new RAPIER.Vector3(
+            Math.max(Math.min(dynamicBodies[i].body.linvel().x, 3), -3),
+            Math.max(Math.min(dynamicBodies[i].body.linvel().y, 3), -3),
+            0
+          ),
+          true
+        );
+
+        dynamicBodies[i].body.setAngvel(
+          new RAPIER.Vector3(
+            Math.max(Math.min(dynamicBodies[i].body.angvel().x, 5), -5),
+            Math.max(Math.min(dynamicBodies[i].body.angvel().y, 5), -5),
+            Math.max(Math.min(dynamicBodies[i].body.angvel().z, 5), -5)
+          ),
+          true
+        );
+
+        console.log(dynamicBodies[i].body.linvel());
 
         dynamicBodies[i].mesh.position.copy(
           dynamicBodies[i].body.translation()
