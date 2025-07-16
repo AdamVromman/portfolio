@@ -41,7 +41,7 @@ const customTransition = {
 ---
 
 <!doctype html>
-<html lang="en" transition:animate={customTransition}>
+<html lang="en" transition:animate="none">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -57,8 +57,12 @@ const customTransition = {
     <ClientRouter />
   </head>
   <body>
-    <div id="grid-calculator"></div>
-    <div id="grid-container" class={slug ? "project-page " + slug : ""}>
+    <div id="grid-calculator" transition:animate="none"></div>
+    <div
+      id="grid-container"
+      transition:animate={customTransition}
+      class={slug ? "project-page " + slug : ""}
+    >
       <Home />
       <slot />
     </div>

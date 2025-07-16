@@ -17,6 +17,7 @@ gsap.registerPlugin(TextPlugin);
 
 export const calculateTileWidth = () => {
   const gridContainer = document.getElementById("grid-calculator");
+  console.log(gridContainer?.clientWidth);
   if (gridContainer)
     return Math.floor(gridContainer.clientWidth / getNrOfColumns());
   return 0;
