@@ -268,6 +268,7 @@ export const loadProjectPage = () => {
   //loadHomePage();
   console.log("loadProjectPage");
   drawHomeGrid(true);
+
   drawProjectPageGrid();
   if (selectedProject) {
     document.documentElement.style.setProperty(
@@ -400,22 +401,108 @@ export const navigateToHomePage = () => {
 
 export const navigateToProjectPage = () => {
   console.log("navigateToProjectPage");
+
+  gsap.set("body", {
+    overflow: "hidden",
+  });
+
   drawProjectPageGrid();
   if (selectedProject) {
     document.documentElement.style.setProperty(
       "--color-active",
       `#${selectedProject.color}`
     );
+
+    const duration = 0.75;
+
+    const stagger: gsap.StaggerVars = {
+      each: 0.05,
+      from: "random",
+      ease: "power1.out",
+    };
+    const ease = "power1.inOut";
+
     const timeline = gsap.timeline({
       onComplete: justifyParagraphs,
     });
 
     timeline
-      .to(".home", {
-        y: "-100vw",
-        duration: 1,
-        ease: "power4.out",
-      })
+      .to(
+        ".grid_cell.bottom .grid_cell_container",
+        {
+          duration: 1,
+          y: "100%",
+          ease: "power4.out",
+        },
+        "<"
+      )
+      .to(
+        ".grid_cell.top .grid_cell_container",
+        {
+          duration: 1,
+          y: "-100%",
+          ease: "power4.out",
+        },
+        "<"
+      )
+      .to(
+        ".grid_cell.left .grid_cell_container",
+        {
+          duration: 1,
+          x: "-100%",
+          ease: "power4.out",
+        },
+        "<"
+      )
+      .to(
+        ".grid_cell.right .grid_cell_container",
+        {
+          duration: 1,
+          x: "100%",
+          ease: "power4.out",
+        },
+        "<"
+      )
+      .to(
+        ".background .background_svg_line.line_vertical.line_main",
+        {
+          duration: duration,
+          attr: { y2: "50%", y1: "50%" },
+          ease: ease,
+          stagger: stagger,
+        },
+        ">-=1"
+      )
+      .to(
+        ".background .background_svg_line.line_vertical.line_sub",
+        {
+          duration: duration,
+          attr: { y2: "50%", y1: "50%" },
+          ease: ease,
+          stagger: stagger,
+        },
+        "<"
+      )
+      .to(
+        ".background .background_svg_line.line_horizontal.line_main",
+        {
+          duration: duration,
+          attr: { x2: "50%", x1: "50%" },
+          ease: ease,
+          stagger: stagger,
+        },
+        "<"
+      )
+      .to(
+        ".background .background_svg_line.line_horizontal.line_sub",
+        {
+          duration: duration,
+          attr: { x2: "50%", x1: "50%" },
+          ease: ease,
+          stagger: stagger,
+        },
+        "<"
+      )
       .from(
         ".project-page",
         {
@@ -423,7 +510,14 @@ export const navigateToProjectPage = () => {
           duration: 1,
           ease: "power4.out",
         },
-        "<"
+        ">"
+      )
+      .set(
+        "body",
+        {
+          overflow: "auto",
+        },
+        ">"
       );
   }
 };
