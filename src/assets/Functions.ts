@@ -279,33 +279,68 @@ export const loadProjectPage = () => {
       onComplete: justifyParagraphs,
       delay: 3.7,
     });
-
-    timeline
-      .to(".home", {
-        y: "-100vw",
-        duration: 1,
-        ease: "power4.out",
-      })
-      .from(
-        ".project-page",
-        {
-          y: "100vw",
-          duration: 1,
-          ease: "power4.out",
-        },
-        "<"
-      );
   }
 };
 
+//TODO: Can I navigate outgoing content before it leaves?
 export const navigateToHomePage = () => {
   console.log("navigateToHomePage");
   drawHomeGrid(true);
   if (!selectedProject) {
     document.documentElement.style.setProperty("--color-active", "#4000ff");
+
+    const duration = 0.75;
+
+    const stagger: gsap.StaggerVars = {
+      each: 0.05,
+      from: "random",
+      ease: "power1.out",
+    };
+    const ease = "power1.inOut";
+
     const timeline = gsap.timeline();
 
     timeline
+      .to(
+        ".background_project-page .background_svg_line.line_vertical.line_main",
+        {
+          duration: duration,
+          attr: { y2: "50%", y1: "50%" },
+          ease: ease,
+          stagger: stagger,
+        },
+        ">-=1"
+      )
+      .to(
+        ".background_project-page .background_svg_line.line_vertical.line_sub",
+        {
+          duration: duration,
+          attr: { y2: "50%", y1: "50%" },
+          ease: ease,
+          stagger: stagger,
+        },
+        "<"
+      )
+      .to(
+        ".background_project-page .background_svg_line.line_horizontal.line_main",
+        {
+          duration: duration,
+          attr: { x2: "50%", x1: "50%" },
+          ease: ease,
+          stagger: stagger,
+        },
+        "<"
+      )
+      .to(
+        ".background_project-page .background_svg_line.line_horizontal.line_sub",
+        {
+          duration: duration,
+          attr: { x2: "50%", x1: "50%" },
+          ease: ease,
+          stagger: stagger,
+        },
+        "<"
+      )
       .to(
         ".home",
         {
