@@ -22,7 +22,7 @@ const { slug } = Astro.props;
     />
     <ClientRouter />
   </head>
-  <body transition:persist>
+  <body data-slug={slug} transition:persist>
     <div id="grid-calculator"></div>
     <div id="grid-container" class={`${slug ? slug : ""}`}>
       <Home />
@@ -50,10 +50,10 @@ const { slug } = Astro.props;
         }
       };
 
-      const analyseURL = (url: string) => {
-        const urlParts = url.split("/");
-        const lastPart = urlParts[urlParts.length - 1];
-        return lastPart;
+      const analyseURL = () => {
+        const slug = document.body.dataset.slug;
+        console.log("slug:", slug);
+        return slug;
       };
 
       const handleResize = () => {
@@ -73,7 +73,7 @@ const { slug } = Astro.props;
           ease: "power2.inOut",
         });
 
-        const url = analyseURL(window.location.href);
+        const url = analyseURL();
         const project = projects.find((p) => p.slug === url);
         if (url === "about") {
           console.log("About page navigated");
@@ -97,7 +97,7 @@ const { slug } = Astro.props;
           ease: "power2.inOut",
         });
 
-        const url = analyseURL(window.location.href);
+        const url = analyseURL();
         const project = projects.find((p) => p.slug === url);
         if (url === "about") {
           console.log("About page loaded");

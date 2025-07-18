@@ -1,6 +1,6 @@
 @import "./imports.css";
 
-.home {
+.page-container.home {
   @apply w-full h-full;
   @apply relative;
   @apply flex flex-col items-center justify-start gap-15;
