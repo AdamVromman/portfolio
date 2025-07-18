@@ -5,25 +5,18 @@ import HomeBackground from "./HomeBackground.astro";
 import { projects } from "../assets/Constants";
 ---
 
-<div id="home" class="page-container" transition:persist>
-  {
-    projects.map((project) => {
-      return (
-        <video
-          class={`home_video ${project.slug}`}
-          src={`/${project.slug}/ANIMATION-header.webm`}
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="auto"
-        />
-      );
-    })
-  }
-
+<div class="page-container home" transition:persist>
   <HomeBackground />
-  <div id="home_grid" class="home_grid">
+  <div class="home_grid">
+    <a href="/" class="home_grid_back-home">
+      <div class="home_grid_back-home_icon">
+        <svg viewBox="0 0 35 16">
+          <path d="M35 8H2" stroke-width="2"></path>
+          <path d="M9 1L2 8L9 15" stroke-width="2"></path>
+        </svg>
+      </div>
+      <span class="uppercase half-col-text pl-5">back home</span>
+    </a>
     <div class="grid_cell bottom ignore-move-out home_grid_title">
       <div class="grid_cell_container">
         <h1 class="full-col-text page-title">
@@ -45,7 +38,6 @@ import { projects } from "../assets/Constants";
         <span class="half-col-text">Discover my work:</span>
       </div>
     </div>
-
     {
       projects.map((project) => {
         return (
@@ -65,9 +57,9 @@ import { projects } from "../assets/Constants";
     <div class="grid_cell left home_grid_text">
       <div class="grid_cell_container">
         <p class="justified-paragraph">
-          I’m Adam Vromman, a Belgian designer and dev. I mix bold design with
-          clean code—serious about the details, but never too stiff. Two
-          degrees, endless grids, and a love for creative coding.
+          My name is Adam, I am a designer and developer. I spend my time
+          perfecting the details, enjoying the experimentation and crafting
+          beautiful things.
         </p>
       </div>
     </div>
@@ -98,121 +90,43 @@ import { projects } from "../assets/Constants";
         </svg>
       </a>
     </div>
+    <div class="grid_cell home_grid_videos">
+      {
+        projects.map((project) => {
+          return (
+            <video
+              class={`home_video ${project.slug}`}
+              src={`/assets/${project.slug}/ANIMATION-header.mp4`}
+              muted
+              loop
+              playsinline
+              preload="auto"
+            />
+          );
+        })
+      }
+    </div>
   </div>
   <FlyingObjects />
-
-  <script>
-    import {
-      calculateTileWidth,
-      calculateNrOfRows,
-      getNrOfColumns,
-      handleMouseOut,
-      selectedProject,
-    } from "../assets/Functions";
-    import gsap from "gsap";
-
-    const home = document.getElementById("home");
-    const homeGrid = document.getElementById("home_grid");
-
-    const drawGrid = () => {
-      if (homeGrid) {
-        const localTileWidth = calculateTileWidth();
-        const nrOfRows = calculateNrOfRows(localTileWidth);
-        homeGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-        homeGrid.style.gridTemplateRows = `repeat(${nrOfRows}, ${localTileWidth}px)`;
-      }
-    };
-
-    const animateIntro = () => {
-      const localTileWidth = calculateTileWidth();
-      const nrOfRows = calculateNrOfRows(localTileWidth);
-
-      const height = home?.parentElement?.classList.contains("project-page")
-        ? (nrOfRows - 2) * localTileWidth - 2
-        : nrOfRows * localTileWidth;
-
-      gsap.set(".page-container", {
-        width: getNrOfColumns() * localTileWidth,
-        height: height,
-        left: 0,
-        top: 0,
-      });
-
-      // gsap
-      //   .timeline()
-      //   .to(
-      //     ".page-container",
-      //     {
-      //       duration: 0.5,
-      //       scaleX: 1,
-      //       scaleY: 0.005,
-      //       ease: "power4.out",
-      //     },
-      //     "0"
-      //   )
-      //   .to(
-      //     ".page-container",
-      //     {
-      //       duration: 0.5,
-      //       scaleY: 1,
-      //       ease: "power3.out",
-      //     },
-      //     ">"
-      //   )
-      //   .to(
-      //     ".page-container",
-      //     {
-      //       duration: 0.5,
-      //       backgroundColor: "transparent",
-      //       ease: "power4.inOut",
-      //     },
-      //     "<+=0.25"
-      //   );
-    };
-
-    const handleResize = () => {
-      if (home) {
-        const localTileWidth = calculateTileWidth();
-        const nrOfRows = calculateNrOfRows(localTileWidth);
-        home.style.width = `${getNrOfColumns() * localTileWidth}px`;
-        home.style.height = `${nrOfRows * localTileWidth}px`;
-      }
-
-      drawGrid();
-    };
-
-    document.addEventListener("assetsloaded", () => {
-      animateIntro();
-      drawGrid();
-    });
-
-    window.addEventListener("resize", handleResize);
-  </script>
-
-  <script>
-    import { handleMouseIn, handleMouseOut } from "../assets/Functions";
-
-    const links = document.querySelectorAll(".home_grid_work_link");
-    links.forEach((link) => {
-      link.addEventListener("mouseenter", (e) => {
-        if (link instanceof HTMLElement) {
-          const key = link.dataset.slug || "";
-          const element = e.target as HTMLElement;
-          element.parentElement?.classList.add("ignore-move-out");
-          element.style.opacity = "0";
-          handleMouseIn(key);
-        }
-      });
-
-      link.addEventListener("mouseleave", (e) => {
-        if (link instanceof HTMLElement) {
-          const key = link.dataset.slug || "";
-          handleMouseOut(key);
-          const element = e.target as HTMLElement;
-          element.parentElement?.classList.remove("ignore-move-out");
-          element.style.opacity = "1";
-        }
-      });
-    });
-  </script>
 </div>
+
+<script>
+  import { handleMouseIn, handleMouseOut } from "../assets/Functions";
+
+  const links = document.querySelectorAll(".home_grid_work_link");
+  links.forEach((link) => {
+    link.addEventListener("mouseenter", () => {
+      if (link instanceof HTMLElement) {
+        const key = link.dataset.slug || "";
+        handleMouseIn(key);
+      }
+    });
+
+    link.addEventListener("mouseleave", () => {
+      if (link instanceof HTMLElement) {
+        const key = link.dataset.slug || "";
+        handleMouseOut(key);
+      }
+    });
+  });
+</script>

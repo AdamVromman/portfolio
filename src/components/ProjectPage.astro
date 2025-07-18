@@ -6,46 +6,32 @@ import ProjectPageBackground from "./ProjectPageBackground.astro";
 const { slug } = Astro.props;
 ---
 
-<div id="project-page">
-  <ProjectPageBackground />
-  <div id="project-page_grid">
-    <slot />
+<div class="project-page">
+  <video
+    class="project-page-header-video"
+    id={`project-page_video-${slug}`}
+    autoplay
+    loop
+    muted
+    playsinline
+    src={`/assets/${slug}/ANIMATION-header.mp4`}></video>
+  <div
+    id={`project-page-${slug}`}
+    data-slug={slug}
+    class="project-page-container"
+  >
+    <ProjectPageBackground />
+    <div id={`project-page_grid-${slug}`} class="project-page_grid">
+      <slot />
+    </div>
   </div>
+  <video
+    class="project-page-header-video border-solid border-2 border-active box-content"
+    id={`project-page_video-${slug}`}
+    autoplay
+    loop
+    muted
+    playsinline
+    src={`/assets/${slug}/ANIMATION-header.mp4`}></video>
+  <Footer />
 </div>
-<video
-  class="border-solid border-2 border-active"
-  id="project-page_video"
-  autoplay
-  loop
-  muted
-  playsinline
-  src={`/${slug}/ANIMATION-header.mp4`}></video>
-<Footer />
-<script>
-  import {
-    calculateTileWidth,
-    calculateNrOfRows,
-    getNrOfColumns,
-    getProjectRowsPerScreenSize,
-  } from "../assets/Functions";
-
-  const projectPage = document.getElementById("project-page");
-  const projectPageGrid = document.getElementById("project-page_grid");
-
-  const drawGrid = () => {
-    if (projectPageGrid && projectPage) {
-      const localTileWidth = calculateTileWidth();
-      projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
-      projectPageGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-      projectPageGrid.style.gridTemplateRows = `repeat(${getProjectRowsPerScreenSize()}, ${localTileWidth}px)`;
-    }
-  };
-
-  const handleResize = () => {
-    drawGrid();
-  };
-
-  window.addEventListener("resize", handleResize);
-
-  drawGrid();
-</script>

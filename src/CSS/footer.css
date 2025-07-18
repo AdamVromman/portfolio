@@ -1,12 +1,12 @@
 @import "./imports.css";
 
-#footer {
+.footer {
   @apply relative;
   @apply border-2 border-active box-content;
   @apply overflow-hidden;
 }
 
-#footer_grid {
+.footer_grid {
   @apply grid;
 }
 
@@ -106,15 +106,20 @@
     grid-column: 1 / 8;
   }
 
+  .footer_grid_back-home_icon svg {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+
   &:hover {
     @apply bg-active;
     @apply text-white;
 
-    .footer_grid_back-home_icon {
-      @apply bg-white;
-      svg {
-        @apply stroke-active;
-      }
+    .grid_cell_container {
+      @apply bg-active;
+    }
+
+    .footer_grid_back-home_icon svg {
+      @apply -translate-x-[200%];
     }
   }
 }

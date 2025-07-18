@@ -10,11 +10,11 @@ export const ROWS_PER_PROJECT_PER_SCREENSIZE = new Map<
   string,
   { xs: number; sm: number; md: number; lg: number; xl: number }
 >([
-  ["club-sofa", { xs: 115, sm: 138, md: 121, lg: 109, xl: 107 }],
-  ["train-world", { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 }],
-  ["transfo-intiem", { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 }],
-  ["all-eyes-on-gaza", { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 }],
-  ["qausal", { xs: 5, sm: 5, md: 5, lg: 5, xl: 5 }],
+  ["club-sofa", { xs: 113, sm: 131, md: 121, lg: 113, xl: 111 }],
+  ["train-world", { xs: 98, sm: 110, md: 84, lg: 113, xl: 111 }],
+  ["transfo-intiem", { xs: 98, sm: 120, md: 93, lg: 115, xl: 111 }],
+  ["all-eyes-on-gaza", { xs: 101, sm: 114, md: 117, lg: 139, xl: 145 }],
+  ["qausal", { xs: 94, sm: 116, md: 115, lg: 147, xl: 151 }],
 ]);
 
 export const projects: Project[] = [
@@ -30,24 +30,24 @@ export const projects: Project[] = [
     color: "de2217",
     year: 2023,
   },
-  // {
-  //   name: "Transfo Intiem",
-  //   slug: "transfo-intiem",
-  //   color: "B87AFF",
-  //   year: 2024,
-  // },
-  // {
-  //   name: "All Eyes on Gaza",
-  //   slug: "all-eyes-on-gaza",
-  //   color: "FF7700",
-  //   year: 2025,
-  // },
-  // {
-  //   name: "Qausal",
-  //   slug: "qausal",
-  //   color: "FF7700",
-  //   year: 2025,
-  // },
+  {
+    name: "Transfo Intiem",
+    slug: "transfo-intiem",
+    color: "B87AFF",
+    year: 2024,
+  },
+  {
+    name: "All Eyes on Gaza",
+    slug: "all-eyes-on-gaza",
+    color: "009736",
+    year: 2025,
+  },
+  {
+    name: "Qausal",
+    slug: "qausal",
+    color: "FF7700",
+    year: 2025,
+  },
 ];
 
 export const dynamicBodies: FlyingObject[] = [];

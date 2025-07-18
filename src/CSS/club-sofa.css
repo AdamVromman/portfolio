@@ -192,12 +192,12 @@
     }
   }
 
-  .project-page_grid_screen-collection {
+  .video-3 {
     grid-column: 1 / -1;
-    grid-row: 49 / 65;
+    grid-row: 49 / 63;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 55 / 74;
+      grid-row: 55 / 68;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -205,29 +205,20 @@
     }
 
     @media (min-width: theme(--breakpoint-md)) {
-      grid-row: 48 / 60;
+      grid-row: 48 / 64;
     }
 
     @media (min-width: theme(--breakpoint-lg)) {
-      grid-row: 44 / 58;
-    }
-
-    .grid_cell_container {
-      @apply flex-row flex-wrap;
-      @apply justify-evenly items-center gap-5;
-      @apply bg-project-club-sofa;
-      img {
-        @apply w-1/3;
-      }
+      grid-row: 44 / 62;
     }
   }
 
   .image-3 {
     grid-column: 2 / -2;
-    grid-row: 66 / 72;
+    grid-row: 64 / 69;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 75 / 81;
+      grid-row: 69 / 75;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -235,20 +226,20 @@
     }
 
     @media (min-width: theme(--breakpoint-md)) {
-      grid-row: 62 / 76;
+      grid-row: 66 / 80;
     }
 
     @media (min-width: theme(--breakpoint-lg)) {
       grid-column: 4 / -4;
-      grid-row: 60 / 74;
+      grid-row: 64 / 78;
     }
   }
 
   .paragraph-2 {
-    grid-row: 72 / 80;
+    grid-row: 69 / 77;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 81 / 84;
+      grid-row: 75 / 83;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -256,23 +247,23 @@
     }
 
     @media (min-width: theme(--breakpoint-md)) {
-      grid-row: 76 / 86;
+      grid-row: 80 / 90;
       grid-column: 2 / 14;
     }
 
     @media (min-width: theme(--breakpoint-lg)) {
       grid-column: 4 / 14;
-      grid-row: 74 / 86;
+      grid-row: 78 / 90;
     }
   }
 
-  .video-3 {
+  .video-4 {
     grid-column: 2 / -2;
-    grid-row: 80 / 86;
+    grid-row: 77 / 84;
     @apply p-thin;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 89 / 99;
+      grid-row: 83 / 93;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -281,22 +272,22 @@
     }
 
     @media (min-width: theme(--breakpoint-md)) {
-      grid-row: 86 / 98;
+      grid-row: 90 / 102;
       grid-column: 2 / 14;
     }
 
     @media (min-width: theme(--breakpoint-lg)) {
       grid-column: 4 / 14;
-      grid-row: 86 / 96;
+      grid-row: 90 / 100;
     }
   }
 
   .image-4 {
     grid-column: 2 / -2;
-    grid-row: 87 / 99;
+    grid-row: 85 / 97;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 100 / 116;
+      grid-row: 94 / 109;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -305,22 +296,22 @@
     }
 
     @media (min-width: theme(--breakpoint-md)) {
-      grid-row: 82 / 98;
+      grid-row: 86 / 102;
       grid-column: 16 / -2;
     }
 
     @media (min-width: theme(--breakpoint-lg)) {
       grid-column: 16 / -4;
-      grid-row: 80 / 96;
+      grid-row: 84 / 100;
     }
   }
 
   .image-5 {
     grid-column: 1 / -1;
-    grid-row: 100 / 106;
+    grid-row: 98 / 104;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 117 / 127;
+      grid-row: 110 / 120;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -328,22 +319,22 @@
     }
 
     @media (min-width: theme(--breakpoint-md)) {
-      grid-row: 100 / 108;
+      grid-row: 104 / 112;
       grid-column: 14 / -2;
     }
 
     @media (min-width: theme(--breakpoint-lg)) {
       grid-column: 14 / -4;
-      grid-row: 98 / 106;
+      grid-row: 102 / 110;
     }
   }
 
   .image-6 {
     grid-column: 2 / -2;
-    grid-row: 107 / 115;
+    grid-row: 105 / 113;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 128 / 138;
+      grid-row: 121 / 131;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -352,13 +343,13 @@
     }
 
     @media (min-width: theme(--breakpoint-md)) {
-      grid-row: 100 / 108;
+      grid-row: 104 / 112;
       grid-column: 2 / 12;
     }
 
     @media (min-width: theme(--breakpoint-lg)) {
       grid-column: 4 / 12;
-      grid-row: 98 / 106;
+      grid-row: 102 / 110;
     }
   }
 

@@ -1,13 +1,23 @@
 @import "./imports.css";
 
-#project-page {
+.project-page {
+  @apply absolute;
+  @apply top-[15px];
+  @apply flex flex-col items-center gap-15;
+  @apply pb-15;
+}
+
+.project-page-header-video {
+  @apply border-solid border-2 border-active box-content;
+}
+
+.project-page-container {
   @apply relative;
-  @apply opacity-0;
   @apply border-2 border-active box-content;
   @apply overflow-hidden;
 }
 
-#project-page_grid {
+.project-page_grid {
   @apply grid;
   @apply relative z-10;
 }
@@ -21,11 +31,12 @@
   grid-column: 1 / -1;
 
   @apply pb-thick;
+  @apply text-active;
 }
 
 .project-page_grid_category {
   .grid_cell_container {
-    @apply justify-end;
+    @apply justify-end pr-15;
   }
 
   &.first {
@@ -53,6 +64,15 @@
 
     @media (min-width: theme(--breakpoint-md)) {
       grid-column: -6 / -3;
+    }
+  }
+
+  &.dev {
+    grid-column: -4 / -1;
+    @apply pl-thin;
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-column: -5 / -3;
     }
   }
 }

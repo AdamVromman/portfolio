@@ -1,7 +1,7 @@
 ---
 import Home from "../components/Home.astro";
 import "../CSS/main.css";
-import { ClientRouter } from "astro:transitions";
+import { ClientRouter, slide } from "astro:transitions";
 
 const { slug } = Astro.props;
 ---
@@ -22,90 +22,95 @@ const { slug } = Astro.props;
     />
     <ClientRouter />
   </head>
-  <body>
+  <body data-slug={slug} transition:persist>
     <div id="grid-calculator"></div>
-    <div id="grid-container" class={slug ? "project-page " + slug : ""}>
+    <div id="grid-container" class={`${slug ? slug : ""}`}>
       <Home />
       <slot />
     </div>
-
-    <!-- <script>
-      import gsap from "gsap";
-      import { selectedProject } from "../assets/Functions";
-
-      const homeStartupTimeline = gsap
-        .timeline({ delay: 2.5, paused: true })
-        .from(
-          ".grid_cell.bottom .grid_cell_container",
-          {
-            duration: 1,
-            y: "100%",
-            ease: "power4.out",
-          },
-          0
-        )
-        .from(
-          ".grid_cell.top .grid_cell_container",
-          {
-            duration: 1,
-            y: "-100%",
-            ease: "power4.out",
-          },
-          0
-        )
-        .from(
-          ".grid_cell.left .grid_cell_container",
-          {
-            duration: 1,
-            x: "-100%",
-            ease: "power4.out",
-          },
-          0
-        )
-        .from(
-          ".grid_cell.right .grid_cell_container",
-          {
-            duration: 1,
-            x: "100%",
-            ease: "power4.out",
-          },
-          0
-        );
-      // .from(
-      //   "#flying-objects",
-      //   {
-      //     scale: 0,
-      //     opacity: 0,
-      //     duration: 1,
-      //     ease: "power4.out",
-      //   },
-      //   0
-      // );
-
-      document.addEventListener("assetsloaded", () => {
-        document.body.style.opacity = "1";
-        //if (!selectedProject) homeStartupTimeline.play();
-      });
-    </script> -->
     <script>
-      const justifyParagraphs = () => {
-        const justifiedParagraphs = document.querySelectorAll<HTMLElement>(
-          ".justified-paragraph"
-        );
+      import gsap from "gsap";
+      import { projects } from "../assets/Constants";
+      import {
+        calculateTileWidth,
+        drawProjectPageGrid,
+        getNrOfColumns,
+        loadHomePage,
+        loadProjectPage,
+        navigateToHomePage,
+        navigateToProjectPage,
+        setSelectedProject,
+      } from "../assets/Functions";
 
-        justifiedParagraphs.forEach((paragraph) => {
-          const height = paragraph.getBoundingClientRect().height;
-          const parentHeight =
-            paragraph.parentElement?.getBoundingClientRect().height ?? 0;
-
-          const heightDiff = parentHeight - height;
-          paragraph.style.padding = `${heightDiff / 4}px`;
-        });
+      const sizeGrid = () => {
+        const localTileWidth = calculateTileWidth("Layout.sizeGrid");
+        const gridContainer = document.getElementById("grid-container");
+        if (gridContainer) {
+          gridContainer.style.width = `${getNrOfColumns() * localTileWidth}px`;
+        }
       };
 
-      document.addEventListener("assetsloaded", justifyParagraphs);
-      window.addEventListener("resize", justifyParagraphs);
-      document.addEventListener("astro:after-swap", justifyParagraphs);
+      const analyseURL = () => {
+        const slug = document.body.dataset.slug;
+        console.log("slug:", slug);
+        return slug;
+      };
+
+      const handleResize = () => {
+        sizeGrid();
+        drawProjectPageGrid();
+      };
+
+      sizeGrid();
+
+      window.addEventListener("resize", handleResize);
+
+      document.addEventListener("astro:after-swap", () => {
+        console.log("astro:after-swap event triggered");
+
+        gsap.set("body", {
+          opacity: 1,
+          ease: "power2.inOut",
+        });
+
+        const url = analyseURL();
+        const project = projects.find((p) => p.slug === url);
+        if (url === "about") {
+          console.log("About page navigated");
+        } else if (project) {
+          console.log(`Project page navigated for: ${url}`);
+          setSelectedProject(project);
+          navigateToProjectPage();
+        } else {
+          console.log("Home page navigated");
+          setSelectedProject(undefined);
+          navigateToHomePage();
+        }
+      });
+
+      window.addEventListener("load", () => {
+        console.log("load event triggered");
+
+        gsap.to("body", {
+          duration: 0.5,
+          opacity: 1,
+          ease: "power2.inOut",
+        });
+
+        const url = analyseURL();
+        const project = projects.find((p) => p.slug === url);
+        if (url === "about") {
+          console.log("About page loaded");
+        } else if (project) {
+          console.log(`Project page loaded for: ${url}`);
+          setSelectedProject(project);
+          loadProjectPage();
+        } else {
+          console.log("Home page loaded");
+          loadHomePage();
+          setSelectedProject(undefined);
+        }
+      });
     </script>
   </body>
 </html>
