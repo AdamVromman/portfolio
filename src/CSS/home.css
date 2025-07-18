@@ -20,6 +20,31 @@
   @apply z-0;
 }
 
+.home_grid_back-home {
+  grid-row: 1 / 2;
+  grid-column: 1 / 8;
+  z-index: 100;
+  @apply -translate-y-100;
+  @apply flex flex-row items-center;
+  @apply bg-active text-white;
+
+  svg {
+    @apply w-4/5;
+    @apply stroke-white fill-none;
+  }
+}
+
+.home_grid_back-home_icon {
+  @apply flex flex-row justify-center items-center;
+  @apply h-full aspect-square;
+  @apply bg-active;
+
+  svg {
+    @apply w-4/5;
+    @apply stroke-white fill-none;
+  }
+}
+
 .home_grid_title {
   grid-row: -5 / -1;
   grid-column: 1 / -1;

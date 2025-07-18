@@ -280,9 +280,26 @@ export const loadProjectPage = () => {
     window.scrollTo(0, 0);
 
     timeline
-      .set(".home", {
-        opacity: 0,
-      })
+      .set(
+        ".page-container.home",
+        {
+          height: calculateTileWidth("ProjectPage.navigateToProjectPage"),
+          position: "fixed",
+          zIndex: 100,
+          width: calculateTileWidth("ProjectPage.navigateToProjectPage") * 7,
+          top: 14,
+          left: 13,
+          y: "-200%",
+        },
+        "0"
+      )
+      .set(
+        ".home_grid_back-home",
+        {
+          y: "0%",
+        },
+        "<"
+      )
       .from(
         ".project-page-header-video",
         {
@@ -304,13 +321,23 @@ export const loadProjectPage = () => {
           ease: "power4.out",
         },
         "<+=0.1"
-      );
+      )
+      .to(".page-container.home", {
+        y: "0%",
+        duration: 0.3,
+      });
   }
 };
 
-//TODO: Can I navigate outgoing content before it leaves?
 export const navigateToHomePage = () => {
   console.log("navigateToHomePage");
+
+  const localTileWidth = calculateTileWidth(
+    "ProjectPage.navigateToProjectPage"
+  );
+
+  const nrOfRows = calculateNrOfRows(localTileWidth);
+
   drawHomeGrid(true);
   if (!selectedProject) {
     document.documentElement.style.setProperty("--color-active", "#4000ff");
@@ -327,8 +354,45 @@ export const navigateToHomePage = () => {
     const timeline = gsap.timeline();
 
     timeline
-      .set(".home", {
-        opacity: 1,
+      .set(
+        ".page-container.home",
+        {
+          height: calculateTileWidth("ProjectPage.navigateToProjectPage"),
+          position: "fixed",
+          zIndex: 100,
+          width: calculateTileWidth("ProjectPage.navigateToProjectPage") * 8,
+          top: 14,
+          left: 13,
+        },
+        "0"
+      )
+      .to(
+        ".page-container.home",
+        {
+          width: `${getNrOfColumns() * localTileWidth}px`,
+          duration: 1,
+        },
+        "<"
+      )
+      .to(
+        ".page-container.home",
+        {
+          height: `${nrOfRows * localTileWidth}px`,
+          duration: 1,
+        },
+        ">"
+      )
+      .to(
+        ".home_grid_back-home",
+        {
+          y: "-100%",
+        },
+        "<"
+      )
+      .set(".page-container.home", {
+        position: "relative",
+        top: 0,
+        left: 0,
       })
       .to(
         `.home_grid_work .grid_cell_container`,
@@ -337,7 +401,7 @@ export const navigateToHomePage = () => {
           color: "#111111",
           duration: 0.2,
         },
-        "0"
+        ">-=1"
       )
       .to(
         ".page-container.home",
@@ -414,21 +478,6 @@ export const navigateToHomePage = () => {
           stagger: stagger,
         },
         "<"
-      )
-      .fromTo(
-        "#flying-objects",
-        {
-          scale: 1.1,
-          filter: "blur(10px)",
-          opacity: 0,
-          duration: 1,
-        },
-        {
-          scale: 1,
-          filter: "blur(0px)",
-          opacity: 1,
-        },
-        ">"
       )
       .to(
         ".background_svg_dot",
@@ -533,6 +582,9 @@ export const navigateToProjectPage = () => {
     });
 
     timeline
+      .set(".project-page", {
+        opacity: 0,
+      })
       .to(
         ".home_video",
         {
@@ -619,23 +671,41 @@ export const navigateToProjectPage = () => {
         "<"
       )
       .to(
-        "#flying-objects",
+        ".page-container.home",
         {
-          scale: 1.1,
-          filter: "blur(10px)",
-          opacity: 0,
+          height: calculateTileWidth("ProjectPage.navigateToProjectPage"),
           duration: 1,
+        },
+        "<"
+      )
+      .set(
+        ".page-container.home",
+        {
+          position: "fixed",
+          zIndex: 100,
         },
         ">"
       )
       .to(
         ".page-container.home",
         {
-          opacity: 0,
+          width: calculateTileWidth("ProjectPage.navigateToProjectPage") * 7,
+          top: 14,
+          left: 13,
           duration: 1,
+        },
+        ">"
+      )
+      .to(
+        ".home_grid_back-home",
+        {
+          y: "0%",
         },
         "<"
       )
+      .set(".project-page", {
+        opacity: 1,
+      })
       .from(
         ".project-page",
         {
