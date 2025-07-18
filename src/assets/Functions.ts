@@ -136,6 +136,7 @@ export const setPreviousVel = (vector: RAPIER.Vector) => {
 export const loadHomePage = () => {
   console.log("loadHomePage");
   drawHomeGrid(true);
+  sizeGrid();
   const duration = 0.75;
 
   const stagger: gsap.StaggerVars = {
@@ -268,7 +269,7 @@ export const loadProjectPage = () => {
   //loadHomePage();
   console.log("loadProjectPage");
   drawHomeGrid(true);
-
+  sizeGrid();
   drawProjectPageGrid();
   if (selectedProject) {
     document.documentElement.style.setProperty(
@@ -285,10 +286,7 @@ export const loadProjectPage = () => {
         {
           height: calculateTileWidth("ProjectPage.navigateToProjectPage"),
           position: "fixed",
-          zIndex: 100,
           width: calculateTileWidth("ProjectPage.navigateToProjectPage") * 7,
-          top: 14,
-          left: 13,
           y: "-200%",
         },
         "0"
@@ -322,10 +320,14 @@ export const loadProjectPage = () => {
         },
         "<+=0.1"
       )
-      .to(".page-container.home", {
-        y: "0%",
-        duration: 0.3,
-      });
+      .to(
+        ".page-container.home",
+        {
+          y: "0%",
+          duration: 0.3,
+        },
+        ">"
+      );
   }
 };
 
@@ -337,7 +339,7 @@ export const navigateToHomePage = () => {
   );
 
   const nrOfRows = calculateNrOfRows(localTileWidth);
-
+  sizeGrid();
   drawHomeGrid(true);
   if (!selectedProject) {
     document.documentElement.style.setProperty("--color-active", "#4000ff");
@@ -358,11 +360,7 @@ export const navigateToHomePage = () => {
         ".page-container.home",
         {
           height: calculateTileWidth("ProjectPage.navigateToProjectPage"),
-          position: "fixed",
-          zIndex: 100,
           width: calculateTileWidth("ProjectPage.navigateToProjectPage") * 8,
-          top: 14,
-          left: 13,
         },
         "0"
       )
@@ -370,7 +368,9 @@ export const navigateToHomePage = () => {
         ".page-container.home",
         {
           width: `${getNrOfColumns() * localTileWidth}px`,
-          duration: 1,
+          duration: 0.75,
+          ease: "power3.out",
+          delay: 0.25,
         },
         "<"
       )
@@ -378,7 +378,8 @@ export const navigateToHomePage = () => {
         ".page-container.home",
         {
           height: `${nrOfRows * localTileWidth}px`,
-          duration: 1,
+          duration: 0.75,
+          ease: "power3.out",
         },
         ">"
       )
@@ -389,11 +390,6 @@ export const navigateToHomePage = () => {
         },
         "<"
       )
-      .set(".page-container.home", {
-        position: "relative",
-        top: 0,
-        left: 0,
-      })
       .to(
         `.home_grid_work .grid_cell_container`,
         {
@@ -557,10 +553,7 @@ export const navigateToHomePage = () => {
 export const navigateToProjectPage = () => {
   console.log("navigateToProjectPage");
 
-  gsap.set("body", {
-    overflow: "hidden",
-  });
-
+  sizeGrid();
   drawProjectPageGrid();
   if (selectedProject) {
     document.documentElement.style.setProperty(
@@ -674,9 +667,10 @@ export const navigateToProjectPage = () => {
         ".page-container.home",
         {
           height: calculateTileWidth("ProjectPage.navigateToProjectPage"),
-          duration: 1,
+          duration: 0.75,
+          ease: "power3.out",
         },
-        "<"
+        ">-=0.5"
       )
       .set(
         ".page-container.home",
@@ -690,9 +684,8 @@ export const navigateToProjectPage = () => {
         ".page-container.home",
         {
           width: calculateTileWidth("ProjectPage.navigateToProjectPage") * 7,
-          top: 14,
-          left: 13,
-          duration: 1,
+          duration: 0.75,
+          ease: "power3.out",
         },
         ">"
       )
@@ -707,20 +700,26 @@ export const navigateToProjectPage = () => {
         opacity: 1,
       })
       .from(
-        ".project-page",
+        ".project-page-header-video",
         {
-          y: "100vw",
+          y: "-100vw",
+          opacity: 0,
+          filter: "blur(10px)",
           duration: 1,
           ease: "power4.out",
         },
-        ">"
+        ">+=0.1"
       )
-      .set(
-        "body",
+      .from(
+        ".project-page-container",
         {
-          overflow: "auto",
+          y: "100vw",
+          opacity: 0,
+          filter: "blur(10px)",
+          duration: 1,
+          ease: "power4.out",
         },
-        ">"
+        "<+=0.1"
       );
   }
 };
@@ -1084,5 +1083,13 @@ export const drawHomeGrid = (animated: boolean) => {
 
   if (animated) {
   } else {
+  }
+};
+
+export const sizeGrid = () => {
+  const localTileWidth = calculateTileWidth("Layout.sizeGrid");
+  const gridContainer = document.getElementById("grid-container");
+  if (gridContainer) {
+    gridContainer.style.width = `${getNrOfColumns() * localTileWidth}px`;
   }
 };

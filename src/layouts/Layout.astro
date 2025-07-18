@@ -40,15 +40,8 @@ const { slug } = Astro.props;
         navigateToHomePage,
         navigateToProjectPage,
         setSelectedProject,
+        sizeGrid,
       } from "../assets/Functions";
-
-      const sizeGrid = () => {
-        const localTileWidth = calculateTileWidth("Layout.sizeGrid");
-        const gridContainer = document.getElementById("grid-container");
-        if (gridContainer) {
-          gridContainer.style.width = `${getNrOfColumns() * localTileWidth}px`;
-        }
-      };
 
       const analyseURL = () => {
         const slug = document.body.dataset.slug;

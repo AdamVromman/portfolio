@@ -2,7 +2,6 @@
 
 .project-page {
   @apply absolute;
-  @apply top-[15px];
   @apply flex flex-col items-center gap-15;
   @apply pb-15;
 }
