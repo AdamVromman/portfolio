@@ -17,6 +17,7 @@ body {
   @apply p-15;
   @apply flex flex-col items-center justify-start;
   @apply opacity-0;
+  @apply overflow-y-scroll;
 }
 
 * {
@@ -103,7 +104,8 @@ body {
 
 #grid-container {
   @apply w-full;
-  @apply flex flex-col items-center justify-start gap-30;
+  @apply flex flex-col gap-30;
+  @apply relative;
 }
 
 .grid_cell {
