@@ -331,12 +331,21 @@ export const navigateToHomePage = () => {
         opacity: 1,
       })
       .to(
+        `.home_grid_work .grid_cell_container`,
+        {
+          backgroundColor: "#eeeeee",
+          color: "#111111",
+          duration: 0.2,
+        },
+        "0"
+      )
+      .to(
         ".page-container.home",
         {
           opacity: 1,
           duration: 0.3,
         },
-        ">"
+        "<"
       )
       .to(
         ".background_svg_dot.background_svg_dot_odd",
@@ -683,90 +692,15 @@ export const handleMouseIn = (key: string) => {
           },
           "<"
         )
-        // .fromTo(
-        //   `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
-        //   {
-        //     y: "0",
-        //   },
-        //   {
-        //     duration: 0.3,
-        //     y: "100%",
-        //     ease: "power3.in",
-        //     overwrite: true,
-        //   },
-        //   "<"
-        // )
-        // .fromTo(
-        //   `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
-        //   {
-        //     y: "0",
-        //   },
-        //   {
-        //     duration: 0.3,
-        //     y: "-100%",
-        //     ease: "power3.in",
-        //     overwrite: true,
-        //   },
-        //   "<"
-        // )
-        // .fromTo(
-        //   `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
-        //   {
-        //     x: "0",
-        //   },
-        //   {
-        //     duration: 0.3,
-        //     x: "-100%",
-        //     ease: "power3.in",
-        //     overwrite: true,
-        //   },
-        //   "<"
-        // )
-        // .fromTo(
-        //   `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
-        //   {
-        //     x: "0",
-        //   },
-        //   {
-        //     duration: 0.3,
-        //     x: "100%",
-        //     ease: "power3.in",
-        //     overwrite: true,
-        //   },
-        //   "<"
-        // )
-        // .to(
-        //   ".background_svg_line.line_vertical:not(.not-animated)",
-        //   {
-        //     duration: 1,
-        //     opacity: 0,
-        //     attr: { y2: "50%", y1: "50%" },
-        //     ease: "power4.out",
-        //     overwrite: true,
-        //     // stagger: {
-        //     //   each: 0.01,
-        //     //   from: "start",
-        //     //   ease: "power1.out",
-        //     // },
-        //   },
-        //   "<"
-        // )
-        // .to(
-        //   ".background_svg_line.line_horizontal:not(.not-animated)",
-        //   {
-        //     duration: 1,
-        //     opacity: 0,
-        //     attr: { x2: "50%", x1: "50%" },
-        //     ease: "power4.out",
-        //     overwrite: true,
-        //     // stagger: {
-        //     //   each: 0.01,
-        //     //   from: "start",
-        //     //   ease: "power1.out",
-        //     // },
-        //   },
-        //   "<"
-        // )
+        .to(
+          `.home_grid_work.${project.slug} .grid_cell_container`,
+          {
+            backgroundColor: `#${project.color}`,
+            color: "#eeeeee",
+            duration: 0.2,
+          },
+          "<"
+        )
         .to(
           `.home_video.${project.slug}`,
           {
@@ -791,6 +725,15 @@ export const handleMouseOut = (key: string) => {
       const timeline = gsap.timeline();
 
       timeline
+        .to(
+          `.home_grid_work .grid_cell_container`,
+          {
+            backgroundColor: "#eeeeee",
+            color: "#111111",
+            duration: 0.2,
+          },
+          "0"
+        )
         .to(
           `.home_video.${project.slug}`,
           {
@@ -820,100 +763,6 @@ export const handleMouseOut = (key: string) => {
           },
           "<"
         );
-      // .fromTo(
-      //   `.grid_cell.bottom:not(.ignore-move-out) .grid_cell_container`,
-      //   {
-      //     y: "100%",
-      //   },
-      //   {
-      //     duration: 0.3,
-      //     y: "0",
-      //     ease: "power3.in",
-      //     overwrite: true,
-      //   },
-      //   "<"
-      // )
-      // .fromTo(
-      //   `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
-      //   {
-      //     y: "-100%",
-      //   },
-      //   {
-      //     duration: 0.3,
-      //     y: "0",
-      //     ease: "power3.in",
-      //     overwrite: true,
-      //   },
-      //   "<"
-      // )
-      // .fromTo(
-      //   `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
-      //   {
-      //     x: "-100%",
-      //   },
-      //   {
-      //     duration: 0.3,
-      //     x: "0",
-      //     ease: "power3.in",
-      //     overwrite: true,
-      //   },
-      //   "<"
-      // )
-      // .fromTo(
-      //   `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
-      //   {
-      //     x: "100%",
-      //   },
-      //   {
-      //     duration: 0.3,
-      //     x: "0",
-      //     ease: "power3.in",
-      //     overwrite: true,
-      //   },
-      //   "<"
-      // )
-
-      // .to(
-      //   "#background",
-      //   {
-      //     duration: 0.2,
-      //     opacity: 1,
-      //     overwrite: true,
-      //   },
-      //   "<"
-      // )
-      // .to(
-      //   ".background_svg_line.line_vertical:not(.not-animated)",
-      //   {
-      //     duration: 1,
-      //     opacity: 1,
-      //     attr: { y2: "100%", y1: "0%" },
-      //     ease: "power4.out",
-      //     overwrite: true,
-      //     // stagger: {
-      //     //   each: 0.01,
-      //     //   from: "random",
-      //     //   ease: "power1.out",
-      //     // },
-      //   },
-      //   "<"
-      // )
-      // .to(
-      //   ".background_svg_line.line_horizontal:not(.not-animated)",
-      //   {
-      //     duration: 1,
-      //     opacity: 1,
-      //     attr: { x2: "100%", x1: "0%" },
-      //     ease: "power4.out",
-      //     overwrite: true,
-      //     // stagger: {
-      //     //   each: 0.01,
-      //     //   from: "random",
-      //     //   ease: "power1.out",
-      //     // },
-      //   },
-      //   "<"
-      // );
       hoveringBody = undefined;
       if (previousVel) {
         flyingObject.body.setLinvel(previousVel, true);
