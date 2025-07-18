@@ -8,39 +8,3 @@ import "../CSS/background.css";
     <g class="background_home_lines-group"></g>
   </svg>
 </div>
-<!-- <script>
-  import gsap from "gsap";
-  import {
-    calculateNrOfRows,
-    calculateTileWidth,
-    getNrOfColumns,
-    loadHomePage,
-  } from "../assets/Functions";
-  import { selectedProject } from "../assets/Functions";
-
-  const backgrounds = document.getElementsByClassName("background");
-
-
-  const onResize = () => {
-    drawLines();
-    drawDots();
-    if (!selectedProject) {
-      gsap.set(".background_svg_line.line_vertical", {
-        attr: { y2: "100%", y1: "0%" },
-      });
-
-      gsap.set(".background_svg_line.line_horizontal", {
-        attr: { x2: "100%", x1: "0%" },
-      });
-    }
-  };
-
-  const drawHome = () => {
-    drawLines();
-    drawDots();
-  };
-
-  drawHome();
-
-  window.addEventListener("resize", onResize);
-</script> -->

@@ -6,6 +6,10 @@
   @apply flex flex-col items-center gap-15;
 }
 
+.project-page-header-video {
+  @apply border-solid border-2 border-active box-content;
+}
+
 .project-page-container {
   @apply relative;
   @apply border-2 border-active box-content;

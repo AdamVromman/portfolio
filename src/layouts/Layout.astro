@@ -43,9 +43,9 @@ const { slug } = Astro.props;
       } from "../assets/Functions";
 
       const sizeGrid = () => {
+        const localTileWidth = calculateTileWidth("Layout.sizeGrid");
         const gridContainer = document.getElementById("grid-container");
         if (gridContainer) {
-          const localTileWidth = calculateTileWidth("Layout.sizeGrid");
           gridContainer.style.width = `${getNrOfColumns() * localTileWidth}px`;
         }
       };

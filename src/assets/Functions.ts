@@ -275,10 +275,36 @@ export const loadProjectPage = () => {
       "--color-active",
       `#${selectedProject.color}`
     );
-    const timeline = gsap.timeline({
-      onComplete: justifyParagraphs,
-      delay: 3.7,
-    });
+    const timeline = gsap.timeline();
+
+    window.scrollTo(0, 0);
+
+    timeline
+      .set(".home", {
+        opacity: 0,
+      })
+      .from(
+        ".project-page-header-video",
+        {
+          y: "-100vw",
+          opacity: 0,
+          filter: "blur(10px)",
+          duration: 1,
+          ease: "power4.out",
+        },
+        "0.5"
+      )
+      .from(
+        ".project-page-container",
+        {
+          y: "100vw",
+          opacity: 0,
+          filter: "blur(10px)",
+          duration: 1,
+          ease: "power4.out",
+        },
+        "<+=0.1"
+      );
   }
 };
 
@@ -301,54 +327,151 @@ export const navigateToHomePage = () => {
     const timeline = gsap.timeline();
 
     timeline
+      .set(".home", {
+        opacity: 1,
+      })
       .to(
-        ".background_project-page .background_svg_line.line_vertical.line_main",
+        ".page-container.home",
+        {
+          opacity: 1,
+          duration: 0.3,
+        },
+        ">"
+      )
+      .to(
+        ".background_svg_dot.background_svg_dot_odd",
+        {
+          duration: 1,
+          attr: { r: `1px` },
+          stagger: {
+            each: 0.003,
+            from: "random",
+            ease: "power1.in",
+          },
+          ease: "elastic.out",
+        },
+        "<"
+      )
+      .to(
+        ".background_svg_dot.background_svg_dot_even",
+        {
+          duration: 1,
+          attr: { r: `1px` },
+          stagger: {
+            each: 0.003,
+            from: "random",
+            ease: "power1.in",
+          },
+          ease: "elastic.out",
+        },
+        "<"
+      )
+      .to(
+        ".background_svg_line.line_vertical.line_main",
         {
           duration: duration,
-          attr: { y2: "50%", y1: "50%" },
+          attr: { y2: "100%", y1: "0%" },
           ease: ease,
           stagger: stagger,
         },
         ">-=1"
       )
       .to(
-        ".background_project-page .background_svg_line.line_vertical.line_sub",
+        ".background_svg_line.line_vertical.line_sub",
         {
           duration: duration,
-          attr: { y2: "50%", y1: "50%" },
+          attr: { y2: "100%", y1: "0%" },
           ease: ease,
           stagger: stagger,
         },
         "<"
       )
       .to(
-        ".background_project-page .background_svg_line.line_horizontal.line_main",
+        ".background_svg_line.line_horizontal.line_main",
         {
           duration: duration,
-          attr: { x2: "50%", x1: "50%" },
+          attr: { x2: "100%", x1: "0%" },
           ease: ease,
           stagger: stagger,
         },
         "<"
       )
       .to(
-        ".background_project-page .background_svg_line.line_horizontal.line_sub",
+        ".background_svg_line.line_horizontal.line_sub",
         {
           duration: duration,
-          attr: { x2: "50%", x1: "50%" },
+          attr: { x2: "100%", x1: "0%" },
           ease: ease,
           stagger: stagger,
         },
         "<"
       )
-      .to(
-        ".home",
+      .fromTo(
+        "#flying-objects",
         {
-          y: "0",
+          scale: 1.1,
+          filter: "blur(10px)",
+          opacity: 0,
           duration: 1,
+        },
+        {
+          scale: 1,
+          filter: "blur(0px)",
+          opacity: 1,
+        },
+        ">"
+      )
+      .to(
+        ".background_svg_dot",
+        {
+          duration: 0.5,
+          attr: { r: `0` },
+          stagger: {
+            amount: 0.5,
+            from: "random",
+          },
+        },
+        "<"
+      )
+      .fromTo(
+        ".grid_cell.bottom .grid_cell_container",
+        {
+          duration: 1,
+          y: "100%",
           ease: "power4.out",
         },
-        "0"
+        { y: "0%" },
+        "<"
+      )
+      .fromTo(
+        ".grid_cell.top .grid_cell_container",
+        {
+          duration: 1,
+          y: "-100%",
+          ease: "power4.out",
+        },
+        { y: "0%" },
+        "<"
+      )
+      .fromTo(
+        ".grid_cell.left .grid_cell_container",
+        {
+          duration: 1,
+          x: "-100%",
+          ease: "power4.out",
+        },
+        { x: "0%" },
+        "<+=0.5"
+      )
+      .fromTo(
+        ".grid_cell.right .grid_cell_container",
+        {
+          duration: 1,
+          x: "100%",
+          ease: "power4.out",
+        },
+        { x: "0%" },
+        "<"
       )
       .to(
         ".grid_cell.home_grid_title h1.page-title",
@@ -358,75 +481,14 @@ export const navigateToHomePage = () => {
           ease: "power3.in",
           overwrite: true,
         },
-        ">"
-      )
-      .fromTo(
-        `.grid_cell.top:not(.ignore-move-out) .grid_cell_container`,
-        {
-          y: "-100%",
-        },
-        {
-          duration: 0.3,
-          y: "0",
-          ease: "power3.in",
-          overwrite: true,
-        },
-        "<"
-      )
-      .fromTo(
-        `.grid_cell.left:not(.ignore-move-out) .grid_cell_container`,
-        {
-          x: "-100%",
-        },
-        {
-          duration: 0.3,
-          x: "0",
-          ease: "power3.in",
-          overwrite: true,
-        },
-        "<"
-      )
-      .fromTo(
-        `.grid_cell.right:not(.ignore-move-out) .grid_cell_container`,
-        {
-          x: "100%",
-        },
-        {
-          duration: 0.3,
-          x: "0",
-          ease: "power3.in",
-          overwrite: true,
-        },
-        "<"
-      )
-
-      .to(
-        ".background",
-        {
-          duration: 0.2,
-          opacity: 1,
-          overwrite: true,
-        },
         "<"
       )
       .to(
-        ".background_svg_line.line_vertical:not(.not-animated)",
+        `.grid_cell.home_grid_title .page-title.sub`,
         {
-          duration: 1,
-          opacity: 1,
-          attr: { y2: "100%", y1: "0%" },
-          ease: "power4.out",
-          overwrite: true,
-        },
-        "<"
-      )
-      .to(
-        ".background_svg_line.line_horizontal:not(.not-animated)",
-        {
-          duration: 1,
-          opacity: 1,
-          attr: { x2: "100%", x1: "0%" },
-          ease: "power4.out",
+          y: "100%",
+          duration: 0.3,
+          ease: "power3.in",
           overwrite: true,
         },
         "<"
@@ -462,6 +524,15 @@ export const navigateToProjectPage = () => {
     });
 
     timeline
+      .to(
+        ".home_video",
+        {
+          duration: 0.3,
+          y: "100%",
+          overwrite: true,
+        },
+        "0"
+      )
       .to(
         ".grid_cell.bottom .grid_cell_container",
         {
@@ -535,6 +606,24 @@ export const navigateToProjectPage = () => {
           attr: { x2: "50%", x1: "50%" },
           ease: ease,
           stagger: stagger,
+        },
+        "<"
+      )
+      .to(
+        "#flying-objects",
+        {
+          scale: 1.1,
+          filter: "blur(10px)",
+          opacity: 0,
+          duration: 1,
+        },
+        ">"
+      )
+      .to(
+        ".page-container.home",
+        {
+          opacity: 0,
+          duration: 1,
         },
         "<"
       )
@@ -839,6 +928,12 @@ export const isHomePage = () => {
 };
 
 export const drawProjectPageGrid = () => {
+  const localTileWidth = calculateTileWidth("ProjectPage.drawGrid");
+  const projectPage = document.querySelector(".project-page") as HTMLElement;
+  if (projectPage) {
+    projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
+  }
+
   const projectPages = document.getElementsByClassName(
     "project-page-container"
   );
@@ -847,7 +942,6 @@ export const drawProjectPageGrid = () => {
       const projectPageGrid = projectPage.querySelector(
         ".project-page_grid"
       ) as HTMLElement;
-      const localTileWidth = calculateTileWidth("ProjectPage.drawGrid");
       projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
       if (projectPageGrid) {
         projectPageGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;

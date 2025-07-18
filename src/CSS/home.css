@@ -232,7 +232,7 @@
   @apply relative;
 
   video {
-    @apply border-2 border-active;
+    /* @apply border-2 border-active box-content; */
   }
 
   grid-column: 1 / -1;
