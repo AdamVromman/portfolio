@@ -1,12 +1,8 @@
 ---
-import Background from "../components/Background";
-import Home from "../components/Home";
+import Home from "../components/Home.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout>
-  <div>
-    <Background client:load />
-    <Home client:load />
-  </div>
+<Layout slug="home">
+  <!-- <Home /> -->
 </Layout>

@@ -1,12 +1,16 @@
 ---
+import Home from "../components/Home.astro";
 import "../CSS/main.css";
+import { ClientRouter, slide } from "astro:transitions";
+
+const { slug } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>ADAM VROMMAN</title>
@@ -16,17 +20,90 @@ import "../CSS/main.css";
       href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
       rel="stylesheet"
     />
+    <ClientRouter />
   </head>
-  <body>
-    <slot />
+  <body data-slug={slug} transition:persist>
+    <div id="grid-calculator"></div>
+    <div id="grid-container" class={`${slug ? slug : ""}`}>
+      <Home />
+      <slot />
+    </div>
+    <script>
+      import gsap from "gsap";
+      import { projects } from "../assets/Constants";
+      import {
+        calculateTileWidth,
+        drawProjectPageGrid,
+        getNrOfColumns,
+        loadHomePage,
+        loadProjectPage,
+        navigateToHomePage,
+        navigateToProjectPage,
+        setSelectedProject,
+        sizeGrid,
+      } from "../assets/Functions";
+
+      const analyseURL = () => {
+        const slug = document.body.dataset.slug;
+        console.log("slug:", slug);
+        return slug;
+      };
+
+      const handleResize = () => {
+        sizeGrid();
+        drawProjectPageGrid();
+      };
+
+      sizeGrid();
+
+      window.addEventListener("resize", handleResize);
+
+      document.addEventListener("astro:after-swap", () => {
+        console.log("astro:after-swap event triggered");
+
+        gsap.set("body", {
+          opacity: 1,
+          ease: "power2.inOut",
+        });
+
+        const url = analyseURL();
+        const project = projects.find((p) => p.slug === url);
+        if (url === "about") {
+          console.log("About page navigated");
+        } else if (project) {
+          console.log(`Project page navigated for: ${url}`);
+          setSelectedProject(project);
+          navigateToProjectPage();
+        } else {
+          console.log("Home page navigated");
+          setSelectedProject(undefined);
+          navigateToHomePage();
+        }
+      });
+
+      window.addEventListener("load", () => {
+        console.log("load event triggered");
+
+        gsap.to("body", {
+          duration: 0.5,
+          opacity: 1,
+          ease: "power2.inOut",
+        });
+
+        const url = analyseURL();
+        const project = projects.find((p) => p.slug === url);
+        if (url === "about") {
+          console.log("About page loaded");
+        } else if (project) {
+          console.log(`Project page loaded for: ${url}`);
+          setSelectedProject(project);
+          loadProjectPage();
+        } else {
+          console.log("Home page loaded");
+          loadHomePage();
+          setSelectedProject(undefined);
+        }
+      });
+    </script>
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>

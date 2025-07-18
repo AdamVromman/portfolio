@@ -1,0 +1,123 @@
+@import "./imports.css";
+
+.project-page {
+  @apply absolute;
+  @apply flex flex-col items-center gap-15;
+  @apply pb-15;
+}
+
+.project-page-header-video {
+  @apply border-solid border-2 border-active box-content;
+}
+
+.project-page-container {
+  @apply relative;
+  @apply border-2 border-active box-content;
+  @apply overflow-hidden;
+}
+
+.project-page_grid {
+  @apply grid;
+  @apply relative z-10;
+}
+
+.project-page-cell {
+  @apply overflow-hidden;
+  @apply bg-white;
+}
+
+.project-page_grid_title {
+  grid-column: 1 / -1;
+
+  @apply pb-thick;
+  @apply text-active;
+}
+
+.project-page_grid_category {
+  .grid_cell_container {
+    @apply justify-end pr-15;
+  }
+
+  &.first {
+    grid-row: 3 / 4;
+    @apply pt-thick pb-thin;
+  }
+
+  &.second {
+    grid-row: 4 / 5;
+    @apply pt-thin pb-thick;
+  }
+
+  &.ux {
+    grid-column: -3 / -1;
+    @apply pl-thick;
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-column: -5 / -3;
+    }
+  }
+
+  &.design {
+    grid-column: -4 / -1;
+    @apply pl-thin;
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-column: -6 / -3;
+    }
+  }
+
+  &.dev {
+    grid-column: -4 / -1;
+    @apply pl-thin;
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-column: -5 / -3;
+    }
+  }
+}
+
+.project-page_grid_description {
+  grid-column: 1 / -1;
+
+  @media (min-width: theme(--breakpoint-sm)) {
+    grid-column: 1 / -7;
+  }
+
+  @media (min-width: theme(--breakpoint-md)) {
+    grid-column: 3 / 17;
+  }
+
+  @apply py-thick;
+}
+
+.project-page_grid_icon {
+  grid-column: 1 / 3;
+
+  @apply p-thick pl-0;
+}
+
+.project-page-image,
+.project-page-video {
+  &.border {
+    @apply border-2 border-active box-content;
+  }
+
+  &.full-width {
+    @apply border-y-2 border-active;
+  }
+
+  @apply overflow-hidden;
+  img,
+  video {
+    @apply object-cover;
+    @apply w-full h-full;
+  }
+}
+
+.project-page_grid_paragraph {
+  grid-column: 2 / -2;
+
+  @media (min-width: theme(--breakpoint-sm)) {
+    grid-column: 4 / -4;
+  }
+}

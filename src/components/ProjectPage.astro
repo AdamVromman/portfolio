@@ -1,0 +1,37 @@
+---
+import "../CSS/project-page.css";
+import Footer from "./Footer.astro";
+import ProjectPageBackground from "./ProjectPageBackground.astro";
+
+const { slug } = Astro.props;
+---
+
+<div class="project-page">
+  <video
+    class="project-page-header-video"
+    id={`project-page_video-${slug}`}
+    autoplay
+    loop
+    muted
+    playsinline
+    src={`/assets/${slug}/ANIMATION-header.mp4`}></video>
+  <div
+    id={`project-page-${slug}`}
+    data-slug={slug}
+    class="project-page-container"
+  >
+    <ProjectPageBackground />
+    <div id={`project-page_grid-${slug}`} class="project-page_grid">
+      <slot />
+    </div>
+  </div>
+  <video
+    class="project-page-header-video border-solid border-2 border-active box-content"
+    id={`project-page_video-${slug}`}
+    autoplay
+    loop
+    muted
+    playsinline
+    src={`/assets/${slug}/ANIMATION-header.mp4`}></video>
+  <Footer />
+</div>

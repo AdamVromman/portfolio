@@ -1,5 +1,9 @@
 @import "./imports.css";
 
+:root {
+  --color-active: #4000ff;
+}
+
 html {
   @apply bg-white;
 }
@@ -9,12 +13,128 @@ body {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+  @apply relative max-w-[1920px] mx-auto;
+  @apply p-15;
+  @apply flex flex-col items-center justify-start;
+  @apply opacity-0;
+  @apply overflow-y-scroll;
+}
+
+* {
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-out;
+}
+
+.third-col-text {
+  @apply text-[3.8vw];
+  @apply leading-[5.2vw];
+
+  @media (min-width: theme(--breakpoint-xs)) {
+    @apply text-[3.8vw];
+    @apply leading-[5.2vw];
+  }
+  @media (min-width: theme(--breakpoint-sm)) {
+    @apply text-[2.2vw];
+    @apply leading-[3.4vw];
+  }
+  @media (min-width: theme(--breakpoint-md)) {
+    @apply text-[1.7vw];
+    @apply leading-[2.3vw];
+  }
+  @media (min-width: theme(--breakpoint-lg)) {
+    font-size: min(1.2vw, 30px);
+    line-height: min(1.5vw, 40px);
+  }
 }
 
 .half-col-text {
-  @apply text-[5vw] lg:text-[2vw];
+  @apply text-[5.3vw];
+  @apply leading-[5.7vw];
+
+  @media (min-width: theme(--breakpoint-xs)) {
+    @apply text-[4.8vw];
+    @apply leading-[5.5vw];
+  }
+  @media (min-width: theme(--breakpoint-sm)) {
+    @apply text-[4vw];
+    @apply leading-[4.5vw];
+  }
+  @media (min-width: theme(--breakpoint-md)) {
+    @apply text-[3vw];
+    @apply leading-[3.5vw];
+  }
+  @media (min-width: theme(--breakpoint-lg)) {
+    font-size: min(2.5vw, 28.8px);
+    line-height: min(2.5vw, 36px);
+  }
 }
 
 .full-col-text {
-  @apply text-[4vw];
+  @apply text-[17vw];
+  @apply leading-[18vw];
+
+  @media (min-width: theme(--breakpoint-xs)) {
+    @apply text-[14vw];
+    @apply leading-[13vw];
+  }
+
+  @media (min-width: theme(--breakpoint-sm)) {
+    @apply text-[11vw];
+    @apply leading-[10vw];
+  }
+
+  @media (min-width: theme(--breakpoint-md)) {
+    @apply text-[8vw];
+    @apply leading-[7vw];
+  }
+
+  @media (min-width: theme(--breakpoint-lg)) {
+    font-size: min(6vw, 110px);
+    line-height: min(6vw, 100px);
+  }
+}
+
+#grid-calculator {
+  @apply absolute inset-15;
+  /* @apply h-lvh; */
+  height: calc(100lvh - 30px);
+}
+
+#grid-container {
+  @apply w-full;
+  @apply flex flex-col gap-30;
+  @apply relative;
+}
+
+.grid_cell {
+  @apply overflow-hidden;
+  @apply relative z-10;
+}
+
+.grid_cell_container {
+  @apply bg-white;
+  @apply w-full h-full;
+  @apply flex items-center;
+  @apply overflow-hidden;
+}
+
+.page-title {
+  @apply block px-5;
+  @apply text-[#4000ff] font-bold uppercase;
+
+  .thin {
+    @apply font-light;
+  }
+
+  &.sub {
+    @apply absolute top-0 left-0 right-0 bottom-0;
+    @apply translate-y-full;
+  }
+}
+
+.justified-paragraph {
+  @apply w-full;
+  @apply p-30;
 }

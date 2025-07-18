@@ -1,6 +1,136 @@
 @import "./imports.css";
 
-#footer {
-  @apply w-full h-96;
-  @apply border-project-trainworld border-2;
+.footer {
+  @apply relative;
+  @apply border-2 border-active box-content;
+  @apply overflow-hidden;
+}
+
+.footer_grid {
+  @apply grid;
+}
+
+.footer_grid_title {
+  grid-row: -5 / -1;
+  grid-column: 1 / -1;
+  @apply text-right;
+
+  @apply pt-thick;
+
+  @media (min-width: theme(--breakpoint-xs)) {
+    grid-column: 3 / -1;
+  }
+
+  @media (min-width: theme(--breakpoint-sm)) {
+    grid-column: 7 / -1;
+  }
+
+  @media (min-width: theme(--breakpoint-md)) {
+    .grid_cell_container {
+      @apply justify-end;
+    }
+    grid-row: -3 / -1;
+    grid-column: 7 / -1;
+  }
+
+  @media (min-width: theme(--breakpoint-lg)) {
+    grid-column: -17 / -1;
+  }
+}
+
+.footer_grid_text {
+  grid-row: -5 / -9;
+  grid-column: 1 / 7;
+
+  @apply p-thick pl-0;
+
+  @media (min-width: theme(--breakpoint-xs)) {
+    grid-row: -5 / -10;
+    grid-column: 1 / 9;
+  }
+
+  @media (min-width: theme(--breakpoint-sm)) {
+    grid-row: -1 / -7;
+    grid-column: 1 / 7;
+  }
+
+  @media (min-width: theme(--breakpoint-md)) {
+    grid-row: -3 / -7;
+    grid-column: 1 / 11;
+  }
+
+  @media (min-width: theme(--breakpoint-lg)) {
+    grid-row: -1 / -4;
+    grid-column: 1 / 11;
+  }
+
+  p {
+    @apply p-5;
+  }
+}
+
+.grid_cell.footer_grid_contact {
+  a {
+    @apply bg-active fill-white;
+    @apply w-full aspect-square;
+    @apply flex justify-center items-center;
+    @apply hover:bg-white hover:fill-active;
+
+    svg {
+      @apply w-4/5;
+    }
+  }
+
+  &.linkedin {
+    grid-column: -1 / -2;
+    grid-row: 1 / 2;
+  }
+
+  &.pixelfed {
+    grid-column: -1 / -2;
+    grid-row: 2 / 3;
+  }
+
+  svg {
+    @apply w-3/5 h-3/5;
+  }
+}
+
+.footer_grid_back-home {
+  grid-row: 1 / 2;
+  grid-column: 1 / 6;
+
+  @apply pb-thin pr-thick;
+
+  @media (min-width: theme(--breakpoint-xs)) {
+    grid-column: 1 / 8;
+  }
+
+  .footer_grid_back-home_icon svg {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+
+  &:hover {
+    @apply bg-active;
+    @apply text-white;
+
+    .grid_cell_container {
+      @apply bg-active;
+    }
+
+    .footer_grid_back-home_icon svg {
+      @apply -translate-x-[200%];
+    }
+  }
+}
+
+.footer_grid_back-home_icon {
+  @apply flex flex-row justify-center items-center;
+  @apply h-full aspect-square;
+  @apply bg-active;
+
+  svg {
+    @apply w-4/5;
+    @apply stroke-white fill-none;
+  }
 }

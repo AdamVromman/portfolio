@@ -1,58 +1,55 @@
-export enum LineDirection {
-  VERTICAL = "vertical",
-  HORIZONTAL = "horizontal",
-}
+import type { Project, FlyingObject } from "./Interfaces";
 
-export enum LineType {
-  MAIN = "main",
-  SUB = "sub",
-}
+export const NR_OF_COLUMNS = 10;
+export const NR_OF_COLUMNS_480 = 14;
+export const NR_OF_COLUMNS_768 = 18;
+export const NR_OF_COLUMNS_1024 = 26;
+export const NR_OF_COLUMNS_1280 = 30;
 
-const NR_OF_COLUMNS = 5;
-const NR_OF_COLUMNS_480 = 7;
-const NR_OF_COLUMNS_768 = 9;
-const NR_OF_COLUMNS_1024 = 13;
-const NR_OF_COLUMNS_1280 = 15;
+export const ROWS_PER_PROJECT_PER_SCREENSIZE = new Map<
+  string,
+  { xs: number; sm: number; md: number; lg: number; xl: number }
+>([
+  ["club-sofa", { xs: 113, sm: 131, md: 121, lg: 113, xl: 111 }],
+  ["train-world", { xs: 98, sm: 110, md: 84, lg: 113, xl: 111 }],
+  ["transfo-intiem", { xs: 98, sm: 120, md: 93, lg: 115, xl: 111 }],
+  ["all-eyes-on-gaza", { xs: 101, sm: 114, md: 117, lg: 139, xl: 145 }],
+  ["qausal", { xs: 94, sm: 116, md: 115, lg: 147, xl: 151 }],
+]);
 
-export const calculateNrOfRows = (localTileWidth: number) => {
-  if (window) {
-    const screenWidth = getScreenWidth();
-    const NR_OF_ROWS = Math.floor((window.innerHeight - 30) / localTileWidth);
-    if (screenWidth >= 1280) {
-      return Math.max(NR_OF_ROWS, 5);
-    }
-    if (screenWidth >= 1024) {
-      return Math.max(NR_OF_ROWS, 6);
-    }
-    if (screenWidth >= 768) {
-      return Math.max(NR_OF_ROWS, 7);
-    }
-    if (screenWidth >= 480) {
-      return Math.max(NR_OF_ROWS, 8);
-    }
-    return Math.max(NR_OF_ROWS, 10);
-  }
-  return 5;
-};
+export const projects: Project[] = [
+  {
+    name: "Club Sofa",
+    slug: "club-sofa",
+    color: "07d9ae",
+    year: 2022,
+  },
+  {
+    name: "Train World",
+    slug: "train-world",
+    color: "de2217",
+    year: 2023,
+  },
+  {
+    name: "Transfo Intiem",
+    slug: "transfo-intiem",
+    color: "B87AFF",
+    year: 2024,
+  },
+  {
+    name: "All Eyes on Gaza",
+    slug: "all-eyes-on-gaza",
+    color: "009736",
+    year: 2025,
+  },
+  {
+    name: "Qausal",
+    slug: "qausal",
+    color: "FF7700",
+    year: 2025,
+  },
+];
 
-export const getScreenWidth = () => {
-  if (window) {
-    return window.innerWidth;
-  }
-  return 0;
-};
+export const dynamicBodies: FlyingObject[] = [];
 
-export const getNrOfColumns = () => {
-  const screenWidth = getScreenWidth();
-  if (screenWidth >= 1280) {
-    return NR_OF_COLUMNS_1280;
-  } else if (screenWidth >= 1024) {
-    return NR_OF_COLUMNS_1024;
-  } else if (screenWidth >= 768) {
-    return NR_OF_COLUMNS_768;
-  } else if (screenWidth >= 480) {
-    return NR_OF_COLUMNS_480;
-  }
-
-  return NR_OF_COLUMNS;
-};
+export const assetsLoaded = new Event("assetsloaded");
