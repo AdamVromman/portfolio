@@ -40,4 +40,4 @@ jobs:
       # RSYNC
       - name: Deploy web files with rsync
         run: |
-          rsync -azh --delete-after -e "ssh -o StrictHostKeyChecking=no" dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{env.WEB_PATH}}
+          rsync -azh --exclude ./assets/ --delete-after -e "ssh -o StrictHostKeyChecking=no" dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{env.WEB_PATH}}
