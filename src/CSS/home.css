@@ -281,6 +281,11 @@
   }
 }
 
+.grid_cell.home_grid_about-me {
+  grid-column: -5 / -1;
+  grid-row: 3 / 4;
+}
+
 .home_video {
   @apply w-full h-full object-cover;
   @apply opacity-100;

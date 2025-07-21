@@ -45,7 +45,7 @@ export const calculateNrOfRows = (localTileWidth: number) => {
     if (screenWidth >= 480) {
       return Math.max(nrOfRows, 22);
     }
-    return Math.max(nrOfRows, 16);
+    return Math.max(nrOfRows, 20);
   }
   return 5;
 };
@@ -134,9 +134,9 @@ export const setPreviousVel = (vector: RAPIER.Vector) => {
 };
 
 export const loadHomePage = () => {
-  console.log("loadHomePage");
-  drawHomeGrid(true);
   sizeGrid();
+  drawHomeGrid(true);
+
   const duration = 0.75;
 
   const stagger: gsap.StaggerVars = {
@@ -145,8 +145,9 @@ export const loadHomePage = () => {
     ease: "power1.out",
   };
   const ease = "power1.inOut";
-  const timeline = gsap
-    .timeline()
+  const timeline = gsap.timeline();
+
+  timeline
     .to(
       ".background_svg_dot.background_svg_dot_odd",
       {
@@ -266,11 +267,10 @@ export const loadHomePage = () => {
 };
 
 export const loadProjectPage = () => {
-  //loadHomePage();
-  console.log("loadProjectPage");
-  drawHomeGrid(true);
   sizeGrid();
+  drawHomeGrid(true);
   drawProjectPageGrid();
+
   if (selectedProject) {
     document.documentElement.style.setProperty(
       "--color-active",
@@ -284,9 +284,12 @@ export const loadProjectPage = () => {
       .set(
         ".page-container.home",
         {
-          height: calculateTileWidth("ProjectPage.navigateToProjectPage"),
+          height: calculateTileWidth(
+            "ProjectPage.navigateHomePageToProjectPage"
+          ),
           position: "fixed",
-          width: calculateTileWidth("ProjectPage.navigateToProjectPage") * 7,
+          width:
+            calculateTileWidth("ProjectPage.navigateHomePageToProjectPage") * 7,
           y: "-200%",
         },
         "0"
@@ -331,11 +334,140 @@ export const loadProjectPage = () => {
   }
 };
 
-export const navigateToHomePage = () => {
-  console.log("navigateToHomePage");
+export const loadAboutMePage = () => {
+  sizeGrid();
+  drawHomeGrid(true);
+
+  const duration = 0.75;
+
+  const stagger: gsap.StaggerVars = {
+    each: 0.05,
+    from: "center",
+    ease: "power1.out",
+  };
+  const ease = "power1.inOut";
+  const timeline = gsap.timeline();
+
+  timeline
+    .set(
+      ".grid_cell.home_cell.bottom .grid_cell_container",
+      {
+        y: "100%",
+        ease: "power4.out",
+      },
+      "0"
+    )
+    .set(
+      ".grid_cell.home_cell.top .grid_cell_container",
+      {
+        y: "-100%",
+        ease: "power4.out",
+      },
+      "<"
+    )
+    .set(
+      ".grid_cell.home_cell.left .grid_cell_container",
+      {
+        x: "-100%",
+        ease: "power4.out",
+      },
+      "<"
+    )
+    .set(
+      ".grid_cell.home_cell.right .grid_cell_container",
+      {
+        x: "100%",
+        ease: "power4.out",
+      },
+      "<"
+    )
+    .to(
+      ".background_svg_dot.background_svg_dot_odd",
+      {
+        duration: 1,
+        attr: { r: `1px` },
+        stagger: {
+          each: 0.003,
+          from: "random",
+          ease: "power1.in",
+        },
+        ease: "elastic.out",
+      },
+      "<"
+    )
+    .to(
+      ".background_svg_dot.background_svg_dot_even",
+      {
+        duration: 1,
+        attr: { r: `1px` },
+        stagger: {
+          each: 0.003,
+          from: "random",
+          ease: "power1.in",
+        },
+        ease: "elastic.out",
+      },
+      "<"
+    )
+    .to(
+      ".background_svg_line.line_vertical.line_main",
+      {
+        duration: duration,
+        attr: { y2: "100%", y1: "0%" },
+        ease: ease,
+        stagger: stagger,
+      },
+      ">-=1"
+    )
+    .to(
+      ".background_svg_line.line_vertical.line_sub",
+      {
+        duration: duration,
+        attr: { y2: "100%", y1: "0%" },
+        ease: ease,
+        stagger: stagger,
+      },
+      "<"
+    )
+    .to(
+      ".background_svg_line.line_horizontal.line_main",
+      {
+        duration: duration,
+        attr: { x2: "100%", x1: "0%" },
+        ease: ease,
+        stagger: stagger,
+      },
+      "<"
+    )
+    .to(
+      ".background_svg_line.line_horizontal.line_sub",
+      {
+        duration: duration,
+        attr: { x2: "100%", x1: "0%" },
+        ease: ease,
+        stagger: stagger,
+      },
+      "<"
+    )
+    .to(
+      ".background_svg_dot",
+      {
+        duration: 0.5,
+        attr: { r: `0` },
+        stagger: {
+          amount: 0.5,
+          from: "random",
+        },
+      },
+      ">"
+    );
+};
+
+export const navigateProjectPageToHomePage = () => {
+  console.log("navigateProjectPageToHomePage");
 
   const localTileWidth = calculateTileWidth(
-    "ProjectPage.navigateToProjectPage"
+    "ProjectPage.navigateHomePageToProjectPage"
   );
 
   const nrOfRows = calculateNrOfRows(localTileWidth);
@@ -359,8 +491,11 @@ export const navigateToHomePage = () => {
       .set(
         ".page-container.home",
         {
-          height: calculateTileWidth("ProjectPage.navigateToProjectPage"),
-          width: calculateTileWidth("ProjectPage.navigateToProjectPage") * 8,
+          height: calculateTileWidth(
+            "ProjectPage.navigateHomePageToProjectPage"
+          ),
+          width:
+            calculateTileWidth("ProjectPage.navigateHomePageToProjectPage") * 8,
         },
         "0"
       )
@@ -550,8 +685,8 @@ export const navigateToHomePage = () => {
   }
 };
 
-export const navigateToProjectPage = () => {
-  console.log("navigateToProjectPage");
+export const navigateHomePageToProjectPage = () => {
+  console.log("navigateHomePageToProjectPage");
 
   sizeGrid();
   drawProjectPageGrid();
@@ -666,7 +801,9 @@ export const navigateToProjectPage = () => {
       .to(
         ".page-container.home",
         {
-          height: calculateTileWidth("ProjectPage.navigateToProjectPage"),
+          height: calculateTileWidth(
+            "ProjectPage.navigateHomePageToProjectPage"
+          ),
           duration: 0.75,
           ease: "power3.out",
         },
@@ -683,7 +820,8 @@ export const navigateToProjectPage = () => {
       .to(
         ".page-container.home",
         {
-          width: calculateTileWidth("ProjectPage.navigateToProjectPage") * 7,
+          width:
+            calculateTileWidth("ProjectPage.navigateHomePageToProjectPage") * 7,
           duration: 0.75,
           ease: "power3.out",
         },
@@ -723,6 +861,8 @@ export const navigateToProjectPage = () => {
       );
   }
 };
+
+export const navigateHomePageToAboutMePage = () => {};
 
 export const handleMouseIn = (key: string) => {
   if (!selectedProject) {
