@@ -11,9 +11,9 @@ export const ROWS_PER_PROJECT_PER_SCREENSIZE = new Map<
   { xs: number; sm: number; md: number; lg: number; xl: number }
 >([
   ["club-sofa", { xs: 113, sm: 131, md: 121, lg: 113, xl: 111 }],
-  ["train-world", { xs: 98, sm: 110, md: 84, lg: 113, xl: 111 }],
-  ["transfo-intiem", { xs: 98, sm: 120, md: 93, lg: 115, xl: 111 }],
-  ["all-eyes-on-gaza", { xs: 101, sm: 114, md: 117, lg: 139, xl: 145 }],
+  ["train-world", { xs: 100, sm: 112, md: 86, lg: 115, xl: 113 }],
+  ["transfo-intiem", { xs: 100, sm: 122, md: 95, lg: 117, xl: 113 }],
+  ["all-eyes-on-gaza", { xs: 103, sm: 116, md: 119, lg: 141, xl: 147 }],
   ["qausal", { xs: 94, sm: 116, md: 115, lg: 147, xl: 151 }],
 ]);
 

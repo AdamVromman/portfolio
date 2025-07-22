@@ -109,7 +109,8 @@
 }
 
 .about-me_grid_contact {
-  &:hover {
+  &:hover,
+  &:focus-within {
     .grid_cell_container {
       @apply bg-active text-white;
     }

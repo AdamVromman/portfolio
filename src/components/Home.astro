@@ -3,12 +3,14 @@ import FlyingObjects from "./FlyingObjects.astro";
 import "../CSS/home.css";
 import HomeBackground from "./HomeBackground.astro";
 import { projects } from "../assets/Constants";
+
+const { slug } = Astro.props;
 ---
 
 <div class="page-container home" transition:persist>
   <HomeBackground />
   <div class="home_grid">
-    <a href="/" class="home_grid_back-home">
+    <a href="/" class="home_grid_back-home tabindex tabindex_projects">
       <div class="home_grid_back-home_icon">
         <svg viewBox="0 0 35 16">
           <path d="M35 8H2" stroke-width="2"></path>
@@ -46,7 +48,7 @@ import { projects } from "../assets/Constants";
           >
             <a
               data-slug={project.slug}
-              class={`grid_cell_container  home_grid_work_link ${project.slug}`}
+              class={`grid_cell_container  home_grid_work_link ${project.slug} tabindex tabindex_home`}
               href={`/${project.slug}`}
             >
               <span class="half-col-text">{project.name}</span>
@@ -70,7 +72,7 @@ import { projects } from "../assets/Constants";
       <a
         target="_blank"
         href="https://www.linkedin.com/in/adamvromman/"
-        class="grid_cell_container"
+        class="grid_cell_container tabindex tabindex_home"
       >
         <svg viewBox="0 0 32 32">
           <path
@@ -83,7 +85,7 @@ import { projects } from "../assets/Constants";
       <a
         target="_blank"
         href="https://pixelfed.social/adamvromman"
-        class="grid_cell_container"
+        class="grid_cell_container tabindex tabindex_home"
       >
         <svg viewBox="0 0 32 32">
           <path
@@ -95,7 +97,7 @@ import { projects } from "../assets/Constants";
     <div
       class="grid_cell home_cell button button-right right home_grid_about-me"
     >
-      <a class="grid_cell_container" href="/about-me/">
+      <a class="grid_cell_container tabindex tabindex_home" href="/about-me/">
         <span class="button-text half-col-text">About Me</span><div
           class="button-icon"
         >
@@ -107,7 +109,7 @@ import { projects } from "../assets/Constants";
       >
     </div>
     <div class="grid_cell top about-me_cell button about-me_grid_back-home">
-      <a class="grid_cell_container" href="/"
+      <a class="grid_cell_container tabindex tabindex_about-me" href="/"
         ><div class="button-icon">
           <svg viewBox="0 0 35 16">
             <path d="M35 8H2" stroke-width="2"></path>
@@ -133,7 +135,9 @@ import { projects } from "../assets/Constants";
     <div
       class="grid_cell bottom about-me_cell about-me_grid_email about-me_grid_contact"
     >
-      <a href="mailto:adam@adamvromman.net" class="grid_cell_container"
+      <a
+        href="mailto:adam@adamvromman.net"
+        class="grid_cell_container tabindex tabindex_about-me"
         ><div class="about-me_logo">
           <svg viewBox="0 0 512 512">
             <path
@@ -148,7 +152,7 @@ import { projects } from "../assets/Constants";
     >
       <a
         href="https://www.linkedin.com/in/adamvromman/"
-        class="grid_cell_container"
+        class="grid_cell_container tabindex tabindex_about-me"
         ><div class="about-me_logo">
           <svg viewBox="0 0 32 32">
             <path
@@ -161,7 +165,9 @@ import { projects } from "../assets/Constants";
     <div
       class="grid_cell bottom about-me_cell about-me_grid_pixelfed about-me_grid_contact"
     >
-      <a href="https://pixelfed.social/adamvromman" class="grid_cell_container"
+      <a
+        href="https://pixelfed.social/adamvromman"
+        class="grid_cell_container tabindex tabindex_about-me"
         ><div class="about-me_logo">
           <svg viewBox="0 0 32 32">
             <path
@@ -174,7 +180,10 @@ import { projects } from "../assets/Constants";
     <div
       class="grid_cell bottom about-me_cell about-me_grid_cv about-me_grid_contact"
     >
-      <a href="/assets/adam-vromman-cv.pdf" class="grid_cell_container" download
+      <a
+        href="/assets/adam-vromman-cv.pdf"
+        class="grid_cell_container tabindex tabindex_about-me"
+        download
         ><div class="about-me_logo">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
             ><path
@@ -187,7 +196,7 @@ import { projects } from "../assets/Constants";
     <div class="grid_cell bottom about-me_cell about-me_grid_internship">
       <div class="grid_cell_container">
         <video
-          class="about-me_grid_internship_video"
+          class="about-me_grid_internship_video tabindex tabindex_about-me"
           src="/assets/internship-valencia.mp4"
           controls
           poster="/assets/internship-valencia.webp"
@@ -226,7 +235,21 @@ import { projects } from "../assets/Constants";
       }
     });
 
+    link.addEventListener("focus", () => {
+      if (link instanceof HTMLElement) {
+        const key = link.dataset.slug || "";
+        handleMouseIn(key);
+      }
+    });
+
     link.addEventListener("mouseleave", () => {
+      if (link instanceof HTMLElement) {
+        const key = link.dataset.slug || "";
+        handleMouseOut(key);
+      }
+    });
+
+    link.addEventListener("blur", () => {
       if (link instanceof HTMLElement) {
         const key = link.dataset.slug || "";
         handleMouseOut(key);

@@ -348,4 +348,29 @@
       grid-column: 4 / -4;
     }
   }
+
+  .link-1 {
+    grid-row: 99 / 100;
+    grid-column: 2 / -2;
+
+    @media (min-width: theme(--breakpoint-xs)) {
+      grid-row: 121 / 122;
+      grid-column: 4 / -4;
+    }
+
+    @media (min-width: theme(--breakpoint-sm)) {
+      grid-row: 94 / 95;
+      grid-column: -10 / -2;
+    }
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 115 / 116;
+      grid-column: -10 / -2;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-row: 111 / 112;
+      grid-column: -12 / -4;
+    }
+  }
 }

@@ -135,7 +135,7 @@ export const setPreviousVel = (vector: RAPIER.Vector) => {
 
 export const loadHomePage = () => {
   sizeGrid();
-  drawHomeGrid(true);
+  drawHomeGrid(false);
 
   const duration = 0.75;
 
@@ -292,7 +292,7 @@ export const loadHomePage = () => {
 
 export const loadProjectPage = () => {
   sizeGrid();
-  drawHomeGrid(true);
+  drawHomeGrid(false);
   drawProjectPageGrid();
 
   if (selectedProject) {
@@ -360,7 +360,7 @@ export const loadProjectPage = () => {
 
 export const loadAboutMePage = () => {
   sizeGrid();
-  drawHomeGrid(true);
+  drawHomeGrid(false);
 
   const duration = 0.75;
 
@@ -532,7 +532,7 @@ export const navigateProjectPageToHomePage = () => {
 
   const nrOfRows = calculateNrOfRows(localTileWidth);
   sizeGrid();
-  drawHomeGrid(true);
+  drawHomeGrid(false);
   if (!selectedProject) {
     document.documentElement.style.setProperty("--color-active", "#4000ff");
 
@@ -1377,7 +1377,7 @@ export const drawProjectPageGrid = () => {
   }
 };
 
-export const drawHomeGrid = (animated: boolean) => {
+export const drawHomeGrid = (resize: boolean) => {
   const homes = document.getElementsByClassName("home");
   const backgrounds = document.getElementsByClassName("background");
 
@@ -1488,8 +1488,37 @@ export const drawHomeGrid = (animated: boolean) => {
     }
   }
 
-  if (animated) {
-  } else {
+  if (resize) {
+    const timeline = gsap.timeline();
+    timeline
+      .set(
+        ".background_svg_line.line_vertical.line_main",
+        {
+          attr: { y2: "100%", y1: "0%" },
+        },
+        "0"
+      )
+      .set(
+        ".background_svg_line.line_vertical.line_sub",
+        {
+          attr: { y2: "100%", y1: "0%" },
+        },
+        "<"
+      )
+      .set(
+        ".background_svg_line.line_horizontal.line_main",
+        {
+          attr: { x2: "100%", x1: "0%" },
+        },
+        "<"
+      )
+      .set(
+        ".background_svg_line.line_horizontal.line_sub",
+        {
+          attr: { x2: "100%", x1: "0%" },
+        },
+        "<"
+      );
   }
 };
 

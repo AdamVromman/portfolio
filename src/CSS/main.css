@@ -153,7 +153,8 @@ body {
     }
   }
 
-  &:hover {
+  &:hover,
+  &:focus-within {
     .grid_cell_container {
       @apply bg-active text-white;
     }

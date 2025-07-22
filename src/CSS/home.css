@@ -244,7 +244,11 @@
     @apply bg-active fill-white;
     @apply w-full aspect-square;
     @apply flex justify-center items-center;
-    @apply hover:bg-white hover:fill-active;
+    &:hover,
+    &:focus-within {
+      @apply bg-white;
+      @apply fill-active;
+    }
 
     svg {
       @apply w-4/5;
