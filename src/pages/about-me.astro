@@ -4,3 +4,14 @@ import "../CSS/about-me.css";
 ---
 
 <Layout slug="about-me" />
+<style is:global>
+  .home_cell,
+  .flying-object-link,
+  .home_grid_videos {
+    @apply pointer-events-none;
+  }
+
+  .about-me_cell {
+    @apply pointer-events-auto;
+  }
+</style>

@@ -37,7 +37,7 @@ export const calculateNrOfRows = (localTileWidth: number) => {
       return Math.max(nrOfRows, 14);
     }
     if (screenWidth >= 1024) {
-      return Math.max(nrOfRows, 12);
+      return Math.max(nrOfRows, 14);
     }
     if (screenWidth >= 768) {
       return Math.max(nrOfRows, 14);
@@ -148,6 +148,30 @@ export const loadHomePage = () => {
   const timeline = gsap.timeline();
 
   timeline
+    .set(
+      ".grid_cell.about-me_cell.bottom .grid_cell_container",
+      {
+        y: "105%",
+        ease: "power4.out",
+      },
+      "0"
+    )
+    .set(
+      ".grid_cell.about-me_cell.top .grid_cell_container",
+      {
+        y: "-105%",
+        ease: "power4.out",
+      },
+      "<"
+    )
+    .set(
+      ".grid_cell.about-me_cell.left .grid_cell_container",
+      {
+        x: "-105%",
+        ease: "power4.out",
+      },
+      "<"
+    )
     .to(
       ".background_svg_dot.background_svg_dot_odd",
       {
@@ -229,37 +253,37 @@ export const loadHomePage = () => {
       ">"
     )
     .from(
-      ".grid_cell.bottom .grid_cell_container",
+      ".grid_cell.home_cell.bottom .grid_cell_container",
       {
         duration: 1,
-        y: "100%",
+        y: "105%",
         ease: "power4.out",
       },
       "<"
     )
     .from(
-      ".grid_cell.top .grid_cell_container",
+      ".grid_cell.home_cell.top .grid_cell_container",
       {
         duration: 1,
-        y: "-100%",
+        y: "-105%",
         ease: "power4.out",
       },
       "<"
     )
     .from(
-      ".grid_cell.left .grid_cell_container",
+      ".grid_cell.home_cell.left .grid_cell_container",
       {
         duration: 1,
-        x: "-100%",
+        x: "-105%",
         ease: "power4.out",
       },
       "<+=0.5"
     )
     .from(
-      ".grid_cell.right .grid_cell_container",
+      ".grid_cell.home_cell.right .grid_cell_container",
       {
         duration: 1,
-        x: "100%",
+        x: "105%",
         ease: "power4.out",
       },
       "<"
@@ -352,7 +376,7 @@ export const loadAboutMePage = () => {
     .set(
       ".grid_cell.home_cell.bottom .grid_cell_container",
       {
-        y: "100%",
+        y: "105%",
         ease: "power4.out",
       },
       "0"
@@ -360,7 +384,7 @@ export const loadAboutMePage = () => {
     .set(
       ".grid_cell.home_cell.top .grid_cell_container",
       {
-        y: "-100%",
+        y: "-105%",
         ease: "power4.out",
       },
       "<"
@@ -368,7 +392,7 @@ export const loadAboutMePage = () => {
     .set(
       ".grid_cell.home_cell.left .grid_cell_container",
       {
-        x: "-100%",
+        x: "-105%",
         ease: "power4.out",
       },
       "<"
@@ -376,7 +400,7 @@ export const loadAboutMePage = () => {
     .set(
       ".grid_cell.home_cell.right .grid_cell_container",
       {
-        x: "100%",
+        x: "105%",
         ease: "power4.out",
       },
       "<"
@@ -460,6 +484,42 @@ export const loadAboutMePage = () => {
         },
       },
       ">"
+    )
+    .fromTo(
+      ".grid_cell.about-me_cell.bottom .grid_cell_container",
+      {
+        duration: 1,
+        y: "105%",
+        ease: "power4.out",
+      },
+      {
+        y: "0%",
+      },
+      "<+=0.1"
+    )
+    .fromTo(
+      ".grid_cell.about-me_cell.top .grid_cell_container",
+      {
+        duration: 1,
+        y: "-105%",
+        ease: "power4.out",
+      },
+      {
+        y: "0%",
+      },
+      "<+=0.1"
+    )
+    .fromTo(
+      ".grid_cell.about-me_cell.left .grid_cell_container",
+      {
+        duration: 1,
+        x: "-105%",
+        ease: "power4.out",
+      },
+      {
+        x: "0%",
+      },
+      "<+=0.1"
     );
 };
 
@@ -488,6 +548,38 @@ export const navigateProjectPageToHomePage = () => {
     const timeline = gsap.timeline();
 
     timeline
+      .set(
+        ".grid_cell.about-me_cell.bottom .grid_cell_container",
+        {
+          y: "105%",
+          ease: "power4.out",
+        },
+        "0"
+      )
+      .set(
+        ".grid_cell.about-me_cell.top .grid_cell_container",
+        {
+          y: "-105%",
+          ease: "power4.out",
+        },
+        "<"
+      )
+      .set(
+        ".grid_cell.about-me_cell.left .grid_cell_container",
+        {
+          x: "-105%",
+          ease: "power4.out",
+        },
+        "<"
+      )
+      .set(
+        ".grid_cell.about-me_cell.right .grid_cell_container",
+        {
+          x: "105%",
+          ease: "power4.out",
+        },
+        "<"
+      )
       .set(
         ".page-container.home",
         {
@@ -623,40 +715,40 @@ export const navigateProjectPageToHomePage = () => {
         "<"
       )
       .fromTo(
-        ".grid_cell.bottom .grid_cell_container",
+        ".grid_cell.home_cell.bottom .grid_cell_container",
         {
           duration: 1,
-          y: "100%",
+          y: "105%",
           ease: "power4.out",
         },
         { y: "0%" },
         "<"
       )
       .fromTo(
-        ".grid_cell.top .grid_cell_container",
+        ".grid_cell.home_cell.top .grid_cell_container",
         {
           duration: 1,
-          y: "-100%",
+          y: "-105%",
           ease: "power4.out",
         },
         { y: "0%" },
         "<"
       )
       .fromTo(
-        ".grid_cell.left .grid_cell_container",
+        ".grid_cell.home_cell.left .grid_cell_container",
         {
           duration: 1,
-          x: "-100%",
+          x: "-105%",
           ease: "power4.out",
         },
         { x: "0%" },
         "<+=0.5"
       )
       .fromTo(
-        ".grid_cell.right .grid_cell_container",
+        ".grid_cell.home_cell.right .grid_cell_container",
         {
           duration: 1,
-          x: "100%",
+          x: "105%",
           ease: "power4.out",
         },
         { x: "0%" },
@@ -723,37 +815,37 @@ export const navigateHomePageToProjectPage = () => {
         "0"
       )
       .to(
-        ".grid_cell.bottom .grid_cell_container",
+        ".grid_cell.home_cell.bottom .grid_cell_container",
         {
           duration: 1,
-          y: "100%",
+          y: "105%",
           ease: "power4.out",
         },
         "<"
       )
       .to(
-        ".grid_cell.top .grid_cell_container",
+        ".grid_cell.home_cell.top .grid_cell_container",
         {
           duration: 1,
-          y: "-100%",
+          y: "-105%",
           ease: "power4.out",
         },
         "<"
       )
       .to(
-        ".grid_cell.left .grid_cell_container",
+        ".grid_cell.home_cell.left .grid_cell_container",
         {
           duration: 1,
-          x: "-100%",
+          x: "-105%",
           ease: "power4.out",
         },
         "<"
       )
       .to(
-        ".grid_cell.right .grid_cell_container",
+        ".grid_cell.home_cell.right .grid_cell_container",
         {
           duration: 1,
-          x: "100%",
+          x: "105%",
           ease: "power4.out",
         },
         "<"
@@ -862,7 +954,182 @@ export const navigateHomePageToProjectPage = () => {
   }
 };
 
-export const navigateHomePageToAboutMePage = () => {};
+export const navigateHomePageToAboutMePage = () => {
+  const timeline = gsap.timeline();
+
+  timeline
+    .to(
+      ".home_video",
+      {
+        duration: 0.3,
+        y: "100%",
+        overwrite: true,
+      },
+      "0"
+    )
+    .to(
+      ".grid_cell.home_cell.bottom .grid_cell_container",
+      {
+        duration: 1,
+        y: "105%",
+        ease: "power4.out",
+      },
+      "<"
+    )
+    .to(
+      ".grid_cell.home_cell.top .grid_cell_container",
+      {
+        duration: 1,
+        y: "-105%",
+        ease: "power4.out",
+      },
+      "<"
+    )
+    .to(
+      ".grid_cell.home_cell.left .grid_cell_container",
+      {
+        duration: 1,
+        x: "-105%",
+        ease: "power4.out",
+      },
+      "<"
+    )
+    .to(
+      ".grid_cell.home_cell.right .grid_cell_container",
+      {
+        duration: 1,
+        x: "105%",
+        ease: "power4.out",
+      },
+      "<"
+    )
+    .fromTo(
+      ".grid_cell.about-me_cell.bottom .grid_cell_container",
+      {
+        duration: 1,
+        y: "105%",
+        ease: "power4.out",
+      },
+      {
+        y: "0%",
+      },
+      "<+=0.1"
+    )
+    .fromTo(
+      ".grid_cell.about-me_cell.top .grid_cell_container",
+      {
+        duration: 1,
+        y: "-105%",
+        ease: "power4.out",
+      },
+      {
+        y: "0%",
+      },
+      "<+=0.1"
+    )
+    .fromTo(
+      ".grid_cell.about-me_cell.left .grid_cell_container",
+      {
+        duration: 1,
+        x: "-105%",
+        ease: "power4.out",
+      },
+      {
+        x: "0%",
+      },
+      "<+=0.1"
+    );
+};
+
+export const navigateAboutMeToHomePage = () => {
+  const timeline = gsap.timeline();
+
+  timeline
+    .to(
+      ".home_video",
+      {
+        duration: 0.3,
+        y: "100%",
+        overwrite: true,
+      },
+      "0"
+    )
+    .to(
+      ".grid_cell.about-me_cell.bottom .grid_cell_container",
+      {
+        duration: 1,
+        y: "105%",
+        ease: "power4.out",
+      },
+      "<"
+    )
+    .to(
+      ".grid_cell.about-me_cell.top .grid_cell_container",
+      {
+        duration: 1,
+        y: "-105%",
+        ease: "power4.out",
+      },
+      "<"
+    )
+    .to(
+      ".grid_cell.about-me_cell.left .grid_cell_container",
+      {
+        duration: 1,
+        x: "-105%",
+        ease: "power4.out",
+      },
+      "<"
+    )
+    .fromTo(
+      ".grid_cell.home_cell.bottom .grid_cell_container",
+      {
+        duration: 1,
+        y: "105%",
+        ease: "power4.out",
+      },
+      {
+        y: "0%",
+      },
+      "<+=0.1"
+    )
+    .fromTo(
+      ".grid_cell.home_cell.top .grid_cell_container",
+      {
+        duration: 1,
+        y: "-105%",
+        ease: "power4.out",
+      },
+      {
+        y: "0%",
+      },
+      "<+=0.1"
+    )
+    .fromTo(
+      ".grid_cell.home_cell.left .grid_cell_container",
+      {
+        duration: 1,
+        x: "-105%",
+        ease: "power4.out",
+      },
+      {
+        x: "0%",
+      },
+      "<+=0.1"
+    )
+    .fromTo(
+      ".grid_cell.home_cell.right .grid_cell_container",
+      {
+        duration: 1,
+        x: "105%",
+        ease: "power4.out",
+      },
+      {
+        x: "0%",
+      },
+      "<+=0.1"
+    );
+};
 
 export const handleMouseIn = (key: string) => {
   if (!selectedProject) {

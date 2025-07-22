@@ -42,6 +42,8 @@ const { slug } = Astro.props;
         setSelectedProject,
         sizeGrid,
         loadAboutMePage,
+        navigateHomePageToAboutMePage,
+        navigateAboutMeToHomePage,
       } from "../assets/Functions";
 
       const analyseURL = () => {
@@ -57,10 +59,17 @@ const { slug } = Astro.props;
 
       sizeGrid();
 
+      let pathName = "";
+
       window.addEventListener("resize", handleResize);
+
+      document.addEventListener("astro:before-swap", (e) => {
+        pathName = e.from.pathname.replaceAll("/", "");
+      });
 
       document.addEventListener("astro:after-swap", () => {
         console.log("astro:after-swap event triggered");
+        console.log(pathName);
 
         gsap.set("body", {
           opacity: 1,
@@ -71,6 +80,7 @@ const { slug } = Astro.props;
         const project = projects.find((p) => p.slug === url);
         if (url === "about-me") {
           console.log("About page navigated");
+          navigateHomePageToAboutMePage();
         } else if (project) {
           console.log(`Project page navigated for: ${url}`);
           setSelectedProject(project);
@@ -78,7 +88,11 @@ const { slug } = Astro.props;
         } else {
           console.log("Home page navigated");
           setSelectedProject(undefined);
-          navigateProjectPageToHomePage();
+          if (pathName === "about-me") {
+            navigateAboutMeToHomePage();
+          } else {
+            navigateProjectPageToHomePage();
+          }
         }
       });
 

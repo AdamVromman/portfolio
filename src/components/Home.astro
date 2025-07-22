@@ -92,22 +92,36 @@ import { projects } from "../assets/Constants";
         </svg>
       </a>
     </div>
-    <div class="grid_cell home_cell right home_grid_about-me">
-      <a class="grid_cell_container" href="/about-me/"
-        ><span class="half-col-text">About Me</span></a
+    <div
+      class="grid_cell home_cell button button-right right home_grid_about-me"
+    >
+      <a class="grid_cell_container" href="/about-me/">
+        <span class="button-text half-col-text">About Me</span><div
+          class="button-icon"
+        >
+          <svg viewBox="0 0 35 16">
+            <path d="M35 8H2" stroke-width="2"></path>
+            <path d="M9 1L2 8L9 15" stroke-width="2"></path>
+          </svg>
+        </div></a
       >
     </div>
-    <div class="grid_cell about-me_cell about-me_grid_back-home">
-      <a class="grid_cell_container" href="/about-me/"
-        ><span class="half-col-text">Back home</span></a
+    <div class="grid_cell top about-me_cell button about-me_grid_back-home">
+      <a class="grid_cell_container" href="/"
+        ><div class="button-icon">
+          <svg viewBox="0 0 35 16">
+            <path d="M35 8H2" stroke-width="2"></path>
+            <path d="M9 1L2 8L9 15" stroke-width="2"></path>
+          </svg>
+        </div><span class="half-col-text button-text">Back home</span></a
       >
     </div>
-    <div class="grid_cell about-me_cell about-me_grid_profile-picture">
+    <div class="grid_cell bottom about-me_cell about-me_grid_profile-picture">
       <div class="grid_cell_container">
         <img src="/assets/profile-pic.webp" />
       </div>
     </div>
-    <div class="grid_cell about-me_cell about-me_grid_text">
+    <div class="grid_cell left about-me_cell about-me_grid_text">
       <div class="grid_cell_container">
         <p class="justified-paragraph third-col-text">
           This is me! In 2022 I graduated from HOGENT with a degree in Applied
@@ -117,7 +131,7 @@ import { projects } from "../assets/Constants";
       </div>
     </div>
     <div
-      class="grid_cell about-me_cell about-me_grid_email about-me_grid_contact"
+      class="grid_cell bottom about-me_cell about-me_grid_email about-me_grid_contact"
     >
       <a href="mailto:adam@adamvromman.net" class="grid_cell_container"
         ><div class="about-me_logo">
@@ -130,7 +144,7 @@ import { projects } from "../assets/Constants";
       >
     </div>
     <div
-      class="grid_cell about-me_cell about-me_grid_linkedin about-me_grid_contact"
+      class="grid_cell bottom about-me_cell about-me_grid_linkedin about-me_grid_contact"
     >
       <a
         href="https://www.linkedin.com/in/adamvromman/"
@@ -145,7 +159,7 @@ import { projects } from "../assets/Constants";
       >
     </div>
     <div
-      class="grid_cell about-me_cell about-me_grid_pixelfed about-me_grid_contact"
+      class="grid_cell bottom about-me_cell about-me_grid_pixelfed about-me_grid_contact"
     >
       <a href="https://pixelfed.social/adamvromman" class="grid_cell_container"
         ><div class="about-me_logo">
@@ -157,7 +171,9 @@ import { projects } from "../assets/Constants";
         </div><span class="half-col-text">/adamvromman/</span></a
       >
     </div>
-    <div class="grid_cell about-me_cell about-me_grid_cv about-me_grid_contact">
+    <div
+      class="grid_cell bottom about-me_cell about-me_grid_cv about-me_grid_contact"
+    >
       <a href="/assets/adam-vromman-cv.pdf" class="grid_cell_container" download
         ><div class="about-me_logo">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
@@ -168,7 +184,7 @@ import { projects } from "../assets/Constants";
         </div><span class="half-col-text">Download my CV</span></a
       >
     </div>
-    <div class="grid_cell about-me_cell about-me_grid_internship">
+    <div class="grid_cell bottom about-me_cell about-me_grid_internship">
       <div class="grid_cell_container">
         <video
           class="about-me_grid_internship_video"

@@ -138,3 +138,46 @@ body {
   @apply w-full;
   @apply p-30;
 }
+
+.grid_cell.button {
+  @apply transition-transform duration-300 ease-in-out;
+
+  .grid_cell_container {
+    @apply flex flex-row;
+    @apply cursor-pointer;
+  }
+
+  &.button-right {
+    .button-icon {
+      @apply rotate-180;
+    }
+  }
+
+  &:hover {
+    .grid_cell_container {
+      @apply bg-active text-white;
+    }
+
+    .button-icon svg {
+      @apply -translate-x-[150%];
+    }
+  }
+
+  .button-icon {
+    @apply flex flex-row justify-center items-center;
+    @apply h-full aspect-square;
+    @apply overflow-hidden;
+    @apply bg-active;
+
+    svg {
+      @apply w-4/5;
+      @apply stroke-white fill-none;
+      @apply transition-transform duration-300 ease-in-out;
+    }
+  }
+
+  .button-text {
+    @apply block flex-grow text-center;
+    @apply uppercase;
+  }
+}
