@@ -319,15 +319,15 @@ import "../CSS/flying-objects.css";
               );
             },
             (xhr) => {
-              console.log(
-                (projectsLoaded / projects.length) * 100 + "% loaded"
-              );
-              if (projectsLoaded < projects.length - 1) {
-                projectsLoaded++;
-              } else {
-                console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-                document.dispatchEvent(assetsLoaded);
-              }
+              // console.log(
+              //   (projectsLoaded / projects.length) * 100 + "% loaded"
+              // );
+              // if (projectsLoaded < projects.length - 1) {
+              //   projectsLoaded++;
+              // } else {
+              //   console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+              //   document.dispatchEvent(assetsLoaded);
+              // }
             },
             (error) => {
               console.log(error);

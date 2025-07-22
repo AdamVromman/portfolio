@@ -524,8 +524,6 @@ export const loadAboutMePage = () => {
 };
 
 export const navigateProjectPageToHomePage = () => {
-  console.log("navigateProjectPageToHomePage");
-
   const localTileWidth = calculateTileWidth(
     "ProjectPage.navigateHomePageToProjectPage"
   );
@@ -778,8 +776,6 @@ export const navigateProjectPageToHomePage = () => {
 };
 
 export const navigateHomePageToProjectPage = () => {
-  console.log("navigateHomePageToProjectPage");
-
   sizeGrid();
   drawProjectPageGrid();
   if (selectedProject) {
