@@ -32,9 +32,7 @@ const { slug } = Astro.props;
       import gsap from "gsap";
       import { projects } from "../assets/Constants";
       import {
-        calculateTileWidth,
         drawProjectPageGrid,
-        getNrOfColumns,
         loadHomePage,
         loadProjectPage,
         navigateProjectPageToHomePage,
@@ -44,8 +42,8 @@ const { slug } = Astro.props;
         loadAboutMePage,
         navigateHomePageToAboutMePage,
         navigateAboutMeToHomePage,
+        drawHomeGrid,
       } from "../assets/Functions";
-      import { all } from "three/tsl";
 
       const analyseURL = () => {
         const slug = document.body.dataset.slug;
@@ -55,7 +53,14 @@ const { slug } = Astro.props;
 
       const handleResize = () => {
         sizeGrid();
-        drawProjectPageGrid();
+        const url = analyseURL();
+        console.log("Resizing grid for URL:", url);
+
+        if (url === "about-me" || url === "home") {
+          drawHomeGrid(true);
+        } else {
+          drawProjectPageGrid();
+        }
       };
 
       const fixTabIndeces = (slug: string) => {
