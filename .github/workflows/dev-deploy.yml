@@ -2,9 +2,9 @@ name: Portfolio Deploy to Test
 on:
   push:
     branches:
-      - dev 
+      - dev
   workflow_dispatch:
-  
+
 env:
   WEB_PATH: ~/subsites/test.adamvromman.net
 jobs:
@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -40,4 +40,4 @@ jobs:
       # RSYNC
       - name: Deploy web files with rsync
         run: |
-          rsync -azh --exclude assets/ --delete-after -e "ssh -o StrictHostKeyChecking=no" dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{env.WEB_PATH}}
+          rsync -azh --exclude assets/ -e "ssh -o StrictHostKeyChecking=no" dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{env.WEB_PATH}}
