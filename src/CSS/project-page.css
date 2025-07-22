@@ -26,6 +26,15 @@
   @apply bg-white;
 }
 
+.project-page_link {
+  @apply bg-active text-white;
+
+  a {
+    @apply flex items-center justify-center;
+    @apply h-full w-full;
+  }
+}
+
 .project-page_grid_title {
   grid-column: 1 / -1;
 

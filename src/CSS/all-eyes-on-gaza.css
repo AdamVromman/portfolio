@@ -319,7 +319,7 @@
       grid-column: 2 / -2;
     }
 
-    @media (min-width: theme(--breakpoint-xs)) {
+    @media (min-width: theme(--breakpoint-sm)) {
       grid-row: 109 / 117;
     }
 
@@ -330,6 +330,31 @@
     @media (min-width: theme(--breakpoint-lg)) {
       grid-row: 132 / 144;
       grid-column: 4 / -4;
+    }
+  }
+
+  .link-1 {
+    grid-row: 102 / 103;
+    grid-column: 2 / -2;
+
+    @media (min-width: theme(--breakpoint-xs)) {
+      grid-row: 115 / 116;
+      grid-column: 4 / -4;
+    }
+
+    @media (min-width: theme(--breakpoint-sm)) {
+      grid-row: 118 / 119;
+      grid-column: -10 / -2;
+    }
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 139 / 140;
+      grid-column: -10 / -2;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-row: 145 / 146;
+      grid-column: -12 / -4;
     }
   }
 }
