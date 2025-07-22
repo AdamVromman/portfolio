@@ -1,8 +1,15 @@
 ---
-import Home from "../components/Home.astro";
 import Layout from "../layouts/Layout.astro";
+import "../CSS/about-me.css";
 ---
 
-<Layout slug="home">
-  <!-- <Home /> -->
-</Layout>
+<Layout slug="home" />
+<style is:global>
+  .home_cell {
+    pointer-events: auto;
+  }
+
+  .about-me_cell {
+    pointer-events: none;
+  }
+</style>

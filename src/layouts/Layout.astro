@@ -37,10 +37,13 @@ const { slug } = Astro.props;
         getNrOfColumns,
         loadHomePage,
         loadProjectPage,
-        navigateToHomePage,
-        navigateToProjectPage,
+        navigateProjectPageToHomePage,
+        navigateHomePageToProjectPage,
         setSelectedProject,
         sizeGrid,
+        loadAboutMePage,
+        navigateHomePageToAboutMePage,
+        navigateAboutMeToHomePage,
       } from "../assets/Functions";
 
       const analyseURL = () => {
@@ -56,10 +59,17 @@ const { slug } = Astro.props;
 
       sizeGrid();
 
+      let pathName = "";
+
       window.addEventListener("resize", handleResize);
+
+      document.addEventListener("astro:before-swap", (e) => {
+        pathName = e.from.pathname.replaceAll("/", "");
+      });
 
       document.addEventListener("astro:after-swap", () => {
         console.log("astro:after-swap event triggered");
+        console.log(pathName);
 
         gsap.set("body", {
           opacity: 1,
@@ -68,16 +78,21 @@ const { slug } = Astro.props;
 
         const url = analyseURL();
         const project = projects.find((p) => p.slug === url);
-        if (url === "about") {
+        if (url === "about-me") {
           console.log("About page navigated");
+          navigateHomePageToAboutMePage();
         } else if (project) {
           console.log(`Project page navigated for: ${url}`);
           setSelectedProject(project);
-          navigateToProjectPage();
+          navigateHomePageToProjectPage();
         } else {
           console.log("Home page navigated");
           setSelectedProject(undefined);
-          navigateToHomePage();
+          if (pathName === "about-me") {
+            navigateAboutMeToHomePage();
+          } else {
+            navigateProjectPageToHomePage();
+          }
         }
       });
 
@@ -92,8 +107,9 @@ const { slug } = Astro.props;
 
         const url = analyseURL();
         const project = projects.find((p) => p.slug === url);
-        if (url === "about") {
+        if (url === "about-me") {
           console.log("About page loaded");
+          loadAboutMePage();
         } else if (project) {
           console.log(`Project page loaded for: ${url}`);
           setSelectedProject(project);
