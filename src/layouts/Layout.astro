@@ -25,7 +25,7 @@ const { slug } = Astro.props;
   <body data-slug={slug} transition:persist>
     <div id="grid-calculator"></div>
     <div id="grid-container" class={`${slug ? slug : ""}`}>
-      <Home />
+      <Home slug={slug} />
       <slot />
     </div>
     <script>
@@ -45,6 +45,7 @@ const { slug } = Astro.props;
         navigateHomePageToAboutMePage,
         navigateAboutMeToHomePage,
       } from "../assets/Functions";
+      import { all } from "three/tsl";
 
       const analyseURL = () => {
         const slug = document.body.dataset.slug;
@@ -55,6 +56,24 @@ const { slug } = Astro.props;
       const handleResize = () => {
         sizeGrid();
         drawProjectPageGrid();
+      };
+
+      const fixTabIndeces = (slug: string) => {
+        const allElements = document.querySelectorAll(
+          ".tabindex"
+        ) as NodeListOf<HTMLElement>;
+
+        allElements.forEach((el) => {
+          el.tabIndex = -1;
+        });
+
+        const key = slug === "home" || slug === "about-me" ? slug : "projects";
+        const tabindexElements = document.querySelectorAll(
+          `.tabindex_${key}`
+        ) as NodeListOf<HTMLElement>;
+        tabindexElements.forEach((el) => {
+          el.tabIndex = 0;
+        });
       };
 
       sizeGrid();
@@ -77,6 +96,8 @@ const { slug } = Astro.props;
         });
 
         const url = analyseURL();
+        fixTabIndeces(url || "home");
+
         const project = projects.find((p) => p.slug === url);
         if (url === "about-me") {
           console.log("About page navigated");
@@ -106,6 +127,9 @@ const { slug } = Astro.props;
         });
 
         const url = analyseURL();
+        console.log("Current URL slug:", url);
+        fixTabIndeces(url || "home");
+
         const project = projects.find((p) => p.slug === url);
         if (url === "about-me") {
           console.log("About page loaded");

@@ -234,6 +234,7 @@ import "../CSS/flying-objects.css";
                   const element = document.createElement("a");
                   element.className = `flying-object-link ${project.slug}`;
                   element.href = `/${project.slug}`;
+                  element.tabIndex = -1;
                   canvasContainer?.appendChild(element);
                   box.center();
                   box.scale(scale, scale, scale);
