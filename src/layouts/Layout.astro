@@ -43,12 +43,9 @@ const { slug } = Astro.props;
         navigateHomePageToAboutMePage,
         navigateAboutMeToHomePage,
         drawHomeGrid,
+        stopAnimation,
+        analyseURL,
       } from "../assets/Functions";
-
-      const analyseURL = () => {
-        const slug = document.body.dataset.slug;
-        return slug;
-      };
 
       const handleResize = () => {
         sizeGrid();
@@ -100,6 +97,7 @@ const { slug } = Astro.props;
 
         const project = projects.find((p) => p.slug === url);
         if (url === "about-me") {
+          stopAnimation();
           navigateHomePageToAboutMePage();
         } else if (project) {
           setSelectedProject(project);

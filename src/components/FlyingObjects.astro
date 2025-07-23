@@ -8,10 +8,9 @@ import "../CSS/flying-objects.css";
     import * as THREE from "three";
     import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
     import RAPIER from "@dimforge/rapier3d-compat";
-    import Stats from "three/addons/libs/stats.module.js";
     import { RGBELoader } from "three/examples/jsm/Addons.js";
     import gsap from "gsap";
-    import { assetsLoaded, dynamicBodies, projects } from "../assets/Constants";
+    import { dynamicBodies, projects } from "../assets/Constants";
     import {
       handleMouseIn,
       handleMouseOut,
@@ -21,10 +20,11 @@ import "../CSS/flying-objects.css";
       calculateTileWidth,
       calculateNrOfRows,
       getNrOfColumns,
-      isHomePage,
+      playing,
+      playAnimation,
+      stopAnimation,
+      analyseURL,
     } from "../assets/Functions";
-
-    let stats: Stats;
 
     await RAPIER.init();
     const gravity = new RAPIER.Vector3(0.0, 0.0, 0.0);
@@ -32,8 +32,6 @@ import "../CSS/flying-objects.css";
     const frustumSize = 50;
     let previousVelDecreasing: RAPIER.Vector3 | undefined;
     let time = 0;
-    let movedWalls = false;
-    let playing = true;
 
     let leftWall:
       | {
@@ -317,17 +315,6 @@ import "../CSS/flying-objects.css";
 
     const animate = () => {
       if (playing) requestAnimationFrame(animate);
-      stats.update();
-
-      // const { vertices, colors } = world.debugRender();
-      // debug.geometry.setAttribute(
-      //   "position",
-      //   new THREE.BufferAttribute(vertices, 3)
-      // );
-      // debug.geometry.setAttribute(
-      //   "color",
-      //   new THREE.BufferAttribute(colors, 4)
-      // );
 
       delta = clock.getDelta();
       time += Math.min(delta, 0.1);
@@ -419,10 +406,6 @@ import "../CSS/flying-objects.css";
         camera.lookAt(0, 0, 0);
         camera.updateProjectionMatrix();
 
-        const light = new THREE.DirectionalLight(0xffffff, 3);
-        light.position.set(1, 1, 1).normalize();
-        //scene.add(light);
-
         createFlyingObject();
         createBox();
 
@@ -446,9 +429,6 @@ import "../CSS/flying-objects.css";
           "afterbegin",
           renderer.domElement
         );
-
-        stats = new Stats();
-        //document.body.appendChild(stats.dom);
 
         requestAnimationFrame(animate);
       }
@@ -499,67 +479,17 @@ import "../CSS/flying-objects.css";
       }
     };
 
-    const moveFlyingObjectsIn = () => {
-      playing = true;
-      requestAnimationFrame(animate);
-      if (leftWall) {
-        leftWall.body.setNextKinematicTranslation(
-          new RAPIER.Vector3(camera.left, 0, 0)
-        );
-      }
-      if (rightWall) {
-        rightWall.body.setNextKinematicTranslation(
-          new RAPIER.Vector3(camera.right, 0, 0)
-        );
-      }
-
-      dynamicBodies.forEach((body) => {
-        body.body.setNextKinematicTranslation(
-          new RAPIER.Vector3(
-            body.body.translation().x / 2,
-            body.body.translation().y,
-            body.body.translation().z
-          )
-        );
-      });
-    };
-
-    const moveFlyingObjectsOut = () => {
-      if (leftWall) {
-        leftWall.body.setNextKinematicTranslation(
-          new RAPIER.Vector3(camera.left * 2, 0, 0)
-        );
-      }
-      if (rightWall) {
-        rightWall.body.setNextKinematicTranslation(
-          new RAPIER.Vector3(camera.right * 2, 0, 0)
-        );
-      }
-
-      dynamicBodies.forEach((body) => {
-        body.body.setNextKinematicTranslation(
-          new RAPIER.Vector3(
-            body.body.translation().x * 2,
-            body.body.translation().y,
-            body.body.translation().z
-          )
-        );
-      });
-
-      playing = false;
-    };
-
-    if (!isHomePage()) playing = false;
-
     init();
 
     window.addEventListener("pointermove", onPointerMove);
     window.addEventListener("resize", onWindowResize);
     document.addEventListener("astro:after-swap", () => {
-      if (isHomePage()) {
-        moveFlyingObjectsIn();
+      const url = analyseURL();
+
+      if (url === "home") {
+        playAnimation(animate);
       } else {
-        moveFlyingObjectsOut();
+        stopAnimation();
       }
     });
   </script>

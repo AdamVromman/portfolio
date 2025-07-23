@@ -121,9 +121,24 @@ export const getProjectRowsPerScreenSize = () => {
   return 0;
 };
 
+export const analyseURL = () => {
+  const slug = document.body.dataset.slug;
+  return slug;
+};
+
 export let hoveringBody: FlyingObject | undefined = undefined;
 export let previousVel: RAPIER.Vector3 | undefined = undefined;
 export let selectedProject: Project | undefined = undefined;
+export let playing = true;
+
+export const playAnimation = (callback: FrameRequestCallback) => {
+  playing = true;
+  requestAnimationFrame(callback);
+};
+
+export const stopAnimation = () => {
+  playing = false;
+};
 
 export const setSelectedProject = (project: Project | undefined) => {
   selectedProject = project;
