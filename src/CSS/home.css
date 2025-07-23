@@ -1,7 +1,7 @@
 @import "./imports.css";
 
 .page-container.home {
-  @apply w-full h-full z-100;
+  @apply w-full h-full;
   @apply absolute;
   @apply flex flex-col items-center justify-start gap-15;
   @apply border-active border-2 box-content;
@@ -11,6 +11,7 @@
 .home_grid {
   @apply grid w-full h-full;
   @apply relative;
+  @apply z-20;
 }
 
 #home_intro {

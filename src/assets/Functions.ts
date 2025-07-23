@@ -121,9 +121,24 @@ export const getProjectRowsPerScreenSize = () => {
   return 0;
 };
 
+export const analyseURL = () => {
+  const slug = document.body.dataset.slug;
+  return slug;
+};
+
 export let hoveringBody: FlyingObject | undefined = undefined;
 export let previousVel: RAPIER.Vector3 | undefined = undefined;
 export let selectedProject: Project | undefined = undefined;
+export let playing = true;
+
+export const playAnimation = (callback: FrameRequestCallback) => {
+  playing = true;
+  requestAnimationFrame(callback);
+};
+
+export const stopAnimation = () => {
+  playing = false;
+};
 
 export const setSelectedProject = (project: Project | undefined) => {
   selectedProject = project;
@@ -373,6 +388,13 @@ export const loadAboutMePage = () => {
   const timeline = gsap.timeline();
 
   timeline
+    .set(
+      ".flying-objects",
+      {
+        y: "100%",
+      },
+      "0"
+    )
     .set(
       ".grid_cell.home_cell.bottom .grid_cell_container",
       {
@@ -964,6 +986,15 @@ export const navigateHomePageToAboutMePage = () => {
       "0"
     )
     .to(
+      ".flying-objects",
+      {
+        y: "100%",
+        duration: 1,
+        ease: "power3.in",
+      },
+      ">"
+    )
+    .to(
       ".grid_cell.home_cell.bottom .grid_cell_container",
       {
         duration: 1,
@@ -1074,6 +1105,18 @@ export const navigateAboutMeToHomePage = () => {
         duration: 1,
         x: "-105%",
         ease: "power4.out",
+      },
+      "<"
+    )
+    .fromTo(
+      ".flying-objects",
+      {
+        y: "100%",
+      },
+      {
+        y: "0%",
+        duration: 1,
+        ease: "power3.out",
       },
       "<"
     )
