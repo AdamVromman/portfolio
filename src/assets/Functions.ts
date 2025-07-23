@@ -374,6 +374,13 @@ export const loadAboutMePage = () => {
 
   timeline
     .set(
+      ".flying-objects",
+      {
+        y: "100%",
+      },
+      "0"
+    )
+    .set(
       ".grid_cell.home_cell.bottom .grid_cell_container",
       {
         y: "105%",
@@ -964,6 +971,15 @@ export const navigateHomePageToAboutMePage = () => {
       "0"
     )
     .to(
+      ".flying-objects",
+      {
+        y: "100%",
+        duration: 1,
+        ease: "power3.in",
+      },
+      ">"
+    )
+    .to(
       ".grid_cell.home_cell.bottom .grid_cell_container",
       {
         duration: 1,
@@ -1074,6 +1090,18 @@ export const navigateAboutMeToHomePage = () => {
         duration: 1,
         x: "-105%",
         ease: "power4.out",
+      },
+      "<"
+    )
+    .fromTo(
+      ".flying-objects",
+      {
+        y: "100%",
+      },
+      {
+        y: "0%",
+        duration: 1,
+        ease: "power3.out",
       },
       "<"
     )

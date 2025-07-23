@@ -1,4 +1,4 @@
-name: Portfolio Deploy to Test
+name: Portfolio Deploy to Main
 on:
   push:
     branches:

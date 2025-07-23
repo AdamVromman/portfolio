@@ -1,5 +1,15 @@
 @import "./imports.css";
 
+.flying-objects {
+  @apply pointer-events-none;
+  @apply absolute w-full h-full top-0 left-0;
+  @apply z-30;
+}
+
+.canvas-container {
+  @apply pointer-events-none relative z-10 w-full h-full;
+}
+
 .flying-object-link {
   @apply absolute w-20 h-20;
   @apply top-0 left-0 origin-center;
