@@ -32,7 +32,7 @@
 
   .project-page_grid_category {
     &.first {
-      grid-row: 7 / 6;
+      grid-row: 5 / 6;
       @apply pt-thick pb-thin;
 
       @media (min-width: theme(--breakpoint-xs)) {
@@ -73,6 +73,7 @@
   .video-1 {
     grid-row: 14 / 18;
     grid-column: 2 / -2;
+    @apply p-thin;
 
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 14 / 20;
@@ -96,6 +97,7 @@
   .video-2 {
     grid-row: 19 / 25;
     grid-column: 1 / -1;
+    @apply py-thick;
 
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 21 / 29;
@@ -121,6 +123,7 @@
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 30 / 44;
       grid-column: 2 / -6;
+      @apply p-thin;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -166,6 +169,7 @@
   .paragraph-1 {
     grid-row: 48 / 54;
     grid-column: 2 / -2;
+    @apply p-thin;
 
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 52 / 60;
@@ -190,10 +194,12 @@
   .video-4 {
     grid-row: 54 / 60;
     grid-column: 1 / -1;
+    @apply border-x-0;
 
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 60 / 67;
       grid-column: 2 / -2;
+      @apply border-x-2;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -214,9 +220,13 @@
     grid-row: 61 / 67;
     grid-column: 1 / -1;
 
+    @apply border-x-0;
+
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 68 / 75;
       grid-column: 2 / -2;
+
+      @apply border-x-2;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -240,9 +250,12 @@
     grid-column: 2 / -2;
     @apply bg-[#171717];
 
+    @apply border-x-2;
+
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 76 / 84;
       grid-column: 1 / -1;
+      @apply border-x-0;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -265,6 +278,7 @@
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 84 / 92;
       grid-column: 2 / -2;
+      @apply p-thin;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {

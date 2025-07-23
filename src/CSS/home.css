@@ -321,6 +321,8 @@
 .grid_cell.home_grid_about-me {
   grid-column: -7 / -1;
   grid-row: 1 / 2;
+
+  @apply pl-thick pb-thin;
 }
 
 .home_video {
