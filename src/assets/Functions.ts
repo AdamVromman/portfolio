@@ -102,23 +102,18 @@ export const getFooterRows = () => {
   return 12;
 };
 
-export const getProjectRowsPerScreenSize = () => {
-  const key = document.getElementById("grid-container")?.classList[0];
+export const getProjectRowsPerScreenSize = (slug: string) => {
   const screenWidth = getScreenWidth();
-  if (key) {
-    if (screenWidth >= 1280) {
-      return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.xl || 0;
-    } else if (screenWidth >= 1024) {
-      return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.lg || 0;
-    } else if (screenWidth >= 768) {
-      return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.md || 0;
-    } else if (screenWidth >= 480) {
-      return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.sm || 0;
-    }
-
-    return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.xs || 0;
+  if (screenWidth >= 1280) {
+    return ROWS_PER_PROJECT_PER_SCREENSIZE.get(slug)?.xl || 0;
+  } else if (screenWidth >= 1024) {
+    return ROWS_PER_PROJECT_PER_SCREENSIZE.get(slug)?.lg || 0;
+  } else if (screenWidth >= 768) {
+    return ROWS_PER_PROJECT_PER_SCREENSIZE.get(slug)?.md || 0;
+  } else if (screenWidth >= 480) {
+    return ROWS_PER_PROJECT_PER_SCREENSIZE.get(slug)?.sm || 0;
   }
-  return 0;
+  return ROWS_PER_PROJECT_PER_SCREENSIZE.get(slug)?.xs || 0;
 };
 
 export const analyseURL = () => {
@@ -308,9 +303,9 @@ export const loadHomePage = () => {
 export const loadProjectPage = () => {
   sizeGrid();
   drawHomeGrid(false);
-  drawProjectPageGrid();
 
   if (selectedProject) {
+    drawProjectPageGrid(selectedProject.slug);
     document.documentElement.style.setProperty(
       "--color-active",
       `#${selectedProject.color}`
@@ -593,14 +588,6 @@ export const navigateProjectPageToHomePage = () => {
         "<"
       )
       .set(
-        ".grid_cell.about-me_cell.right .grid_cell_container",
-        {
-          x: "105%",
-          ease: "power4.out",
-        },
-        "<"
-      )
-      .set(
         ".page-container.home",
         {
           position: "relative",
@@ -615,7 +602,7 @@ export const navigateProjectPageToHomePage = () => {
       .to(
         ".page-container.home",
         {
-          width: `${getNrOfColumns() * localTileWidth}px`,
+          width: "100%",
           duration: 0.75,
           ease: "power3.out",
           delay: 0.25,
@@ -625,7 +612,7 @@ export const navigateProjectPageToHomePage = () => {
       .to(
         ".page-container.home",
         {
-          height: `${nrOfRows * localTileWidth}px`,
+          height: "100%",
           duration: 0.75,
           ease: "power3.out",
         },
@@ -800,8 +787,9 @@ export const navigateProjectPageToHomePage = () => {
 
 export const navigateHomePageToProjectPage = () => {
   sizeGrid();
-  drawProjectPageGrid();
+
   if (selectedProject) {
+    drawProjectPageGrid(selectedProject.slug);
     document.documentElement.style.setProperty(
       "--color-active",
       `#${selectedProject.color}`
@@ -1291,7 +1279,7 @@ export const handleMouseOut = (key: string) => {
   }
 };
 
-export const drawProjectPageGrid = () => {
+export const drawProjectPageGrid = (slug: string) => {
   const localTileWidth = calculateTileWidth("ProjectPage.drawGrid");
   const projectPage = document.querySelector(".project-page") as HTMLElement;
   if (projectPage) {
@@ -1309,7 +1297,9 @@ export const drawProjectPageGrid = () => {
       projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
       if (projectPageGrid) {
         projectPageGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-        projectPageGrid.style.gridTemplateRows = `repeat(${getProjectRowsPerScreenSize()}, ${localTileWidth}px)`;
+        projectPageGrid.style.gridTemplateRows = `repeat(${getProjectRowsPerScreenSize(
+          slug
+        )}, ${localTileWidth}px)`;
       }
     }
   }
@@ -1326,7 +1316,7 @@ export const drawProjectPageGrid = () => {
 
       if (linesGroup) {
         const localTileWidth = calculateTileWidth("ProjectPage.drawLines");
-        const nrOfRows = getProjectRowsPerScreenSize();
+        const nrOfRows = getProjectRowsPerScreenSize(slug);
         background.style.width = `${getNrOfColumns() * localTileWidth}px`;
         background.style.height = `${nrOfRows * localTileWidth}px`;
         linesGroup.textContent = "";
@@ -1417,7 +1407,6 @@ export const drawProjectPageGrid = () => {
 };
 
 export const drawHomeGrid = (resize: boolean) => {
-  console.log("Drawing home grid");
   const backgrounds = document.getElementsByClassName("background");
 
   const localTileWidth = calculateTileWidth("Home.handleResize");
