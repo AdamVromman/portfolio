@@ -326,7 +326,7 @@ export const loadProjectPage = () => {
           height: calculateTileWidth(
             "ProjectPage.navigateHomePageToProjectPage"
           ),
-          position: "relative",
+          position: "fixed",
           width:
             calculateTileWidth("ProjectPage.navigateHomePageToProjectPage") * 7,
           y: "-200%",
@@ -603,6 +603,7 @@ export const navigateProjectPageToHomePage = () => {
       .set(
         ".page-container.home",
         {
+          position: "relative",
           height: calculateTileWidth(
             "ProjectPage.navigateHomePageToProjectPage"
           ),
@@ -922,7 +923,7 @@ export const navigateHomePageToProjectPage = () => {
       .set(
         ".page-container.home",
         {
-          position: "relative",
+          position: "fixed",
           zIndex: 100,
         },
         ">"
