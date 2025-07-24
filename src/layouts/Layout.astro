@@ -24,7 +24,7 @@ const { slug } = Astro.props;
   </head>
   <body data-slug={slug} transition:persist>
     <div id="grid-calculator"></div>
-    <div id="grid-container" class={`${slug ? slug : ""}`}>
+    <div id="grid-container" class={`grid-container ${slug ? slug : ""}`}>
       <Home slug={slug} />
       <slot />
     </div>
@@ -43,7 +43,6 @@ const { slug } = Astro.props;
         navigateHomePageToAboutMePage,
         navigateAboutMeToHomePage,
         drawHomeGrid,
-        stopAnimation,
         analyseURL,
       } from "../assets/Functions";
 
@@ -92,12 +91,13 @@ const { slug } = Astro.props;
           ease: "power2.inOut",
         });
 
+        sizeGrid();
+
         const url = analyseURL();
         fixTabIndeces(url || "home");
 
         const project = projects.find((p) => p.slug === url);
         if (url === "about-me") {
-          stopAnimation();
           navigateHomePageToAboutMePage();
         } else if (project) {
           setSelectedProject(project);

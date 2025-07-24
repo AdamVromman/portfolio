@@ -102,23 +102,18 @@ export const getFooterRows = () => {
   return 12;
 };
 
-export const getProjectRowsPerScreenSize = () => {
-  const key = document.getElementById("grid-container")?.classList[0];
+export const getProjectRowsPerScreenSize = (slug: string) => {
   const screenWidth = getScreenWidth();
-  if (key) {
-    if (screenWidth >= 1280) {
-      return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.xl || 0;
-    } else if (screenWidth >= 1024) {
-      return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.lg || 0;
-    } else if (screenWidth >= 768) {
-      return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.md || 0;
-    } else if (screenWidth >= 480) {
-      return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.sm || 0;
-    }
-
-    return ROWS_PER_PROJECT_PER_SCREENSIZE.get(key)?.xs || 0;
+  if (screenWidth >= 1280) {
+    return ROWS_PER_PROJECT_PER_SCREENSIZE.get(slug)?.xl || 0;
+  } else if (screenWidth >= 1024) {
+    return ROWS_PER_PROJECT_PER_SCREENSIZE.get(slug)?.lg || 0;
+  } else if (screenWidth >= 768) {
+    return ROWS_PER_PROJECT_PER_SCREENSIZE.get(slug)?.md || 0;
+  } else if (screenWidth >= 480) {
+    return ROWS_PER_PROJECT_PER_SCREENSIZE.get(slug)?.sm || 0;
   }
-  return 0;
+  return ROWS_PER_PROJECT_PER_SCREENSIZE.get(slug)?.xs || 0;
 };
 
 export const analyseURL = () => {
@@ -308,9 +303,9 @@ export const loadHomePage = () => {
 export const loadProjectPage = () => {
   sizeGrid();
   drawHomeGrid(false);
-  drawProjectPageGrid();
 
   if (selectedProject) {
+    drawProjectPageGrid(selectedProject.slug);
     document.documentElement.style.setProperty(
       "--color-active",
       `#${selectedProject.color}`
@@ -326,7 +321,7 @@ export const loadProjectPage = () => {
           height: calculateTileWidth(
             "ProjectPage.navigateHomePageToProjectPage"
           ),
-          position: "relative",
+          position: "fixed",
           width:
             calculateTileWidth("ProjectPage.navigateHomePageToProjectPage") * 7,
           y: "-200%",
@@ -593,16 +588,9 @@ export const navigateProjectPageToHomePage = () => {
         "<"
       )
       .set(
-        ".grid_cell.about-me_cell.right .grid_cell_container",
-        {
-          x: "105%",
-          ease: "power4.out",
-        },
-        "<"
-      )
-      .set(
         ".page-container.home",
         {
+          position: "relative",
           height: calculateTileWidth(
             "ProjectPage.navigateHomePageToProjectPage"
           ),
@@ -614,7 +602,7 @@ export const navigateProjectPageToHomePage = () => {
       .to(
         ".page-container.home",
         {
-          width: `${getNrOfColumns() * localTileWidth}px`,
+          width: "100%",
           duration: 0.75,
           ease: "power3.out",
           delay: 0.25,
@@ -624,7 +612,7 @@ export const navigateProjectPageToHomePage = () => {
       .to(
         ".page-container.home",
         {
-          height: `${nrOfRows * localTileWidth}px`,
+          height: "100%",
           duration: 0.75,
           ease: "power3.out",
         },
@@ -799,8 +787,9 @@ export const navigateProjectPageToHomePage = () => {
 
 export const navigateHomePageToProjectPage = () => {
   sizeGrid();
-  drawProjectPageGrid();
+
   if (selectedProject) {
+    drawProjectPageGrid(selectedProject.slug);
     document.documentElement.style.setProperty(
       "--color-active",
       `#${selectedProject.color}`
@@ -922,8 +911,7 @@ export const navigateHomePageToProjectPage = () => {
       .set(
         ".page-container.home",
         {
-          position: "relative",
-          zIndex: 100,
+          position: "fixed",
         },
         ">"
       )
@@ -973,7 +961,11 @@ export const navigateHomePageToProjectPage = () => {
 };
 
 export const navigateHomePageToAboutMePage = () => {
-  const timeline = gsap.timeline();
+  const timeline = gsap.timeline({
+    onComplete: () => {
+      stopAnimation();
+    },
+  });
 
   timeline
     .to(
@@ -1287,11 +1279,7 @@ export const handleMouseOut = (key: string) => {
   }
 };
 
-export const isHomePage = () => {
-  return !document.getElementById("grid-container") !== undefined;
-};
-
-export const drawProjectPageGrid = () => {
+export const drawProjectPageGrid = (slug: string) => {
   const localTileWidth = calculateTileWidth("ProjectPage.drawGrid");
   const projectPage = document.querySelector(".project-page") as HTMLElement;
   if (projectPage) {
@@ -1309,7 +1297,9 @@ export const drawProjectPageGrid = () => {
       projectPage.style.width = `${getNrOfColumns() * localTileWidth}px`;
       if (projectPageGrid) {
         projectPageGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-        projectPageGrid.style.gridTemplateRows = `repeat(${getProjectRowsPerScreenSize()}, ${localTileWidth}px)`;
+        projectPageGrid.style.gridTemplateRows = `repeat(${getProjectRowsPerScreenSize(
+          slug
+        )}, ${localTileWidth}px)`;
       }
     }
   }
@@ -1326,7 +1316,7 @@ export const drawProjectPageGrid = () => {
 
       if (linesGroup) {
         const localTileWidth = calculateTileWidth("ProjectPage.drawLines");
-        const nrOfRows = getProjectRowsPerScreenSize();
+        const nrOfRows = getProjectRowsPerScreenSize(slug);
         background.style.width = `${getNrOfColumns() * localTileWidth}px`;
         background.style.height = `${nrOfRows * localTileWidth}px`;
         linesGroup.textContent = "";
@@ -1417,28 +1407,23 @@ export const drawProjectPageGrid = () => {
 };
 
 export const drawHomeGrid = (resize: boolean) => {
-  const homes = document.getElementsByClassName("home");
   const backgrounds = document.getElementsByClassName("background");
 
-  for (let home of homes as HTMLCollectionOf<HTMLElement>) {
-    const localTileWidth = calculateTileWidth("Home.handleResize");
+  const localTileWidth = calculateTileWidth("Home.handleResize");
+  const nrOfRows = calculateNrOfRows(localTileWidth);
+
+  const homeGrids = document.querySelectorAll(
+    ".home_grid"
+  ) as NodeListOf<HTMLElement>;
+  for (let homeGrid of homeGrids) {
+    const localTileWidth = calculateTileWidth("Home.drawGrid");
     const nrOfRows = calculateNrOfRows(localTileWidth);
-    home.style.width = `${getNrOfColumns() * localTileWidth}px`;
-    home.style.height = `${nrOfRows * localTileWidth}px`;
 
-    const homeGrid = home.querySelector(".home_grid") as HTMLElement;
-    if (homeGrid) {
-      const localTileWidth = calculateTileWidth("Home.drawGrid");
-      const nrOfRows = calculateNrOfRows(localTileWidth);
-
-      homeGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-      homeGrid.style.gridTemplateRows = `repeat(${nrOfRows}, ${localTileWidth}px)`;
-    }
+    homeGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
+    homeGrid.style.gridTemplateRows = `repeat(${nrOfRows}, ${localTileWidth}px)`;
   }
 
   const svgNS = "http://www.w3.org/2000/svg";
-  const localTileWidth = calculateTileWidth("Home.drawDots");
-  const nrOfRows = calculateNrOfRows(localTileWidth);
   const nrOfColumns = getNrOfColumns();
   const dotsGroups = document.getElementsByClassName("starting-animation-dots");
   for (let dotsGroup of dotsGroups as HTMLCollectionOf<HTMLElement>) {
@@ -1563,8 +1548,12 @@ export const drawHomeGrid = (resize: boolean) => {
 
 export const sizeGrid = () => {
   const localTileWidth = calculateTileWidth("Layout.sizeGrid");
-  const gridContainer = document.getElementById("grid-container");
-  if (gridContainer) {
+  const nrOfRows = calculateNrOfRows(localTileWidth);
+  const gridContainers = document.querySelectorAll(
+    ".grid-container"
+  ) as NodeListOf<HTMLElement>;
+  for (let gridContainer of gridContainers) {
     gridContainer.style.width = `${getNrOfColumns() * localTileWidth}px`;
+    gridContainer.style.height = `${nrOfRows * localTileWidth}px`;
   }
 };
