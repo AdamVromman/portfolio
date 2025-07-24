@@ -33,7 +33,7 @@ export const projects: Project[] = [
   {
     name: "Transfo Intiem",
     slug: "transfo-intiem",
-    color: "B87AFF",
+    color: "8419ff",
     year: 2024,
   },
   {
