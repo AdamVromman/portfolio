@@ -541,11 +541,7 @@ export const loadAboutMePage = () => {
 };
 
 export const navigateProjectPageToHomePage = () => {
-  const localTileWidth = calculateTileWidth(
-    "ProjectPage.navigateHomePageToProjectPage"
-  );
-
-  const nrOfRows = calculateNrOfRows(localTileWidth);
+  window.scrollTo(0, 0);
   sizeGrid();
   drawHomeGrid(false);
   if (!selectedProject) {
@@ -610,6 +606,15 @@ export const navigateProjectPageToHomePage = () => {
         "<"
       )
       .to(
+        ".home_grid_back-home",
+        {
+          y: "-100%",
+          duration: 0.75,
+          ease: "power3.out",
+        },
+        "<"
+      )
+      .to(
         ".page-container.home",
         {
           height: "100%",
@@ -618,13 +623,7 @@ export const navigateProjectPageToHomePage = () => {
         },
         ">"
       )
-      .to(
-        ".home_grid_back-home",
-        {
-          y: "-100%",
-        },
-        "<"
-      )
+
       .to(
         `.home_grid_work .grid_cell_container`,
         {
@@ -915,6 +914,7 @@ export const navigateHomePageToProjectPage = () => {
         },
         ">"
       )
+
       .to(
         ".page-container.home",
         {
@@ -929,12 +929,18 @@ export const navigateHomePageToProjectPage = () => {
         ".home_grid_back-home",
         {
           y: "0%",
+          duration: 0.75,
+          ease: "power3.out",
         },
         "<"
       )
-      .set(".project-page", {
-        opacity: 1,
-      })
+      .set(
+        ".project-page",
+        {
+          opacity: 1,
+        },
+        "<"
+      )
       .from(
         ".project-page-header-video",
         {
@@ -944,7 +950,7 @@ export const navigateHomePageToProjectPage = () => {
           duration: 1,
           ease: "power4.out",
         },
-        ">+=0.1"
+        "<+=0.1"
       )
       .from(
         ".project-page-container",
