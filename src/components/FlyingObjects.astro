@@ -486,11 +486,7 @@ import "../CSS/flying-objects.css";
     document.addEventListener("astro:after-swap", () => {
       const url = analyseURL();
 
-      if (url === "home") {
-        playAnimation(animate);
-      } else {
-        stopAnimation();
-      }
+      if (url === "home") playAnimation(animate);
     });
   </script>
 </div>

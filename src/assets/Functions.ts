@@ -924,7 +924,6 @@ export const navigateHomePageToProjectPage = () => {
         ".page-container.home",
         {
           position: "fixed",
-          zIndex: 100,
         },
         ">"
       )
@@ -974,7 +973,11 @@ export const navigateHomePageToProjectPage = () => {
 };
 
 export const navigateHomePageToAboutMePage = () => {
-  const timeline = gsap.timeline();
+  const timeline = gsap.timeline({
+    onComplete: () => {
+      stopAnimation();
+    },
+  });
 
   timeline
     .to(
@@ -1288,10 +1291,6 @@ export const handleMouseOut = (key: string) => {
   }
 };
 
-export const isHomePage = () => {
-  return !document.getElementById("grid-container") !== undefined;
-};
-
 export const drawProjectPageGrid = () => {
   const localTileWidth = calculateTileWidth("ProjectPage.drawGrid");
   const projectPage = document.querySelector(".project-page") as HTMLElement;
@@ -1418,28 +1417,24 @@ export const drawProjectPageGrid = () => {
 };
 
 export const drawHomeGrid = (resize: boolean) => {
-  const homes = document.getElementsByClassName("home");
+  console.log("Drawing home grid");
   const backgrounds = document.getElementsByClassName("background");
 
-  for (let home of homes as HTMLCollectionOf<HTMLElement>) {
-    const localTileWidth = calculateTileWidth("Home.handleResize");
+  const localTileWidth = calculateTileWidth("Home.handleResize");
+  const nrOfRows = calculateNrOfRows(localTileWidth);
+
+  const homeGrids = document.querySelectorAll(
+    ".home_grid"
+  ) as NodeListOf<HTMLElement>;
+  for (let homeGrid of homeGrids) {
+    const localTileWidth = calculateTileWidth("Home.drawGrid");
     const nrOfRows = calculateNrOfRows(localTileWidth);
-    home.style.width = `${getNrOfColumns() * localTileWidth}px`;
-    home.style.height = `${nrOfRows * localTileWidth}px`;
 
-    const homeGrid = home.querySelector(".home_grid") as HTMLElement;
-    if (homeGrid) {
-      const localTileWidth = calculateTileWidth("Home.drawGrid");
-      const nrOfRows = calculateNrOfRows(localTileWidth);
-
-      homeGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
-      homeGrid.style.gridTemplateRows = `repeat(${nrOfRows}, ${localTileWidth}px)`;
-    }
+    homeGrid.style.gridTemplateColumns = `repeat(${getNrOfColumns()}, ${localTileWidth}px)`;
+    homeGrid.style.gridTemplateRows = `repeat(${nrOfRows}, ${localTileWidth}px)`;
   }
 
   const svgNS = "http://www.w3.org/2000/svg";
-  const localTileWidth = calculateTileWidth("Home.drawDots");
-  const nrOfRows = calculateNrOfRows(localTileWidth);
   const nrOfColumns = getNrOfColumns();
   const dotsGroups = document.getElementsByClassName("starting-animation-dots");
   for (let dotsGroup of dotsGroups as HTMLCollectionOf<HTMLElement>) {
@@ -1564,8 +1559,12 @@ export const drawHomeGrid = (resize: boolean) => {
 
 export const sizeGrid = () => {
   const localTileWidth = calculateTileWidth("Layout.sizeGrid");
-  const gridContainer = document.getElementById("grid-container");
-  if (gridContainer) {
+  const nrOfRows = calculateNrOfRows(localTileWidth);
+  const gridContainers = document.querySelectorAll(
+    ".grid-container"
+  ) as NodeListOf<HTMLElement>;
+  for (let gridContainer of gridContainers) {
     gridContainer.style.width = `${getNrOfColumns() * localTileWidth}px`;
+    gridContainer.style.height = `${nrOfRows * localTileWidth}px`;
   }
 };
