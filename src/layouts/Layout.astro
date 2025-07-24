@@ -50,10 +50,10 @@ const { slug } = Astro.props;
         sizeGrid();
         const url = analyseURL();
 
-        if (url === "about-me" || url === "home") {
+        if (url === "about-me" || url === "home" || url === undefined) {
           drawHomeGrid(true);
         } else {
-          drawProjectPageGrid();
+          drawProjectPageGrid(url);
         }
       };
 
