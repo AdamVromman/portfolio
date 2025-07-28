@@ -72,13 +72,7 @@ export const init = (project: Project) => {
           object = mesh;
           scene.add(mesh);
         },
-        (xhr) => {
-          console.log(
-            `${project.slug} model loading: ${Math.round(
-              (xhr.loaded / xhr.total) * 100
-            )}%`
-          );
-        },
+        (xhr) => {},
         (error) => {
           console.log(error);
         }
@@ -108,7 +102,6 @@ export const init = (project: Project) => {
     controls.enablePan = false;
     controls.enableDamping = true;
 
-    console.log(width, height);
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
