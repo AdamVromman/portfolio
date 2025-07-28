@@ -262,6 +262,18 @@ export const loadHomePage = () => {
       },
       ">"
     )
+    .fromTo(
+      ".flying-objects",
+      {
+        y: "100%",
+      },
+      {
+        y: "0%",
+        duration: 1,
+        ease: "power3.out",
+      },
+      "<"
+    )
     .from(
       ".grid_cell.home_cell.bottom .grid_cell_container",
       {

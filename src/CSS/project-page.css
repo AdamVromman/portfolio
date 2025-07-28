@@ -8,6 +8,7 @@
 
 .project-page-header-video {
   @apply border-solid border-2 border-active box-content;
+  @apply w-full;
 }
 
 .project-page-container {
