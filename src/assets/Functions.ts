@@ -325,7 +325,7 @@ export const loadProjectPage = () => {
     );
     const timeline = gsap.timeline({
       onComplete: () => {
-        init();
+        if (selectedProject) init(selectedProject);
       },
     });
 
@@ -821,7 +821,9 @@ export const navigateHomePageToProjectPage = () => {
     const ease = "power1.inOut";
 
     const timeline = gsap.timeline({
-      onComplete: justifyParagraphs,
+      onComplete: () => {
+        if (selectedProject) init(selectedProject);
+      },
     });
 
     timeline

@@ -3,6 +3,8 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 import { projects } from "./Constants";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import gsap from "gsap";
+import type { Project } from "./Interfaces";
 
 let renderer: THREE.WebGLRenderer,
   scene: THREE.Scene,
@@ -15,12 +17,6 @@ const frustumSize = 50;
 const clock = new THREE.Clock();
 let delta;
 let time = 0;
-
-const slug =
-  (document.querySelector(".single-flying-object") as HTMLElement).dataset
-    .slug || "default";
-const container = document.getElementById(`single-flying-object-${slug}`);
-const project = projects.find((p) => p.slug === slug);
 
 const animate = () => {
   requestAnimationFrame(animate);
@@ -35,7 +31,11 @@ const animate = () => {
   if (renderer && scene && camera) renderer.render(scene, camera);
 };
 
-export const init = () => {
+export const init = (project: Project) => {
+  const container = document.getElementById(
+    `single-flying-object-${project.slug}`
+  );
+
   if (container && project) {
     height = container.getBoundingClientRect().height;
     width = container.getBoundingClientRect().width;
@@ -58,7 +58,7 @@ export const init = () => {
 
     if (scene) {
       loader.load(
-        `/assets/${slug}/${slug}.drc`,
+        `/assets/${project.slug}/${project.slug}.drc`,
         (geometry) => {
           geometry.center();
           geometry.scale(100, 100, 100);
@@ -74,9 +74,9 @@ export const init = () => {
         },
         (xhr) => {
           console.log(
-            `Loading ${slug}... ${Math.round(
+            `${project.slug} model loading: ${Math.round(
               (xhr.loaded / xhr.total) * 100
-            )}% loaded`
+            )}%`
           );
         },
         (error) => {
@@ -115,5 +115,11 @@ export const init = () => {
     container.insertAdjacentElement("afterbegin", renderer.domElement);
 
     requestAnimationFrame(animate);
+
+    gsap.fromTo(
+      container,
+      { opacity: 0, y: 100 },
+      { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+    );
   }
 };
