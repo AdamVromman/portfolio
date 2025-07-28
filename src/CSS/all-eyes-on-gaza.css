@@ -58,14 +58,6 @@
     }
   }
 
-  .project-page_grid_icon {
-    grid-row: 5 / 7;
-
-    @media (min-width: theme(--breakpoint-md)) {
-      grid-row: 1 / 3;
-    }
-  }
-
   .project-page_grid_description {
     grid-row: 7 / 13;
   }
