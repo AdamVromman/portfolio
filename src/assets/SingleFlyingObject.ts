@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
-import { projects } from "./Constants";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import gsap from "gsap";
 import type { Project } from "./Interfaces";
@@ -17,6 +16,7 @@ const frustumSize = 50;
 const clock = new THREE.Clock();
 let delta;
 let time = 0;
+let localProject: Project | null = null;
 
 const animate = () => {
   requestAnimationFrame(animate);
@@ -37,6 +37,8 @@ export const init = (project: Project) => {
   );
 
   if (container && project) {
+    localProject = project;
+
     height = container.getBoundingClientRect().height;
     width = container.getBoundingClientRect().width;
     const aspect = width / height;
@@ -116,3 +118,31 @@ export const init = (project: Project) => {
     );
   }
 };
+
+const onWindowResize = (project: Project) => {
+  const container = document.getElementById(
+    `single-flying-object-${project.slug}`
+  );
+
+  if (renderer && camera && container) {
+    height = container.clientHeight;
+    width = container.clientWidth;
+
+    const aspect = width / height;
+
+    camera.left = (frustumSize * aspect) / -2;
+    camera.right = (frustumSize * aspect) / 2;
+    camera.top = frustumSize / 2;
+    camera.bottom = frustumSize / -2;
+
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(width, height);
+  }
+};
+
+window.addEventListener("resize", () => {
+  if (localProject) {
+    onWindowResize(localProject);
+  }
+});
