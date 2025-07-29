@@ -32,9 +32,6 @@
 
   .project-page_grid_category {
     &.first {
-      grid-row: 5 / 6;
-      @apply pt-thick pb-thin;
-
       @media (min-width: theme(--breakpoint-xs)) {
         grid-row: 5 / 6;
       }
@@ -45,9 +42,6 @@
     }
 
     &.second {
-      grid-row: 6 / 7;
-      @apply pt-thin pb-thick;
-
       @media (min-width: theme(--breakpoint-xs)) {
         grid-row: 6 / 7;
       }
@@ -59,11 +53,11 @@
   }
 
   .project-page_grid_description {
-    grid-row: 7 / 13;
+    grid-row: 9 / 15;
   }
 
   .video-1 {
-    grid-row: 14 / 18;
+    grid-row: 16 / 20;
     grid-column: 2 / -2;
     @apply p-thin;
 
@@ -87,7 +81,7 @@
   }
 
   .video-2 {
-    grid-row: 19 / 25;
+    grid-row: 21 / 27;
     grid-column: 1 / -1;
     @apply py-thick;
 
@@ -109,7 +103,7 @@
   }
 
   .video-3 {
-    grid-row: 26 / 42;
+    grid-row: 28 / 44;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -134,7 +128,7 @@
   }
 
   .image-1 {
-    grid-row: 43 / 48;
+    grid-row: 45 / 50;
     grid-column: 2 / -2;
     @apply bg-[#171717];
 
@@ -159,7 +153,7 @@
   }
 
   .paragraph-1 {
-    grid-row: 48 / 54;
+    grid-row: 50 / 56;
     grid-column: 2 / -2;
     @apply p-thin;
 
@@ -184,7 +178,7 @@
   }
 
   .video-4 {
-    grid-row: 54 / 60;
+    grid-row: 56 / 62;
     grid-column: 1 / -1;
     @apply border-x-0;
 
@@ -209,15 +203,13 @@
   }
 
   .video-5 {
-    grid-row: 61 / 67;
+    grid-row: 63 / 69;
     grid-column: 1 / -1;
-
     @apply border-x-0;
 
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 68 / 75;
       grid-column: 2 / -2;
-
       @apply border-x-2;
     }
 
@@ -238,10 +230,9 @@
   }
 
   .image-2 {
-    grid-row: 68 / 72;
+    grid-row: 70 / 74;
     grid-column: 2 / -2;
     @apply bg-[#171717];
-
     @apply border-x-2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -264,7 +255,7 @@
   }
 
   .paragraph-2 {
-    grid-row: 73 / 79;
+    grid-row: 75 / 81;
     grid-column: 1 / -1;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -290,7 +281,7 @@
   }
 
   .video-6 {
-    grid-row: 80 / 96;
+    grid-row: 82 / 98;
     grid-column: 2 / -2;
     @apply bg-[#171717];
 
@@ -316,7 +307,7 @@
   }
 
   .video-7 {
-    grid-row: 97 / 101;
+    grid-row: 99 / 103;
     grid-column: 2 / -2;
     @apply bg-[#ebebeb];
 
@@ -340,7 +331,7 @@
   }
 
   .link-1 {
-    grid-row: 102 / 103;
+    grid-row: 104 / 105;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
