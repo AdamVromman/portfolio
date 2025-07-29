@@ -323,9 +323,18 @@
 
 .grid_cell.home_grid_videos {
   @apply relative;
+  @apply overflow-hidden;
+  @apply py-thick;
 
-  video {
-    /* @apply border-2 border-active box-content; */
+  @media (min-width: theme(--breakpoint-sm)) {
+    @apply p-thick;
+  }
+
+  .home_video {
+    @apply object-cover w-full h-full;
+    @apply opacity-100;
+    @apply translate-y-full;
+    @apply absolute;
   }
 
   grid-column: 1 / -1;
@@ -354,11 +363,4 @@
   grid-row: 1 / 2;
 
   @apply pl-thick pb-thin;
-}
-
-.home_video {
-  @apply w-full h-full object-cover;
-  @apply opacity-100;
-  @apply translate-y-full;
-  @apply absolute top-0 left-0;
 }
