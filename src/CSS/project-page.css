@@ -105,10 +105,17 @@
 .project-page_grid_year {
   grid-column: -3 / -1;
   grid-row: 5 / 6;
+
   @apply pl-thick pt-thick pb-thin;
+
   .grid_cell_container {
     @apply justify-center;
     @apply italic;
+  }
+
+  @media (min-width: theme(--breakpoint-xs)) {
+    grid-column: -4 / -1;
+    @apply pl-thin;
   }
 }
 
