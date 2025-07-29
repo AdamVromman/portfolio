@@ -27,19 +27,19 @@ export const projects: Project[] = [
   {
     name: "Train World",
     slug: "train-world",
-    color: "de2217",
+    color: "de0d00",
     year: 2023,
   },
   {
     name: "Transfo Intiem",
     slug: "transfo-intiem",
-    color: "8419ff",
+    color: "750ee9",
     year: 2024,
   },
   {
     name: "All Eyes on Gaza",
     slug: "all-eyes-on-gaza",
-    color: "009736",
+    color: "03a33b",
     year: 2025,
   },
   {
