@@ -23,9 +23,6 @@
 
   .project-page_grid_category {
     &.first {
-      grid-row: 5 / 6;
-      @apply pt-thick pb-thin;
-
       @media (min-width: theme(--breakpoint-xs)) {
         grid-row: 5 / 6;
       }
@@ -36,9 +33,6 @@
     }
 
     &.second {
-      grid-row: 6 / 7;
-      @apply pt-thin pb-thick;
-
       @media (min-width: theme(--breakpoint-xs)) {
         grid-row: 6 / 7;
       }
@@ -50,8 +44,6 @@
   }
 
   .project-page_grid_icon {
-    grid-row: 5 / 7;
-
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 5 / 7;
     }
@@ -64,7 +56,7 @@
   }
 
   .project-page_grid_description {
-    grid-row: 7 / 13;
+    grid-row: 9 / 15;
 
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 7 / 13;
@@ -88,7 +80,7 @@
   }
 
   .video-1 {
-    grid-row: 14 / 20;
+    grid-row: 16 / 22;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -107,7 +99,7 @@
   }
 
   .paragraph-1 {
-    grid-row: 21 / 27;
+    grid-row: 23 / 29;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -131,7 +123,7 @@
   }
 
   .video-2 {
-    grid-row: 27 / 36;
+    grid-row: 29 / 38;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -155,7 +147,7 @@
   }
 
   .video-3 {
-    grid-row: 37 / 41;
+    grid-row: 39 / 43;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -179,7 +171,7 @@
   }
 
   .video-4 {
-    grid-row: 42 / 49;
+    grid-row: 44 / 51;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -203,7 +195,7 @@
   }
 
   .paragraph-2 {
-    grid-row: 52 / 58;
+    grid-row: 54 / 60;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -227,7 +219,7 @@
   }
 
   .image-1 {
-    grid-row: 59 / 67;
+    grid-row: 61 / 69;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -256,7 +248,7 @@
   }
 
   .video-5 {
-    grid-row: 68 / 74;
+    grid-row: 70 / 76;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -280,7 +272,7 @@
   }
 
   .image-2 {
-    grid-row: 75 / 83;
+    grid-row: 77 / 85;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -304,7 +296,7 @@
   }
 
   .video-6 {
-    grid-row: 84 / 90;
+    grid-row: 86 / 92;
     grid-column: 2 / -4;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -328,7 +320,7 @@
   }
 
   .video-7 {
-    grid-row: 91 / 98;
+    grid-row: 93 / 100;
     grid-column: 4 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -352,7 +344,7 @@
   }
 
   .link-1 {
-    grid-row: 99 / 100;
+    grid-row: 101 / 102;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
