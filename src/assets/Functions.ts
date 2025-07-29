@@ -152,7 +152,7 @@ export const loadHomePage = () => {
 
   const stagger: gsap.StaggerVars = {
     each: 0.05,
-    from: "center",
+    from: "random",
     ease: "power1.out",
   };
   const ease = "power1.inOut";
@@ -393,7 +393,7 @@ export const loadAboutMePage = () => {
 
   const stagger: gsap.StaggerVars = {
     each: 0.05,
-    from: "center",
+    from: "random",
     ease: "power1.out",
   };
   const ease = "power1.inOut";
