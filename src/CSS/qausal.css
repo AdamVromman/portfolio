@@ -13,12 +13,13 @@
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
-      grid-column: 1 / 13;
+      grid-column: 1 / 11;
       @apply pr-thick pb-thick;
     }
 
     @media (min-width: theme(--breakpoint-md)) {
-      grid-column: 3 / 17;
+      grid-column: 3 / 13;
+      @apply px-thick;
     }
 
     @media (min-width: theme(--breakpoint-lg)) {

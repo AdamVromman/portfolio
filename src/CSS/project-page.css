@@ -68,6 +68,7 @@
 
     @media (min-width: theme(--breakpoint-md)) {
       grid-column: -5 / -3;
+      @apply px-thick;
     }
 
     @media (min-width: theme(--breakpoint-lg)) {
@@ -80,7 +81,8 @@
     @apply pl-thin;
 
     @media (min-width: theme(--breakpoint-md)) {
-      grid-column: -6 / -3;
+      grid-column: -7 / -3;
+      @apply px-thick;
     }
 
     @media (min-width: theme(--breakpoint-lg)) {
@@ -94,6 +96,7 @@
 
     @media (min-width: theme(--breakpoint-md)) {
       grid-column: -5 / -3;
+      @apply px-thick;
     }
 
     @media (min-width: theme(--breakpoint-lg)) {
@@ -121,6 +124,15 @@
   @media (min-width: theme(--breakpoint-sm)) {
     grid-column: 1 / 4;
     @apply pl-thin;
+  }
+
+  @media (min-width: theme(--breakpoint-md)) {
+    grid-column: 3 / 6;
+    @apply pl-thick pr-thin;
+  }
+
+  @media (min-width: theme(--breakpoint-lg)) {
+    grid-column: 5 / 8;
   }
 }
 

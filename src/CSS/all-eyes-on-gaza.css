@@ -22,7 +22,8 @@
     }
 
     @media (min-width: theme(--breakpoint-md)) {
-      grid-column: 3 / 17;
+      grid-column: 3 / 15;
+      @apply px-thick;
     }
 
     @media (min-width: theme(--breakpoint-lg)) {
