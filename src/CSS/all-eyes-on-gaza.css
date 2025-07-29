@@ -32,20 +32,12 @@
 
   .project-page_grid_category {
     &.first {
-      @media (min-width: theme(--breakpoint-xs)) {
-        grid-row: 5 / 6;
-      }
-
       @media (min-width: theme(--breakpoint-sm)) {
         grid-row: 1 / 2;
       }
     }
 
     &.second {
-      @media (min-width: theme(--breakpoint-xs)) {
-        grid-row: 6 / 7;
-      }
-
       @media (min-width: theme(--breakpoint-sm)) {
         grid-row: 2 / 3;
       }
@@ -62,7 +54,7 @@
     @apply p-thin;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 14 / 20;
+      grid-row: 16 / 22;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -86,7 +78,7 @@
     @apply py-thick;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 21 / 29;
+      grid-row: 23 / 31;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -107,7 +99,7 @@
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 30 / 44;
+      grid-row: 32 / 46;
       grid-column: 2 / -6;
       @apply p-thin;
     }
@@ -133,7 +125,7 @@
     @apply bg-[#171717];
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 45 / 52;
+      grid-row: 47 / 54;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -158,7 +150,7 @@
     @apply p-thin;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 52 / 60;
+      grid-row: 54 / 62;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
@@ -183,7 +175,7 @@
     @apply border-x-0;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 60 / 67;
+      grid-row: 62 / 69;
       grid-column: 2 / -2;
       @apply border-x-2;
     }
@@ -208,7 +200,7 @@
     @apply border-x-0;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 68 / 75;
+      grid-row: 70 / 77;
       grid-column: 2 / -2;
       @apply border-x-2;
     }
@@ -236,7 +228,7 @@
     @apply border-x-2;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 76 / 84;
+      grid-row: 78 / 86;
       grid-column: 1 / -1;
       @apply border-x-0;
     }
@@ -259,7 +251,7 @@
     grid-column: 1 / -1;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 84 / 92;
+      grid-row: 86 / 94;
       grid-column: 2 / -2;
       @apply p-thin;
     }
@@ -286,7 +278,7 @@
     @apply bg-[#171717];
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 92 / 107;
+      grid-row: 94 / 109;
       grid-column: -10 / -2;
     }
 
@@ -312,7 +304,7 @@
     @apply bg-[#ebebeb];
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 108 / 114;
+      grid-row: 110 / 116;
       grid-column: 2 / -2;
     }
 
@@ -335,7 +327,7 @@
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 115 / 116;
+      grid-row: 117 / 118;
       grid-column: 4 / -4;
     }
 
