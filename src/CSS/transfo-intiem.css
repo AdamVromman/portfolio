@@ -64,6 +64,11 @@
       grid-row: 16 / 26;
     }
 
+    @media (min-width: theme(--breakpoint-sm)) {
+      grid-row: 15 / 25;
+      grid-column: 2 / -2;
+    }
+
     @media (min-width: theme(--breakpoint-md)) {
       grid-row: 18 / 32;
       grid-column: 2 / -6;
@@ -76,15 +81,15 @@
   }
 
   .paragraph-1 {
-    grid-row: 23 / 29;
+    grid-row: 22 / 29;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
-      grid-row: 27 / 36;
+      grid-row: 26 / 36;
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
-      grid-row: 25 / 32;
+      grid-row: 25 / 33;
       grid-column: 2 / 10;
     }
 
@@ -108,7 +113,7 @@
     }
 
     @media (min-width: theme(--breakpoint-sm)) {
-      grid-row: 25 / 36;
+      grid-row: 26 / 37;
       grid-column: 11 / -2;
     }
 

@@ -175,8 +175,6 @@
     grid-column: -11 / -5;
     grid-row: 7 / 13;
   }
-
-  @apply p-thick;
 }
 
 .project-page-image,
