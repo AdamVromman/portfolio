@@ -30,9 +30,6 @@
 
   .project-page_grid_category {
     &.first {
-      grid-row: 5 / 6;
-      @apply pt-thick pb-thin;
-
       @media (min-width: theme(--breakpoint-xs)) {
         grid-row: 5 / 6;
       }
@@ -43,9 +40,6 @@
     }
 
     &.second {
-      grid-row: 6 / 7;
-      @apply pt-thin pb-thick;
-
       @media (min-width: theme(--breakpoint-xs)) {
         grid-row: 6 / 7;
       }
@@ -57,8 +51,6 @@
   }
 
   .project-page_grid_icon {
-    grid-row: 5 / 7;
-
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 3 / 5;
     }
@@ -69,7 +61,7 @@
   }
 
   .project-page_grid_description {
-    grid-row: 7 / 13;
+    grid-row: 9 / 15;
 
     @media (min-width: theme(--breakpoint-xs)) {
       grid-row: 7 / 13;
@@ -89,7 +81,7 @@
   }
 
   .video-1 {
-    grid-row: 14 / 20;
+    grid-row: 16 / 22;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -114,7 +106,7 @@
   }
 
   .image-1 {
-    grid-row: 21 / 25;
+    grid-row: 23 / 27;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -139,7 +131,7 @@
   }
 
   .video-2 {
-    grid-row: 26 / 34;
+    grid-row: 28 / 36;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -164,7 +156,7 @@
   }
 
   .paragraph-1 {
-    grid-row: 34 / 41;
+    grid-row: 36 / 43;
     grid-column: 2 / -2;
     @apply p-thin;
 
@@ -190,7 +182,7 @@
   }
 
   .image-2 {
-    grid-row: 42 / 52;
+    grid-row: 44 / 54;
     grid-column: -10 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -215,7 +207,7 @@
   }
 
   .image-3 {
-    grid-row: 53 / 60;
+    grid-row: 55 / 62;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -240,7 +232,7 @@
   }
 
   .video-3 {
-    grid-row: 61 / 65;
+    grid-row: 63 / 67;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -265,7 +257,7 @@
   }
 
   .image-4 {
-    grid-row: 66 / 71;
+    grid-row: 68 / 73;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -290,7 +282,7 @@
   }
 
   .video-4 {
-    grid-row: 72 / 76;
+    grid-row: 74 / 78;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -315,7 +307,7 @@
   }
 
   .paragraph-2 {
-    grid-row: 77 / 84;
+    grid-row: 79 / 86;
     grid-column: 2 / -2;
     @apply p-thin;
 
@@ -341,7 +333,7 @@
   }
 
   .video-5 {
-    grid-row: 85 / 93;
+    grid-row: 87 / 95;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -366,7 +358,7 @@
   }
 
   .video-6 {
-    grid-row: 94 / 98;
+    grid-row: 96 / 100;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
@@ -391,7 +383,7 @@
   }
 
   .link-1 {
-    grid-row: 99 / 100;
+    grid-row: 101 / 102;
     grid-column: 2 / -2;
 
     @media (min-width: theme(--breakpoint-xs)) {
