@@ -88,7 +88,7 @@ export const init = (project: Project) => {
         scene.environment = texture;
       });
 
-    camera.position.set(0, 0, 20);
+    camera.position.set(0, 0, 100);
     camera.lookAt(0, 0, 0);
     camera.updateProjectionMatrix();
 
