@@ -2,6 +2,7 @@
 import ProjectPage from "../components/ProjectPage.astro";
 import Layout from "../layouts/Layout.astro";
 import "../CSS/transfo-intiem.css";
+import SingleFlyingObject from "../components/SingleFlyingObject.astro";
 ---
 
 <Layout slug="transfo-intiem">
@@ -21,6 +22,11 @@ import "../CSS/transfo-intiem.css";
         <span class="half-col-text">UX</span>
       </div>
     </div>
+    <div class="grid_cell project-page_grid_year">
+      <div class="grid_cell_container">
+        <span class="half-col-text">2024</span>
+      </div>
+    </div>
     <div class="grid_cell project-page_grid_description">
       <div class="grid_cell_container">
         <p class="half-col-text justified-paragraph">
@@ -31,7 +37,9 @@ import "../CSS/transfo-intiem.css";
       </div>
     </div>
     <div class="grid_cell project-page_grid_icon">
-      <div class="grid_cell_container"></div>
+      <div class="grid_cell_container">
+        <SingleFlyingObject slug="transfo-intiem" />
+      </div>
     </div>
     <div class="project-page-video video-1 border">
       <video

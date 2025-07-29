@@ -12,6 +12,7 @@ import {
 import type { FlyingObject, Project } from "./Interfaces";
 import gsap from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
+import { init } from "./SingleFlyingObject";
 
 gsap.registerPlugin(TextPlugin);
 
@@ -151,7 +152,7 @@ export const loadHomePage = () => {
 
   const stagger: gsap.StaggerVars = {
     each: 0.05,
-    from: "center",
+    from: "random",
     ease: "power1.out",
   };
   const ease = "power1.inOut";
@@ -262,6 +263,18 @@ export const loadHomePage = () => {
       },
       ">"
     )
+    .fromTo(
+      ".flying-objects",
+      {
+        y: "100%",
+      },
+      {
+        y: "0%",
+        duration: 1,
+        ease: "power3.out",
+      },
+      "<"
+    )
     .from(
       ".grid_cell.home_cell.bottom .grid_cell_container",
       {
@@ -310,7 +323,11 @@ export const loadProjectPage = () => {
       "--color-active",
       `#${selectedProject.color}`
     );
-    const timeline = gsap.timeline();
+    const timeline = gsap.timeline({
+      onComplete: () => {
+        if (selectedProject) init(selectedProject);
+      },
+    });
 
     window.scrollTo(0, 0);
 
@@ -376,7 +393,7 @@ export const loadAboutMePage = () => {
 
   const stagger: gsap.StaggerVars = {
     each: 0.05,
-    from: "center",
+    from: "random",
     ease: "power1.out",
   };
   const ease = "power1.inOut";
@@ -804,7 +821,9 @@ export const navigateHomePageToProjectPage = () => {
     const ease = "power1.inOut";
 
     const timeline = gsap.timeline({
-      onComplete: justifyParagraphs,
+      onComplete: () => {
+        if (selectedProject) init(selectedProject);
+      },
     });
 
     timeline

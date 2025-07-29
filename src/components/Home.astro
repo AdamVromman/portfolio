@@ -52,13 +52,24 @@ const { slug } = Astro.props;
     <div class="grid_cell home_cell left home_grid_text">
       <div class="grid_cell_container">
         <p class="justified-paragraph">
-          My name is Adam, I am a designer and developer. I spend my time
-          perfecting the details, enjoying the experimentation and crafting
-          beautiful things.
+          My name is Adam, I am a designer and developer. I enjoy experimenting
+          and trying new things and I always take care of the details.
         </p>
       </div>
     </div>
-
+    <div class="grid_cell home_cell right home_grid_contact mail">
+      <a
+        target="_blank"
+        href="mailto:adam@adamvromman.net"
+        class="grid_cell_container tabindex tabindex_home"
+      >
+        <svg viewBox="0 0 512 512">
+          <path
+            d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"
+          ></path></svg
+        >
+      </a>
+    </div>
     <div class="grid_cell home_cell right home_grid_contact linkedin">
       <a
         target="_blank"
@@ -117,9 +128,9 @@ const { slug } = Astro.props;
     <div class="grid_cell left about-me_cell about-me_grid_text">
       <div class="grid_cell_container">
         <p class="justified-paragraph third-col-text">
-          This is me! In 2022 I graduated from HOGENT with a degree in Applied
-          Computer Science and in 2025 from Howest with a degree in Design and
-          Development. You can see how my internship went below.
+          In 2022 I graduated from HOGENT with a degree in Applied Computer
+          Science and in 2025 from Howest with a degree in Design and
+          Development. During my last internship, I created this after movie:
         </p>
       </div>
     </div>
@@ -205,6 +216,7 @@ const { slug } = Astro.props;
               loop
               playsinline
               preload="auto"
+              autoplay
             />
           );
         })

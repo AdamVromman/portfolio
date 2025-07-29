@@ -10,11 +10,11 @@ export const ROWS_PER_PROJECT_PER_SCREENSIZE = new Map<
   string,
   { xs: number; sm: number; md: number; lg: number; xl: number }
 >([
-  ["club-sofa", { xs: 113, sm: 131, md: 121, lg: 113, xl: 111 }],
-  ["train-world", { xs: 100, sm: 112, md: 86, lg: 115, xl: 113 }],
-  ["transfo-intiem", { xs: 100, sm: 122, md: 95, lg: 117, xl: 113 }],
-  ["all-eyes-on-gaza", { xs: 103, sm: 116, md: 119, lg: 141, xl: 147 }],
-  ["qausal", { xs: 94, sm: 116, md: 115, lg: 147, xl: 151 }],
+  ["club-sofa", { xs: 116, sm: 133, md: 123, lg: 113, xl: 111 }],
+  ["train-world", { xs: 102, sm: 114, md: 86, lg: 115, xl: 113 }],
+  ["transfo-intiem", { xs: 102, sm: 126, md: 95, lg: 117, xl: 113 }],
+  ["all-eyes-on-gaza", { xs: 105, sm: 118, md: 119, lg: 141, xl: 147 }],
+  ["qausal", { xs: 96, sm: 118, md: 115, lg: 147, xl: 151 }],
 ]);
 
 export const projects: Project[] = [
@@ -27,19 +27,19 @@ export const projects: Project[] = [
   {
     name: "Train World",
     slug: "train-world",
-    color: "de2217",
+    color: "de0d00",
     year: 2023,
   },
   {
     name: "Transfo Intiem",
     slug: "transfo-intiem",
-    color: "8419ff",
+    color: "750ee9",
     year: 2024,
   },
   {
     name: "All Eyes on Gaza",
     slug: "all-eyes-on-gaza",
-    color: "009736",
+    color: "03a33b",
     year: 2025,
   },
   {
