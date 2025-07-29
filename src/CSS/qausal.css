@@ -70,6 +70,10 @@
 
   .project-page_grid_description {
     grid-row: 7 / 13;
+
+    @media (min-width: theme(--breakpoint-sm)) {
+      grid-row: 5 / 11;
+    }
   }
 
   .image-1 {

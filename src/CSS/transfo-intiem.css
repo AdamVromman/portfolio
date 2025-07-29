@@ -46,12 +46,12 @@
   .project-page_grid_description {
     grid-row: 9 / 15;
 
-    @media (min-width: theme(--breakpoint-md)) {
-      grid-row: 7 / 15;
+    @media (min-width: theme(--breakpoint-sm)) {
+      grid-row: 7 / 14;
     }
 
-    @media (min-width: theme(--breakpoint-lg)) {
-      grid-row: 5 / 11;
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-row: 7 / 15;
     }
 
     @media (min-width: theme(--breakpoint-lg)) {
