@@ -771,6 +771,11 @@ array-iterate@^2.0.0:
   resolved "https://registry.npmjs.org/array-iterate/-/array-iterate-2.0.1.tgz"
   integrity sha512-I1jXZMjAgCMmxT4qxXfPXa6SthSoE8h6gkSI9BGGNv8mP8G/v0blc+qFnZu6K42vTOiuME596QaLO0TP3Lk0xg==
 
+astro-matomo@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/astro-matomo/-/astro-matomo-1.9.0.tgz#679344488b6be24e4e61ab0c44cd785dff7d2ec2"
+  integrity sha512-eOmhDHvqjrasJvhaKTSEZIMk9pW/3OcqYS6VVGOQBrEg33H1/Mk62sJuv2dxmsg3cNTDwm2rlZlw9r18KNgYnw==
+
 astro@5.7.5:
   version "5.7.5"
   resolved "https://registry.yarnpkg.com/astro/-/astro-5.7.5.tgz#ecea1cabf2909cd791bfc2d0616a0e5b045cb3af"
