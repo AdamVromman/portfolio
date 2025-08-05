@@ -1,25 +1,30 @@
 ---
-import ProjectPage from "../components/ProjectPage.astro";
-import Layout from "../layouts/Layout.astro";
-import "../CSS/club-sofa.css";
-import SingleFlyingObject from "../components/SingleFlyingObject.astro";
+import ProjectPage from "../../components/ProjectPage.astro";
+import Layout from "../../layouts/Layout.astro";
+import "../../CSS/club-sofa.css";
+import SingleFlyingObject from "../../components/SingleFlyingObject.astro";
+import { getLanguage } from "../../assets/ServerFunctions";
+import Languages from "../../assets/Languages.json";
+
+const activeLanguage = getLanguage(Astro.currentLocale);
+const copy = Languages[activeLanguage];
 ---
 
 <Layout slug="club-sofa">
   <ProjectPage slug="club-sofa">
     <div class="grid_cell project-page_grid_title">
       <div class="grid_cell_container">
-        <h1 class="full-col-text page-title">Club sofa</h1>
+        <h1 class="full-col-text page-title">{copy.projects.clubSofa.title}</h1>
       </div>
     </div>
     <div class="grid_cell project-page_grid_category ux first">
       <div class="grid_cell_container">
-        <span class="half-col-text">UX</span>
+        <span class="half-col-text">{copy.projects.types.ux}</span>
       </div>
     </div>
     <div class="grid_cell project-page_grid_category design second">
       <div class="grid_cell_container">
-        <span class="half-col-text">Design</span>
+        <span class="half-col-text">{copy.projects.types.design}</span>
       </div>
     </div>
     <div class="grid_cell project-page_grid_year">
@@ -30,9 +35,7 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
     <div class="grid_cell project-page_grid_description">
       <div class="grid_cell_container">
         <p class="half-col-text justified-paragraph">
-          A cocktail-ingredient monthly-subscription service and application,
-          made for young creatives; I used this school project to experiment
-          with illustration, branding and creative onboarding.
+          {copy.projects.clubSofa.description}
         </p>
       </div>
     </div>
@@ -42,10 +45,14 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
       </div>
     </div>
     <div class="project-page-image image-1">
-      <img src="/assets/club-sofa/logo-still.webp" />
+      <img
+        src="/assets/club-sofa/logo-still.webp"
+        alt={copy.projects.clubSofa.alts.image1}
+      />
     </div>
     <div class="project-page-video video-1">
       <video
+        aria-label={copy.projects.clubSofa.alts.video1}
         src="/assets/club-sofa/ANIMATION-logotype.mp4"
         autoplay
         loop
@@ -54,6 +61,7 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
     </div>
     <div class="project-page-video video-2 full-width">
       <video
+        aria-label={copy.projects.clubSofa.alts.video2}
         src="/assets/club-sofa/ANIMATION-icons.mp4"
         autoplay
         loop
@@ -63,19 +71,19 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
     <div class="grid_cell project-page_grid_paragraph paragraph-1">
       <div class="grid_cell_container">
         <p class="third-col-text justified-paragraph">
-          For me, the main challenge lay in finding a balance between my own
-          vision and ideas for the brand and what the intended audience would
-          be. I had to go for something that encompasses both the fun, summer-y,
-          party music aspect of cocktails and the luxurious, premium
-          ingredients, fancy one.
+          {copy.projects.clubSofa.paragraph1}
         </p>
       </div>
     </div>
     <div class="project-page-image image-2 border">
-      <img src="/assets/club-sofa/phone.webp" />
+      <img
+        src="/assets/club-sofa/phone.webp"
+        alt={copy.projects.clubSofa.alts.image2}
+      />
     </div>
     <div class="project-page-video video-3">
       <video
+        aria-label={copy.projects.clubSofa.alts.video3}
         src="/assets/club-sofa/ANIMATION-screens-desktop.mp4"
         autoplay
         loop
@@ -83,21 +91,21 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
         playsinline></video>
     </div>
     <div class="project-page-image image-3 border">
-      <img src="/assets/club-sofa/phone-2.webp" />
+      <img
+        src="/assets/club-sofa/phone-2.webp"
+        alt={copy.projects.clubSofa.alts.image3}
+      />
     </div>
     <div class="grid_cell project-page_grid_paragraph paragraph-2">
       <div class="grid_cell_container">
         <p class="third-col-text justified-paragraph">
-          As a delivery service, another important aspect was the packaging. I
-          had a lot of fun coming up with different designs for the differently
-          themed boxes and seeing my vision come to life when I created mock-ups
-          with my designs. I think the combination of physical design with
-          application design made the assignment so engaging.
+          {copy.projects.clubSofa.paragraph2}
         </p>
       </div>
     </div>
     <div class="project-page-video video-4">
       <video
+        aria-label={copy.projects.clubSofa.alts.video4}
         src="/assets/club-sofa/ANIMATION-boxes.mp4"
         autoplay
         loop
@@ -105,13 +113,22 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
         playsinline></video>
     </div>
     <div class="project-page-image image-4 border">
-      <img src="/assets/club-sofa/boxes.webp" />
+      <img
+        src="/assets/club-sofa/boxes.webp"
+        alt={copy.projects.clubSofa.alts.image4}
+      />
     </div>
     <div class="project-page-image image-5 full-width">
-      <img src="/assets/club-sofa/box-1.webp" />
+      <img
+        src="/assets/club-sofa/box-1.webp"
+        alt={copy.projects.clubSofa.alts.image5}
+      />
     </div>
     <div class="project-page-image image-6 border">
-      <img src="/assets/club-sofa/ipad.webp" />
+      <img
+        src="/assets/club-sofa/ipad.webp"
+        alt={copy.projects.clubSofa.alts.image6}
+      />
     </div>
   </ProjectPage>
 </Layout>

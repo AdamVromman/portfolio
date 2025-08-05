@@ -53,3 +53,8 @@ export const projects: Project[] = [
 export const dynamicBodies: FlyingObject[] = [];
 
 export const assetsLoaded = new Event("assetsloaded");
+
+export enum Language {
+  EN = "en",
+  NL = "nl",
+}

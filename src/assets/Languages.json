@@ -1,0 +1,234 @@
+{
+    "en": {
+        "lastName": "Vromman",
+        "firstName": "Adam",
+        "email": "adam@adamvromman.net",
+        "handle": "/adamvromman/",
+        "downloadMyCV": "Download my CV",
+        "home": {
+            "discoverMyProjects": "Discover my projects",
+            "description": "My name is Adam, I am a designer and developer. I enjoy experimenting and trying new things and I always take care of the details.",
+            "aboutMe": "About Me"
+        },
+        "aboutMe": {
+            "back": "Back",
+            "description": "In 2022 I graduated from HOGENT with a degree in Applied Computer Science and in 2025 from Howest with a degree in Design and Development. During my last internship, I created this after movie:"
+        },
+        "projects": {
+            "visitTheWebsite": "Visit the website",
+            "types": {
+                "ux": "UX",
+                "design": "Design",
+                "development": "Dev"
+            },
+            "clubSofa": {
+                "title": "Club Sofa",
+                "description": "A cocktail-ingredient monthly-subscription service and application, made for young creatives; I used this school project to experiment with illustration, branding and creative onboarding.",
+                "paragraph1": "For me, the main challenge lay in finding a balance between my own vision and ideas for the brand and what the intended audience would be. I had to go for something that encompasses both the fun, summer-y, party music aspect of cocktails and the luxurious, premium ingredients, fancy one.",
+                "paragraph2": "As a delivery service, another important aspect was the packaging. I had a lot of fun coming up with different designs for the differently themed boxes and seeing my vision come to life when I created mock-ups with my designs. I think the combination of physical design with application design made the assignment so engaging.",
+                "alts": {
+                    "headerVideo": "Animation of the Club Sofa Logo in the middle of the screen with falling boxes, icons and illustrations",
+                    "image1": "White Club Sofa logo on black background.",
+                    "image2": "Phone showing the Club Sofa app. It says 'Pick a season' with four illustrations as options.",
+                    "image3": "Hand holding a phone with the Club Sofa login screen open. Another hand reaches for it mimicking the famous painting 'The creation of Adam' by Michelangelo.",
+                    "image4": "An image of two stacked boxes with Club Sofa branding. One box says 'Sweet & Sour' and the other 'Local & Seasonal'.",
+                    "image5": "An image of a box with Club Sofa branding. The box is being opened and says 'Dark & Stormy'.",
+                    "image6": "Tablet showing the Club Sofa dashboard showing one active order.",
+                    "video1": "Animation of the Club Sofa logo. The words 'Club Sofa' appear and dissapear and the colors change from white-black to black-white.",
+                    "video2": "Animation of simple illustrations floating through the screen. A leaf, flowers, a pineapple, books, dice, a shoe, a pinecone, vanilla sticks, powder, ginger, pear, easel, wheat, pepper, snowflake.",
+                    "video3": "Animation of different screens of the Club Sofa app appearing and dissapearing. They show different screens like the dashboard, the onboarding and the order process.",
+                    "video4": "Animation of four illustrated boxes rotating in 3D space, showing one face at a time."
+                }
+            },
+            "trainWorld": {
+                "title": "Train World",
+                "description": "During my second year, I created this website to recount—through illustration, interaction and animation—the forgotten tale of the Belgian postal train service.",
+                "paragraph1": "I had a lot of fun looking for an illustration style that highlights the complex engineering of trains and also works in the setting of the early 20th century. The colour is based on the iconic Belgian Post red and for the fonts, I looked for typewriter-inspired typographies.",
+                "paragraph2": "For the different smaller illustrations throughout the website, I experimented with using parallel lines to shade the objects. Next to that, I also tried to recreate the visual language of plaques, signs and architectural decorations of the 20th century, which I used as UI elements.",
+                "alts": {
+                    "headerVideo": "Animation of the Train world Logo in the middle of the screen with a train passing through a landscape with clouds in the background.",
+                    "image1": "An illustration of a postal train wagon from the early 20th century.",
+                    "image2": "A mockup of a laptop with the Train World website open. It shows a train wagon with a red background and the text: 'To my dearest... A love letter to our postal trains'.'",
+                    "image3": "A mockup of a phone with the Train World website open. It shows a train wagon with a red background and the text: 'To my dearest... A love letter to our postal trains'.'",
+                    "image4": "An illustration of a postal train wagon from the late 20th century. The side is open and inside are postal bags and crates.",
+                    "video1": "Animation of a train slowly passing by. The train is a postal train from the late 20th century.",
+                    "video2": "Animation of a loading screen. Several small trains pass by, white on a red background.",
+                    "video3": "Animation of clouds passing by.",
+                    "video4": "Animation of hills and trees passing by.",
+                    "video5": "Animation of different illustrations: a rock, a car, a tree, a crate, a hat, a cloud, a bag.",
+                    "video6": "Animation of different types of illustrated signs. The signs have no words on them."
+                }
+            },
+            "transfoIntiem": {
+                "title": "Transfo Intiem",
+                "description": "This one was a team effort. Together with two classmates, I tackled the navigation and programming of a local festival: the website, the flyers and a game on the night itself.",
+                "paragraph1": "My focus in the team was on implementing the design we had created for the website and programming the frontend logic. This meant animating the UI elements, making sure the website was useable on different devices and in different environments, and connecting the 2D and 3D elements.",
+                "paragraph2": "Apart from this main task, I tried to assist my classmates wherever it could be needed, whether it was helping with the design of the flyer or pair-debugging the AR game we had created. It all culminated into a lovely evening in which we helped more than 3000 navigate the festival.",
+                "alts": {
+                    "headerVideo": "",
+                    "image1": "",
+                    "image2": "",
+                    "video1": "",
+                    "video2": "",
+                    "video3": "",
+                    "video4": "",
+                    "video5": "",
+                    "video6": "",
+                    "video7": ""
+                }
+            },
+            "allEyesOnGaza": {
+                "title": "All Eyes On Gaza",
+                "description": "This project is an exploration of interactive data visualisation, as well as attempt to highlight how data is misused to oppress the Palestinian people.",
+                "paragraph1": "For this school assignment, I explored the use of animation frameworks like GSAP to animate and visualise data. It consists of two parts. The eye, which is more abstract and less interactive, and the dashboard, which is more straight-forward data that the users can control themselves.",
+                "paragraph2": "The dashboard shows a timeline which contains, on the one hand, key moments and on the other hand, data that the user can add. Like that, a user can not only learn new things about Israel-Palestine, as well as see how historical moments influenced certain statistics.",
+                "alts": {
+                    "headerVideo": "",
+                    "image1": "",
+                    "image2": "",
+                    "video1": "",
+                    "video2": "",
+                    "video3": "",
+                    "video4": "",
+                    "video5": "",
+                    "video6": "",
+                    "video7": ""
+                }
+            },
+            "qausal": {
+                "title": "Qausal",
+                "description": "During my internship abroad, I got the chance to create both a logo and a keynote presentation for a scientist specialised in particle acceleration.",
+                "paragraph1": "Although the end-product of the project was a keynote presentation to secure funding—on paper, not the most exciting graphic problem—I still managed to experiment and find a brand I both really liked and trusted to be appropriate for its intended use.",
+                "paragraph2": "The keynote had to be visual pleasing and modern, but above all, the ideas expressed in it had to be clear. This was a challenge, since the ideas were extremely complex. I had to create something without truly understanding the content I was using. It meant putting a lot of care into the layout of the keynote and frequent meetings with the scientist himself.",
+                "alts": {
+                    "headerVideo": "",
+                    "image1": "",
+                    "image2": "",
+                    "image3": "",
+                    "image4": "",
+                    "image5": "",
+                    "video1": "",
+                    "video2": "",
+                    "video3": "",
+                    "video4": ""
+                }
+            }
+        }
+    },
+    "nl": {
+        "lastName": "Vromman",
+        "firstName": "Adam",
+        "email": "adam@adamvromman.net",
+        "handle": "/adamvromman/",
+        "downloadMyCV": "Download mijn CV",
+        "home": {
+            "discoverMyProjects": "Ontdek mijn projecten",
+            "description": "My name is Adam, I am a designer and developer. I enjoy experimenting and trying new things and I always take care of the details.",
+            "aboutMe": "Over Mij"
+        },
+        "aboutMe": {
+            "back": "Terug",
+            "description": "In 2022 I graduated from HOGENT with a degree in Applied Computer Science and in 2025 from Howest with a degree in Design and Development. During my last internship, I created this after movie:"
+        },
+        "projects": {
+            "visitTheWebsite": "Visit the website",
+            "types": {
+                "ux": "UX",
+                "design": "Design",
+                "development": "Dev"
+            },
+            "clubSofa": {
+                "title": "Club Sofa",
+                "description": "A cocktail-ingredient monthly-subscription service and application, made for young creatives; I used this school project to experiment with illustration, branding and creative onboarding.",
+                "paragraph1": "For me, the main challenge lay in finding a balance between my own vision and ideas for the brand and what the intended audience would be. I had to go for something that encompasses both the fun, summer-y, party music aspect of cocktails and the luxurious, premium ingredients, fancy one.",
+                "paragraph2": "As a delivery service, another important aspect was the packaging. I had a lot of fun coming up with different designs for the differently themed boxes and seeing my vision come to life when I created mock-ups with my designs. I think the combination of physical design with application design made the assignment so engaging.",
+                "alts": {
+                    "headerVideo": "",
+                    "image1": "",
+                    "image2": "",
+                    "image3": "",
+                    "image4": "",
+                    "image5": "",
+                    "image6": "",
+                    "video1": "",
+                    "video2": "",
+                    "video3": "",
+                    "video4": ""
+                }
+            },
+            "trainWorld": {
+                "title": "Train World",
+                "description": "During my second year, I created this website to recount—through illustration, interaction and animation—the forgotten tale of the Belgian postal train service.",
+                "paragraph1": "I had a lot of fun looking for an illustration style that highlights the complex engineering of trains and also works in the setting of the early 20th century. The colour is based on the iconic Belgian Post red and for the fonts, I looked for typewriter-inspired typographies.",
+                "paragraph2": "For the different smaller illustrations throughout the website, I experimented with using parallel lines to shade the objects. Next to that, I also tried to recreate the visual language of plaques, signs and architectural decorations of the 20th century, which I used as UI elements.",
+                "alts": {
+                    "headerVideo": "",
+                    "image1": "",
+                    "image2": "",
+                    "image3": "",
+                    "image4": "",
+                    "video1": "",
+                    "video2": "",
+                    "video3": "",
+                    "video4": "",
+                    "video5": "",
+                    "video6": ""
+                }
+            },
+            "transfoIntiem": {
+                "title": "Transfo Intiem",
+                "description": "This one was a team effort. Together with two classmates, I tackled the navigation and programming of a local festival: the website, the flyers and a game on the night itself.",
+                "paragraph1": "My focus in the team was on implementing the design we had created for the website and programming the frontend logic. This meant animating the UI elements, making sure the website was useable on different devices and in different environments, and connecting the 2D and 3D elements.",
+                "paragraph2": "Apart from this main task, I tried to assist my classmates wherever it could be needed, whether it was helping with the design of the flyer or pair-debugging the AR game we had created. It all culminated into a lovely evening in which we helped more than 3000 navigate the festival.",
+                "alts": {
+                    "headerVideo": "",
+                    "image1": "",
+                    "image2": "",
+                    "video1": "",
+                    "video2": "",
+                    "video3": "",
+                    "video4": "",
+                    "video5": "",
+                    "video6": "",
+                    "video7": ""
+                }
+            },
+            "allEyesOnGaza": {
+                "title": "All Eyes On Gaza",
+                "description": "This project is an exploration of interactive data visualisation, as well as attempt to highlight how data is misused to oppress the Palestinian people.",
+                "paragraph1": "For this school assignment, I explored the use of animation frameworks like GSAP to animate and visualise data. It consists of two parts. The eye, which is more abstract and less interactive, and the dashboard, which is more straight-forward data that the users can control themselves.",
+                "paragraph2": "The dashboard shows a timeline which contains, on the one hand, key moments and on the other hand, data that the user can add. Like that, a user can not only learn new things about Israel-Palestine, as well as see how historical moments influenced certain statistics.",
+                "alts": {
+                    "headerVideo": "",
+                    "image1": "",
+                    "image2": "",
+                    "video1": "",
+                    "video2": "",
+                    "video3": "",
+                    "video4": "",
+                    "video5": "",
+                    "video6": "",
+                    "video7": ""
+                }
+            },
+            "qausal": {
+                "title": "Qausal",
+                "description": "During my internship abroad, I got the chance to create both a logo and a keynote presentation for a scientist specialised in particle acceleration.",
+                "paragraph1": "Although the end-product of the project was a keynote presentation to secure funding—on paper, not the most exciting graphic problem—I still managed to experiment and find a brand I both really liked and trusted to be appropriate for its intended use.",
+                "paragraph2": "The keynote had to be visual pleasing and modern, but above all, the ideas expressed in it had to be clear. This was a challenge, since the ideas were extremely complex. I had to create something without truly understanding the content I was using. It meant putting a lot of care into the layout of the keynote and frequent meetings with the scientist himself.",
+                "alts": {
+                    "headerVideo": "",
+                    "image1": "",
+                    "image2": "",
+                    "image3": "",
+                    "image4": "",
+                    "image5": "",
+                    "video1": "",
+                    "video2": "",
+                    "video3": "",
+                    "video4": ""
+                }
+            }
+        }
+    }
+}

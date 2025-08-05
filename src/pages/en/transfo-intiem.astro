@@ -1,25 +1,32 @@
 ---
-import ProjectPage from "../components/ProjectPage.astro";
-import Layout from "../layouts/Layout.astro";
-import "../CSS/transfo-intiem.css";
-import SingleFlyingObject from "../components/SingleFlyingObject.astro";
+import ProjectPage from "../../components/ProjectPage.astro";
+import Layout from "../../layouts/Layout.astro";
+import "../../CSS/transfo-intiem.css";
+import SingleFlyingObject from "../../components/SingleFlyingObject.astro";
+import { getLanguage } from "../../assets/ServerFunctions";
+import Languages from "../../assets/Languages.json";
+
+const activeLanguage = getLanguage(Astro.currentLocale);
+const copy = Languages[activeLanguage];
 ---
 
 <Layout slug="transfo-intiem">
   <ProjectPage slug="transfo-intiem">
     <div class="grid_cell project-page_grid_title">
       <div class="grid_cell_container">
-        <h1 class="full-col-text page-title">Transfo Intiem</h1>
+        <h1 class="full-col-text page-title">
+          {copy.projects.transfoIntiem.title}
+        </h1>
       </div>
     </div>
     <div class="grid_cell project-page_grid_category dev first">
       <div class="grid_cell_container">
-        <span class="half-col-text">Dev</span>
+        <span class="half-col-text">{copy.projects.types.development}</span>
       </div>
     </div>
     <div class="grid_cell project-page_grid_category ux second">
       <div class="grid_cell_container">
-        <span class="half-col-text">UX</span>
+        <span class="half-col-text">{copy.projects.types.ux}</span>
       </div>
     </div>
     <div class="grid_cell project-page_grid_year">
@@ -30,9 +37,7 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
     <div class="grid_cell project-page_grid_description">
       <div class="grid_cell_container">
         <p class="half-col-text justified-paragraph">
-          This one was a team effort. Together with two classmates, I tackled
-          the navigation and programming of a local festival: the website, the
-          flyers and a game on the night itself.
+          {copy.projects.transfoIntiem.description}
         </p>
       </div>
     </div>
@@ -43,6 +48,7 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
     </div>
     <div class="project-page-video video-1 border">
       <video
+        aria-label={copy.projects.transfoIntiem.alts.video1}
         src="/assets/transfo-intiem/ANIMATION-mockup-both.mp4"
         autoplay
         loop
@@ -52,16 +58,13 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
     <div class="grid_cell project-page_grid_paragraph paragraph-1">
       <div class="grid_cell_container">
         <p class="third-col-text justified-paragraph">
-          My focus in the team was on implementing the design we had created for
-          the website and programming the frontend logic. This meant animating
-          the UI elements, making sure the website was useable on different
-          devices and in different environments, and connecting the 2D and 3D
-          elements.
+          {copy.projects.transfoIntiem.paragraph1}
         </p>
       </div>
     </div>
     <div class="project-page-video video-2">
       <video
+        aria-label={copy.projects.transfoIntiem.alts.video2}
         src="/assets/transfo-intiem/ANIMATION-screen-faq.mp4"
         autoplay
         loop
@@ -70,6 +73,7 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
     </div>
     <div class="project-page-video video-3">
       <video
+        aria-label={copy.projects.transfoIntiem.alts.video3}
         src="/assets/transfo-intiem/ANIMATION-screen-button.mp4"
         autoplay
         loop
@@ -78,6 +82,7 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
     </div>
     <div class="project-page-video video-4 border">
       <video
+        aria-label={copy.projects.transfoIntiem.alts.video4}
         src="/assets/transfo-intiem/ANIMATION-screen-planning.mp4"
         autoplay
         loop
@@ -87,19 +92,19 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
     <div class="grid_cell project-page_grid_paragraph paragraph-2">
       <div class="grid_cell_container">
         <p class="third-col-text justified-paragraph">
-          Apart from this main task, I tried to assist my classmates wherever it
-          could be needed, whether it was helping with the design of the flyer
-          or pair-debugging the AR game we had created. It all culminated into a
-          lovely evening in which we helped more than 3000 navigate the
-          festival.
+          {copy.projects.transfoIntiem.paragraph2}
         </p>
       </div>
     </div>
     <div class="project-page-image image-1">
-      <img src="/assets/transfo-intiem/flyers.webp" />
+      <img
+        src="/assets/transfo-intiem/flyers.webp"
+        alt={copy.projects.transfoIntiem.alts.image1}
+      />
     </div>
     <div class="project-page-video video-5 border">
       <video
+        aria-label={copy.projects.transfoIntiem.alts.video5}
         src="/assets/transfo-intiem/ANIMATION-3d-model.mp4"
         autoplay
         loop
@@ -107,10 +112,14 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
         playsinline></video>
     </div>
     <div class="project-page-image image-2 border">
-      <img src="/assets/transfo-intiem/bus-stop.webp" />
+      <img
+        src="/assets/transfo-intiem/bus-stop.webp"
+        alt={copy.projects.transfoIntiem.alts.image2}
+      />
     </div>
     <div class="project-page-video video-6">
       <video
+        aria-label={copy.projects.transfoIntiem.alts.video6}
         src="/assets/transfo-intiem/ANIMATION-mockup-laptop.mp4"
         autoplay
         loop
@@ -119,6 +128,7 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
     </div>
     <div class="project-page-video video-7 border">
       <video
+        aria-label={copy.projects.transfoIntiem.alts.video7}
         src="/assets/transfo-intiem/ANIMATION-mockup-phone.mp4"
         autoplay
         loop
@@ -127,7 +137,7 @@ import SingleFlyingObject from "../components/SingleFlyingObject.astro";
     </div>
     <div class="project-page_link link-1">
       <a href="https://www.transfo-intiem.be/" target="_blank">
-        <span class="half-col-text">Visit the website</span>
+        <span class="half-col-text">{copy.projects.visitTheWebsite}</span>
       </a>
     </div>
   </ProjectPage>

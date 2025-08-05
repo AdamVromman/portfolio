@@ -3,8 +3,15 @@ import FlyingObjects from "./FlyingObjects.astro";
 import "../CSS/home.css";
 import HomeBackground from "./HomeBackground.astro";
 import { projects } from "../assets/Constants";
+import { getLanguage } from "../assets/ServerFunctions";
+import Languages from "../assets/Languages.json";
 
 const { slug } = Astro.props;
+
+const activeLanguage = getLanguage(Astro.currentLocale);
+const copy = Languages[activeLanguage];
+
+console.log("Active language:", activeLanguage);
 ---
 
 <div class="page-container home" transition:persist>
@@ -13,7 +20,8 @@ const { slug } = Astro.props;
     <div class="grid_cell home_cell bottom ignore-move-out home_grid_title">
       <div class="grid_cell_container">
         <h1 class="full-col-text page-title">
-          Adam<span class="thin"> Vromman</span>
+          {copy.firstName}
+          <span class="thin">{copy.lastName}</span>
         </h1>
         {
           projects.map((project) => {
@@ -28,7 +36,7 @@ const { slug } = Astro.props;
     </div>
     <div class="grid_cell home_cell top home_grid_discover-work">
       <div class="grid_cell_container">
-        <span class="third-col-text">Discover my work:</span>
+        <span class="third-col-text">{copy.home.discoverMyProjects}:</span>
       </div>
     </div>
     {
@@ -40,7 +48,7 @@ const { slug } = Astro.props;
             <a
               data-slug={project.slug}
               class={`grid_cell_container  home_grid_work_link ${project.slug} tabindex tabindex_home`}
-              href={`/${project.slug}`}
+              href={`/${activeLanguage}/${project.slug}`}
             >
               <span class="half-col-text">{project.name}</span>
             </a>
@@ -52,8 +60,7 @@ const { slug } = Astro.props;
     <div class="grid_cell home_cell left home_grid_text">
       <div class="grid_cell_container">
         <p class="justified-paragraph">
-          My name is Adam, I am a designer and developer. I enjoy experimenting
-          and trying new things and I always take care of the details.
+          {copy.home.description}
         </p>
       </div>
     </div>
@@ -99,8 +106,11 @@ const { slug } = Astro.props;
     <div
       class="grid_cell home_cell button button-right right home_grid_about-me"
     >
-      <a class="grid_cell_container tabindex tabindex_home" href="/about-me/">
-        <span class="button-text half-col-text">About Me</span><div
+      <a
+        class="grid_cell_container tabindex tabindex_home"
+        href={`/${activeLanguage}/about-me`}
+      >
+        <span class="button-text half-col-text">{copy.home.aboutMe}</span><div
           class="button-icon"
         >
           <svg viewBox="0 0 35 16">
@@ -111,13 +121,16 @@ const { slug } = Astro.props;
       >
     </div>
     <div class="grid_cell top about-me_cell button about-me_grid_back-home">
-      <a class="grid_cell_container tabindex tabindex_about-me" href="/"
+      <a
+        class="grid_cell_container tabindex tabindex_about-me"
+        href={`/${activeLanguage}/`}
         ><div class="button-icon">
           <svg viewBox="0 0 35 16">
             <path d="M35 8H2" stroke-width="2"></path>
             <path d="M9 1L2 8L9 15" stroke-width="2"></path>
           </svg>
-        </div><span class="half-col-text button-text">Back home</span></a
+        </div><span class="half-col-text button-text">{copy.aboutMe.back}</span
+        ></a
       >
     </div>
     <div class="grid_cell bottom about-me_cell about-me_grid_profile-picture">
@@ -128,9 +141,7 @@ const { slug } = Astro.props;
     <div class="grid_cell left about-me_cell about-me_grid_text">
       <div class="grid_cell_container">
         <p class="justified-paragraph third-col-text">
-          In 2022 I graduated from HOGENT with a degree in Applied Computer
-          Science and in 2025 from Howest with a degree in Design and
-          Development. During my last internship, I created this after movie:
+          {copy.aboutMe.description}
         </p>
       </div>
     </div>
@@ -146,7 +157,7 @@ const { slug } = Astro.props;
               d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"
             ></path></svg
           >
-        </div><span class="half-col-text">adam@adamvromman.net</span></a
+        </div><span class="half-col-text">{copy.email}</span></a
       >
     </div>
     <div
@@ -161,7 +172,7 @@ const { slug } = Astro.props;
               d="M28.4444 0C29.3874 0 30.2918 0.374602 30.9586 1.0414C31.6254 1.70819 32 2.61256 32 3.55556V28.4444C32 29.3874 31.6254 30.2918 30.9586 30.9586C30.2918 31.6254 29.3874 32 28.4444 32H3.55556C2.61256 32 1.70819 31.6254 1.0414 30.9586C0.374602 30.2918 0 29.3874 0 28.4444V3.55556C0 2.61256 0.374602 1.70819 1.0414 1.0414C1.70819 0.374602 2.61256 0 3.55556 0H28.4444ZM27.5556 27.5556V18.1333C27.5556 16.5963 26.945 15.1221 25.8581 14.0353C24.7712 12.9484 23.2971 12.3378 21.76 12.3378C20.2489 12.3378 18.4889 13.2622 17.6356 14.6489V12.6756H12.6756V27.5556H17.6356V18.7911C17.6356 17.4222 18.7378 16.3022 20.1067 16.3022C20.7668 16.3022 21.3998 16.5644 21.8666 17.0312C22.3333 17.498 22.5956 18.131 22.5956 18.7911V27.5556H27.5556ZM6.89778 9.88445C7.68989 9.88445 8.44956 9.56978 9.00967 9.00967C9.56978 8.44956 9.88445 7.68989 9.88445 6.89778C9.88445 5.24444 8.55111 3.89333 6.89778 3.89333C6.10095 3.89333 5.33676 4.20987 4.77331 4.77331C4.20987 5.33676 3.89333 6.10095 3.89333 6.89778C3.89333 8.55111 5.24444 9.88445 6.89778 9.88445ZM9.36889 27.5556V12.6756H4.44444V27.5556H9.36889Z"
             ></path>
           </svg>
-        </div><span class="half-col-text">/adamvromman/</span></a
+        </div><span class="half-col-text">{copy.handle}</span></a
       >
     </div>
     <div
@@ -176,7 +187,7 @@ const { slug } = Astro.props;
               d="M16 0C24.8368 0 32 7.1632 32 16C32 24.8368 24.8368 32 16 32C7.1632 32 0 24.8368 0 16C0 7.1632 7.1632 0 16 0ZM17.6496 9.7584H13.4512C11.8704 9.7584 10.5888 11 10.5888 12.5312V23.328L14.7408 19.3744H17.6496C20.3904 19.3744 22.6112 17.2224 22.6112 14.5664C22.6112 11.9104 20.3888 9.7584 17.6496 9.7584Z"
             ></path>
           </svg>
-        </div><span class="half-col-text">/adamvromman/</span></a
+        </div><span class="half-col-text">{copy.handle}</span></a
       >
     </div>
     <div
@@ -192,7 +203,7 @@ const { slug } = Astro.props;
               d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 288c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128z"
             ></path></svg
           >
-        </div><span class="half-col-text">Download my CV</span></a
+        </div><span class="half-col-text">{copy.downloadMyCV}</span></a
       >
     </div>
     <div class="grid_cell bottom about-me_cell about-me_grid_internship">
@@ -224,14 +235,17 @@ const { slug } = Astro.props;
     </div>
   </div>
   <FlyingObjects />
-  <a href="/" class="home_grid_back-home tabindex tabindex_projects">
+  <a
+    href={`/${activeLanguage}/`}
+    class="home_grid_back-home tabindex tabindex_projects"
+  >
     <div class="home_grid_back-home_icon">
       <svg viewBox="0 0 35 16">
         <path d="M35 8H2" stroke-width="2"></path>
         <path d="M9 1L2 8L9 15" stroke-width="2"></path>
       </svg>
     </div>
-    <span class="uppercase half-col-text pl-5">back home</span>
+    <span class="uppercase half-col-text pl-5">{copy.aboutMe.back}</span>
   </a>
 </div>
 
