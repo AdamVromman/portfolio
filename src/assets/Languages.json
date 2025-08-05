@@ -7,12 +7,15 @@
         "downloadMyCV": "Download my CV",
         "home": {
             "discoverMyProjects": "Discover my projects",
-            "description": "My name is Adam, I am a designer and developer. I enjoy experimenting and trying new things and I always take care of the details.",
+            "description": "My name is Adam, I am a designer and developer. I enjoy experimenting and discovering new things and I always take care of the details.",
             "aboutMe": "About Me"
         },
         "aboutMe": {
             "back": "Back",
             "description": "In 2022 I graduated from HOGENT with a degree in Applied Computer Science and in 2025 from Howest with a degree in Design and Development. During my last internship, I created this after movie:"
+        },
+        "footer": {
+            "description": "My name is Adam, I enjoy experimenting and discovering new things and I always take care of the details."
         },
         "projects": {
             "visitTheWebsite": "Visit the website",
@@ -65,16 +68,16 @@
                 "paragraph1": "My focus in the team was on implementing the design we had created for the website and programming the frontend logic. This meant animating the UI elements, making sure the website was useable on different devices and in different environments, and connecting the 2D and 3D elements.",
                 "paragraph2": "Apart from this main task, I tried to assist my classmates wherever it could be needed, whether it was helping with the design of the flyer or pair-debugging the AR game we had created. It all culminated into a lovely evening in which we helped more than 3000 navigate the festival.",
                 "alts": {
-                    "headerVideo": "",
-                    "image1": "",
-                    "image2": "",
-                    "video1": "",
-                    "video2": "",
-                    "video3": "",
-                    "video4": "",
-                    "video5": "",
-                    "video6": "",
-                    "video7": ""
+                    "headerVideo": "Animation of the Transfo Intiem logo in the middle of the screen with a 3D model of the Transfo site in the background slowly rotating.",
+                    "image1": "Flyers showing the schedule, map and a game for children along with the festival mascot, Miefel.",
+                    "image2": "Mockup of a bus stop sign with a poster saying: 'The warmest, coziest, ..hairy-ist.., winter-festival of Flanders'.",
+                    "video1": "Animation of a laptop and a phone both showing the Transfo Intiem website, which has monster arms, a 3D model of the site and the name: Transfo Intiem.",
+                    "video2": "Animation of a group of accordion buttons that open and close.",
+                    "video3": "Animation of the hover state of a button. An arrow appears and disappears.",
+                    "video4": "Animation of the navigation within the schedule of the website, first showing an overview, then a specific event and then a specific location.",
+                    "video5": "Animation of a 3D model of the Transfo site rotating slowly.",
+                    "video6": "Animation of a laptop showing regular usage of the Transfo Intiem website.",
+                    "video7": "Animation of a mobile phone showing regular usage of the Transfo Intiem website."
                 }
             },
             "allEyesOnGaza": {
@@ -83,16 +86,16 @@
                 "paragraph1": "For this school assignment, I explored the use of animation frameworks like GSAP to animate and visualise data. It consists of two parts. The eye, which is more abstract and less interactive, and the dashboard, which is more straight-forward data that the users can control themselves.",
                 "paragraph2": "The dashboard shows a timeline which contains, on the one hand, key moments and on the other hand, data that the user can add. Like that, a user can not only learn new things about Israel-Palestine, as well as see how historical moments influenced certain statistics.",
                 "alts": {
-                    "headerVideo": "",
-                    "image1": "",
-                    "image2": "",
-                    "video1": "",
-                    "video2": "",
-                    "video3": "",
-                    "video4": "",
-                    "video5": "",
-                    "video6": "",
-                    "video7": ""
+                    "headerVideo": "Animation of an illustrated eye opening an closing. Each time it opens, the iris is a different composition of red and green lines, representing the people injured and killed in Gaza and the west bank on a specific day.",
+                    "image1": "Screenshot from the All Eyes On Gaza website, showing a graph with the number of Palestinian minors imprisoned by Israel in 2015, which is 472.",
+                    "image2": "Screenshot from the eye animation on December 24, 2023, when 4 people were injured in the West Bank, 384 in Gaza and 166 were killed in Gaza.",
+                    "video1": "Animation of the All Eyes On Gaza website. It shows a text saying 'Don't close your eyes for Israel's genocide in Gaza and the illegal occupation of Palestinian land.' and after a single click it shows the animated eye.",
+                    "video2": "Animation of the All Eyes On Gaza website. It shows the graph scrolling up and being animated.",
+                    "video3": "Animation of the All Eyes On Gaza website in mobile view. It shows different statistics being dragged onto the graph.",
+                    "video4": "Animation of the All Eyes On Gaza website. It shows the graph and the amount of illegal settlers in the West Bank from 1988 (190953) to 2021 (719452)",
+                    "video5": "Animation of the All Eyes On Gaza website. It shows the timeline with some key moments in the history of Israel-Palestine.",
+                    "video6": "Animation of the All Eyes On Gaza website. It shows the panning of the timeline to the left and right.",
+                    "video7": "Animation of the All Eyes On Gaza website. It shows the zooming of the timeline."
                 }
             },
             "qausal": {
@@ -101,16 +104,16 @@
                 "paragraph1": "Although the end-product of the project was a keynote presentation to secure funding—on paper, not the most exciting graphic problem—I still managed to experiment and find a brand I both really liked and trusted to be appropriate for its intended use.",
                 "paragraph2": "The keynote had to be visual pleasing and modern, but above all, the ideas expressed in it had to be clear. This was a challenge, since the ideas were extremely complex. I had to create something without truly understanding the content I was using. It meant putting a lot of care into the layout of the keynote and frequent meetings with the scientist himself.",
                 "alts": {
-                    "headerVideo": "",
-                    "image1": "",
-                    "image2": "",
-                    "image3": "",
-                    "image4": "",
-                    "image5": "",
-                    "video1": "",
-                    "video2": "",
-                    "video3": "",
-                    "video4": ""
+                    "headerVideo": "Animation of the Qausal logo in the middle of the screen with the words 'the Opportunity' and an animated quantum computer in the background.",
+                    "image1": "The Qausal logo on a black background with lines around it indicating the safe area.",
+                    "image2": "A mockup of a laptop showing one of the slides of the keynote presentation.",
+                    "image3": "Two vertical screen. One says 'The Challenge' with a picture of a particle accelerator and the other says 'The Opportunity' with a picture of a quantum computer.",
+                    "image4": "Mockup of a book name 'Qausal' with the logo on the front, written by Germán Rodrigo",
+                    "image5": "Mockup of a huge screen showing the first slide of the keynote presentation and people looking at it.",
+                    "video1": "Animation of the Qausal logo being drawn on the screen, starting with a circle and ending with the letter 'Q'",
+                    "video2": "Animation of white circles being drawn to a middle point from the left side and one glowing orange circle leaving the center to the right side.",
+                    "video3": "Animation of a group of white circles growing and shrinking with a blue glowing orb in the middle and more white circles being drawn to the side of it.",
+                    "video4": "Animation of a simple map with coordinates. The camera zooms on a circle on the ground and moves underground to reveal a glowing orange circle."
                 }
             }
         }
@@ -123,15 +126,18 @@
         "downloadMyCV": "Download mijn CV",
         "home": {
             "discoverMyProjects": "Ontdek mijn projecten",
-            "description": "My name is Adam, I am a designer and developer. I enjoy experimenting and trying new things and I always take care of the details.",
+            "description": "Mijn naam is Adam, ik ben designer en developer. Ik hou van experimenteren en nieuwe dingen ontdekken, en ik let altijd op de details.",
             "aboutMe": "Over Mij"
         },
         "aboutMe": {
             "back": "Terug",
-            "description": "In 2022 I graduated from HOGENT with a degree in Applied Computer Science and in 2025 from Howest with a degree in Design and Development. During my last internship, I created this after movie:"
+            "description": "In 2022 ben ik afgestudeerd aan HOGENT met een diploma in Toegepaste Informatica en in 2025 aan Howest met een diploma in Design & Development. Tijdens mijn laatste stage maakte ik deze aftermovie:"
+        },
+        "footer": {
+            "description": "Mijn naam is Adam, ik hou van experimenteren en nieuwe dingen ontdekken, en ik let altijd op de details."
         },
         "projects": {
-            "visitTheWebsite": "Visit the website",
+            "visitTheWebsite": "Bezoek de website",
             "types": {
                 "ux": "UX",
                 "design": "Design",

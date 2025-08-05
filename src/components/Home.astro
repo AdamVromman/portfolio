@@ -3,7 +3,7 @@ import FlyingObjects from "./FlyingObjects.astro";
 import "../CSS/home.css";
 import HomeBackground from "./HomeBackground.astro";
 import { projects } from "../assets/Constants";
-import { getLanguage } from "../assets/ServerFunctions";
+import { getLanguage, slugToLanguageKey } from "../assets/ServerFunctions";
 import Languages from "../assets/Languages.json";
 
 const { slug } = Astro.props;
@@ -221,6 +221,9 @@ console.log("Active language:", activeLanguage);
         projects.map((project) => {
           return (
             <video
+              aria-label={
+                copy.projects[slugToLanguageKey(project.slug)].alts.headerVideo
+              }
               class={`home_video ${project.slug}`}
               src={`/assets/${project.slug}/ANIMATION-header.mp4`}
               muted
