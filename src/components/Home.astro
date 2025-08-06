@@ -123,20 +123,18 @@ console.log("Active language:", activeLanguage);
     <div
       class={`grid_cell home_cell right home_grid_language ${activeLanguage}`}
     >
-      <div class="grid_cell_container">
-        <a
-          data-astro-reload
-          class={`language language-${Language.EN}`}
-          href={`/${Language.EN}/`}
-          ><span class="third-col-text">{Language.EN}</span></a
+      <a
+        class="grid_cell_container"
+        data-astro-reload
+        href={`/${activeLanguage === Language.EN ? Language.NL : Language.EN}/`}
+      >
+        <span class={`language language-${Language.EN} third-col-text`}
+          >{Language.EN}</span
         >
-        <a
-          data-astro-reload
-          class={`language language-${Language.NL}`}
-          href={`/${Language.NL}/`}
-          ><span class="third-col-text">{Language.NL}</span></a
+        <span class={`language language-${Language.NL} third-col-text`}
+          >{Language.NL}</span
         >
-      </div>
+      </a>
     </div>
     <div class="grid_cell top about-me_cell button about-me_grid_back-home">
       <a
