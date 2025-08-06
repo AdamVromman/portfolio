@@ -122,7 +122,7 @@ body {
 
 .page-title {
   @apply block px-5;
-  @apply text-[#4000ff] font-bold uppercase;
+  @apply text-active font-bold uppercase;
 
   .thin {
     @apply font-light;
