@@ -26,21 +26,20 @@ const { slug } = Astro.props;
         </p>
       </div>
     </div>
-    <div class={`grid_cell home_cell footer_grid_language ${activeLanguage}`}>
-      <div class="grid_cell_container">
-        <a
-          data-astro-reload
-          class={`language language-${Language.EN}`}
-          href={`/${Language.EN}/${slug}`}
-          ><span class="third-col-text">{Language.EN}</span></a
+
+    <div class={`grid_cell footer_grid_language ${activeLanguage}`}>
+      <a
+        class="grid_cell_container"
+        data-astro-reload
+        href={`/${activeLanguage === Language.EN ? Language.NL : Language.EN}/${slug}`}
+      >
+        <span class={`language language-${Language.EN} third-col-text`}
+          >{Language.EN}</span
         >
-        <a
-          data-astro-reload
-          class={`language language-${Language.NL}`}
-          href={`/${Language.NL}/${slug}`}
-          ><span class="third-col-text">{Language.NL}</span></a
+        <span class={`language language-${Language.NL} third-col-text`}
+          >{Language.NL}</span
         >
-      </div>
+      </a>
     </div>
     <div class="grid_cell footer_grid_contact linkedin">
       <a
