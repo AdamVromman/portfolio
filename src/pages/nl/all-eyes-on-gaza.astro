@@ -1,0 +1,144 @@
+---
+import ProjectPage from "../../components/ProjectPage.astro";
+import Layout from "../../layouts/Layout.astro";
+import "../../CSS/all-eyes-on-gaza.css";
+import SingleFlyingObject from "../../components/SingleFlyingObject.astro";
+import { getLanguage } from "../../assets/ServerFunctions";
+import Languages from "../../assets/Languages.json";
+
+const activeLanguage = getLanguage(Astro.currentLocale);
+const copy = Languages[activeLanguage];
+---
+
+<Layout slug="all-eyes-on-gaza">
+  <ProjectPage slug="all-eyes-on-gaza">
+    <div class="grid_cell project-page_grid_title">
+      <div class="grid_cell_container">
+        <h1 class="full-col-text page-title">
+          {copy.projects.allEyesOnGaza.title}
+        </h1>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_category dev first">
+      <div class="grid_cell_container">
+        <span class="half-col-text">{copy.projects.types.development}</span>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_category ux second">
+      <div class="grid_cell_container">
+        <span class="half-col-text">{copy.projects.types.ux}</span>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_year">
+      <div class="grid_cell_container">
+        <span class="half-col-text">2025</span>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_description">
+      <div class="grid_cell_container">
+        <p class="half-col-text justified-paragraph">
+          {copy.projects.allEyesOnGaza.description}
+        </p>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_icon">
+      <div class="grid_cell_container">
+        <SingleFlyingObject slug="all-eyes-on-gaza" />
+      </div>
+    </div>
+    <div class="project-page-video video-1 bg-[#171717] border">
+      <video
+        aria-label={copy.projects.allEyesOnGaza.alts.video1}
+        src="/assets/all-eyes-on-gaza/ANIMATION-intro.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-video video-2 bg-[#171717]">
+      <video
+        aria-label={copy.projects.allEyesOnGaza.alts.video2}
+        src="/assets/all-eyes-on-gaza/ANIMATION-scroll.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-video video-3 bg-[#171717]">
+      <video
+        aria-label={copy.projects.allEyesOnGaza.alts.video3}
+        src="/assets/all-eyes-on-gaza/ANIMATION-adding.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-image image-1">
+      <img
+        src="/assets/all-eyes-on-gaza/still-data.webp"
+        alt={copy.projects.allEyesOnGaza.alts.image1}
+      />
+    </div>
+    <div class="grid_cell project-page_grid_paragraph paragraph-1">
+      <div class="grid_cell_container">
+        <p class="third-col-text justified-paragraph">
+          {copy.projects.allEyesOnGaza.paragraph1}
+        </p>
+      </div>
+    </div>
+    <div class="project-page-video video-4 bg-[#171717] border">
+      <video
+        aria-label={copy.projects.allEyesOnGaza.alts.video4}
+        src="/assets/all-eyes-on-gaza/ANIMATION-floating-info.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-video video-5 bg-[#171717] border">
+      <video
+        aria-label={copy.projects.allEyesOnGaza.alts.video5}
+        src="/assets/all-eyes-on-gaza/ANIMATION-floating-info-different.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-image image-2 full-width">
+      <img
+        src="/assets/all-eyes-on-gaza/still-eye.webp"
+        alt={copy.projects.allEyesOnGaza.alts.image2}
+      />
+    </div>
+    <div class="grid_cell project-page_grid_paragraph paragraph-2">
+      <div class="grid_cell_container">
+        <p class="third-col-text justified-paragraph">
+          {copy.projects.allEyesOnGaza.paragraph2}
+        </p>
+      </div>
+    </div>
+    <div class="project-page-video video-6">
+      <video
+        aria-label={copy.projects.allEyesOnGaza.alts.video6}
+        src="/assets/all-eyes-on-gaza/ANIMATION-dragging.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-video video-7 border">
+      <video
+        aria-label={copy.projects.allEyesOnGaza.alts.video7}
+        src="/assets/all-eyes-on-gaza/ANIMATION-zoom.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page_link link-1">
+      <a href="https://passion-project-chi.vercel.app/" target="_blank">
+        <span class="half-col-text">{copy.projects.visitTheWebsite}</span>
+      </a>
+    </div>
+  </ProjectPage>
+</Layout>

@@ -1,8 +1,18 @@
 ---
+import { getLanguage } from "../assets/ServerFunctions";
 import "../CSS/flying-objects.css";
+import Languages from "../assets/Languages.json";
+
+const activeLanguage = getLanguage(Astro.currentLocale);
+const copy = Languages[activeLanguage];
 ---
 
 <div id="flying-objects" class="flying-objects">
-  <div class="canvas-container" id="canvas-container"></div>
+  <div
+    data-language={activeLanguage}
+    class="canvas-container"
+    id="canvas-container"
+  >
+  </div>
   <script src="../assets/FlyingObjects.ts"></script>
 </div>

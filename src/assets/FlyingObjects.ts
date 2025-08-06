@@ -15,7 +15,6 @@ import {
   getNrOfColumns,
   playing,
   playAnimation,
-  stopAnimation,
   analyseURL,
 } from "../assets/Functions";
 
@@ -65,6 +64,7 @@ let debug;
 let pointer: THREE.Vector2 = new THREE.Vector2();
 
 const canvasContainer = document.getElementById("canvas-container");
+const language = canvasContainer?.dataset.language || "en";
 
 const clock = new THREE.Clock();
 let delta;
@@ -216,7 +216,7 @@ const createFlyingObject = () => {
               let projectShape;
               const element = document.createElement("a");
               element.className = `flying-object-link ${project.slug}`;
-              element.href = `/${project.slug}`;
+              element.href = `/${language}/${project.slug}`;
               element.tabIndex = -1;
               element.style.width = "120px";
               element.style.height = "120px";

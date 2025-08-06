@@ -8,6 +8,7 @@ import {
   projects,
   dynamicBodies,
   ROWS_PER_PROJECT_PER_SCREENSIZE,
+  Language,
 } from "./Constants";
 import type { FlyingObject, Project } from "./Interfaces";
 import gsap from "gsap";

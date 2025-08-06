@@ -1,0 +1,147 @@
+---
+import ProjectPage from "../../components/ProjectPage.astro";
+import Layout from "../../layouts/Layout.astro";
+import "../../CSS/train-world.css";
+import SingleFlyingObject from "../../components/SingleFlyingObject.astro";
+import Languages from "../../assets/Languages.json";
+import { getLanguage } from "../../assets/ServerFunctions";
+
+const activeLanguage = getLanguage(Astro.currentLocale);
+const copy = Languages[activeLanguage];
+---
+
+<Layout slug="train-world">
+  <ProjectPage slug="train-world">
+    <div class="grid_cell project-page_grid_title">
+      <div class="grid_cell_container">
+        <h1 class="full-col-text page-title">
+          {copy.projects.trainWorld.title}
+        </h1>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_category design first">
+      <div class="grid_cell_container">
+        <span class="half-col-text">{copy.projects.types.design}</span>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_category dev second">
+      <div class="grid_cell_container">
+        <span class="half-col-text">{copy.projects.types.development}</span>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_year">
+      <div class="grid_cell_container">
+        <span class="half-col-text">2023</span>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_description">
+      <div class="grid_cell_container">
+        <p class="half-col-text justified-paragraph">
+          {copy.projects.trainWorld.description}
+        </p>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_icon">
+      <div class="grid_cell_container">
+        <SingleFlyingObject slug="train-world" />
+      </div>
+    </div>
+    <div class="project-page-video video-1 border">
+      <video
+        aria-label={copy.projects.trainWorld.alts.video1}
+        src="/assets/train-world/ANIMATION-train-cart-double.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-image image-1">
+      <img
+        src="/assets/train-world/train-cart-single.webp"
+        alt={copy.projects.trainWorld.alts.image1}
+      />
+    </div>
+    <div class="project-page-video video-2">
+      <video
+        aria-label={copy.projects.trainWorld.alts.video2}
+        src="/assets/train-world/ANIMATION-loading.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="grid_cell project-page_grid_paragraph paragraph-1">
+      <div class="grid_cell_container">
+        <p class="third-col-text justified-paragraph">
+          {copy.projects.trainWorld.paragraph1}
+        </p>
+      </div>
+    </div>
+    <div class="project-page-image image-2">
+      <img
+        src="/assets/train-world/iphone.webp"
+        alt={copy.projects.trainWorld.alts.image2}
+      />
+    </div>
+    <div class="project-page-image image-3 border">
+      <img
+        src="/assets/train-world/macBook.webp"
+        alt={copy.projects.trainWorld.alts.image3}
+      />
+    </div>
+    <div class="project-page-video video-3 border">
+      <video
+        aria-label={copy.projects.trainWorld.alts.video3}
+        src="/assets/train-world/ANIMATION-clouds.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-image image-4">
+      <img
+        src="/assets/train-world/train-cart-open.webp"
+        alt={copy.projects.trainWorld.alts.image4}
+      />
+    </div>
+    <div class="project-page-video video-4 border">
+      <video
+        aria-label={copy.projects.trainWorld.alts.video4}
+        src="/assets/train-world/ANIMATION-trees.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="grid_cell project-page_grid_paragraph paragraph-2">
+      <div class="grid_cell_container">
+        <p class="third-col-text justified-paragraph">
+          {copy.projects.trainWorld.paragraph2}
+        </p>
+      </div>
+    </div>
+    <div class="project-page-video video-5">
+      <video
+        aria-label={copy.projects.trainWorld.alts.video5}
+        src="/assets/train-world/ANIMATION-illustrations.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-video video-6">
+      <video
+        aria-label={copy.projects.trainWorld.alts.video6}
+        src="/assets/train-world/ANIMATION-labels.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page_link link-1">
+      <a href="/train-world/live" target="_blank">
+        <span class="half-col-text">{copy.projects.visitTheWebsite}</span>
+      </a>
+    </div>
+  </ProjectPage>
+</Layout>

@@ -1,34 +1,45 @@
 ---
+import { getLanguage } from "../assets/ServerFunctions";
 import "../CSS/footer.css";
 import FooterBackground from "./FooterBackground.astro";
+import Languages from "../assets/Languages.json";
+import { Language } from "../assets/Constants";
+
+const activeLanguage = getLanguage(Astro.currentLocale);
+const copy = Languages[activeLanguage];
+const { slug } = Astro.props;
 ---
 
 <footer class="footer">
   <div class="footer_grid">
-    <!-- <a href="/" class="grid_cell footer_grid_back-home">
-      <div class="grid_cell_container">
-        <div class="footer_grid_back-home_icon">
-          <svg viewBox="0 0 35 16">
-            <path d="M35 8H2" stroke-width="2"></path>
-            <path d="M9 1L2 8L9 15" stroke-width="2"></path>
-          </svg>
-        </div>
-        <span class="uppercase half-col-text pl-5">back home</span>
-      </div>
-    </a> -->
     <div class="grid_cell footer_grid_title">
       <div class="grid_cell_container">
         <h1 class="full-col-text page-title">
-          Adam<span class="thin"> Vromman</span>
+          {copy.firstName}<span class="thin"> {copy.lastName}</span>
         </h1>
       </div>
     </div>
     <div class="grid_cell footer_grid_text">
       <div class="grid_cell_container">
         <p class="half-col-text">
-          I am a Belgian designer and developer, with a love for motion,
-          creativity and math.
+          {copy.footer.description}
         </p>
+      </div>
+    </div>
+    <div class={`grid_cell home_cell footer_grid_language ${activeLanguage}`}>
+      <div class="grid_cell_container">
+        <a
+          data-astro-reload
+          class={`language language-${Language.EN}`}
+          href={`/${Language.EN}/${slug}`}
+          ><span class="third-col-text">{Language.EN}</span></a
+        >
+        <a
+          data-astro-reload
+          class={`language language-${Language.NL}`}
+          href={`/${Language.NL}/${slug}`}
+          ><span class="third-col-text">{Language.NL}</span></a
+        >
       </div>
     </div>
     <div class="grid_cell footer_grid_contact linkedin">

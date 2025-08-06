@@ -1,0 +1,134 @@
+---
+import ProjectPage from "../../components/ProjectPage.astro";
+import Layout from "../../layouts/Layout.astro";
+import "../../CSS/club-sofa.css";
+import SingleFlyingObject from "../../components/SingleFlyingObject.astro";
+import { getLanguage } from "../../assets/ServerFunctions";
+import Languages from "../../assets/Languages.json";
+
+const activeLanguage = getLanguage(Astro.currentLocale);
+const copy = Languages[activeLanguage];
+---
+
+<Layout slug="club-sofa">
+  <ProjectPage slug="club-sofa">
+    <div class="grid_cell project-page_grid_title">
+      <div class="grid_cell_container">
+        <h1 class="full-col-text page-title">{copy.projects.clubSofa.title}</h1>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_category ux first">
+      <div class="grid_cell_container">
+        <span class="half-col-text">{copy.projects.types.ux}</span>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_category design second">
+      <div class="grid_cell_container">
+        <span class="half-col-text">{copy.projects.types.design}</span>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_year">
+      <div class="grid_cell_container">
+        <span class="half-col-text">2022</span>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_description">
+      <div class="grid_cell_container">
+        <p class="half-col-text justified-paragraph">
+          {copy.projects.clubSofa.description}
+        </p>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_icon">
+      <div class="grid_cell_container">
+        <SingleFlyingObject slug="club-sofa" />
+      </div>
+    </div>
+    <div class="project-page-image image-1">
+      <img
+        src="/assets/club-sofa/logo-still.webp"
+        alt={copy.projects.clubSofa.alts.image1}
+      />
+    </div>
+    <div class="project-page-video video-1">
+      <video
+        aria-label={copy.projects.clubSofa.alts.video1}
+        src="/assets/club-sofa/ANIMATION-logotype.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-video video-2 full-width">
+      <video
+        aria-label={copy.projects.clubSofa.alts.video2}
+        src="/assets/club-sofa/ANIMATION-icons.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="grid_cell project-page_grid_paragraph paragraph-1">
+      <div class="grid_cell_container">
+        <p class="third-col-text justified-paragraph">
+          {copy.projects.clubSofa.paragraph1}
+        </p>
+      </div>
+    </div>
+    <div class="project-page-image image-2 border">
+      <img
+        src="/assets/club-sofa/phone.webp"
+        alt={copy.projects.clubSofa.alts.image2}
+      />
+    </div>
+    <div class="project-page-video video-3">
+      <video
+        aria-label={copy.projects.clubSofa.alts.video3}
+        src="/assets/club-sofa/ANIMATION-screens-desktop.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-image image-3 border">
+      <img
+        src="/assets/club-sofa/phone-2.webp"
+        alt={copy.projects.clubSofa.alts.image3}
+      />
+    </div>
+    <div class="grid_cell project-page_grid_paragraph paragraph-2">
+      <div class="grid_cell_container">
+        <p class="third-col-text justified-paragraph">
+          {copy.projects.clubSofa.paragraph2}
+        </p>
+      </div>
+    </div>
+    <div class="project-page-video video-4">
+      <video
+        aria-label={copy.projects.clubSofa.alts.video4}
+        src="/assets/club-sofa/ANIMATION-boxes.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-image image-4 border">
+      <img
+        src="/assets/club-sofa/boxes.webp"
+        alt={copy.projects.clubSofa.alts.image4}
+      />
+    </div>
+    <div class="project-page-image image-5 full-width">
+      <img
+        src="/assets/club-sofa/box-1.webp"
+        alt={copy.projects.clubSofa.alts.image5}
+      />
+    </div>
+    <div class="project-page-image image-6 border">
+      <img
+        src="/assets/club-sofa/ipad.webp"
+        alt={copy.projects.clubSofa.alts.image6}
+      />
+    </div>
+  </ProjectPage>
+</Layout>

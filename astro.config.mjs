@@ -5,6 +5,13 @@ import matomo from "astro-matomo";
 
 // https://astro.build/config
 export default defineConfig({
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "nl"],
+    routing: {
+      prefixDefaultLocale: true,
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
   },

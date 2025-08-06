@@ -1,0 +1,240 @@
+{
+    "en": {
+        "lastName": "Vromman",
+        "firstName": "Adam",
+        "email": "adam@adamvromman.net",
+        "handle": "/adamvromman/",
+        "downloadMyCV": "Download my CV",
+        "home": {
+            "discoverMyProjects": "Discover my projects",
+            "description": "My name is Adam, I am a designer and developer. I enjoy experimenting and discovering new things and I always take care of the details.",
+            "aboutMe": "About Me"
+        },
+        "aboutMe": {
+            "back": "Back",
+            "description": "In 2022 I graduated from HOGENT with a degree in Applied Computer Science and in 2025 from Howest with a degree in Design and Development. During my last internship, I created this after movie:"
+        },
+        "footer": {
+            "description": "My name is Adam, I enjoy experimenting and discovering new things and I always take care of the details."
+        },
+        "projects": {
+            "visitTheWebsite": "Visit the website",
+            "types": {
+                "ux": "UX",
+                "design": "Design",
+                "development": "Dev"
+            },
+            "clubSofa": {
+                "title": "Club Sofa",
+                "description": "A cocktail-ingredient monthly-subscription service and application, made for young creatives; I used this school project to experiment with illustration, branding and creative onboarding.",
+                "paragraph1": "For me, the main challenge lay in finding a balance between my own vision and ideas for the brand and what the intended audience would be. I had to go for something that encompasses both the fun, summer-y, party music aspect of cocktails and the luxurious, premium ingredients, fancy one.",
+                "paragraph2": "As a delivery service, another important aspect was the packaging. I had a lot of fun coming up with different designs for the differently themed boxes and seeing my vision come to life when I created mock-ups with my designs. I think the combination of physical design with application design made the assignment so engaging.",
+                "alts": {
+                    "headerVideo": "Animation of the Club Sofa Logo in the middle of the screen with falling boxes, icons and illustrations",
+                    "image1": "White Club Sofa logo on black background.",
+                    "image2": "Phone showing the Club Sofa app. It says 'Pick a season' with four illustrations as options.",
+                    "image3": "Hand holding a phone with the Club Sofa login screen open. Another hand reaches for it mimicking the famous painting 'The creation of Adam' by Michelangelo.",
+                    "image4": "An image of two stacked boxes with Club Sofa branding. One box says 'Sweet & Sour' and the other 'Local & Seasonal'.",
+                    "image5": "An image of a box with Club Sofa branding. The box is being opened and says 'Dark & Stormy'.",
+                    "image6": "Tablet showing the Club Sofa dashboard showing one active order.",
+                    "video1": "Animation of the Club Sofa logo. The words 'Club Sofa' appear and dissapear and the colors change from white-black to black-white.",
+                    "video2": "Animation of simple illustrations floating through the screen. A leaf, flowers, a pineapple, books, dice, a shoe, a pinecone, vanilla sticks, powder, ginger, pear, easel, wheat, pepper, snowflake.",
+                    "video3": "Animation of different screens of the Club Sofa app appearing and dissapearing. They show different screens like the dashboard, the onboarding and the order process.",
+                    "video4": "Animation of four illustrated boxes rotating in 3D space, showing one face at a time."
+                }
+            },
+            "trainWorld": {
+                "title": "Train World",
+                "description": "During my second year, I created this website to recount—through illustration, interaction and animation—the forgotten tale of the Belgian postal train service.",
+                "paragraph1": "I had a lot of fun looking for an illustration style that highlights the complex engineering of trains and also works in the setting of the early 20th century. The colour is based on the iconic Belgian Post red and for the fonts, I looked for typewriter-inspired typographies.",
+                "paragraph2": "For the different smaller illustrations throughout the website, I experimented with using parallel lines to shade the objects. Next to that, I also tried to recreate the visual language of plaques, signs and architectural decorations of the 20th century, which I used as UI elements.",
+                "alts": {
+                    "headerVideo": "Animation of the Train world Logo in the middle of the screen with a train passing through a landscape with clouds in the background.",
+                    "image1": "An illustration of a postal train wagon from the early 20th century.",
+                    "image2": "A mockup of a laptop with the Train World website open. It shows a train wagon with a red background and the text: 'To my dearest... A love letter to our postal trains'.'",
+                    "image3": "A mockup of a phone with the Train World website open. It shows a train wagon with a red background and the text: 'To my dearest... A love letter to our postal trains'.'",
+                    "image4": "An illustration of a postal train wagon from the late 20th century. The side is open and inside are postal bags and crates.",
+                    "video1": "Animation of a train slowly passing by. The train is a postal train from the late 20th century.",
+                    "video2": "Animation of a loading screen. Several small trains pass by, white on a red background.",
+                    "video3": "Animation of clouds passing by.",
+                    "video4": "Animation of hills and trees passing by.",
+                    "video5": "Animation of different illustrations: a rock, a car, a tree, a crate, a hat, a cloud, a bag.",
+                    "video6": "Animation of different types of illustrated signs. The signs have no words on them."
+                }
+            },
+            "transfoIntiem": {
+                "title": "Transfo Intiem",
+                "description": "This one was a team effort. Together with two classmates, I tackled the navigation and programming of a local festival: the website, the flyers and a game on the night itself.",
+                "paragraph1": "My focus in the team was on implementing the design we had created for the website and programming the frontend logic. This meant animating the UI elements, making sure the website was useable on different devices and in different environments, and connecting the 2D and 3D elements.",
+                "paragraph2": "Apart from this main task, I tried to assist my classmates wherever it could be needed, whether it was helping with the design of the flyer or pair-debugging the AR game we had created. It all culminated into a lovely evening in which we helped more than 3000 navigate the festival.",
+                "alts": {
+                    "headerVideo": "Animation of the Transfo Intiem logo in the middle of the screen with a 3D model of the Transfo site in the background slowly rotating.",
+                    "image1": "Flyers showing the schedule, map and a game for children along with the festival mascot, Miefel.",
+                    "image2": "Mockup of a bus stop sign with a poster saying: 'The warmest, coziest, ..hairy-ist.., winter-festival of Flanders'.",
+                    "video1": "Animation of a laptop and a phone both showing the Transfo Intiem website, which has monster arms, a 3D model of the site and the name: Transfo Intiem.",
+                    "video2": "Animation of a group of accordion buttons that open and close.",
+                    "video3": "Animation of the hover state of a button. An arrow appears and disappears.",
+                    "video4": "Animation of the navigation within the schedule of the website, first showing an overview, then a specific event and then a specific location.",
+                    "video5": "Animation of a 3D model of the Transfo site rotating slowly.",
+                    "video6": "Animation of a laptop showing regular usage of the Transfo Intiem website.",
+                    "video7": "Animation of a mobile phone showing regular usage of the Transfo Intiem website."
+                }
+            },
+            "allEyesOnGaza": {
+                "title": "All Eyes On Gaza",
+                "description": "This project is an exploration of interactive data visualisation, as well as attempt to highlight how data can be misused to suppress and denounce a just cause.",
+                "paragraph1": "For this school assignment, I explored the use of animation frameworks like GSAP to animate and visualise data. It consists of two parts. The eye, which is more abstract and less interactive, and the dashboard, which is more straight-forward data that the users can control themselves.",
+                "paragraph2": "The dashboard shows a timeline which contains, on the one hand, key moments and on the other hand, data that the user can add. Like that, a user can not only learn new things about Israel-Palestine, as well as see how historical moments influenced certain statistics.",
+                "alts": {
+                    "headerVideo": "Animation of an illustrated eye opening an closing. Each time it opens, the iris is a different composition of red and green lines, representing the people injured and killed in Gaza and the west bank on a specific day.",
+                    "image1": "Screenshot from the All Eyes On Gaza website, showing a graph with the number of Palestinian minors imprisoned by Israel in 2015, which is 472.",
+                    "image2": "Screenshot from the eye animation on December 24, 2023, when 4 people were injured in the West Bank, 384 in Gaza and 166 were killed in Gaza.",
+                    "video1": "Animation of the All Eyes On Gaza website. It shows a text saying 'Don't close your eyes for Israel's genocide in Gaza and the illegal occupation of Palestinian land.' and after a single click it shows the animated eye.",
+                    "video2": "Animation of the All Eyes On Gaza website. It shows the graph scrolling up and being animated.",
+                    "video3": "Animation of the All Eyes On Gaza website in mobile view. It shows different statistics being dragged onto the graph.",
+                    "video4": "Animation of the All Eyes On Gaza website. It shows the graph and the amount of illegal settlers in the West Bank from 1988 (190953) to 2021 (719452)",
+                    "video5": "Animation of the All Eyes On Gaza website. It shows the timeline with some key moments in the history of Israel-Palestine.",
+                    "video6": "Animation of the All Eyes On Gaza website. It shows the panning of the timeline to the left and right.",
+                    "video7": "Animation of the All Eyes On Gaza website. It shows the zooming of the timeline."
+                }
+            },
+            "qausal": {
+                "title": "Qausal",
+                "description": "During my internship abroad, I got the chance to create both a logo and a keynote presentation for a scientist specialised in particle acceleration.",
+                "paragraph1": "Although the end-product of the project was a keynote presentation to secure funding—on paper, not the most exciting graphic problem—I still managed to experiment and find a brand I both really liked and trusted to be appropriate for its intended use.",
+                "paragraph2": "The keynote had to be visual pleasing and modern, but above all, the ideas expressed in it had to be clear. This was a challenge, since the ideas were extremely complex. I had to create something without truly understanding the content I was using. It meant putting a lot of care into the layout of the keynote and frequent meetings with the scientist himself.",
+                "alts": {
+                    "headerVideo": "Animation of the Qausal logo in the middle of the screen with the words 'the Opportunity' and an animated quantum computer in the background.",
+                    "image1": "The Qausal logo on a black background with lines around it indicating the safe area.",
+                    "image2": "A mockup of a laptop showing one of the slides of the keynote presentation.",
+                    "image3": "Two vertical screen. One says 'The Challenge' with a picture of a particle accelerator and the other says 'The Opportunity' with a picture of a quantum computer.",
+                    "image4": "Mockup of a book name 'Qausal' with the logo on the front, written by Germán Rodrigo",
+                    "image5": "Mockup of a huge screen showing the first slide of the keynote presentation and people looking at it.",
+                    "video1": "Animation of the Qausal logo being drawn on the screen, starting with a circle and ending with the letter 'Q'",
+                    "video2": "Animation of white circles being drawn to a middle point from the left side and one glowing orange circle leaving the center to the right side.",
+                    "video3": "Animation of a group of white circles growing and shrinking with a blue glowing orb in the middle and more white circles being drawn to the side of it.",
+                    "video4": "Animation of a simple map with coordinates. The camera zooms on a circle on the ground and moves underground to reveal a glowing orange circle."
+                }
+            }
+        }
+    },
+    "nl": {
+        "lastName": "Vromman",
+        "firstName": "Adam",
+        "email": "adam@adamvromman.net",
+        "handle": "/adamvromman/",
+        "downloadMyCV": "Download mijn CV",
+        "home": {
+            "discoverMyProjects": "Ontdek mijn projecten",
+            "description": "Mijn naam is Adam, ik ben designer en developer. Ik hou van experimenteren en nieuwe dingen ontdekken, en ik let altijd op de details.",
+            "aboutMe": "Over Mij"
+        },
+        "aboutMe": {
+            "back": "Terug",
+            "description": "In 2022 ben ik afgestudeerd aan HOGENT met een diploma in Toegepaste Informatica en in 2025 aan Howest met een diploma in Design & Development. Tijdens mijn laatste stage maakte ik deze aftermovie:"
+        },
+        "footer": {
+            "description": "Mijn naam is Adam, ik hou van experimenteren en nieuwe dingen ontdekken, en ik let altijd op de details."
+        },
+        "projects": {
+            "visitTheWebsite": "Bezoek de website",
+            "types": {
+                "ux": "UX",
+                "design": "Design",
+                "development": "Dev"
+            },
+            "clubSofa": {
+                "title": "Club Sofa",
+                "description": "Een maandelijkse subscriptionservice en app voor cocktailingrediënten, speciaal voor young creatives. Ik heb dit schoolproject gebruikt om te experimenteren met illustratie, branding en creatieve onboarding.",
+                "paragraph1": "Voor mij lag de grootste uitdaging in het vinden van een balans tussen mijn eigen visie en ideeën voor het merk en wat de doelgroep zou zijn. Ik moest kiezen voor iets dat zowel het leuke, zomerse, feestelijke muziekaspect van cocktails als de luxe, kwaliteitsvolle ingrediënten en het chique aspect omvat.",
+                "paragraph2": "De verpakking was een ander belangrijk aspect. Ik heb genoten van ontwerpen te bedenken voor de dozen met verschillende thema's en om mijn visie tot leven te zien komen door mijn ontwerpen te gebruiken in mock-ups. Ik denk dat de combinatie van fysiek en digitaal ontwerp de opdracht zo boeiend maakte.",
+                "alts": {
+                    "headerVideo": "Animatie van het Club Sofa-logo in het midden van het scherm met vallende dozen, pictogrammen en illustraties",
+                    "image1": "Wit Club Sofa-logo op zwarte achtergrond.",
+                    "image2": "Smartphone die de Club Sofa-app toont. Er staat 'Kies een seizoen' met vier illustraties als opties.",
+                    "image3": "Hand die een smartphone vasthoudt met het inlogscherm van Club Sofa open. Een andere hand reikt ernaar en imiteert het beroemde schilderij 'De schepping van Adam' van Michelangelo.",
+                    "image4": "Een afbeelding van twee gestapelde dozen met Club Sofa-branding. Op een doos staat 'Sweet & Sour' en op de andere 'Local & Seasonal'.",
+                    "image5": "Een afbeelding van een doos met Club Sofa-branding. De doos wordt geopend en zegt 'Dark & Stormy'.",
+                    "image6": "Tablet die het Club Sofa-dashboard toont met één actieve bestelling.",
+                    "video1": "Animatie van het Club Sofa-logo. De woorden 'Club Sofa' verschijnen en verdwijnen en de kleuren veranderen van wit-zwart naar zwart-wit.",
+                    "video2": "Animatie van eenvoudige illustraties die door het scherm zweven. Een blad, bloemen, een ananas, boeken, dobbelstenen, een schoen, een dennenappel, vanille-sticks, poeder, gember, peer, ezel, tarwe, peper, sneeuwvlok.",
+                    "video3": "Animatie van verschillende schermen van de Club Sofa-app die verschijnen en verdwijnen. Ze tonen verschillende schermen zoals het dashboard, de onboarding en het bestelproces.",
+                    "video4": "Animatie van vier geïllustreerde dozen die in 3D-ruimte draaien en één kant tegelijk tonen."
+                }
+            },
+            "trainWorld": {
+                "title": "Train World",
+                "description": "Tijdens mijn tweede jaar heb ik deze website gemaakt om—door middel van illustraties, interactie en animaties–het vergeten verhaal van de Belgische posttreindienst te vertellen.",
+                "paragraph1": "Het was leuk om op zoek te gaan naar een illustratiestijl die de complexe techniek van treinen toonde en ook past bij de setting van het begin van de 20e eeuw. De kleur is gebaseerd op het iconische rood van de Belgische Post en voor de lettertypes heb ik gezocht naar typografieën die geïnspireerd zijn op typemachines.",
+                "paragraph2": "Voor de verschillende kleinere illustraties op de website heb ik geëxperimenteerd met het gebruik van parallelle lijnen om de objecten schaduw te geven. Daarnaast heb ik ook geprobeerd om de beeldtaal van plaquettes, borden en architecturale decoraties uit de 20e eeuw na te doen en die als UI-elementen te gebruiken.",
+                "alts": {
+                    "headerVideo": "Animatie van het Train World-logo in het midden van het scherm met een trein die door een landschap rijdt en wolken op de achtergrond.",
+                    "image1": "Een illustratie van een posttreinwagon uit het begin van de 20e eeuw.",
+                    "image2": "Een mockup van een laptop met de Train World-website open. Je ziet een treinwagon met een rode achtergrond en de tekst: 'To my dearest... A love letter to our postal trains'.'.",
+                    "image3": "Een mockup van een telefoon met de Train World-website open. Je ziet een treinwagon met een rode achtergrond en de tekst: 'To my dearest... A love letter to our postal trains'.'.",
+                    "image4": "Een illustratie van een posttreinwagon uit het einde van de 20e eeuw. De zijkant is open en binnenin liggen postzakken en kratten.",
+                    "video1": "Animatie van een trein die langzaam voorbijrijdt. De trein is een posttrein uit het einde van de 20e eeuw.",
+                    "video2": "Animatie van een laadscherm. Verschillende kleine treinen rijden voorbij, wit op een rode achtergrond.",
+                    "video3": "Animatie van voorbijdrijvende wolken.",
+                    "video4": "Animatie van heuvels en bomen die voorbij komen.",
+                    "video5": "Animatie van verschillende illustraties: een rots, een auto, een boom, een krat, een hoed, een wolk, een tas.",
+                    "video6": "Animatie van verschillende soorten geïllustreerde borden. Op de borden staan geen woorden."
+                }
+            },
+            "transfoIntiem": {
+                "title": "Transfo Intiem",
+                "description": "Dit was een groepswerk. Samen met twee klasgenoten heb ik de navigatie en het programma van een lokaal festival op me genomen: de website, de flyers en een spel op de avond zelf.",
+                "paragraph1": "Mijn focus in het team lag op het implementeren van het ontwerp dat we voor de website hadden gemaakt en het programmeren van de frontend-logica. Ik animeerde de UI-elementen, maakte de website bruikbaar op verschillende apparaten en in verschillende omgevingen, en zorgde ervoor dat de 2D- en 3D-elementen goed samenwerkte.",
+                "paragraph2": "Naast deze hoofdtaken probeerde ik mijn klasgenoten te helpen waar dat nodig was, of het nu ging om het ontwerpen van de flyer of het samen debuggen van de AR-game die we hadden gemaakt. Dit alles kwam ten einde in een geweldige avond waarop we meer dan 3000 mensen hielpen bij het navigeren op het festival.",
+                "alts": {
+                    "headerVideo": "Animatie van het Transfo Intiem-logo in het midden van het scherm met een 3D-model van de Transfo-locatie op de achtergrond dat langzaam draait.",
+                    "image1": "Flyers met het schema, de plattegrond en een spel voor kinderen, samen met het festivalmaskot, Miefel.",
+                    "image2": "Mockup van een bushaltebord met een poster waarop staat: 'Het warmste, gezelligste, ..harigste.., winterfestival van Vlaanderen'.",
+                    "video1": "Animatie van een laptop en een telefoon die beide de Transfo Intiem-website tonen, die monsterarmen heeft, een 3D-model van de site en de naam: Transfo Intiem.",
+                    "video2": "Animatie van een groep accordeonknoppen die openen en sluiten.",
+                    "video3": "Animatie van de hover-toestand van een knop. Een pijl verschijnt en verdwijnt.",
+                    "video4": "Animatie van de navigatie binnen het schema van de website, eerst een overzicht tonend, dan een specifiek evenement en vervolgens een specifieke locatie.",
+                    "video5": "Animatie van een 3D-model van de Transfo-locatie dat langzaam draait.",
+                    "video6": "Animatie van een laptop die regulier gebruik van de Transfo Intiem-website toont.",
+                    "video7": "Animatie van een mobiele telefoon die regulier gebruik van de Transfo Intiem-website toont."
+                }
+            },
+            "allEyesOnGaza": {
+                "title": "All Eyes On Gaza",
+                "description": "Dit project is een verkenning van interactieve datavisualisatie en een poging om te laten zien hoe data kan worden misbruikt om een rechtvaardige zaak te onderdrukken en te veroordelen.",
+                "paragraph1": "Voor deze schoolopdracht heb ik het gebruik van animatieframeworks zoals GSAP onderzocht om gegevens te animeren en te visualiseren. Het bestaat uit twee delen. Het oog, dat abstracter en minder interactief is, en het dashboard, dat meer uitgebreide gegevens bevat die de gebruikers zelf kunnen ontdekken.",
+                "paragraph2": "Het dashboard toont een tijdlijn met enerzijds belangrijke momenten en anderzijds gegevens die de gebruiker kan toevoegen. Zo kan een gebruiker niet alleen nieuwe dingen leren over Israël-Palestina, maar ook zien hoe historische momenten bepaalde statistieken beïnvloedden.",
+                "alts": {
+                    "headerVideo": "Animatie van een geïllustreerd oog dat opent en sluit. Elke keer dat het oog opent, is de iris een andere compositie van rode en groene lijnen, die de mensen vertegenwoordigen die gewond zijn geraakt en gedood in Gaza en de Westelijke Jordaanoever op een specifieke dag.",
+                    "image1": "Screenshot van de All Eyes On Gaza-website, met een grafiek van het aantal Palestijnse minderjarigen dat in 2015 door Israël werd opgesloten, namelijk 472.",
+                    "image2": "Screenshot van de ooganimatie op 24 december 2023, toen 4 mensen gewond raakten op de Westelijke Jordaanoever, 384 in Gaza en 166 werden gedood in Gaza.",
+                    "video1": "Animatie van de All Eyes On Gaza-website. Er verschijnt een tekst: 'Sluit je ogen niet voor Israëls genocide in Gaza en de illegale bezetting van Palestijns land.' en na een klik verschijnt het geanimeerde oog.",
+                    "video2": "Animatie van de All Eyes On Gaza-website. De grafiek scrollt omhoog en wordt geanimeerd.",
+                    "video3": "Animatie van de All Eyes On Gaza-website in mobiele weergave. Verschillende statistieken worden op de grafiek geplaatst.",
+                    "video4": "Animatie van de All Eyes On Gaza-website. De grafiek toont het aantal illegale kolonisten in de Westelijke Jordaanoever van 1988 (190953) tot 2021 (719452).",
+                    "video5": "Animatie van de All Eyes On Gaza-website. De tijdlijn toont enkele belangrijke momenten in de geschiedenis van Israël-Palestina.",
+                    "video6": "Animatie van de All Eyes On Gaza-website. De tijdlijn wordt naar links en rechts geschoven.",
+                    "video7": "Animatie van de All Eyes On Gaza-website. De tijdlijn wordt ingezoomd."
+                }
+            },
+            "qausal": {
+                "title": "Qausal",
+                "description": "Tijdens mijn stage in het buitenland kreeg ik de kans om zowel een logo als een keynote-presentatie te ontwerpen voor een wetenschapper die gespecialiseerd is in deeltjesversnelling.",
+                "paragraph1": "Hoewel het eindproduct van het project een keynote-presentatie was om funding te verkrijgen – op papier niet het meest spannende grafische probleem – slaagde ik er toch in om te experimenteren en een branding te vinden die ik zowel mooi vond als toepasselijk voor het doelpubliek.",
+                "paragraph2": "De keynote moest visueel aantrekkelijk en modern zijn, maar bovenal moesten de ideeën die erin werden uitgedrukt duidelijk zijn. Dit was een uitdaging, aangezien de ideeën uiterst complex waren. Ik moest iets creëren zonder de inhoud die ik gebruikte echt te begrijpen. Dit betekende dat ik veel zorg moest besteden aan de lay-out van de keynote en regelmatig moest overleggen met de wetenschapper zelf.",
+                "alts": {
+                    "headerVideo": "Animatie van het Qausal-logo in het midden van het scherm met de woorden 'the Opportunity' en een geanimeerde quantumcomputer op de achtergrond.",
+                    "image1": "Het Qausal-logo op een zwarte achtergrond met lijnen eromheen die het veilige gebied aangeven.",
+                    "image2": "Een mockup van een laptop waarop een van de slides van de keynote-presentatie te zien is.",
+                    "image3": "Twee verticale schermen. Op het ene staat 'The Challenge' met een afbeelding van een deeltjesversneller en op het andere 'The Opportunity' met een afbeelding van een quantumcomputer.",
+                    "image4": "Mockup van een boek genaamd 'Qausal' met het logo op de voorkant, geschreven door Germán Rodrigo.",
+                    "image5": "Mockup van een groot scherm waarop de eerste slide van de keynote-presentatie te zien is en mensen die ernaar kijken.",
+                    "video1": "Animatie van het Qausal-logo dat op het scherm wordt getekend, beginnend met een cirkel en eindigend met de letter 'Q'.",
+                    "video2": "Animatie van witte cirkels die vanuit de linkerkant naar een middelpunt worden getekend en één gloeiende oranje cirkel die vanuit het midden naar de rechterkant vertrekt.",
+                    "video3": "Animatie van een groep witte cirkels die groter en kleiner worden met een blauw gloeiende bol in het midden en meer witte cirkels die aan de zijkant worden getekend.",
+                    "video4": "Animatie van een eenvoudige kaart met coördinaten. De camera zoomt in op een cirkel op de grond en beweegt ondergronds om een gloeiende oranje cirkel te onthullen."
+                }
+            }
+        }
+    }
+}
