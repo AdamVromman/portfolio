@@ -2,7 +2,7 @@
 import FlyingObjects from "./FlyingObjects.astro";
 import "../CSS/home.css";
 import HomeBackground from "./HomeBackground.astro";
-import { projects } from "../assets/Constants";
+import { Language, projects } from "../assets/Constants";
 import { getLanguage, slugToLanguageKey } from "../assets/ServerFunctions";
 import Languages from "../assets/Languages.json";
 
@@ -119,6 +119,24 @@ console.log("Active language:", activeLanguage);
           </svg>
         </div></a
       >
+    </div>
+    <div
+      class={`grid_cell home_cell right home_grid_language ${activeLanguage}`}
+    >
+      <div class="grid_cell_container">
+        <a
+          data-astro-reload
+          class={`language language-${Language.EN}`}
+          href={`/${Language.EN}/`}
+          ><span class="third-col-text">{Language.EN}</span></a
+        >
+        <a
+          data-astro-reload
+          class={`language language-${Language.NL}`}
+          href={`/${Language.NL}/`}
+          ><span class="third-col-text">{Language.NL}</span></a
+        >
+      </div>
     </div>
     <div class="grid_cell top about-me_cell button about-me_grid_back-home">
       <a

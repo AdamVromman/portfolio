@@ -3,9 +3,11 @@ import { getLanguage } from "../assets/ServerFunctions";
 import "../CSS/footer.css";
 import FooterBackground from "./FooterBackground.astro";
 import Languages from "../assets/Languages.json";
+import { Language } from "../assets/Constants";
 
 const activeLanguage = getLanguage(Astro.currentLocale);
 const copy = Languages[activeLanguage];
+const { slug } = Astro.props;
 ---
 
 <footer class="footer">
@@ -22,6 +24,22 @@ const copy = Languages[activeLanguage];
         <p class="half-col-text">
           {copy.footer.description}
         </p>
+      </div>
+    </div>
+    <div class={`grid_cell home_cell footer_grid_language ${activeLanguage}`}>
+      <div class="grid_cell_container">
+        <a
+          data-astro-reload
+          class={`language language-${Language.EN}`}
+          href={`/${Language.EN}/${slug}`}
+          ><span class="third-col-text">{Language.EN}</span></a
+        >
+        <a
+          data-astro-reload
+          class={`language language-${Language.NL}`}
+          href={`/${Language.NL}/${slug}`}
+          ><span class="third-col-text">{Language.NL}</span></a
+        >
       </div>
     </div>
     <div class="grid_cell footer_grid_contact linkedin">
