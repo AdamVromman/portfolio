@@ -74,6 +74,11 @@
       @apply justify-start;
       @apply border-r-0;
     }
+
+    .sub.kickstarter-video,
+    .sub.all-eyes-on-gaza {
+      font-size: 9vw;
+    }
   }
 
   @media (min-width: theme(--breakpoint-md)) {
@@ -84,11 +89,22 @@
     .grid_cell_container {
       @apply border-r-2;
     }
+
+    .sub.kickstarter-video,
+    .sub.all-eyes-on-gaza {
+      font-size: 7vw;
+    }
   }
 
   @media (min-width: theme(--breakpoint-lg)) {
     grid-row: -3 / -1;
-    grid-column: 1 / 19;
+    grid-column: 1 / 21;
+
+    .sub.kickstarter-video,
+    .sub.all-eyes-on-gaza {
+      font-size: min(6vw, 110px);
+      line-height: min(6vw, 100px);
+    }
   }
 }
 
@@ -160,39 +176,58 @@
     }
   }
 
-  &.transfo-intiem {
+  &.kickstarter-video {
     @apply pt-thick pb-thin pr-thin;
     grid-row: 3 / 4;
+    grid-column: 1 / 7;
+
+    @media (min-width: theme(--breakpoint-xs)) {
+      grid-row: 4 / 5;
+    }
+
+    @media (min-width: theme(--breakpoint-sm)) {
+      grid-column: 1 / 8;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-column: 1 / 8;
+      @apply pb-thick pt-thin pr-thick;
+    }
+  }
+
+  &.transfo-intiem {
+    @apply pt-thin pb-thick pr-thin;
+    grid-row: 4 / 5;
     grid-column: 1 / 6;
 
     @media (min-width: theme(--breakpoint-xs)) {
       grid-column: 1 / 7;
-      grid-row: 4 / 5;
-      @apply pt-thin pb-thick pr-thick;
+      grid-row: 5 / 6;
+      @apply pt-thick pb-thin pr-thick;
     }
   }
 
   &.all-eyes-on-gaza {
-    @apply pb-thick pt-thin pr-thick;
-    grid-row: 4 / 5;
+    @apply pb-thin pt-thick pr-thick;
+    grid-row: 5 / 6;
     grid-column: 1 / 7;
 
     @media (min-width: theme(--breakpoint-xs)) {
       grid-column: 1 / 8;
-      grid-row: 5 / 6;
-      @apply pt-thick pb-thin pr-thin;
+      grid-row: 6 / 7;
+      @apply pt-thin pb-thick pr-thin;
     }
   }
 
   &.qausal {
-    @apply pt-thick pb-thin pr-thin;
-    grid-row: 5 / 6;
+    @apply pt-thin pb-thick pr-thin;
+    grid-row: 6 / 7;
     grid-column: 1 / 4;
 
     @media (min-width: theme(--breakpoint-xs)) {
       grid-column: 1 / 4;
-      grid-row: 6 / 7;
-      @apply pt-thin pb-thick pr-thin;
+      grid-row: 7 / 8;
+      @apply pt-thick pb-thin pr-thin;
     }
   }
 
@@ -346,7 +381,7 @@
   }
   @media (min-width: theme(--breakpoint-sm)) {
     grid-column: -11 / -1;
-    grid-row: -11 / -5;
+    grid-row: 3 / 9;
   }
   @media (min-width: theme(--breakpoint-md)) {
     grid-column: -15 / -1;

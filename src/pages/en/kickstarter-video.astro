@@ -1,0 +1,50 @@
+---
+import ProjectPage from "../../components/ProjectPage.astro";
+import Layout from "../../layouts/Layout.astro";
+import "../../CSS/all-eyes-on-gaza.css";
+import SingleFlyingObject from "../../components/SingleFlyingObject.astro";
+import { getLanguage } from "../../assets/ServerFunctions";
+import Languages from "../../assets/Languages.json";
+
+const activeLanguage = getLanguage(Astro.currentLocale);
+const copy = Languages[activeLanguage];
+---
+
+<Layout slug="kickstarter-video">
+  <ProjectPage slug="kickstarter-video">
+    <div class="grid_cell project-page_grid_title">
+      <div class="grid_cell_container">
+        <h1 class="full-col-text page-title">
+          {copy.projects.kickstarterVideo.title}
+        </h1>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_category design first">
+      <div class="grid_cell_container">
+        <span class="half-col-text">{copy.projects.types.design}</span>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_category motion second">
+      <div class="grid_cell_container">
+        <span class="half-col-text">{copy.projects.types.motion}</span>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_year">
+      <div class="grid_cell_container">
+        <span class="half-col-text">2023</span>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_description">
+      <div class="grid_cell_container">
+        <p class="half-col-text justified-paragraph">
+          {copy.projects.kickstarterVideo.description}
+        </p>
+      </div>
+    </div>
+    <div class="grid_cell project-page_grid_icon">
+      <div class="grid_cell_container">
+        <SingleFlyingObject slug="all-eyes-on-gaza" />
+      </div>
+    </div>
+  </ProjectPage>
+</Layout>

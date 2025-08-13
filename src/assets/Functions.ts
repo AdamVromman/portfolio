@@ -1189,6 +1189,7 @@ export const navigateAboutMeToHomePage = () => {
 };
 
 export const handleMouseIn = (key: string) => {
+  console.log(key);
   if (!selectedProject) {
     const project = projects.find((project) => project.slug === key);
     const flyingObject = dynamicBodies.find(

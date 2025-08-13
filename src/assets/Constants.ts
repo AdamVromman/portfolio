@@ -12,6 +12,7 @@ export const ROWS_PER_PROJECT_PER_SCREENSIZE = new Map<
 >([
   ["club-sofa", { xs: 116, sm: 133, md: 123, lg: 113, xl: 111 }],
   ["train-world", { xs: 102, sm: 114, md: 86, lg: 115, xl: 113 }],
+  ["kickstarter-video", { xs: 102, sm: 114, md: 86, lg: 115, xl: 113 }],
   ["transfo-intiem", { xs: 102, sm: 126, md: 95, lg: 117, xl: 113 }],
   ["all-eyes-on-gaza", { xs: 105, sm: 118, md: 119, lg: 141, xl: 147 }],
   ["qausal", { xs: 96, sm: 118, md: 115, lg: 147, xl: 151 }],
@@ -28,6 +29,12 @@ export const projects: Project[] = [
     name: "Train World",
     slug: "train-world",
     color: "de0d00",
+    year: 2023,
+  },
+  {
+    name: "Kickstarter Video",
+    slug: "kickstarter-video",
+    color: "FF0000",
     year: 2023,
   },
   {

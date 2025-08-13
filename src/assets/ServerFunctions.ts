@@ -6,7 +6,13 @@ export const getLanguage = (astroInput: any): Language => {
 
 export const slugToLanguageKey = (
   slug: string
-): "clubSofa" | "trainWorld" | "transfoIntiem" | "qausal" | "allEyesOnGaza" => {
+):
+  | "clubSofa"
+  | "trainWorld"
+  | "transfoIntiem"
+  | "qausal"
+  | "allEyesOnGaza"
+  | "kickstarterVideo" => {
   switch (slug) {
     case "club-sofa":
       return "clubSofa";
@@ -18,6 +24,8 @@ export const slugToLanguageKey = (
       return "qausal";
     case "all-eyes-on-gaza":
       return "allEyesOnGaza";
+    case "kickstarter-video":
+      return "kickstarterVideo";
     default:
       return "clubSofa";
   }

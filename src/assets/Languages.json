@@ -22,7 +22,8 @@
             "types": {
                 "ux": "UX",
                 "design": "Design",
-                "development": "Dev"
+                "development": "Dev",
+                "motion": "Motion"
             },
             "clubSofa": {
                 "title": "Club Sofa",
@@ -60,6 +61,19 @@
                     "video4": "Animation of hills and trees passing by.",
                     "video5": "Animation of different illustrations: a rock, a car, a tree, a crate, a hat, a cloud, a bag.",
                     "video6": "Animation of different types of illustrated signs. The signs have no words on them."
+                }
+            },
+            "kickstarterVideo": {
+                "title": "Kickstarter Video",
+                "description": "This project involved creating a promotional video for a Kickstarter campaign.",
+                "paragraph1": "I was responsible for the overall concept and direction of the video, working closely with the client to ensure their vision was realized.",
+                "paragraph2": "The final product was a dynamic and engaging video that effectively communicated the project's goals and captured the attention of potential backers.",
+                "alts": {
+                    "headerVideo": "Animation of the Kickstarter video logo in the middle of the screen with dynamic visuals and text.",
+                    "image1": "Screenshot from the Kickstarter video showing the main product being showcased.",
+                    "image2": "Behind-the-scenes shot of the video production process.",
+                    "video1": "Full animation of the Kickstarter video, highlighting key features and benefits of the project.",
+                    "video2": "Short teaser clip from the Kickstarter video, designed to grab attention."
                 }
             },
             "transfoIntiem": {
@@ -141,7 +155,8 @@
             "types": {
                 "ux": "UX",
                 "design": "Design",
-                "development": "Dev"
+                "development": "Dev",
+                "motion": "Motion"
             },
             "clubSofa": {
                 "title": "Club Sofa",
@@ -179,6 +194,19 @@
                     "video4": "Animatie van heuvels en bomen die voorbij komen.",
                     "video5": "Animatie van verschillende illustraties: een rots, een auto, een boom, een krat, een hoed, een wolk, een tas.",
                     "video6": "Animatie van verschillende soorten geïllustreerde borden. Op de borden staan geen woorden."
+                }
+            },
+            "kickstarterVideo": {
+                "title": "Kickstarter Video",
+                "description": "This project involved creating a promotional video for a Kickstarter campaign.",
+                "paragraph1": "I was responsible for the overall concept and direction of the video, working closely with the client to ensure their vision was realized.",
+                "paragraph2": "The final product was a dynamic and engaging video that effectively communicated the project's goals and captured the attention of potential backers.",
+                "alts": {
+                    "headerVideo": "Animation of the Kickstarter video logo in the middle of the screen with dynamic visuals and text.",
+                    "image1": "Screenshot from the Kickstarter video showing the main product being showcased.",
+                    "image2": "Behind-the-scenes shot of the video production process.",
+                    "video1": "Full animation of the Kickstarter video, highlighting key features and benefits of the project.",
+                    "video2": "Short teaser clip from the Kickstarter video, designed to grab attention."
                 }
             },
             "transfoIntiem": {

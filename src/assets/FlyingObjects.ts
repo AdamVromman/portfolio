@@ -201,11 +201,11 @@ const createFlyingObject = () => {
               const projectBody = world.createRigidBody(
                 RAPIER.RigidBodyDesc.dynamic()
                   .setTranslation(
-                    even ? 8 : -8,
-                    camera.top - 8 - 8 * index,
+                    even ? 4 : -4,
+                    0 + (even ? -2 : 2) * (index + 1),
                     -20
                   )
-                  .setRotation({ w: 0.5, x: 0.5, y: 0, z: 0 })
+                  .setRotation({ w: 0, x: 0.5, y: 0, z: 0 })
                   .setCanSleep(false)
                   .setLinearDamping(0)
                   .setAngularDamping(0)
@@ -235,11 +235,15 @@ const createFlyingObject = () => {
 
               projectBody.applyImpulseAtPoint(
                 new RAPIER.Vector3(
-                  -500 + Math.random() * 1000,
-                  -500 + Math.random() * 1000,
+                  Math.random() > 0.5
+                    ? 500 + Math.random() * 500
+                    : -500 - Math.random() * 500,
+                  Math.random() > 0.5
+                    ? 500 + Math.random() * 500
+                    : -500 - Math.random() * 500,
                   0
                 ),
-                new RAPIER.Vector3(Math.random(), Math.random(), Math.random()),
+                new RAPIER.Vector3(0, 0, 0),
                 true
               );
 
