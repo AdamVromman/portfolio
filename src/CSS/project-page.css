@@ -90,6 +90,20 @@
     }
   }
 
+  &.motion {
+    grid-column: -4 / -1;
+    @apply pl-thin;
+
+    @media (min-width: theme(--breakpoint-md)) {
+      grid-column: -7 / -3;
+      @apply px-thick;
+    }
+
+    @media (min-width: theme(--breakpoint-lg)) {
+      grid-column: -8 / -5;
+    }
+  }
+
   &.dev {
     grid-column: -4 / -1;
     @apply pl-thin;

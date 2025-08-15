@@ -1,7 +1,7 @@
 ---
 import ProjectPage from "../../components/ProjectPage.astro";
 import Layout from "../../layouts/Layout.astro";
-import "../../CSS/all-eyes-on-gaza.css";
+import "../../CSS/kickstarter-video.css";
 import SingleFlyingObject from "../../components/SingleFlyingObject.astro";
 import { getLanguage } from "../../assets/ServerFunctions";
 import Languages from "../../assets/Languages.json";
@@ -43,8 +43,106 @@ const copy = Languages[activeLanguage];
     </div>
     <div class="grid_cell project-page_grid_icon">
       <div class="grid_cell_container">
-        <SingleFlyingObject slug="all-eyes-on-gaza" />
+        <SingleFlyingObject slug="kickstarter-video" />
       </div>
+    </div>
+    <div class="project-page-video video-1 border">
+      <video
+        aria-label={copy.projects.kickstarterVideo.alts.video1}
+        src="/assets/kickstarter-video/ANIMATION-sketches.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="grid_cell project-page_grid_paragraph paragraph-1">
+      <div class="grid_cell_container">
+        <p class="third-col-text justified-paragraph">
+          {copy.projects.kickstarterVideo.paragraph1}
+        </p>
+      </div>
+    </div>
+    <div class="project-page-video video-2 border">
+      <video
+        aria-label={copy.projects.kickstarterVideo.alts.video2}
+        src="/assets/kickstarter-video/ANIMATION-digital-sketches.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-image image-1">
+      <img
+        src="/assets/kickstarter-video/shot-1.webp"
+        alt={copy.projects.kickstarterVideo.alts.image1}
+      />
+    </div>
+    <div class="project-page-video video-3">
+      <video
+        aria-label={copy.projects.kickstarterVideo.alts.video3}
+        src="/assets/kickstarter-video/ANIMATION-mountain.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+
+    <div class="project-page-video video-4 border">
+      <video
+        aria-label={copy.projects.kickstarterVideo.alts.video4}
+        src="/assets/kickstarter-video/ANIMATION-pot.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-image image-2">
+      <img
+        src="/assets/kickstarter-video/shot-2.webp"
+        alt={copy.projects.kickstarterVideo.alts.image2}
+      />
+    </div>
+    <div class="project-page-video video-5">
+      <video
+        aria-label={copy.projects.kickstarterVideo.alts.video5}
+        src="/assets/kickstarter-video/ANIMATION-lava.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-video video-6">
+      <video
+        aria-label={copy.projects.kickstarterVideo.alts.video6}
+        src="/assets/kickstarter-video/ANIMATION-stars.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="project-page-video video-7">
+      <video
+        aria-label={copy.projects.kickstarterVideo.alts.video7}
+        src="/assets/kickstarter-video/ANIMATION-snow.mp4"
+        autoplay
+        loop
+        muted
+        playsinline></video>
+    </div>
+    <div class="grid_cell project-page_grid_paragraph paragraph-2">
+      <div class="grid_cell_container">
+        <p class="third-col-text justified-paragraph">
+          {copy.projects.kickstarterVideo.paragraph2}
+        </p>
+      </div>
+    </div>
+    <div class="project-page-video video-8">
+      <video
+        aria-label={copy.projects.kickstarterVideo.alts.video8}
+        src="/assets/kickstarter-video/3DEV_Vromman_Adam_kickstarter_ad.mp4"
+        controls
+        poster="/assets/kickstarter-video/video-still.webp"
+        preload="none"></video>
     </div>
   </ProjectPage>
 </Layout>
