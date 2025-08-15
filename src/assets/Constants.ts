@@ -34,7 +34,7 @@ export const projects: Project[] = [
   {
     name: "Kickstarter Video",
     slug: "kickstarter-video",
-    color: "FF0000",
+    color: "b55920",
     year: 2023,
   },
   {
