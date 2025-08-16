@@ -66,8 +66,8 @@ body {
     @apply leading-[3.5vw];
   }
   @media (min-width: theme(--breakpoint-lg)) {
-    font-size: min(2.5vw, 28.8px);
-    line-height: min(2.5vw, 36px);
+    font-size: min(2.5vw, 40px);
+    line-height: min(2.5vw, 40px);
   }
 }
 
@@ -91,8 +91,8 @@ body {
   }
 
   @media (min-width: theme(--breakpoint-lg)) {
-    font-size: min(6vw, 110px);
-    line-height: min(6vw, 100px);
+    font-size: min(6vw, 130px);
+    line-height: min(6vw, 120px);
   }
 }
 

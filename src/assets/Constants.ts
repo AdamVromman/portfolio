@@ -22,7 +22,7 @@ export const projects: Project[] = [
   {
     name: "Club Sofa",
     slug: "club-sofa",
-    color: "07d9ae",
+    color: "00C496",
     year: 2022,
   },
   {
@@ -34,7 +34,7 @@ export const projects: Project[] = [
   {
     name: "Kickstarter Video",
     slug: "kickstarter-video",
-    color: "b55920",
+    color: "FE6147",
     year: 2023,
   },
   {

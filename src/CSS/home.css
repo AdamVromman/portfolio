@@ -131,7 +131,7 @@
   }
   @media (min-width: theme(--breakpoint-lg)) {
     grid-row: 1 / 2;
-    grid-column: 1 / 6;
+    grid-column: 1 / 10;
   }
 
   & span {

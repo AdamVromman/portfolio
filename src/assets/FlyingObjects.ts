@@ -201,8 +201,8 @@ const createFlyingObject = () => {
               const projectBody = world.createRigidBody(
                 RAPIER.RigidBodyDesc.dynamic()
                   .setTranslation(
-                    even ? 4 : -4,
-                    0 + (even ? -2 : 2) * (index + 1),
+                    even ? 5 : -5,
+                    0 + (even ? -3 : 3) * (index + 1),
                     -20
                   )
                   .setRotation({ w: 0, x: 0.5, y: 0, z: 0 })
