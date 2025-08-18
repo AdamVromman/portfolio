@@ -69,17 +69,17 @@
                 "paragraph1": "I started out by sketching my idea for the video. A pile of cookware get thrown of a mountain by an explosion. The pots and pans fly everywhere, but in the end, they're all stacked perfectly again, at the foot of the mountain.",
                 "paragraph2": "After animating all the individual scenes, I just had to stitch it all together and add the sound effects and voice-over. You can view the final product here:",
                 "alts": {
-                    "headerVideo": "Animation of the Kickstarter video logo in the middle of the screen with dynamic visuals and text.",
-                    "image1": "Screenshot from the Kickstarter video showing the main product being showcased.",
-                    "image2": "Behind-the-scenes shot of the video production process.",
-                    "video1": "Full animation of the Kickstarter video, highlighting key features and benefits of the project.",
-                    "video2": "Short teaser clip from the Kickstarter video, designed to grab attention.",
-                    "video3": "Animation of the Kickstarter video logo with dynamic visuals and text.",
-                    "video4": "",
-                    "video5": "",
-                    "video6": "",
-                    "video7": "",
-                    "video8": ""
+                    "headerVideo": "Animation of a stack of cookware being blown off a mountain by an explosion.",
+                    "image1": "Trial illustration of the opening shot of the video. A mountain in the distance, surrounded by clouds.",
+                    "image2": "Trial illustration of a plate falling down next to a mountain. In the background, more cookware can be seen.",
+                    "video1": "Animation of roughly drawn sketches of each frame of the video.",
+                    "video2": "Animation of digitally drawn sketches of each frame of the video.",
+                    "video3": "Animation of the opening shot of the video. the camera zooms in on a mountain and clouds part way.",
+                    "video4": "Animation of a plate rapidly nearing the camera, eventually engulfing the whole frame.",
+                    "video5": "Animation of a pot falling into a slowly moving river of lava.",
+                    "video6": "Animation of a pot on a cooking fire in the desert, stars shine in the sky.",
+                    "video7": "Animation of a pot on an open fire in a cave, with a snow storm outside.",
+                    "video8": "Full video of a pile of cookware getting thrown of a mountain by an explosion. The pots and pans fly everywhere, but in the end, they're all stacked perfectly again, at the foot of the mountain. The video ends with a voiceover asking you to buy the cookware now!"
                 }
             },
             "transfoIntiem": {
@@ -204,21 +204,21 @@
             },
             "kickstarterVideo": {
                 "title": "Kickstarter Video",
-                "description": "During my second year at Devine, I created this video to sharpen my longer-form motion skills. It's a fictitious Kickstarter campaign video for outdoor cookware.",
-                "paragraph1": "I started out by sketching my idea for the video. A pile of cookware get thrown of a mountain by an explosion. The pots and pans fly everywhere, but in the end, they're all stacked perfectly again, at the foot of the mountain.",
-                "paragraph2": "After animating all the individual scenes, I just had to stitch it all together and add the sound effects and voice-over. You can view the final product here:",
+                "description": "Tijdens mijn tweede jaar bij Devine heb ik deze video gemaakt om mijn longer-form motion skills aan te scherpen. Het is een fictieve Kickstarter-campagnevideo voor outdoor kookgerief.",
+                "paragraph1": "Ik begon met het schetsen van mijn idee. Een stapel kookspullen wordt door een explosie van een berg geblazen. De potten en pannen vliegen alle kanten op, maar uiteindelijk liggen ze allemaal weer perfect opgestapeld aan de voet van de berg.",
+                "paragraph2": "Nadat ik alle afzonderlijke scènes had geanimeerd, hoefde ik alleen nog maar alles aan elkaar te plakken en de geluidseffecten en voice-over toe te voegen. Je kunt het eindresultaat hier bekijken:",
                 "alts": {
-                    "headerVideo": "Animation of the Kickstarter video logo in the middle of the screen with dynamic visuals and text.",
-                    "image1": "Screenshot from the Kickstarter video showing the main product being showcased.",
-                    "image2": "Behind-the-scenes shot of the video production process.",
-                    "video1": "Full animation of the Kickstarter video, highlighting key features and benefits of the project.",
-                    "video2": "Short teaser clip from the Kickstarter video, designed to grab attention.",
-                    "video3": "Animation of the Kickstarter video logo with dynamic visuals and text.",
-                    "video4": "",
-                    "video5": "",
-                    "video6": "",
-                    "video7": "",
-                    "video8": ""
+                    "headerVideo": "Animatie van een stapel kookspullen die door een explosie van een berg wordt geblazen.",
+                    "image1": "Proefillustratie van het openingsshot van de video. Een berg in de verte, omringd door wolken.",
+                    "image2": "Proefillustratie van een bord dat naast een berg naar beneden valt. Op de achtergrond zijn meer kookspullen te zien.",
+                    "video1": "Animatie van grof getekende schetsen van elk frame van de video.",
+                    "video2": "Animatie van digitaal getekende schetsen van elk frame van de video.",
+                    "video3": "Animatie van het openingsshot van de video. De camera zoomt in op een berg en de wolken wijken uiteen.",
+                    "video4": "Animatie van een bord dat snel naar de camera toe komt en uiteindelijk het hele beeld vult.",
+                    "video5": "Animatie van een pot die in een langzaam stromende rivier van lava valt.",
+                    "video6": "Animatie van een pot op een kampvuur in de woestijn, sterren fonkelen aan de hemel.",
+                    "video7": "Animatie van een pot op een open vuur in een grot, met een sneeuwstorm buiten.",
+                    "video8": "Volledige video van een stapel kookspullen die door een explosie van een berg wordt geblazen. De potten en pannen vliegen overal heen, maar uiteindelijk liggen ze allemaal weer perfect opgestapeld aan de voet van de berg. De video eindigt met een voice-over die je vraagt het kookgerief nu te kopen!"
                 }
             },
             "transfoIntiem": {
