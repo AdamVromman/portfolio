@@ -1087,7 +1087,6 @@ export const navigateHomePageToAboutMePage = () => {
 };
 
 export const navigateAboutMeToHomePage = () => {
-  console.log("navigateAboutMeToHomePage");
   const timeline = gsap.timeline();
 
   timeline
