@@ -97,12 +97,12 @@ const { slug } = Astro.props;
 
       sizeGrid();
 
-      let pathName = "";
+      let fromAboutPage = false;
 
       window.addEventListener("resize", handleResize);
 
       document.addEventListener("astro:before-swap", (e) => {
-        pathName = e.from.pathname.split("/").pop() || "home";
+        fromAboutPage = e.from.pathname.includes("about-me");
       });
 
       document.addEventListener("astro:after-swap", () => {
@@ -124,7 +124,7 @@ const { slug } = Astro.props;
           navigateHomePageToProjectPage();
         } else {
           setSelectedProject(undefined);
-          if (pathName === "about-me") {
+          if (fromAboutPage) {
             navigateAboutMeToHomePage();
           } else {
             navigateProjectPageToHomePage();
