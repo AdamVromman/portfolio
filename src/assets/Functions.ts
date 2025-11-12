@@ -1087,6 +1087,7 @@ export const navigateHomePageToAboutMePage = () => {
 };
 
 export const navigateAboutMeToHomePage = () => {
+  console.log("navigateAboutMeToHomePage");
   const timeline = gsap.timeline();
 
   timeline
@@ -1189,7 +1190,6 @@ export const navigateAboutMeToHomePage = () => {
 };
 
 export const handleMouseIn = (key: string) => {
-  console.log(key);
   if (!selectedProject) {
     const project = projects.find((project) => project.slug === key);
     const flyingObject = dynamicBodies.find(

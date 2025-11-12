@@ -102,7 +102,7 @@ const { slug } = Astro.props;
       window.addEventListener("resize", handleResize);
 
       document.addEventListener("astro:before-swap", (e) => {
-        pathName = e.from.pathname.replaceAll("/", "");
+        pathName = e.from.pathname.split("/").pop() || "home";
       });
 
       document.addEventListener("astro:after-swap", () => {
