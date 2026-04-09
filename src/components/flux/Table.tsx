@@ -2,25 +2,23 @@ import { Html } from "@react-three/drei";
 import type { Shape } from "./Configurator";
 import TableLegs from "./TableLegs";
 import TableTop from "./TableTop";
-import { SHAPES } from "./Variables";
+import { EnumSelectablePart, EnumTableLeg, EnumTableShape } from "./Variables";
 
 interface TableProps {
-    selectedShape: Shape;
+    selectedShape: EnumTableShape;
     selectedMaterial: string | null;
-    setSelectedShape: (shape: Shape) => void;
+    setSelectedShape: (shape: EnumTableShape) => void;
     setSelectedMaterial: (material: string | null) => void;
+    setSelectedPart: (part: EnumSelectablePart | null) => void;
+    selectedPart: EnumSelectablePart | null;
+    selectedLegs: EnumTableLeg;
+    setSelectedLegs: (legs: EnumTableLeg) => void;
 }
 
-const Table = ({ selectedShape, selectedMaterial, setSelectedShape, setSelectedMaterial }: TableProps) => {
+const Table = ({ selectedShape, selectedMaterial, setSelectedShape, setSelectedMaterial, setSelectedPart, selectedPart, selectedLegs, setSelectedLegs }: TableProps) => {
   return <group>
-    <Html>
-        <div className="flex flex-col">{
-            SHAPES.map((shape) => <button key={shape.name} onClick={() => setSelectedShape(shape)}>{shape.name}</button>)
-        }</div>
-        
-    </Html>
-    <TableTop selectedShape={selectedShape} selectedMaterial={selectedMaterial}></TableTop>
-    <TableLegs selectedShape={selectedShape} selectedMaterial={selectedMaterial}></TableLegs>
+    <TableTop selectedPart={selectedPart} setSelectedShape={setSelectedShape} setSelectedPart={setSelectedPart} selectedShape={selectedShape} selectedMaterial={selectedMaterial}></TableTop>
+    <TableLegs selectedShape={selectedShape} selectedMaterial={selectedMaterial} selectedLegs={selectedLegs} setSelectedLegs={setSelectedLegs   }></TableLegs>
   </group>
 
 }
