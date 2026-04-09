@@ -2,7 +2,7 @@ name: Portfolio Deploy to Test
 on:
   push:
     branches:
-      - dev
+      - test
   workflow_dispatch:
 
 env:
