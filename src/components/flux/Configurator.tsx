@@ -24,7 +24,7 @@ const Configurator = () => {
  const [selectedPart, setSelectedPart] = useState<EnumSelectablePart | null>(null);
 
     return (
-        <div className='absolute top-0 left-0 w-screen h-screen'> <Canvas gl={{ antialias: true }} camera={{ position: [0, 0, 6], fov: 25, near: 1, far: 20 }}>
+        <div className='absolute top-0 left-0 w-screen h-screen'> <Canvas gl={{ antialias: true }} camera={{ position: [1, 2, 4], fov: 50, near: 0.1, far: 20 }}>
             <pointLight position={[1, 1, 5]} intensity={50} />
             <Table selectedPart={selectedPart} setSelectedPart={setSelectedPart} selectedMaterial={selectedMaterial} selectedShape={selectedShape} setSelectedShape={setSelectedShape} setSelectedMaterial={setSelectedMaterial} selectedLegs={selectedLegs} setSelectedLegs={setSelectedLegs}></Table><OrbitControls /></Canvas></div>
         
