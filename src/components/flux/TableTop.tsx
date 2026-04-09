@@ -1,6 +1,4 @@
-import { useLoader } from "@react-three/fiber";
-import type { Shape } from "./Configurator";
-import { SVGLoader } from "three/examples/jsm/Addons.js";
+
 import * as THREE from 'three';
 import { useEffect, useState } from "react";
 import { EnumSelectablePart, EnumTableShape } from "./Variables";
@@ -12,46 +10,40 @@ interface TableTopProps {
     setSelectedPart: (part: EnumSelectablePart | null) => void;
     selectedPart: EnumSelectablePart | null;
     setSelectedShape: (shape: EnumTableShape) => void;
-    setTableTopScaleX: (scale: number) => void;
-    setTableTopScaleY: (scale: number) => void;
-      setTableTopScaleZ: (scale: number) => void;
-    tableTopScaleX: number;
-    tableTopScaleY: number;
-    tableTopScaleZ: number;
+    setTableTopDepth: (depth: number) => void;
+    setTableTopWidth: (width: number) => void;
+      setTableTopHeight: (height: number) => void;
+    tableTopDepth: number;
+    tableTopWidth: number;
+    tableTopHeight: number;
 }
 
 
-const TableTop = ({ selectedShape, selectedMaterial, setSelectedPart, selectedPart, setSelectedShape, setTableTopScaleX, setTableTopScaleY, setTableTopScaleZ, tableTopScaleX, tableTopScaleY, tableTopScaleZ }: TableTopProps) => {
+const TableTop = ({ selectedShape, selectedMaterial, setSelectedPart, selectedPart, setSelectedShape, setTableTopDepth, setTableTopWidth, setTableTopHeight, tableTopDepth, tableTopWidth, tableTopHeight  }: TableTopProps) => {
 
-    const createShape = () => {
-const svgData = useLoader(SVGLoader, `/assets/${selectedShape}.svg`);
-
-  const shapes = svgData.paths.flatMap((path) => path.toShapes(true));
-
-  const localGeometry = new THREE.ExtrudeGeometry(shapes, {
-    depth: 0.05,
-    steps: 1,
-    bevelEnabled: false,
-  });
-
-  return localGeometry;
+    const getGeometry = (): THREE.BoxGeometry | THREE.CylinderGeometry => {
+    if (selectedShape === EnumTableShape.RECTANGLE) {
+        return new THREE.BoxGeometry(tableTopWidth, tableTopHeight, tableTopDepth);
+    } if (selectedShape === EnumTableShape.CIRCLE) {
+        return new THREE.CylinderGeometry(tableTopWidth, tableTopWidth, tableTopHeight, 100);
     }
 
-    const [geometry, setGeometry] = useState<THREE.ExtrudeGeometry>(createShape());
+    return new THREE.BoxGeometry(tableTopWidth, tableTopHeight, tableTopDepth);
+  }
+
+    const [geometry, setGeometry] = useState<THREE.BoxGeometry | THREE.CylinderGeometry>(getGeometry());
 
     
    
 
   useEffect(() => {
 
-    const localGeometry = createShape();
- 
-  localGeometry.center();
-
-    setGeometry(localGeometry);
+    setGeometry(getGeometry());
 
 
   }, [selectedShape]);
+
+  
 
   const getEdgeGeometry = () => {
     const edgeGeometry = new THREE.EdgesGeometry(geometry, 15);
@@ -61,39 +53,43 @@ const svgData = useLoader(SVGLoader, `/assets/${selectedShape}.svg`);
     return lines.geometry ;
   }
 
+  useEffect(() => {
+    setGeometry(getGeometry());
+  }, [tableTopDepth, tableTopWidth, tableTopHeight])
+
   return (
-    <group rotation={[Math.PI / 2, 0, 0]}>
+    <group>
      {
  selectedPart === EnumSelectablePart.TABLETOP && (
-    <Html position={[1,1,1]}>
+    <Html  position={[1,1,1]}>
         <div className="flex flex-col">{
             Object.values(EnumTableShape).map((shape) => <button key={shape} onClick={() => setSelectedShape(shape)}>{shape}</button>)
         }</div>
         
         
-          <div><input type="range" min="1" max="3" defaultValue={1} step={0.01} onChange={(e) => {
-            e.preventDefault();
-            setTableTopScaleX(parseFloat(e.target.value))}} />
-            <input type="range" min="1" max="3" defaultValue={1} step={0.01} onChange={(e) => {
-            e.preventDefault();
-            setTableTopScaleY(parseFloat(e.target.value))}} />
-            <input type="range" min="1" max="3" defaultValue={1} step={0.01} onChange={(e) => {
-            e.preventDefault();
-            setTableTopScaleZ(parseFloat(e.target.value))}} />
+          <div><label>Width: </label><input type="range" min="1" max="3" defaultValue={tableTopWidth} step={0.1} onDrag={(e) => {e.preventDefault()}} onChange={(e) => {
+            setTableTopWidth(parseFloat(e.target.value))}} />
+            {
+              selectedShape === EnumTableShape.RECTANGLE && ( <><label>Depth: </label><input type="range" min="2" max="6" defaultValue={tableTopDepth} step={0.1} onChange={(e) => {
+            setTableTopDepth(parseFloat(e.target.value))}} /></>)
+            }
+           
+            <label>Height: </label><input type="range" min="0.01" max="0.1" defaultValue={tableTopHeight} step={0.005} onChange={(e) => {
+            setTableTopHeight(parseFloat(e.target.value))}} />
             </div>
         
         
     </Html>
  )
     }
-    <mesh scale={[tableTopScaleX, tableTopScaleY, tableTopScaleZ]}  onClick={() => {
+    <mesh  onClick={() => {
       console.log(selectedPart)
       setSelectedPart(selectedPart === EnumSelectablePart.TABLETOP ? null : EnumSelectablePart.TABLETOP)}} castShadow receiveShadow geometry={geometry}>
       <meshBasicMaterial color={selectedMaterial || "gray"} />
     </mesh>
     {
         selectedPart === EnumSelectablePart.TABLETOP && (
-            <lineSegments scale={[tableTopScaleX, tableTopScaleY, tableTopScaleZ]} geometry={getEdgeGeometry()}>
+            <lineSegments geometry={getEdgeGeometry()}>
                 <lineBasicMaterial linewidth={100} color="red" />
             </lineSegments>
         )

@@ -17,15 +17,15 @@ interface TableProps {
 
 const Table = ({ selectedShape, selectedMaterial, setSelectedShape, setSelectedMaterial, setSelectedPart, selectedPart, selectedLegs, setSelectedLegs }: TableProps) => {
 
-  const [tableTopScaleX, setTableTopScaleX] = useState(1);
-  const [tableTopScaleY, setTableTopScaleY] = useState(1);
-  const [tableTopScaleZ, setTableTopScaleZ] = useState(1);
+  const [tableTopDepth, setTableTopDepth] = useState(2);
+  const [tableTopWidth, setTableTopWidth] = useState(1);
+  const [tableTopHeight, setTableTopHeight] = useState(0.01);
 
 
   return <group>
     <Html>{selectedPart}</Html>
-    <TableTop selectedPart={selectedPart} setSelectedShape={setSelectedShape} setSelectedPart={setSelectedPart} selectedShape={selectedShape} selectedMaterial={selectedMaterial} setTableTopScaleX={setTableTopScaleX} setTableTopScaleY={setTableTopScaleY} setTableTopScaleZ={setTableTopScaleZ} tableTopScaleX={tableTopScaleX} tableTopScaleY={tableTopScaleY} tableTopScaleZ={tableTopScaleZ}></TableTop>
-    <TableLegs  selectedShape={selectedShape} selectedMaterial={selectedMaterial} selectedLegs={selectedLegs} setSelectedLegs={setSelectedLegs   } setSelectedPart={setSelectedPart} selectedPart={selectedPart} tableTopScaleX={tableTopScaleX} tableTopScaleY={tableTopScaleY} tableTopScaleZ={tableTopScaleZ}></TableLegs>
+    <TableTop selectedPart={selectedPart} setSelectedShape={setSelectedShape} setSelectedPart={setSelectedPart} selectedShape={selectedShape} selectedMaterial={selectedMaterial} setTableTopDepth={setTableTopDepth} setTableTopWidth={setTableTopWidth} setTableTopHeight={setTableTopHeight} tableTopDepth={tableTopDepth} tableTopWidth={tableTopWidth} tableTopHeight={tableTopHeight}></TableTop>
+    <TableLegs  selectedShape={selectedShape} selectedMaterial={selectedMaterial} selectedLegs={selectedLegs} setSelectedLegs={setSelectedLegs   } setSelectedPart={setSelectedPart} selectedPart={selectedPart} tableTopDepth={tableTopDepth} tableTopWidth={tableTopWidth} tableTopHeight={tableTopHeight}></TableLegs>
   </group>
 
 }
