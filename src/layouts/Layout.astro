@@ -8,20 +8,20 @@ const { slug } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>ADAM VROMMAN</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-    <ClientRouter />
-    <script>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>ADAM VROMMAN</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+			rel="stylesheet"
+		/>
+		<ClientRouter />
+		<!-- <script>
       if (import.meta.env.PUBLIC_STATISTICS === "true") {
         var _paq = (window._paq = window._paq || []);
         _paq.push(["disableCampaignParameters"]);
@@ -40,119 +40,119 @@ const { slug } = Astro.props;
           s.parentNode.insertBefore(g, s);
         })();
       }
-    </script>
-  </head>
-  <body data-slug={slug} transition:persist>
-    <div id="grid-calculator"></div>
-    <div id="grid-container" class={`grid-container ${slug ? slug : ""}`}>
-      <Home slug={slug} />
-      <slot />
-    </div>
-    <script>
-      import gsap from "gsap";
-      import { projects } from "../assets/Constants";
-      import {
-        drawProjectPageGrid,
-        loadHomePage,
-        loadProjectPage,
-        navigateProjectPageToHomePage,
-        navigateHomePageToProjectPage,
-        setSelectedProject,
-        sizeGrid,
-        loadAboutMePage,
-        navigateHomePageToAboutMePage,
-        navigateAboutMeToHomePage,
-        drawHomeGrid,
-        analyseURL,
-      } from "../assets/Functions";
+    </script> -->
+	</head>
+	<body data-slug={slug} transition:persist>
+		<div id="grid-calculator"></div>
+		<div id="grid-container" class={`grid-container ${slug ? slug : ""}`}>
+			<Home slug={slug} />
+			<slot />
+		</div>
+		<script>
+			import gsap from "gsap";
+			import { projects } from "../assets/Constants";
+			import {
+				drawProjectPageGrid,
+				loadHomePage,
+				loadProjectPage,
+				navigateProjectPageToHomePage,
+				navigateHomePageToProjectPage,
+				setSelectedProject,
+				sizeGrid,
+				loadAboutMePage,
+				navigateHomePageToAboutMePage,
+				navigateAboutMeToHomePage,
+				drawHomeGrid,
+				analyseURL,
+			} from "../assets/Functions";
 
-      const handleResize = () => {
-        sizeGrid();
-        const url = analyseURL();
+			const handleResize = () => {
+				sizeGrid();
+				const url = analyseURL();
 
-        if (url === "about-me" || url === "home" || url === undefined) {
-          drawHomeGrid(true);
-        } else {
-          drawProjectPageGrid(url);
-        }
-      };
+				if (url === "about-me" || url === "home" || url === undefined) {
+					drawHomeGrid(true);
+				} else {
+					drawProjectPageGrid(url);
+				}
+			};
 
-      const fixTabIndeces = (slug: string) => {
-        const allElements = document.querySelectorAll(
-          ".tabindex"
-        ) as NodeListOf<HTMLElement>;
+			const fixTabIndeces = (slug: string) => {
+				const allElements = document.querySelectorAll(
+					".tabindex",
+				) as NodeListOf<HTMLElement>;
 
-        allElements.forEach((el) => {
-          el.tabIndex = -1;
-        });
+				allElements.forEach((el) => {
+					el.tabIndex = -1;
+				});
 
-        const key = slug === "home" || slug === "about-me" ? slug : "projects";
-        const tabindexElements = document.querySelectorAll(
-          `.tabindex_${key}`
-        ) as NodeListOf<HTMLElement>;
-        tabindexElements.forEach((el) => {
-          el.tabIndex = 0;
-        });
-      };
+				const key = slug === "home" || slug === "about-me" ? slug : "projects";
+				const tabindexElements = document.querySelectorAll(
+					`.tabindex_${key}`,
+				) as NodeListOf<HTMLElement>;
+				tabindexElements.forEach((el) => {
+					el.tabIndex = 0;
+				});
+			};
 
-      sizeGrid();
+			sizeGrid();
 
-      let fromAboutPage = false;
+			let fromAboutPage = false;
 
-      window.addEventListener("resize", handleResize);
+			window.addEventListener("resize", handleResize);
 
-      document.addEventListener("astro:before-swap", (e) => {
-        fromAboutPage = e.from.pathname.includes("about-me");
-      });
+			document.addEventListener("astro:before-swap", (e) => {
+				fromAboutPage = e.from.pathname.includes("about-me");
+			});
 
-      document.addEventListener("astro:after-swap", () => {
-        gsap.set("body", {
-          opacity: 1,
-          ease: "power2.inOut",
-        });
+			document.addEventListener("astro:after-swap", () => {
+				gsap.set("body", {
+					opacity: 1,
+					ease: "power2.inOut",
+				});
 
-        sizeGrid();
+				sizeGrid();
 
-        const url = analyseURL();
-        fixTabIndeces(url || "home");
+				const url = analyseURL();
+				fixTabIndeces(url || "home");
 
-        const project = projects.find((p) => p.slug === url);
-        if (url === "about-me") {
-          navigateHomePageToAboutMePage();
-        } else if (project) {
-          setSelectedProject(project);
-          navigateHomePageToProjectPage();
-        } else {
-          setSelectedProject(undefined);
-          if (fromAboutPage) {
-            navigateAboutMeToHomePage();
-          } else {
-            navigateProjectPageToHomePage();
-          }
-        }
-      });
+				const project = projects.find((p) => p.slug === url);
+				if (url === "about-me") {
+					navigateHomePageToAboutMePage();
+				} else if (project) {
+					setSelectedProject(project);
+					navigateHomePageToProjectPage();
+				} else {
+					setSelectedProject(undefined);
+					if (fromAboutPage) {
+						navigateAboutMeToHomePage();
+					} else {
+						navigateProjectPageToHomePage();
+					}
+				}
+			});
 
-      window.addEventListener("load", () => {
-        gsap.to("body", {
-          duration: 0.5,
-          opacity: 1,
-          ease: "power2.inOut",
-        });
+			window.addEventListener("load", () => {
+				gsap.to("body", {
+					duration: 0.5,
+					opacity: 1,
+					ease: "power2.inOut",
+				});
 
-        const url = analyseURL();
-        fixTabIndeces(url || "home");
+				const url = analyseURL();
+				fixTabIndeces(url || "home");
 
-        const project = projects.find((p) => p.slug === url);
-        if (url === "about-me") {
-          loadAboutMePage();
-        } else if (project) {
-          setSelectedProject(project);
-          loadProjectPage();
-        } else {
-          loadHomePage();
-          setSelectedProject(undefined);
-        }
-      });
-    </script>
-  </body>
+				const project = projects.find((p) => p.slug === url);
+				if (url === "about-me") {
+					loadAboutMePage();
+				} else if (project) {
+					setSelectedProject(project);
+					loadProjectPage();
+				} else {
+					loadHomePage();
+					setSelectedProject(undefined);
+				}
+			});
+		</script>
+	</body>
 </html>
