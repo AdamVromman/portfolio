@@ -16,12 +16,12 @@ interface TableTopProps {
 	tableTopDepth: number;
 	tableTopWidth: number;
 	tableTopHeight: number;
-	setStarSize: (radius: number) => void;
-	setStarAngle: (radius: number) => void;
-	setStarPoints: (points: number) => void;
-	starSize: number;
-	starAngle: number;
-	starPoints: number;
+	setTableTopStarSize: (radius: number) => void;
+	setTableTopStarAngle: (radius: number) => void;
+	setTableTopStarPoints: (points: number) => void;
+	tableTopStarSize: number;
+	tableTopStarAngle: number;
+	tableTopStarPoints: number;
 }
 
 const TableTop = ({
@@ -36,25 +36,26 @@ const TableTop = ({
 	tableTopDepth,
 	tableTopWidth,
 	tableTopHeight,
-	starSize,
-	starAngle,
-	starPoints,
-	setStarSize,
-	setStarAngle,
-	setStarPoints,
+	tableTopStarSize,
+	tableTopStarAngle,
+	tableTopStarPoints,
+	setTableTopStarSize,
+	setTableTopStarAngle,
+	setTableTopStarPoints,
 }: TableTopProps) => {
 	const calculateStarShape = () => {
 		const shape = new THREE.Shape();
-		const angleStep = (Math.PI * 2) / (starPoints * 2);
+		const angleStep = (Math.PI * 2) / (tableTopStarPoints * 2);
 		const angle = 0;
-		const radius = starSize * starAngle;
+		const radius = tableTopStarSize * tableTopStarAngle;
 		shape.currentPoint = new THREE.Vector2(
 			Math.cos(angle) * radius,
 			Math.sin(angle) * radius,
 		);
-		for (let i = 0; i <= starPoints * 2; i++) {
+		for (let i = 0; i <= tableTopStarPoints * 2; i++) {
 			const angle = i * angleStep;
-			const radius = i % 2 === 0 ? starSize * starAngle : starSize;
+			const radius =
+				i % 2 === 0 ? tableTopStarSize * tableTopStarAngle : tableTopStarSize;
 			shape.lineTo(Math.cos(angle) * radius, Math.sin(angle) * radius);
 		}
 		return shape;
@@ -115,9 +116,9 @@ const TableTop = ({
 		tableTopDepth,
 		tableTopWidth,
 		tableTopHeight,
-		starSize,
-		starAngle,
-		starPoints,
+		tableTopStarSize,
+		tableTopStarAngle,
+		tableTopStarPoints,
 	]);
 
 	return (
@@ -140,13 +141,13 @@ const TableTop = ({
 									type="range"
 									min="1"
 									max="4"
-									defaultValue={starSize}
+									defaultValue={tableTopStarSize}
 									step={0.1}
 									onDrag={(e) => {
 										e.preventDefault();
 									}}
 									onChange={(e) => {
-										setStarSize(parseFloat(e.target.value));
+										setTableTopStarSize(parseFloat(e.target.value));
 									}}
 								/>
 								<label>Angle: </label>
@@ -154,13 +155,13 @@ const TableTop = ({
 									type="range"
 									min="0.5"
 									max="0.9"
-									defaultValue={starAngle}
+									defaultValue={tableTopStarAngle}
 									step={0.1}
 									onDrag={(e) => {
 										e.preventDefault();
 									}}
 									onChange={(e) => {
-										setStarAngle(parseFloat(e.target.value));
+										setTableTopStarAngle(parseFloat(e.target.value));
 									}}
 								/>
 								<label>star points: </label>
@@ -168,13 +169,13 @@ const TableTop = ({
 									type="range"
 									min="4"
 									max="10"
-									defaultValue={starPoints}
+									defaultValue={tableTopStarPoints}
 									step={1}
 									onDrag={(e) => {
 										e.preventDefault();
 									}}
 									onChange={(e) => {
-										setStarPoints(parseFloat(e.target.value));
+										setTableTopStarPoints(parseFloat(e.target.value));
 									}}
 								/>
 								<label>Height: </label>

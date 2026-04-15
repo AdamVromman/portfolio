@@ -3,7 +3,6 @@ import TableLegs from "./TableLegs";
 import TableTop from "./TableTop";
 import { EnumSelectablePart, EnumTableLeg, EnumTableShape } from "./Variables";
 import { Html } from "@react-three/drei";
-import { set } from "astro:schema";
 
 interface TableProps {
 	selectedShape: EnumTableShape;
@@ -29,9 +28,9 @@ const Table = ({
 	const [tableTopDepth, setTableTopDepth] = useState(2);
 	const [tableTopWidth, setTableTopWidth] = useState(1);
 	const [tableTopHeight, setTableTopHeight] = useState(0.01);
-	const [starSize, setStarSize] = useState(1);
-	const [starAngle, setStarAngle] = useState(0.5);
-	const [starPoints, setStarPoints] = useState(4);
+	const [tableTopStarSize, setTableTopStarSize] = useState(1);
+	const [tableTopStarAngle, setTableTopStarAngle] = useState(0.5);
+	const [tableTopStarPoints, setTableTopStarPoints] = useState(4);
 
 	return (
 		<group>
@@ -48,12 +47,12 @@ const Table = ({
 				tableTopDepth={tableTopDepth}
 				tableTopWidth={tableTopWidth}
 				tableTopHeight={tableTopHeight}
-				starSize={starSize}
-				starAngle={starAngle}
-				starPoints={starPoints}
-				setStarSize={setStarSize}
-				setStarAngle={setStarAngle}
-				setStarPoints={setStarPoints}></TableTop>
+				tableTopStarSize={tableTopStarSize}
+				tableTopStarAngle={tableTopStarAngle}
+				tableTopStarPoints={tableTopStarPoints}
+				setTableTopStarSize={setTableTopStarSize}
+				setTableTopStarAngle={setTableTopStarAngle}
+				setTableTopStarPoints={setTableTopStarPoints}></TableTop>
 			<TableLegs
 				selectedShape={selectedShape}
 				selectedMaterial={selectedMaterial}
@@ -63,7 +62,10 @@ const Table = ({
 				selectedPart={selectedPart}
 				tableTopDepth={tableTopDepth}
 				tableTopWidth={tableTopWidth}
-				tableTopHeight={tableTopHeight}></TableLegs>
+				tableTopHeight={tableTopHeight}
+				tableTopStarSize={tableTopStarSize}
+				tableTopStarAngle={tableTopStarAngle}
+				tableTopStarPoints={tableTopStarPoints}></TableLegs>
 		</group>
 	);
 };
