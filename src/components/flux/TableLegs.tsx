@@ -8,6 +8,7 @@ import {
 } from "./Variables";
 import * as THREE from "three";
 import { Html } from "@react-three/drei";
+import { pointsToGeometry } from "./Functions";
 
 interface TableLegsProps {
 	selectedShape: EnumTableShape;
@@ -146,8 +147,6 @@ const TableLegs = ({
 	const [legs, setLegs] = useState<JSX.Element[]>(calculateLegs());
 
 	useEffect(() => {
-		console.log("recalculating legs");
-
 		setLegs((prev) => calculateLegs());
 	}, [
 		selectedPart,
@@ -160,6 +159,7 @@ const TableLegs = ({
 		tableTopStarAngle,
 		tableTopStarPoints,
 		selectedMaterial,
+		legHeight,
 	]);
 
 	const shapeEnumToSvg = (shape: EnumTableLeg): JSX.Element => {
@@ -197,6 +197,23 @@ const TableLegs = ({
 					</button>
 				))}
 			</div>
+			<h2>Shape options</h2>
+			<div className="flex flex-col gap-2">
+				{" "}
+				<div className="flex flex-col">
+					<label>Height: </label>
+					<input
+						type="range"
+						min="1"
+						max="1.2"
+						defaultValue={legHeight}
+						step={0.05}
+						onChange={(e) => {
+							setLegHeight(parseFloat(e.target.value));
+						}}
+					/>
+				</div>
+			</div>
 			<h2>Material</h2>
 			<div className="flex flex-row gap-4">
 				{Object.values(EnumTableLegsMaterial).map((material) => (
@@ -218,7 +235,58 @@ const TableLegs = ({
 		</div>
 	);
 
-	return <group>{legs}</group>;
+	const calculateTableHeight = (): THREE.Vector3[] => {
+		const linePoints: THREE.Vector3[] = [];
+
+		const startVector = new THREE.Vector3(
+			tableTopWidth / 2 + 0.02,
+			tableTopHeight / 2 + 0.02,
+			-tableTopDepth / 2 - 0.02,
+		);
+
+		const cornerVectorStart = new THREE.Vector3(
+			tableTopWidth / 2 + 0.05,
+			tableTopHeight / 2 + 0.02,
+			-tableTopDepth / 2 - 0.05,
+		);
+
+		const cornerVectorEnd = new THREE.Vector3(
+			tableTopWidth / 2 + 0.05,
+			-(tableTopHeight + legHeight) - 0.02,
+			-tableTopDepth / 2 - 0.05,
+		);
+		const endVector = new THREE.Vector3(
+			tableTopWidth / 2 + 0.02,
+			-(tableTopHeight + legHeight) - 0.02,
+			-tableTopDepth / 2 - 0.02,
+		);
+		linePoints.push(startVector, cornerVectorStart, cornerVectorEnd, endVector);
+
+		return linePoints;
+	};
+
+	return (
+		<group>
+			<group>
+				<mesh geometry={pointsToGeometry(calculateTableHeight())}>
+					<meshBasicMaterial color="#05df72" />
+				</mesh>
+				<Html
+					position={[
+						tableTopWidth / 2 + 0.02,
+						-(tableTopHeight + legHeight) / 2 - 0.02,
+						-tableTopDepth / 2 - 0.02,
+					]}
+					center>
+					<span className="measurement">
+						{tableTopHeight * 10}cm + {legHeight * 100}cm ={" "}
+						{(tableTopHeight + legHeight).toFixed(2)}m
+					</span>
+				</Html>
+			</group>
+			{legs}
+		</group>
+	);
 };
 
 export default TableLegs;

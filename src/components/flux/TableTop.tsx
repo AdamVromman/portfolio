@@ -7,6 +7,7 @@ import {
 	EnumTableTopMaterial,
 } from "./Variables";
 import { Html } from "@react-three/drei";
+import { pointsToGeometry } from "./Functions";
 
 interface TableTopProps {
 	selectedShape: EnumTableShape;
@@ -325,7 +326,7 @@ const TableTop = ({
 		</div>
 	);
 
-	const calculateTableDepthLine = () => {
+	const calculateRectTableDepthLine = () => {
 		let linePoints = [];
 
 		const startVector = new THREE.Vector3(
@@ -354,10 +355,10 @@ const TableTop = ({
 
 		linePoints.push(startVector, cornerVectorStart, cornerVectorEnd, endVector);
 
-		return pointsToGeometry(linePoints);
+		return linePoints;
 	};
 
-	const calculateTableWidthLine = () => {
+	const calculateRectTableWidthLine = () => {
 		let linePoints = [];
 
 		const startVector = new THREE.Vector3(
@@ -386,45 +387,79 @@ const TableTop = ({
 
 		linePoints.push(startVector, cornerVectorStart, cornerVectorEnd, endVector);
 
-		return pointsToGeometry(linePoints);
+		return linePoints;
 	};
 
-	const pointsToGeometry = (points: THREE.Vector3[]) => {
-		const curvePath = new THREE.CurvePath();
-		points.forEach((point, index) => {
-			if (index < points.length - 1) {
-				const nextPoint = points[index + 1];
-				const curve = new THREE.LineCurve3(point, nextPoint);
-				curvePath.add(curve);
-			}
-		});
+	const calculateCircleTableWidthLine = () => {
+		let linePoints = [];
 
-		var tubeGeometry = new THREE.TubeGeometry(curvePath, 64, 0.005, 64, false);
-		return tubeGeometry;
+		const startVector = new THREE.Vector3(
+			-tableTopWidth - 0.1,
+			0,
+			-tableTopWidth - 0.1,
+		);
+
+		const cornerVectorStart = new THREE.Vector3(
+			-tableTopWidth - 0.15,
+			0,
+			-tableTopWidth - 0.15,
+		);
+
+		const cornerVectorEnd = new THREE.Vector3(tableTopWidth / 2 + 0.15, 0, 0);
+
+		const endVector = new THREE.Vector3(tableTopWidth / 2 + 0.1, 0, 0);
+
+		linePoints.push(startVector, cornerVectorStart, cornerVectorEnd, endVector);
+
+		return linePoints;
 	};
 
 	return (
 		<group>
-			{selectedPart === EnumSelectablePart.TABLETOP && (
-				<>
-					<group>
-						<mesh geometry={calculateTableWidthLine()}>
-							<meshBasicMaterial color="#05df72" />
-						</mesh>
-						<Html position={[0, 0, tableTopDepth / 2 + 0.3]} center>
-							<span className="measurement">{tableTopWidth}m</span>
-						</Html>
-					</group>
-					<group>
-						<mesh geometry={calculateTableDepthLine()}>
-							<meshBasicMaterial color="#05df72" />
-						</mesh>
-						<Html position={[-tableTopWidth / 2 - 0.3, 0, 0]} center>
-							<span className="measurement">{tableTopDepth}m</span>
-						</Html>
-					</group>
-				</>
-			)}
+			<>
+				{selectedShape === EnumTableShape.RECTANGLE && (
+					<>
+						<group>
+							<mesh geometry={pointsToGeometry(calculateRectTableWidthLine())}>
+								<meshBasicMaterial color="#05df72" />
+							</mesh>
+							<Html position={[0, 0, tableTopDepth / 2 + 0.3]} center>
+								<span className="measurement">{tableTopWidth}m</span>
+							</Html>
+						</group>
+						<group>
+							<mesh geometry={pointsToGeometry(calculateRectTableDepthLine())}>
+								<meshBasicMaterial color="#05df72" />
+							</mesh>
+							<Html position={[-tableTopWidth / 2 - 0.3, 0, 0]} center>
+								<span className="measurement">{tableTopDepth}m</span>
+							</Html>
+						</group>
+					</>
+				)}
+				{selectedShape === EnumTableShape.CIRCLE && (
+					<>
+						<group>
+							<mesh
+								geometry={pointsToGeometry(calculateCircleTableWidthLine())}>
+								<meshBasicMaterial color="#05df72" />
+							</mesh>
+							<Html position={[0, 0, -tableTopWidth - 0.3]} center>
+								<span className="measurement">{tableTopWidth * 2}m</span>
+							</Html>
+						</group>
+						<group>
+							<mesh
+								geometry={pointsToGeometry(calculateCircleTableWidthLine())}>
+								<meshBasicMaterial color="#05df72" />
+							</mesh>
+							<Html position={[-tableTopWidth - 0.3, 0, 0]} center>
+								<span className="measurement">{tableTopWidth * 2}m</span>
+							</Html>
+						</group>
+					</>
+				)}
+			</>
 
 			<mesh
 				onClick={() => {

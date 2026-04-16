@@ -48,4 +48,5 @@
 	@apply border border-green-500;
 	@apply py-0.5 px-2 rounded-full;
 	backdrop-filter: blur(10px);
+	@apply text-nowrap;
 }
