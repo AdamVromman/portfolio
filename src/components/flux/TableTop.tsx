@@ -1,12 +1,17 @@
 import * as THREE from "three";
-import { useEffect, useState } from "react";
-import { EnumSelectablePart, EnumTableShape } from "./Variables";
+import { useEffect, useState, type JSX } from "react";
+import {
+	EnumMaterial,
+	EnumSelectablePart,
+	EnumTableShape,
+	EnumTableTopMaterial,
+} from "./Variables";
 import { Html } from "@react-three/drei/web/Html";
-import type { size } from "astro:schema";
 
 interface TableTopProps {
 	selectedShape: EnumTableShape;
-	selectedMaterial: string | null;
+	materials: Map<EnumMaterial, THREE.MeshBasicMaterial>;
+	selectedMaterial: EnumMaterial;
 	setSelectedPart: (part: EnumSelectablePart | null) => void;
 	selectedPart: EnumSelectablePart | null;
 	setSelectedShape: (shape: EnumTableShape) => void;
@@ -22,6 +27,8 @@ interface TableTopProps {
 	tableTopStarSize: number;
 	tableTopStarAngle: number;
 	tableTopStarPoints: number;
+	setSelectedMaterial: (material: EnumTableTopMaterial) => void;
+	setSelectedPartHtml: (html: JSX.Element | null) => void;
 }
 
 const TableTop = ({
@@ -42,6 +49,9 @@ const TableTop = ({
 	setTableTopStarSize,
 	setTableTopStarAngle,
 	setTableTopStarPoints,
+	setSelectedMaterial,
+	materials,
+	setSelectedPartHtml,
 }: TableTopProps) => {
 	const calculateStarShape = () => {
 		const shape = new THREE.Shape();
@@ -104,7 +114,7 @@ const TableTop = ({
 
 		const lines = new THREE.LineSegments(
 			edgeGeometry,
-			new THREE.LineBasicMaterial({ color: "red" }),
+			new THREE.LineBasicMaterial({ color: "#05df72" }),
 		);
 
 		return lines.geometry;
@@ -121,156 +131,221 @@ const TableTop = ({
 		tableTopStarPoints,
 	]);
 
+	const shapeEnumToSvg = (shape: EnumTableShape): JSX.Element => {
+		switch (shape) {
+			case EnumTableShape.RECTANGLE:
+				return <rect x="12.5" y="12.5" width="25" height="25" />;
+			case EnumTableShape.CIRCLE:
+				return <circle cx="25" cy="25" r="15" />;
+			case EnumTableShape.STAR:
+				return (
+					<polygon points="25,5 30,20 45,20 32.5,30 37.5,45 25,35 12.5,45 17.5,30 5,20 20,20" />
+				);
+			default:
+				return <rect x="15" y="15" width="25" height="25" />;
+		}
+	};
+
+	const configHtml = (
+		<div className="table-config">
+			<h3>Table Top</h3>
+			<h2>Shape</h2>
+			<div className="flex flex-row gap-4">
+				{Object.values(EnumTableShape).map((shape) => (
+					<button
+						className={`shape-option ${selectedShape === shape ? "selected" : ""}`}
+						key={shape}
+						onClick={() => setSelectedShape(shape)}>
+						<div className="shape-option-svg">
+							<svg
+								fill={selectedShape === shape ? "#05df72" : "none"}
+								stroke="#05df72"
+								viewBox="0 0 50 50"
+								width="50"
+								height="50">
+								{shapeEnumToSvg(shape)}
+							</svg>
+						</div>
+						<span className="shape-option-text">{shape}</span>
+					</button>
+				))}
+			</div>
+			<h2>Shape options</h2>
+			<div className="flex flex-col gap-2">
+				{selectedShape === EnumTableShape.STAR && (
+					<div className="flex flex-col gap-2">
+						<div className="flex flex-col">
+							<label>Size: </label>
+							<input
+								type="range"
+								min="1"
+								max="4"
+								defaultValue={tableTopStarSize}
+								step={0.1}
+								onDrag={(e) => {
+									e.preventDefault();
+								}}
+								onChange={(e) => {
+									setTableTopStarSize(parseFloat(e.target.value));
+								}}
+							/>
+						</div>
+						<div className="flex flex-col">
+							<label>Angle: </label>
+							<input
+								type="range"
+								min="0.5"
+								max="0.9"
+								defaultValue={tableTopStarAngle}
+								step={0.1}
+								onDrag={(e) => {
+									e.preventDefault();
+								}}
+								onChange={(e) => {
+									setTableTopStarAngle(parseFloat(e.target.value));
+								}}
+							/>
+						</div>
+						<div className="flex flex-col">
+							<label>star points: </label>
+							<input
+								type="range"
+								min="4"
+								max="10"
+								defaultValue={tableTopStarPoints}
+								step={1}
+								onDrag={(e) => {
+									e.preventDefault();
+								}}
+								onChange={(e) => {
+									setTableTopStarPoints(parseFloat(e.target.value));
+								}}
+							/>
+						</div>
+						<div className="flex flex-col">
+							<label>Height: </label>
+							<input
+								type="range"
+								min="0.01"
+								max="0.1"
+								defaultValue={tableTopHeight}
+								step={0.005}
+								onChange={(e) => {
+									setTableTopHeight(parseFloat(e.target.value));
+								}}
+							/>
+						</div>
+					</div>
+				)}
+				{selectedShape === EnumTableShape.RECTANGLE && (
+					<div className="flex flex-col gap-2">
+						<div className="flex flex-col">
+							<label>Width: </label>
+							<input
+								type="range"
+								min="1"
+								max="3"
+								defaultValue={tableTopWidth}
+								step={0.1}
+								onDrag={(e) => {
+									e.preventDefault();
+								}}
+								onChange={(e) => {
+									setTableTopWidth(parseFloat(e.target.value));
+								}}
+							/>
+						</div>
+						<div className="flex flex-col gap-2">
+							<div className="flex flex-col">
+								<label>Depth: </label>
+								<input
+									type="range"
+									min="2"
+									max="6"
+									defaultValue={tableTopDepth}
+									step={0.1}
+									onChange={(e) => {
+										setTableTopDepth(parseFloat(e.target.value));
+									}}
+								/>
+							</div>
+						</div>
+						<div className="flex flex-col">
+							<label>Height: </label>
+							<input
+								type="range"
+								min="0.01"
+								max="0.1"
+								defaultValue={tableTopHeight}
+								step={0.005}
+								onChange={(e) => {
+									setTableTopHeight(parseFloat(e.target.value));
+								}}
+							/>
+						</div>
+					</div>
+				)}
+				{selectedShape === EnumTableShape.CIRCLE && (
+					<div className="flex flex-col gap-2">
+						<div className="flex flex-col">
+							<label>Width: </label>
+							<input
+								type="range"
+								min="1"
+								max="3"
+								defaultValue={tableTopWidth}
+								step={0.1}
+								onDrag={(e) => {
+									e.preventDefault();
+								}}
+								onChange={(e) => {
+									setTableTopWidth(parseFloat(e.target.value));
+								}}
+							/>
+						</div>
+						<div className="flex flex-col">
+							<label>Height: </label>
+							<input
+								type="range"
+								min="0.01"
+								max="0.1"
+								defaultValue={tableTopHeight}
+								step={0.005}
+								onChange={(e) => {
+									setTableTopHeight(parseFloat(e.target.value));
+								}}
+							/>
+						</div>
+					</div>
+				)}
+			</div>
+			<h2>Material options</h2>
+			<div className="flex flex-row gap-4">
+				{Object.values(EnumTableTopMaterial).map((material) => (
+					<button
+						className={`shape-option ${selectedMaterial === material ? "selected" : ""}`}
+						key={material}
+						onClick={() => setSelectedMaterial(material)}>
+						<div className="shape-option-svg">
+							<img
+								src={`/assets/flux/${material}.png`}
+								width="50"
+								height="50"
+							/>
+						</div>
+						<span className="shape-option-text">{material}</span>
+					</button>
+				))}
+			</div>
+		</div>
+	);
+
 	return (
 		<group>
-			{selectedPart === EnumSelectablePart.TABLETOP && (
-				<Html position={[1, 1, 1]}>
-					<div className="flex flex-col">
-						{Object.values(EnumTableShape).map((shape) => (
-							<button key={shape} onClick={() => setSelectedShape(shape)}>
-								{shape}
-							</button>
-						))}
-					</div>
-
-					<div>
-						{selectedShape === EnumTableShape.STAR && (
-							<>
-								<label>Size: </label>
-								<input
-									type="range"
-									min="1"
-									max="4"
-									defaultValue={tableTopStarSize}
-									step={0.1}
-									onDrag={(e) => {
-										e.preventDefault();
-									}}
-									onChange={(e) => {
-										setTableTopStarSize(parseFloat(e.target.value));
-									}}
-								/>
-								<label>Angle: </label>
-								<input
-									type="range"
-									min="0.5"
-									max="0.9"
-									defaultValue={tableTopStarAngle}
-									step={0.1}
-									onDrag={(e) => {
-										e.preventDefault();
-									}}
-									onChange={(e) => {
-										setTableTopStarAngle(parseFloat(e.target.value));
-									}}
-								/>
-								<label>star points: </label>
-								<input
-									type="range"
-									min="4"
-									max="10"
-									defaultValue={tableTopStarPoints}
-									step={1}
-									onDrag={(e) => {
-										e.preventDefault();
-									}}
-									onChange={(e) => {
-										setTableTopStarPoints(parseFloat(e.target.value));
-									}}
-								/>
-								<label>Height: </label>
-								<input
-									type="range"
-									min="0.01"
-									max="0.1"
-									defaultValue={tableTopHeight}
-									step={0.005}
-									onChange={(e) => {
-										setTableTopHeight(parseFloat(e.target.value));
-									}}
-								/>
-							</>
-						)}
-						{selectedShape === EnumTableShape.RECTANGLE && (
-							<>
-								<label>Width: </label>
-								<input
-									type="range"
-									min="1"
-									max="3"
-									defaultValue={tableTopWidth}
-									step={0.1}
-									onDrag={(e) => {
-										e.preventDefault();
-									}}
-									onChange={(e) => {
-										setTableTopWidth(parseFloat(e.target.value));
-									}}
-								/>
-								{selectedShape === EnumTableShape.RECTANGLE && (
-									<>
-										<label>Depth: </label>
-										<input
-											type="range"
-											min="2"
-											max="6"
-											defaultValue={tableTopDepth}
-											step={0.1}
-											onChange={(e) => {
-												setTableTopDepth(parseFloat(e.target.value));
-											}}
-										/>
-									</>
-								)}
-
-								<label>Height: </label>
-								<input
-									type="range"
-									min="0.01"
-									max="0.1"
-									defaultValue={tableTopHeight}
-									step={0.005}
-									onChange={(e) => {
-										setTableTopHeight(parseFloat(e.target.value));
-									}}
-								/>
-							</>
-						)}
-						{selectedShape === EnumTableShape.CIRCLE && (
-							<>
-								<label>Width: </label>
-								<input
-									type="range"
-									min="1"
-									max="3"
-									defaultValue={tableTopWidth}
-									step={0.1}
-									onDrag={(e) => {
-										e.preventDefault();
-									}}
-									onChange={(e) => {
-										setTableTopWidth(parseFloat(e.target.value));
-									}}
-								/>
-								<label>Height: </label>
-								<input
-									type="range"
-									min="0.01"
-									max="0.1"
-									defaultValue={tableTopHeight}
-									step={0.005}
-									onChange={(e) => {
-										setTableTopHeight(parseFloat(e.target.value));
-									}}
-								/>
-							</>
-						)}
-					</div>
-				</Html>
-			)}
 			<mesh
 				onClick={() => {
 					console.log(selectedPart);
+					setSelectedPartHtml(configHtml);
 					setSelectedPart(
 						selectedPart === EnumSelectablePart.TABLETOP
 							? null
@@ -279,12 +354,14 @@ const TableTop = ({
 				}}
 				castShadow
 				receiveShadow
-				geometry={geometry}>
-				<meshBasicMaterial color={selectedMaterial || "gray"} />
-			</mesh>
+				geometry={geometry}
+				material={
+					materials.get(selectedMaterial as EnumMaterial) ??
+					new THREE.MeshBasicMaterial()
+				}></mesh>
 			{selectedPart === EnumSelectablePart.TABLETOP && (
 				<lineSegments geometry={getEdgeGeometry()}>
-					<lineBasicMaterial linewidth={100} color="red" />
+					<lineBasicMaterial linewidth={100} color="#05df72" />
 				</lineSegments>
 			)}
 		</group>

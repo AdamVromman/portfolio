@@ -1,1 +1,44 @@
 @import "./imports.css";
+
+.table-config {
+	@apply w-fit;
+	@apply flex flex-col items-center gap-4;
+	@apply bg-green-50/50;
+	@apply border border-solid border-green-400;
+	@apply p-4 rounded-2xl;
+	backdrop-filter: blur(10px);
+
+	& h3 {
+		@apply block text-center;
+		@apply text-3xl font-bold text-nowrap text-green-400;
+		@apply p-2 px-6 rounded-xl;
+	}
+
+	.shape-option {
+		@apply flex flex-col items-center gap-1;
+
+		.shape-option-svg {
+			@apply w-16 h-16;
+			@apply border border-green-400 rounded-lg overflow-hidden;
+			@apply flex items-center justify-center;
+		}
+
+		.shape-option-text {
+			@apply text-xs;
+		}
+
+		&.selected {
+			.shape-option-svg {
+				@apply border-4;
+			}
+
+			.shape-option-text {
+				@apply font-bold;
+			}
+		}
+	}
+
+	label {
+		@apply italic text-xs;
+	}
+}

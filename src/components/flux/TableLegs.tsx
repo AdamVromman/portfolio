@@ -1,11 +1,18 @@
 import { useEffect, useState, type JSX } from "react";
-import { EnumSelectablePart, EnumTableLeg, EnumTableShape } from "./Variables";
+import {
+	EnumMaterial,
+	EnumSelectablePart,
+	EnumTableLeg,
+	EnumTableLegsMaterial,
+	EnumTableShape,
+} from "./Variables";
 import * as THREE from "three";
 import { Html } from "@react-three/drei";
 
 interface TableLegsProps {
 	selectedShape: EnumTableShape;
-	selectedMaterial: string | null;
+	selectedMaterial: EnumMaterial | null;
+	setSelectedMaterial: (material: EnumTableLegsMaterial) => void;
 	selectedLegs: EnumTableLeg;
 	setSelectedLegs: (legs: EnumTableLeg) => void;
 	setSelectedPart: (part: EnumSelectablePart | null) => void;
@@ -16,6 +23,8 @@ interface TableLegsProps {
 	tableTopStarSize: number;
 	tableTopStarAngle: number;
 	tableTopStarPoints: number;
+	materials: Map<EnumMaterial, THREE.MeshBasicMaterial>;
+	setSelectedPartHtml: (html: JSX.Element | null) => void;
 }
 
 const TableLegs = ({
@@ -31,6 +40,9 @@ const TableLegs = ({
 	tableTopStarSize,
 	tableTopStarAngle,
 	tableTopStarPoints,
+	setSelectedMaterial,
+	materials,
+	setSelectedPartHtml,
 }: TableLegsProps) => {
 	const [legHeight, setLegHeight] = useState(1);
 
@@ -43,7 +55,7 @@ const TableLegs = ({
 	};
 
 	const clickLeg = () => {
-		console.log("clicked leg");
+		setSelectedPartHtml(configHtml);
 		setSelectedPart(
 			selectedPart === EnumSelectablePart.TABLELEGS
 				? null
@@ -56,14 +68,18 @@ const TableLegs = ({
 		const geometry = getLegGeometry();
 		const edgeGeometry = new THREE.EdgesGeometry(geometry, 0.1);
 		const leg = (
-			<mesh onClick={clickLeg} geometry={geometry}>
-				<meshBasicMaterial color={selectedMaterial || "gray"} />
-			</mesh>
+			<mesh
+				onClick={clickLeg}
+				geometry={geometry}
+				material={
+					materials.get(selectedMaterial as EnumMaterial) ??
+					new THREE.MeshBasicMaterial()
+				}></mesh>
 		);
 
 		const legSelected = (
 			<lineSegments geometry={edgeGeometry}>
-				<lineBasicMaterial linewidth={100} color="red" />
+				<lineBasicMaterial linewidth={100} color="#05df72" />
 			</lineSegments>
 		);
 
@@ -143,25 +159,66 @@ const TableLegs = ({
 		tableTopStarSize,
 		tableTopStarAngle,
 		tableTopStarPoints,
+		selectedMaterial,
 	]);
 
-	return (
-		<group>
-			{selectedPart === EnumSelectablePart.TABLELEGS && (
-				<Html position={[1, 1, 1]}>
-					<h3>Table Legs</h3>
-					<div className="flex flex-col">
-						{Object.values(EnumTableLeg).map((shape) => (
-							<button key={shape} onClick={() => setSelectedLegs(shape)}>
-								{shape}
-							</button>
-						))}
-					</div>
-				</Html>
-			)}
-			{legs}
-		</group>
+	const shapeEnumToSvg = (shape: EnumTableLeg): JSX.Element => {
+		switch (shape) {
+			case EnumTableLeg.SQUARE:
+				return <rect x="17.5" y="17.5" width="15" height="15" />;
+			case EnumTableLeg.ROUND:
+				return <circle cx="25" cy="25" r="10" />;
+			default:
+				return <rect x="15" y="15" width="25" height="25" />;
+		}
+	};
+
+	const configHtml = (
+		<div className="table-config">
+			<h3>Table Legs</h3>
+			<h2>Shape</h2>
+			<div className="flex flex-row gap-4">
+				{Object.values(EnumTableLeg).map((shape) => (
+					<button
+						className={`shape-option ${selectedLegs === shape ? "selected" : ""}`}
+						key={shape}
+						onClick={() => setSelectedLegs(shape)}>
+						<div className="shape-option-svg">
+							<svg
+								fill={selectedLegs === shape ? "#05df72" : "none"}
+								stroke="#05df72"
+								viewBox="0 0 50 50"
+								width="50"
+								height="50">
+								{shapeEnumToSvg(shape)}
+							</svg>
+						</div>
+						<span className="shape-option-text">{shape}</span>
+					</button>
+				))}
+			</div>
+			<h2>Material</h2>
+			<div className="flex flex-row gap-4">
+				{Object.values(EnumTableLegsMaterial).map((material) => (
+					<button
+						className={`shape-option ${selectedMaterial === material ? "selected" : ""}`}
+						key={material}
+						onClick={() => setSelectedMaterial(material)}>
+						<div className="shape-option-svg">
+							<img
+								src={`/assets/flux/${material}.png`}
+								width="50"
+								height="50"
+							/>
+						</div>
+						<span className="shape-option-text">{material}</span>
+					</button>
+				))}
+			</div>
+		</div>
 	);
+
+	return <group>{legs}</group>;
 };
 
 export default TableLegs;

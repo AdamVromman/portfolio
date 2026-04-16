@@ -1,29 +1,45 @@
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import TableLegs from "./TableLegs";
 import TableTop from "./TableTop";
-import { EnumSelectablePart, EnumTableLeg, EnumTableShape } from "./Variables";
+import {
+	EnumMaterial,
+	EnumSelectablePart,
+	EnumTableLeg,
+	EnumTableLegsMaterial,
+	EnumTableShape,
+	EnumTableTopMaterial,
+} from "./Variables";
 import { Html } from "@react-three/drei";
+import * as THREE from "three";
 
 interface TableProps {
 	selectedShape: EnumTableShape;
-	selectedMaterial: string | null;
+	selectedMaterialTop: EnumMaterial | undefined;
+	selectedMaterialLegs: EnumMaterial | undefined;
 	setSelectedShape: (shape: EnumTableShape) => void;
-	setSelectedMaterial: (material: string | null) => void;
+	setSelectedMaterialTop: (material: EnumMaterial | undefined) => void;
+	setSelectedMaterialLegs: (material: EnumMaterial | undefined) => void;
 	setSelectedPart: (part: EnumSelectablePart | null) => void;
 	selectedPart: EnumSelectablePart | null;
 	selectedLegs: EnumTableLeg;
 	setSelectedLegs: (legs: EnumTableLeg) => void;
+	materials: Map<EnumMaterial, THREE.MeshBasicMaterial>;
+	setSelectedPartHtml: (html: JSX.Element | null) => void;
 }
 
 const Table = ({
 	selectedShape,
-	selectedMaterial,
+	selectedMaterialTop,
+	selectedMaterialLegs,
 	setSelectedShape,
-	setSelectedMaterial,
+	setSelectedMaterialTop,
+	setSelectedMaterialLegs,
 	setSelectedPart,
 	selectedPart,
 	selectedLegs,
 	setSelectedLegs,
+	materials,
+	setSelectedPartHtml,
 }: TableProps) => {
 	const [tableTopDepth, setTableTopDepth] = useState(2);
 	const [tableTopWidth, setTableTopWidth] = useState(1);
@@ -34,13 +50,12 @@ const Table = ({
 
 	return (
 		<group>
-			<Html>{selectedPart}</Html>
 			<TableTop
 				selectedPart={selectedPart}
 				setSelectedShape={setSelectedShape}
 				setSelectedPart={setSelectedPart}
 				selectedShape={selectedShape}
-				selectedMaterial={selectedMaterial}
+				selectedMaterial={selectedMaterialTop}
 				setTableTopDepth={setTableTopDepth}
 				setTableTopWidth={setTableTopWidth}
 				setTableTopHeight={setTableTopHeight}
@@ -52,10 +67,13 @@ const Table = ({
 				tableTopStarPoints={tableTopStarPoints}
 				setTableTopStarSize={setTableTopStarSize}
 				setTableTopStarAngle={setTableTopStarAngle}
-				setTableTopStarPoints={setTableTopStarPoints}></TableTop>
+				setTableTopStarPoints={setTableTopStarPoints}
+				setSelectedMaterial={setSelectedMaterialTop}
+				setSelectedPartHtml={setSelectedPartHtml}
+				materials={materials}></TableTop>
 			<TableLegs
 				selectedShape={selectedShape}
-				selectedMaterial={selectedMaterial}
+				selectedMaterial={selectedMaterialLegs}
 				selectedLegs={selectedLegs}
 				setSelectedLegs={setSelectedLegs}
 				setSelectedPart={setSelectedPart}
@@ -65,7 +83,10 @@ const Table = ({
 				tableTopHeight={tableTopHeight}
 				tableTopStarSize={tableTopStarSize}
 				tableTopStarAngle={tableTopStarAngle}
-				tableTopStarPoints={tableTopStarPoints}></TableLegs>
+				tableTopStarPoints={tableTopStarPoints}
+				setSelectedMaterial={setSelectedMaterialLegs}
+				setSelectedPartHtml={setSelectedPartHtml}
+				materials={materials}></TableLegs>
 		</group>
 	);
 };
