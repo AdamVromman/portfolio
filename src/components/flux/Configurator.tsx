@@ -112,7 +112,7 @@ const Configurator = () => {
 					/>
 				</Canvas>
 			</div>
-			<div className="absolute z-10 top-10 left-10 w-full h-full pointer-events-none">
+			<div className="absolute z-10 top-10 left-10">
 				{selectedPartHtml ? (
 					selectedPartHtml
 				) : (

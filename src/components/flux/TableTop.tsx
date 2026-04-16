@@ -6,7 +6,7 @@ import {
 	EnumTableShape,
 	EnumTableTopMaterial,
 } from "./Variables";
-import { Html } from "@react-three/drei/web/Html";
+import { Html } from "@react-three/drei";
 
 interface TableTopProps {
 	selectedShape: EnumTableShape;
@@ -182,9 +182,6 @@ const TableTop = ({
 								max="4"
 								defaultValue={tableTopStarSize}
 								step={0.1}
-								onDrag={(e) => {
-									e.preventDefault();
-								}}
 								onChange={(e) => {
 									setTableTopStarSize(parseFloat(e.target.value));
 								}}
@@ -198,9 +195,6 @@ const TableTop = ({
 								max="0.9"
 								defaultValue={tableTopStarAngle}
 								step={0.1}
-								onDrag={(e) => {
-									e.preventDefault();
-								}}
 								onChange={(e) => {
 									setTableTopStarAngle(parseFloat(e.target.value));
 								}}
@@ -214,9 +208,6 @@ const TableTop = ({
 								max="10"
 								defaultValue={tableTopStarPoints}
 								step={1}
-								onDrag={(e) => {
-									e.preventDefault();
-								}}
 								onChange={(e) => {
 									setTableTopStarPoints(parseFloat(e.target.value));
 								}}
@@ -247,9 +238,6 @@ const TableTop = ({
 								max="3"
 								defaultValue={tableTopWidth}
 								step={0.1}
-								onDrag={(e) => {
-									e.preventDefault();
-								}}
 								onChange={(e) => {
 									setTableTopWidth(parseFloat(e.target.value));
 								}}
@@ -295,9 +283,6 @@ const TableTop = ({
 								max="3"
 								defaultValue={tableTopWidth}
 								step={0.1}
-								onDrag={(e) => {
-									e.preventDefault();
-								}}
 								onChange={(e) => {
 									setTableTopWidth(parseFloat(e.target.value));
 								}}
@@ -340,8 +325,107 @@ const TableTop = ({
 		</div>
 	);
 
+	const calculateTableDepthLine = () => {
+		let linePoints = [];
+
+		const startVector = new THREE.Vector3(
+			-tableTopWidth / 2 - 0.1,
+			0,
+			tableTopDepth / 2,
+		);
+
+		const cornerVectorStart = new THREE.Vector3(
+			-tableTopWidth / 2 - 0.15,
+			0,
+			tableTopDepth / 2,
+		);
+
+		const cornerVectorEnd = new THREE.Vector3(
+			-tableTopWidth / 2 - 0.15,
+			0,
+			-tableTopDepth / 2,
+		);
+
+		const endVector = new THREE.Vector3(
+			-tableTopWidth / 2 - 0.1,
+			0,
+			-tableTopDepth / 2,
+		);
+
+		linePoints.push(startVector, cornerVectorStart, cornerVectorEnd, endVector);
+
+		return pointsToGeometry(linePoints);
+	};
+
+	const calculateTableWidthLine = () => {
+		let linePoints = [];
+
+		const startVector = new THREE.Vector3(
+			-tableTopWidth / 2,
+			0,
+			tableTopDepth / 2 + 0.1,
+		);
+
+		const cornerVectorStart = new THREE.Vector3(
+			-tableTopWidth / 2,
+			0,
+			tableTopDepth / 2 + 0.15,
+		);
+
+		const cornerVectorEnd = new THREE.Vector3(
+			tableTopWidth / 2,
+			0,
+			tableTopDepth / 2 + 0.15,
+		);
+
+		const endVector = new THREE.Vector3(
+			tableTopWidth / 2,
+			0,
+			tableTopDepth / 2 + 0.1,
+		);
+
+		linePoints.push(startVector, cornerVectorStart, cornerVectorEnd, endVector);
+
+		return pointsToGeometry(linePoints);
+	};
+
+	const pointsToGeometry = (points: THREE.Vector3[]) => {
+		const curvePath = new THREE.CurvePath();
+		points.forEach((point, index) => {
+			if (index < points.length - 1) {
+				const nextPoint = points[index + 1];
+				const curve = new THREE.LineCurve3(point, nextPoint);
+				curvePath.add(curve);
+			}
+		});
+
+		var tubeGeometry = new THREE.TubeGeometry(curvePath, 64, 0.005, 64, false);
+		return tubeGeometry;
+	};
+
 	return (
 		<group>
+			{selectedPart === EnumSelectablePart.TABLETOP && (
+				<>
+					<group>
+						<mesh geometry={calculateTableWidthLine()}>
+							<meshBasicMaterial color="#05df72" />
+						</mesh>
+						<Html position={[0, 0, tableTopDepth / 2 + 0.3]} center>
+							<span className="measurement">{tableTopWidth}m</span>
+						</Html>
+					</group>
+					<group>
+						<mesh geometry={calculateTableDepthLine()}>
+							<meshBasicMaterial color="#05df72" />
+						</mesh>
+						<Html position={[-tableTopWidth / 2 - 0.3, 0, 0]} center>
+							<span className="measurement">{tableTopDepth}m</span>
+						</Html>
+					</group>
+				</>
+			)}
+
 			<mesh
 				onClick={() => {
 					console.log(selectedPart);
@@ -357,11 +441,11 @@ const TableTop = ({
 				geometry={geometry}
 				material={
 					materials.get(selectedMaterial as EnumMaterial) ??
-					new THREE.MeshBasicMaterial()
+					new THREE.THREE.MeshBasicMaterial()
 				}></mesh>
 			{selectedPart === EnumSelectablePart.TABLETOP && (
 				<lineSegments geometry={getEdgeGeometry()}>
-					<lineBasicMaterial linewidth={100} color="#05df72" />
+					<lineBasicMaterial color="#05df72" />
 				</lineSegments>
 			)}
 		</group>

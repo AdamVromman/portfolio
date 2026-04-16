@@ -42,3 +42,10 @@
 		@apply italic text-xs;
 	}
 }
+
+.measurement {
+	@apply bg-green-50/50;
+	@apply border border-green-500;
+	@apply py-0.5 px-2 rounded-full;
+	backdrop-filter: blur(10px);
+}
