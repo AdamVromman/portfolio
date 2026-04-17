@@ -238,31 +238,100 @@ const TableLegs = ({
 	const calculateTableHeight = (): THREE.Vector3[] => {
 		const linePoints: THREE.Vector3[] = [];
 
-		const startVector = new THREE.Vector3(
-			tableTopWidth / 2 + 0.02,
-			tableTopHeight / 2 + 0.02,
-			-tableTopDepth / 2 - 0.02,
-		);
+		const startVector = new THREE.Vector3(),
+			cornerVectorStart = new THREE.Vector3(),
+			cornerVectorEnd = new THREE.Vector3(),
+			endVector = new THREE.Vector3();
 
-		const cornerVectorStart = new THREE.Vector3(
-			tableTopWidth / 2 + 0.05,
-			tableTopHeight / 2 + 0.02,
-			-tableTopDepth / 2 - 0.05,
-		);
+		switch (selectedShape) {
+			case EnumTableShape.RECTANGLE:
+				startVector.x = tableTopWidth / 2 + 0.02;
+				startVector.y = tableTopHeight / 2 + 0.02;
+				startVector.z = -tableTopDepth / 2 - 0.02;
 
-		const cornerVectorEnd = new THREE.Vector3(
-			tableTopWidth / 2 + 0.05,
-			-(tableTopHeight + legHeight) - 0.02,
-			-tableTopDepth / 2 - 0.05,
-		);
-		const endVector = new THREE.Vector3(
-			tableTopWidth / 2 + 0.02,
-			-(tableTopHeight + legHeight) - 0.02,
-			-tableTopDepth / 2 - 0.02,
-		);
+				cornerVectorStart.x = tableTopWidth / 2 + 0.05;
+				cornerVectorStart.y = tableTopHeight / 2 + 0.02;
+				cornerVectorStart.z = -tableTopDepth / 2 - 0.05;
+
+				cornerVectorEnd.x = tableTopWidth / 2 + 0.05;
+				cornerVectorEnd.y = -(tableTopHeight + legHeight) - 0.02;
+				cornerVectorEnd.z = -tableTopDepth / 2 - 0.05;
+
+				endVector.x = tableTopWidth / 2 + 0.02;
+				endVector.y = -(tableTopHeight + legHeight) - 0.02;
+				endVector.z = -tableTopDepth / 2 - 0.02;
+
+				break;
+			case EnumTableShape.CIRCLE:
+				startVector.x = Math.sin(Math.PI / 4) * (tableTopWidth + 0.1);
+				startVector.y = tableTopHeight / 2 + 0.02;
+				startVector.z = Math.cos(Math.PI / 4) * (tableTopWidth + 0.1);
+
+				cornerVectorStart.x = Math.sin(Math.PI / 4) * (tableTopWidth + 0.12);
+				cornerVectorStart.y = tableTopHeight / 2 + 0.02;
+				cornerVectorStart.z = Math.cos(Math.PI / 4) * (tableTopWidth + 0.12);
+
+				cornerVectorEnd.x = Math.sin(Math.PI / 4) * (tableTopWidth + 0.12);
+				cornerVectorEnd.y = -(tableTopHeight + legHeight) - 0.02;
+				cornerVectorEnd.z = Math.cos(Math.PI / 4) * (tableTopWidth + 0.12);
+
+				endVector.x = Math.sin(Math.PI / 4) * (tableTopWidth + 0.1);
+				endVector.y = -(tableTopHeight + legHeight) - 0.02;
+				endVector.z = Math.cos(Math.PI / 4) * (tableTopWidth + 0.1);
+
+				break;
+			case EnumTableShape.STAR:
+				startVector.x = Math.sin(Math.PI / 4) * (tableTopStarSize + 0.1);
+				startVector.y = tableTopHeight / 2 + 0.02;
+				startVector.z = Math.cos(Math.PI / 4) * (tableTopStarSize + 0.1);
+
+				cornerVectorStart.x = Math.sin(Math.PI / 4) * (tableTopStarSize + 0.12);
+				cornerVectorStart.y = tableTopHeight / 2 + 0.02;
+				cornerVectorStart.z = Math.cos(Math.PI / 4) * (tableTopStarSize + 0.12);
+
+				cornerVectorEnd.x = Math.sin(Math.PI / 4) * (tableTopStarSize + 0.12);
+				cornerVectorEnd.y = -(tableTopHeight + legHeight) - 0.02;
+				cornerVectorEnd.z = Math.cos(Math.PI / 4) * (tableTopStarSize + 0.12);
+
+				endVector.x = Math.sin(Math.PI / 4) * (tableTopStarSize + 0.1);
+				endVector.y = -(tableTopHeight + legHeight) - 0.02;
+				endVector.z = Math.cos(Math.PI / 4) * (tableTopStarSize + 0.1);
+
+				break;
+		}
+
 		linePoints.push(startVector, cornerVectorStart, cornerVectorEnd, endVector);
 
 		return linePoints;
+	};
+
+	const calculateLegMeasurementPosition = (): [number, number, number] => {
+		switch (selectedShape) {
+			case EnumTableShape.RECTANGLE:
+				return [
+					tableTopWidth / 2 + 0.02,
+					-(tableTopHeight + legHeight) / 2 - 0.02,
+					-tableTopDepth / 2 - 0.02,
+				];
+			case EnumTableShape.CIRCLE:
+				return [
+					Math.sin(Math.PI / 4) * (tableTopWidth + 0.1),
+					-(tableTopHeight + legHeight) / 2 - 0.02,
+					Math.cos(Math.PI / 4) * (tableTopWidth + 0.1),
+				];
+			case EnumTableShape.STAR:
+				return [
+					Math.sin(Math.PI / 4) * (tableTopStarSize + 0.1),
+					-(tableTopHeight + legHeight) / 2 - 0.02,
+					Math.cos(Math.PI / 4) * (tableTopStarSize + 0.1),
+				];
+			default:
+				return [
+					tableTopWidth / 2 + 0.02,
+					-(tableTopHeight + legHeight) / 2 - 0.02,
+					-tableTopDepth / 2 - 0.02,
+				];
+		}
 	};
 
 	return (
@@ -271,15 +340,10 @@ const TableLegs = ({
 				<mesh geometry={pointsToGeometry(calculateTableHeight())}>
 					<meshBasicMaterial color="#05df72" />
 				</mesh>
-				<Html
-					position={[
-						tableTopWidth / 2 + 0.02,
-						-(tableTopHeight + legHeight) / 2 - 0.02,
-						-tableTopDepth / 2 - 0.02,
-					]}
-					center>
+				<Html position={calculateLegMeasurementPosition()} center>
 					<span className="measurement">
-						{tableTopHeight * 10}cm + {legHeight * 100}cm ={" "}
+						{(tableTopHeight * 100).toFixed(1)}cm +{" "}
+						{(legHeight * 100).toFixed(1)}cm ={" "}
 						{(tableTopHeight + legHeight).toFixed(2)}m
 					</span>
 				</Html>

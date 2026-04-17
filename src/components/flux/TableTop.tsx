@@ -395,21 +395,89 @@ const TableTop = ({
 
 		const startVector = new THREE.Vector3(
 			-tableTopWidth - 0.1,
+			tableTopHeight / 2,
 			0,
-			-tableTopWidth - 0.1,
 		);
 
 		const cornerVectorStart = new THREE.Vector3(
-			-tableTopWidth - 0.15,
+			-tableTopWidth - 0.1,
+			tableTopHeight / 2 + 0.05,
 			0,
-			-tableTopWidth - 0.15,
 		);
 
-		const cornerVectorEnd = new THREE.Vector3(tableTopWidth / 2 + 0.15, 0, 0);
+		const cornerVectorEnd = new THREE.Vector3(
+			tableTopWidth + 0.1,
+			tableTopHeight / 2 + 0.05,
+			0,
+		);
 
-		const endVector = new THREE.Vector3(tableTopWidth / 2 + 0.1, 0, 0);
+		const endVector = new THREE.Vector3(
+			tableTopWidth + 0.1,
+			tableTopHeight / 2,
+			0,
+		);
 
 		linePoints.push(startVector, cornerVectorStart, cornerVectorEnd, endVector);
+
+		return linePoints;
+	};
+
+	const calculateCircleTableCircumferenceLine = () => {
+		let linePoints: THREE.Vector3[] = [];
+
+		let pts = new THREE.Path()
+			.absarc(0, 0, tableTopWidth + 0.1, 0, Math.PI * 2)
+			.getPoints(64);
+
+		pts.forEach((point) => {
+			linePoints.push(new THREE.Vector3(point.x, 0, point.y));
+		});
+
+		return linePoints;
+	};
+
+	const calculateStarTableWidthLine = () => {
+		let linePoints = [];
+
+		const startVector = new THREE.Vector3(
+			Math.sin(Math.PI / 3) * (tableTopStarSize + 0.1),
+			tableTopHeight / 2,
+			Math.cos(Math.PI / 3) * (tableTopStarSize + 0.1),
+		);
+
+		const cornerVectorStart = new THREE.Vector3(
+			Math.sin(Math.PI / 3) * (tableTopStarSize + 0.1),
+			tableTopHeight / 2 + 0.05,
+			Math.cos(Math.PI / 3) * (tableTopStarSize + 0.1),
+		);
+
+		const cornerVectorEnd = new THREE.Vector3(
+			Math.sin(Math.PI / 3) * (-tableTopStarSize - 0.1),
+			tableTopHeight / 2 + 0.05,
+			Math.cos(Math.PI / 3) * (-tableTopStarSize - 0.1),
+		);
+
+		const endVector = new THREE.Vector3(
+			Math.sin(Math.PI / 3) * (-tableTopStarSize - 0.1),
+			tableTopHeight / 2,
+			Math.cos(Math.PI / 3) * (-tableTopStarSize - 0.1),
+		);
+
+		linePoints.push(startVector, cornerVectorStart, cornerVectorEnd, endVector);
+
+		return linePoints;
+	};
+
+	const calculateStarTableCircumferenceLine = () => {
+		let linePoints: THREE.Vector3[] = [];
+
+		let pts = new THREE.Path()
+			.absarc(0, 0, tableTopStarSize + 0.05, 0, Math.PI * 2)
+			.getPoints(64);
+
+		pts.forEach((point) => {
+			linePoints.push(new THREE.Vector3(point.x, 0, point.y));
+		});
 
 		return linePoints;
 	};
@@ -444,17 +512,58 @@ const TableTop = ({
 								geometry={pointsToGeometry(calculateCircleTableWidthLine())}>
 								<meshBasicMaterial color="#05df72" />
 							</mesh>
-							<Html position={[0, 0, -tableTopWidth - 0.3]} center>
+							<Html position={[0, tableTopHeight / 2 + 0.1, 0]} center>
 								<span className="measurement">{tableTopWidth * 2}m</span>
 							</Html>
 						</group>
 						<group>
 							<mesh
-								geometry={pointsToGeometry(calculateCircleTableWidthLine())}>
+								geometry={pointsToGeometry(
+									calculateCircleTableCircumferenceLine(),
+								)}>
 								<meshBasicMaterial color="#05df72" />
 							</mesh>
-							<Html position={[-tableTopWidth - 0.3, 0, 0]} center>
-								<span className="measurement">{tableTopWidth * 2}m</span>
+							<Html
+								position={[
+									Math.sin(0.2) * (tableTopWidth + 0.1),
+									0,
+									Math.cos(0.2) * (tableTopWidth + 0.1),
+								]}
+								center>
+								<span className="measurement">
+									{(tableTopWidth * tableTopWidth * Math.PI).toFixed(2)}m
+								</span>
+							</Html>
+						</group>
+					</>
+				)}
+				{selectedShape === EnumTableShape.STAR && (
+					<>
+						<group>
+							<mesh geometry={pointsToGeometry(calculateStarTableWidthLine())}>
+								<meshBasicMaterial color="#05df72" />
+							</mesh>
+							<Html position={[0, tableTopHeight / 2 + 0.1, 0]} center>
+								<span className="measurement">{tableTopStarSize * 2}m</span>
+							</Html>
+						</group>
+						<group>
+							<mesh
+								geometry={pointsToGeometry(
+									calculateStarTableCircumferenceLine(),
+								)}>
+								<meshBasicMaterial color="#05df72" />
+							</mesh>
+							<Html
+								position={[
+									Math.sin(0.2) * (tableTopStarSize + 0.1),
+									0,
+									Math.cos(0.2) * (tableTopStarSize + 0.1),
+								]}
+								center>
+								<span className="measurement">
+									{(tableTopStarSize * tableTopStarSize * Math.PI).toFixed(2)}m
+								</span>
 							</Html>
 						</group>
 					</>
