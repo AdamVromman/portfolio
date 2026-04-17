@@ -12,8 +12,8 @@ import { pointsToGeometry } from "./Functions";
 
 interface TableLegsProps {
 	selectedShape: EnumTableShape;
-	selectedMaterial: EnumMaterial | null;
-	setSelectedMaterial: (material: EnumTableLegsMaterial) => void;
+	selectedMaterial: EnumMaterial | undefined;
+	setSelectedMaterial: (material: EnumTableLegsMaterial | undefined) => void;
 	selectedLegs: EnumTableLeg;
 	setSelectedLegs: (legs: EnumTableLeg) => void;
 	setSelectedPart: (part: EnumSelectablePart | null) => void;
@@ -224,7 +224,7 @@ const TableLegs = ({
 			<div className="flex flex-row gap-4">
 				{Object.values(EnumTableLegsMaterial).map((material) => (
 					<button
-						className={`shape-option ${selectedMaterial === material ? "selected" : ""}`}
+						className={`shape-option ${selectedMaterial && selectedMaterial.toString() === material ? "selected" : ""}`}
 						key={material}
 						onClick={() => setSelectedMaterial(material)}>
 						<div className="shape-option-svg">

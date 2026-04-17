@@ -8,12 +8,11 @@ import {
 } from "./Variables";
 import { Html } from "@react-three/drei";
 import { pointsToGeometry } from "./Functions";
-import { set } from "astro:schema";
 
 interface TableTopProps {
 	selectedShape: EnumTableShape;
 	materials: Map<EnumMaterial, THREE.MeshBasicMaterial>;
-	selectedMaterial: EnumMaterial;
+	selectedMaterial: EnumMaterial | undefined;
 	setSelectedPart: (part: EnumSelectablePart | null) => void;
 	selectedPart: EnumSelectablePart | null;
 	setSelectedShape: (shape: EnumTableShape) => void;
@@ -29,7 +28,7 @@ interface TableTopProps {
 	tableTopStarSize: number;
 	tableTopStarAngle: number;
 	tableTopStarPoints: number;
-	setSelectedMaterial: (material: EnumTableTopMaterial) => void;
+	setSelectedMaterial: (material: EnumTableTopMaterial | undefined) => void;
 	setSelectedPartHtml: (html: JSX.Element | null) => void;
 	hideMeasurements: boolean;
 }
@@ -178,7 +177,7 @@ const TableTop = ({
 							/>
 						</div>
 						<div className="flex flex-col">
-							<label>star points: </label>
+							<label>Star points: </label>
 							<input
 								type="range"
 								min="4"
@@ -324,7 +323,7 @@ const TableTop = ({
 			<div className="flex flex-row gap-4">
 				{Object.values(EnumTableTopMaterial).map((material) => (
 					<button
-						className={`shape-option ${selectedMaterial === material ? "selected" : ""}`}
+						className={`shape-option ${selectedMaterial && selectedMaterial.toString() === material ? "selected" : ""}`}
 						key={material}
 						onClick={() => setSelectedMaterial(material)}>
 						<div className="shape-option-svg">
