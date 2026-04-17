@@ -1,55 +1,59 @@
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import "../../CSS/flux.css";
 import Table from "./Table";
-import { cloneElement, useEffect, useRef, useState, type JSX } from "react";
+import { useEffect, useState, type JSX } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "@react-three/drei";
 import {
 	EnumMaterial,
 	EnumSelectablePart,
 	EnumTableLeg,
-	EnumTableLegsMaterial,
 	EnumTableShape,
-	EnumTableTopMaterial,
 } from "./Variables";
-import { div } from "three/tsl";
-
-export interface Shape {
-	name: string;
-}
 
 const Configurator = () => {
+	// Table Top Shape
 	const [selectedShape, setSelectedShape] = useState<EnumTableShape>(
 		EnumTableShape.RECTANGLE,
 	);
+
+	// Table Legs Shape
 	const [selectedLegs, setSelectedLegs] = useState<EnumTableLeg>(
 		EnumTableLeg.ROUND,
 	);
 
+	// Html Inputs to change either the legs/top
 	const [selectedPartHtml, setSelectedPartHtml] = useState<JSX.Element | null>(
 		null,
 	);
 
+	// List of available materials already loaded
 	const [materials, setMaterials] = useState<
 		Map<EnumMaterial, THREE.MeshBasicMaterial>
 	>(new Map());
 
+	// Currently selected material for legs
 	const [selectedMaterialLegs, setSelectedMaterialLegs] = useState<
 		EnumMaterial | undefined
 	>(undefined);
+
+	// Currently selected material for top
 	const [selectedMaterialTop, setSelectedMaterialTop] = useState<
 		EnumMaterial | undefined
 	>(undefined);
 
+	// Currently selected part to customize
 	const [selectedPart, setSelectedPart] = useState<EnumSelectablePart | null>(
 		null,
 	);
 
+	// Texture loader
 	const loadManager = new THREE.LoadingManager();
 	const loader = new THREE.TextureLoader(loadManager);
 
 	const [hideMeasurements, setHideMeasurements] = useState(false);
 
+	// Load all textures on component mount and set default materials
 	useEffect(() => {
 		const materials = new Map<EnumMaterial, THREE.MeshBasicMaterial>();
 		Object.values(EnumMaterial).forEach((shape) => {
@@ -95,14 +99,14 @@ const Configurator = () => {
 						hideMeasurements={hideMeasurements}
 						setSelectedPartHtml={(html) => setSelectedPartHtml((prev) => html)}
 						materials={materials}
+						selectedMaterialLegs={selectedMaterialLegs}
+						setSelectedMaterialLegs={setSelectedMaterialLegs}
+						selectedMaterialTop={selectedMaterialTop}
+						setSelectedMaterialTop={setSelectedMaterialTop}
 						selectedPart={selectedPart}
 						setSelectedPart={setSelectedPart}
-						selectedMaterialLegs={selectedMaterialLegs}
-						selectedMaterialTop={selectedMaterialTop}
 						selectedShape={selectedShape}
 						setSelectedShape={setSelectedShape}
-						setSelectedMaterialLegs={setSelectedMaterialLegs}
-						setSelectedMaterialTop={setSelectedMaterialTop}
 						selectedLegs={selectedLegs}
 						setSelectedLegs={setSelectedLegs}></Table>
 					<OrbitControls
@@ -118,7 +122,7 @@ const Configurator = () => {
 			</div>
 			<div className="absolute z-10 top-10 left-10 flex flex-col items-center gap-4">
 				<button
-					className={`button ${hideMeasurements ? "button-primary" : "button-secondary"}`}
+					className="button"
 					onClick={() => setHideMeasurements(!hideMeasurements)}>
 					{hideMeasurements ? "Show Measurements" : "Hide Measurements"}
 				</button>

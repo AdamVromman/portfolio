@@ -13,7 +13,9 @@ import { pointsToGeometry } from "./Functions";
 interface TableLegsProps {
 	selectedShape: EnumTableShape;
 	selectedMaterial: EnumMaterial | undefined;
-	setSelectedMaterial: (material: EnumTableLegsMaterial | undefined) => void;
+	setSelectedMaterialLegs: (
+		material: EnumTableLegsMaterial | undefined,
+	) => void;
 	selectedLegs: EnumTableLeg;
 	setSelectedLegs: (legs: EnumTableLeg) => void;
 	setSelectedPart: (part: EnumSelectablePart | null) => void;
@@ -42,7 +44,7 @@ const TableLegs = ({
 	tableTopStarSize,
 	tableTopStarAngle,
 	tableTopStarPoints,
-	setSelectedMaterial,
+	setSelectedMaterialLegs,
 	materials,
 	setSelectedPartHtml,
 	hideMeasurements,
@@ -226,7 +228,7 @@ const TableLegs = ({
 					<button
 						className={`shape-option ${selectedMaterial && selectedMaterial.toString() === material ? "selected" : ""}`}
 						key={material}
-						onClick={() => setSelectedMaterial(material)}>
+						onClick={() => setSelectedMaterialLegs(material)}>
 						<div className="shape-option-svg">
 							<img
 								src={`/assets/flux/${material}.png`}

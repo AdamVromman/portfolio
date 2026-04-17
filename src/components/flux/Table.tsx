@@ -5,91 +5,112 @@ import {
 	EnumMaterial,
 	EnumSelectablePart,
 	EnumTableLeg,
-	EnumTableLegsMaterial,
 	EnumTableShape,
-	EnumTableTopMaterial,
 } from "./Variables";
 import * as THREE from "three";
 
 interface TableProps {
+	hideMeasurements: boolean;
+	setSelectedPartHtml: (html: JSX.Element | null) => void;
+
+	materials: Map<EnumMaterial, THREE.MeshBasicMaterial>;
+
 	selectedShape: EnumTableShape;
-	selectedMaterialTop: EnumMaterial | undefined;
-	selectedMaterialLegs: EnumMaterial | undefined;
 	setSelectedShape: (shape: EnumTableShape) => void;
+
+	selectedMaterialTop: EnumMaterial | undefined;
 	setSelectedMaterialTop: (material: EnumMaterial | undefined) => void;
+
+	selectedMaterialLegs: EnumMaterial | undefined;
 	setSelectedMaterialLegs: (material: EnumMaterial | undefined) => void;
+
 	setSelectedPart: (part: EnumSelectablePart | null) => void;
 	selectedPart: EnumSelectablePart | null;
+
 	selectedLegs: EnumTableLeg;
 	setSelectedLegs: (legs: EnumTableLeg) => void;
-	materials: Map<EnumMaterial, THREE.MeshBasicMaterial>;
-	setSelectedPartHtml: (html: JSX.Element | null) => void;
-	hideMeasurements: boolean;
 }
 
 const Table = ({
 	hideMeasurements,
+	setSelectedPartHtml,
+	materials,
 	selectedShape,
-	selectedMaterialTop,
-	selectedMaterialLegs,
 	setSelectedShape,
+	selectedMaterialTop,
 	setSelectedMaterialTop,
+	selectedMaterialLegs,
 	setSelectedMaterialLegs,
 	setSelectedPart,
 	selectedPart,
 	selectedLegs,
 	setSelectedLegs,
-	materials,
-	setSelectedPartHtml,
 }: TableProps) => {
-	const [tableTopDepth, setTableTopDepth] = useState(2);
+	// Rectangle and Circle shape specific
 	const [tableTopWidth, setTableTopWidth] = useState(1);
-	const [tableTopHeight, setTableTopHeight] = useState(0.01);
+
+	// Rectangle shape specific
+	const [tableTopDepth, setTableTopDepth] = useState(2);
+
+	// Star shape specific
 	const [tableTopStarSize, setTableTopStarSize] = useState(1);
 	const [tableTopStarAngle, setTableTopStarAngle] = useState(0.5);
 	const [tableTopStarPoints, setTableTopStarPoints] = useState(4);
+
+	// All shapes
+	const [tableTopHeight, setTableTopHeight] = useState(0.01);
 
 	return (
 		<group>
 			<TableTop
 				hideMeasurements={hideMeasurements}
-				selectedPart={selectedPart}
-				setSelectedShape={setSelectedShape}
-				setSelectedPart={setSelectedPart}
-				selectedShape={selectedShape}
-				selectedMaterial={selectedMaterialTop}
-				setTableTopDepth={setTableTopDepth}
-				setTableTopWidth={setTableTopWidth}
-				setTableTopHeight={setTableTopHeight}
-				tableTopDepth={tableTopDepth}
-				tableTopWidth={tableTopWidth}
-				tableTopHeight={tableTopHeight}
-				tableTopStarSize={tableTopStarSize}
-				tableTopStarAngle={tableTopStarAngle}
-				tableTopStarPoints={tableTopStarPoints}
-				setTableTopStarSize={setTableTopStarSize}
-				setTableTopStarAngle={setTableTopStarAngle}
-				setTableTopStarPoints={setTableTopStarPoints}
-				setSelectedMaterial={setSelectedMaterialTop}
 				setSelectedPartHtml={setSelectedPartHtml}
-				materials={materials}></TableTop>
+				materials={materials}
+				selectedMaterial={selectedMaterialTop}
+				setSelectedMaterialTop={setSelectedMaterialTop}
+				// Currently selected table top shape
+				selectedShape={selectedShape}
+				setSelectedShape={setSelectedShape}
+				// Currently selected part
+				selectedPart={selectedPart}
+				setSelectedPart={setSelectedPart}
+				// Rectangle and Circle specific props
+				tableTopWidth={tableTopWidth}
+				setTableTopWidth={setTableTopWidth}
+				// Rectangle specific props
+				tableTopDepth={tableTopDepth}
+				setTableTopDepth={setTableTopDepth}
+				// Star specific props
+				tableTopStarSize={tableTopStarSize}
+				setTableTopStarSize={setTableTopStarSize}
+				tableTopStarAngle={tableTopStarAngle}
+				setTableTopStarAngle={setTableTopStarAngle}
+				tableTopStarPoints={tableTopStarPoints}
+				setTableTopStarPoints={setTableTopStarPoints}
+				// All shapes
+				tableTopHeight={tableTopHeight}
+				setTableTopHeight={setTableTopHeight}></TableTop>
 			<TableLegs
 				hideMeasurements={hideMeasurements}
-				selectedShape={selectedShape}
+				setSelectedPartHtml={setSelectedPartHtml}
+				materials={materials}
 				selectedMaterial={selectedMaterialLegs}
+				setSelectedMaterialLegs={setSelectedMaterialLegs}
+				// Currently selected table top shape for leg position
+				selectedShape={selectedShape}
+				// Currently selected legs
 				selectedLegs={selectedLegs}
 				setSelectedLegs={setSelectedLegs}
-				setSelectedPart={setSelectedPart}
+				// Currently selected part
 				selectedPart={selectedPart}
+				setSelectedPart={setSelectedPart}
+				// Pass table top dimensions to legs for measurement display and leg position
 				tableTopDepth={tableTopDepth}
 				tableTopWidth={tableTopWidth}
 				tableTopHeight={tableTopHeight}
 				tableTopStarSize={tableTopStarSize}
 				tableTopStarAngle={tableTopStarAngle}
-				tableTopStarPoints={tableTopStarPoints}
-				setSelectedMaterial={setSelectedMaterialLegs}
-				setSelectedPartHtml={setSelectedPartHtml}
-				materials={materials}></TableLegs>
+				tableTopStarPoints={tableTopStarPoints}></TableLegs>
 		</group>
 	);
 };

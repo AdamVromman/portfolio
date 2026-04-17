@@ -28,7 +28,7 @@ interface TableTopProps {
 	tableTopStarSize: number;
 	tableTopStarAngle: number;
 	tableTopStarPoints: number;
-	setSelectedMaterial: (material: EnumTableTopMaterial | undefined) => void;
+	setSelectedMaterialTop: (material: EnumTableTopMaterial | undefined) => void;
 	setSelectedPartHtml: (html: JSX.Element | null) => void;
 	hideMeasurements: boolean;
 }
@@ -51,7 +51,7 @@ const TableTop = ({
 	setTableTopStarSize,
 	setTableTopStarAngle,
 	setTableTopStarPoints,
-	setSelectedMaterial,
+	setSelectedMaterialTop,
 	materials,
 	setSelectedPartHtml,
 	hideMeasurements,
@@ -286,10 +286,10 @@ const TableTop = ({
 
 	useEffect(() => {
 		setGeometry(getGeometry());
-		setSelectedPartHtml(configHtml);
+		setSelectedPartHtml(configHtml());
 	}, [selectedMaterial, selectedShape]);
 
-	const configHtml = (
+	const configHtml = () => (
 		<div className="table-config">
 			<h3>Table Top</h3>
 			<h2>Shape</h2>
@@ -325,7 +325,7 @@ const TableTop = ({
 					<button
 						className={`shape-option ${selectedMaterial && selectedMaterial.toString() === material ? "selected" : ""}`}
 						key={material}
-						onClick={() => setSelectedMaterial(material)}>
+						onClick={() => setSelectedMaterialTop(material)}>
 						<div className="shape-option-svg">
 							<img
 								src={`/assets/flux/${material}.png`}
@@ -593,7 +593,7 @@ const TableTop = ({
 				<mesh
 					onClick={() => {
 						console.log(selectedPart);
-						setSelectedPartHtml(configHtml);
+						setSelectedPartHtml(configHtml());
 						setSelectedPart(
 							selectedPart === EnumSelectablePart.TABLETOP
 								? null
