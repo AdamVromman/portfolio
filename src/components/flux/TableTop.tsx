@@ -8,6 +8,7 @@ import {
 } from "./Variables";
 import { Html } from "@react-three/drei";
 import { pointsToGeometry } from "./Functions";
+import { set } from "astro:schema";
 
 interface TableTopProps {
 	selectedShape: EnumTableShape;
@@ -149,33 +150,10 @@ const TableTop = ({
 		}
 	};
 
-	const configHtml = (
-		<div className="table-config">
-			<h3>Table Top</h3>
-			<h2>Shape</h2>
-			<div className="flex flex-row gap-4">
-				{Object.values(EnumTableShape).map((shape) => (
-					<button
-						className={`shape-option ${selectedShape === shape ? "selected" : ""}`}
-						key={shape}
-						onClick={() => setSelectedShape(shape)}>
-						<div className="shape-option-svg">
-							<svg
-								fill={selectedShape === shape ? "#05df72" : "none"}
-								stroke="#05df72"
-								viewBox="0 0 50 50"
-								width="50"
-								height="50">
-								{shapeEnumToSvg(shape)}
-							</svg>
-						</div>
-						<span className="shape-option-text">{shape}</span>
-					</button>
-				))}
-			</div>
-			<h2>Shape options</h2>
-			<div className="flex flex-col gap-2">
-				{selectedShape === EnumTableShape.STAR && (
+	const getHtmlShapeOptions = (shape: EnumTableShape) => {
+		switch (shape) {
+			case EnumTableShape.STAR:
+				return (
 					<div className="flex flex-col gap-2">
 						<div className="flex flex-col">
 							<label>Size: </label>
@@ -230,8 +208,9 @@ const TableTop = ({
 							/>
 						</div>
 					</div>
-				)}
-				{selectedShape === EnumTableShape.RECTANGLE && (
+				);
+			case EnumTableShape.RECTANGLE:
+				return (
 					<div className="flex flex-col gap-2">
 						<div className="flex flex-col">
 							<label>Width: </label>
@@ -275,8 +254,9 @@ const TableTop = ({
 							/>
 						</div>
 					</div>
-				)}
-				{selectedShape === EnumTableShape.CIRCLE && (
+				);
+			case EnumTableShape.CIRCLE:
+				return (
 					<div className="flex flex-col gap-2">
 						<div className="flex flex-col">
 							<label>Width: </label>
@@ -305,7 +285,43 @@ const TableTop = ({
 							/>
 						</div>
 					</div>
-				)}
+				);
+		}
+	};
+
+	useEffect(() => {
+		setSelectedPartHtml(configHtml);
+	}, [selectedMaterial, selectedShape]);
+
+	const configHtml = (
+		<div className="table-config">
+			<h3>Table Top</h3>
+			<h2>Shape</h2>
+			<div className="flex flex-row gap-4">
+				{Object.values(EnumTableShape).map((shape) => (
+					<button
+						className={`shape-option ${selectedShape === shape ? "selected" : ""}`}
+						key={shape}
+						onClick={() => {
+							setSelectedShape(shape);
+						}}>
+						<div className="shape-option-svg">
+							<svg
+								fill={selectedShape === shape ? "#05df72" : "none"}
+								stroke="#05df72"
+								viewBox="0 0 50 50"
+								width="50"
+								height="50">
+								{shapeEnumToSvg(shape)}
+							</svg>
+						</div>
+						<span className="shape-option-text">{shape}</span>
+					</button>
+				))}
+			</div>
+			<h2>Shape options</h2>
+			<div className="flex flex-col gap-2">
+				{getHtmlShapeOptions(selectedShape)}
 			</div>
 			<h2>Material options</h2>
 			<div className="flex flex-row gap-4">

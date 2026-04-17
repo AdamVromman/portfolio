@@ -1,7 +1,7 @@
 import { Canvas, useThree } from "@react-three/fiber";
 import "../../CSS/flux.css";
 import Table from "./Table";
-import { useEffect, useRef, useState, type JSX } from "react";
+import { cloneElement, useEffect, useRef, useState, type JSX } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "@react-three/drei";
 import {
@@ -12,6 +12,7 @@ import {
 	EnumTableShape,
 	EnumTableTopMaterial,
 } from "./Variables";
+import { div } from "three/tsl";
 
 export interface Shape {
 	name: string;
@@ -92,7 +93,7 @@ const Configurator = () => {
 					<pointLight position={[1, 1, 5]} intensity={50} />
 					<Table
 						hideMeasurements={hideMeasurements}
-						setSelectedPartHtml={setSelectedPartHtml}
+						setSelectedPartHtml={(html) => setSelectedPartHtml((prev) => html)}
 						materials={materials}
 						selectedPart={selectedPart}
 						setSelectedPart={setSelectedPart}

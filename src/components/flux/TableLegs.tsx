@@ -175,6 +175,10 @@ const TableLegs = ({
 		}
 	};
 
+	useEffect(() => {
+		setSelectedPartHtml(configHtml);
+	}, [selectedMaterial, selectedLegs]);
+
 	const configHtml = (
 		<div className="table-config">
 			<h3>Table Legs</h3>
