@@ -109,10 +109,6 @@ const TableTop = ({
 		THREE.BoxGeometry | THREE.CylinderGeometry | THREE.ExtrudeGeometry
 	>(getGeometry());
 
-	useEffect(() => {
-		setGeometry(getGeometry());
-	}, [selectedShape]);
-
 	const getEdgeGeometry = () => {
 		const edgeGeometry = new THREE.EdgesGeometry(geometry, 15);
 
@@ -201,7 +197,7 @@ const TableTop = ({
 								min="0.01"
 								max="0.1"
 								defaultValue={tableTopHeight}
-								step={0.005}
+								step={0.01}
 								onChange={(e) => {
 									setTableTopHeight(parseFloat(e.target.value));
 								}}
@@ -247,7 +243,7 @@ const TableTop = ({
 								min="0.01"
 								max="0.1"
 								defaultValue={tableTopHeight}
-								step={0.005}
+								step={0.01}
 								onChange={(e) => {
 									setTableTopHeight(parseFloat(e.target.value));
 								}}
@@ -278,7 +274,7 @@ const TableTop = ({
 								min="0.01"
 								max="0.1"
 								defaultValue={tableTopHeight}
-								step={0.005}
+								step={0.01}
 								onChange={(e) => {
 									setTableTopHeight(parseFloat(e.target.value));
 								}}
@@ -290,6 +286,7 @@ const TableTop = ({
 	};
 
 	useEffect(() => {
+		setGeometry(getGeometry());
 		setSelectedPartHtml(configHtml);
 	}, [selectedMaterial, selectedShape]);
 

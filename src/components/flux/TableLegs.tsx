@@ -213,7 +213,7 @@ const TableLegs = ({
 						min="1"
 						max="1.2"
 						defaultValue={legHeight}
-						step={0.05}
+						step={0.01}
 						onChange={(e) => {
 							setLegHeight(parseFloat(e.target.value));
 						}}
@@ -349,8 +349,8 @@ const TableLegs = ({
 					</mesh>
 					<Html position={calculateLegMeasurementPosition()} center>
 						<span className="measurement">
-							{(tableTopHeight * 100).toFixed(1)}cm +{" "}
-							{(legHeight * 100).toFixed(1)}cm ={" "}
+							{(tableTopHeight * 100).toFixed(0)}cm +{" "}
+							{(legHeight * 100).toFixed(0)}cm ={" "}
 							{(tableTopHeight + legHeight).toFixed(2)}m
 						</span>
 					</Html>
