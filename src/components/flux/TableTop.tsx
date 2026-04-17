@@ -30,6 +30,7 @@ interface TableTopProps {
 	tableTopStarPoints: number;
 	setSelectedMaterial: (material: EnumTableTopMaterial) => void;
 	setSelectedPartHtml: (html: JSX.Element | null) => void;
+	hideMeasurements: boolean;
 }
 
 const TableTop = ({
@@ -53,6 +54,7 @@ const TableTop = ({
 	setSelectedMaterial,
 	materials,
 	setSelectedPartHtml,
+	hideMeasurements,
 }: TableTopProps) => {
 	const calculateStarShape = () => {
 		const shape = new THREE.Shape();
@@ -483,116 +485,123 @@ const TableTop = ({
 	};
 
 	return (
-		<group>
-			<>
-				{selectedShape === EnumTableShape.RECTANGLE && (
-					<>
-						<group>
-							<mesh geometry={pointsToGeometry(calculateRectTableWidthLine())}>
-								<meshBasicMaterial color="#05df72" />
-							</mesh>
-							<Html position={[0, 0, tableTopDepth / 2 + 0.3]} center>
-								<span className="measurement">{tableTopWidth}m</span>
-							</Html>
-						</group>
-						<group>
-							<mesh geometry={pointsToGeometry(calculateRectTableDepthLine())}>
-								<meshBasicMaterial color="#05df72" />
-							</mesh>
-							<Html position={[-tableTopWidth / 2 - 0.3, 0, 0]} center>
-								<span className="measurement">{tableTopDepth}m</span>
-							</Html>
-						</group>
-					</>
-				)}
-				{selectedShape === EnumTableShape.CIRCLE && (
-					<>
-						<group>
-							<mesh
-								geometry={pointsToGeometry(calculateCircleTableWidthLine())}>
-								<meshBasicMaterial color="#05df72" />
-							</mesh>
-							<Html position={[0, tableTopHeight / 2 + 0.1, 0]} center>
-								<span className="measurement">{tableTopWidth * 2}m</span>
-							</Html>
-						</group>
-						<group>
-							<mesh
-								geometry={pointsToGeometry(
-									calculateCircleTableCircumferenceLine(),
-								)}>
-								<meshBasicMaterial color="#05df72" />
-							</mesh>
-							<Html
-								position={[
-									Math.sin(0.2) * (tableTopWidth + 0.1),
-									0,
-									Math.cos(0.2) * (tableTopWidth + 0.1),
-								]}
-								center>
-								<span className="measurement">
-									{(tableTopWidth * tableTopWidth * Math.PI).toFixed(2)}m
-								</span>
-							</Html>
-						</group>
-					</>
-				)}
-				{selectedShape === EnumTableShape.STAR && (
-					<>
-						<group>
-							<mesh geometry={pointsToGeometry(calculateStarTableWidthLine())}>
-								<meshBasicMaterial color="#05df72" />
-							</mesh>
-							<Html position={[0, tableTopHeight / 2 + 0.1, 0]} center>
-								<span className="measurement">{tableTopStarSize * 2}m</span>
-							</Html>
-						</group>
-						<group>
-							<mesh
-								geometry={pointsToGeometry(
-									calculateStarTableCircumferenceLine(),
-								)}>
-								<meshBasicMaterial color="#05df72" />
-							</mesh>
-							<Html
-								position={[
-									Math.sin(0.2) * (tableTopStarSize + 0.1),
-									0,
-									Math.cos(0.2) * (tableTopStarSize + 0.1),
-								]}
-								center>
-								<span className="measurement">
-									{(tableTopStarSize * tableTopStarSize * Math.PI).toFixed(2)}m
-								</span>
-							</Html>
-						</group>
-					</>
-				)}
-			</>
-
-			<mesh
-				onClick={() => {
-					console.log(selectedPart);
-					setSelectedPartHtml(configHtml);
-					setSelectedPart(
-						selectedPart === EnumSelectablePart.TABLETOP
-							? null
-							: EnumSelectablePart.TABLETOP,
-					);
-				}}
-				castShadow
-				receiveShadow
-				geometry={geometry}
-				material={
-					materials.get(selectedMaterial as EnumMaterial) ??
-					new THREE.THREE.MeshBasicMaterial()
-				}></mesh>
-			{selectedPart === EnumSelectablePart.TABLETOP && (
-				<lineSegments geometry={getEdgeGeometry()}>
-					<lineBasicMaterial color="#05df72" />
-				</lineSegments>
+		<>
+			{!hideMeasurements && (
+				<>
+					{selectedShape === EnumTableShape.RECTANGLE && (
+						<>
+							<group>
+								<mesh
+									geometry={pointsToGeometry(calculateRectTableWidthLine())}>
+									<meshBasicMaterial color="#05df72" />
+								</mesh>
+								<Html position={[0, 0, tableTopDepth / 2 + 0.3]} center>
+									<span className="measurement">{tableTopWidth}m</span>
+								</Html>
+							</group>
+							<group>
+								<mesh
+									geometry={pointsToGeometry(calculateRectTableDepthLine())}>
+									<meshBasicMaterial color="#05df72" />
+								</mesh>
+								<Html position={[-tableTopWidth / 2 - 0.3, 0, 0]} center>
+									<span className="measurement">{tableTopDepth}m</span>
+								</Html>
+							</group>
+						</>
+					)}
+					{selectedShape === EnumTableShape.CIRCLE && (
+						<>
+							<group>
+								<mesh
+									geometry={pointsToGeometry(calculateCircleTableWidthLine())}>
+									<meshBasicMaterial color="#05df72" />
+								</mesh>
+								<Html position={[0, tableTopHeight / 2 + 0.1, 0]} center>
+									<span className="measurement">{tableTopWidth * 2}m</span>
+								</Html>
+							</group>
+							<group>
+								<mesh
+									geometry={pointsToGeometry(
+										calculateCircleTableCircumferenceLine(),
+									)}>
+									<meshBasicMaterial color="#05df72" />
+								</mesh>
+								<Html
+									position={[
+										Math.sin(0.2) * (tableTopWidth + 0.1),
+										0,
+										Math.cos(0.2) * (tableTopWidth + 0.1),
+									]}
+									center>
+									<span className="measurement">
+										{(tableTopWidth * tableTopWidth * Math.PI).toFixed(2)}m
+									</span>
+								</Html>
+							</group>
+						</>
+					)}
+					{selectedShape === EnumTableShape.STAR && (
+						<>
+							<group>
+								<mesh
+									geometry={pointsToGeometry(calculateStarTableWidthLine())}>
+									<meshBasicMaterial color="#05df72" />
+								</mesh>
+								<Html position={[0, tableTopHeight / 2 + 0.1, 0]} center>
+									<span className="measurement">{tableTopStarSize * 2}m</span>
+								</Html>
+							</group>
+							<group>
+								<mesh
+									geometry={pointsToGeometry(
+										calculateStarTableCircumferenceLine(),
+									)}>
+									<meshBasicMaterial color="#05df72" />
+								</mesh>
+								<Html
+									position={[
+										Math.sin(0.2) * (tableTopStarSize + 0.1),
+										0,
+										Math.cos(0.2) * (tableTopStarSize + 0.1),
+									]}
+									center>
+									<span className="measurement">
+										{(tableTopStarSize * tableTopStarSize * Math.PI).toFixed(2)}
+										m
+									</span>
+								</Html>
+							</group>
+						</>
+					)}
+				</>
 			)}
-		</group>
+			<group>
+				<mesh
+					onClick={() => {
+						console.log(selectedPart);
+						setSelectedPartHtml(configHtml);
+						setSelectedPart(
+							selectedPart === EnumSelectablePart.TABLETOP
+								? null
+								: EnumSelectablePart.TABLETOP,
+						);
+					}}
+					castShadow
+					receiveShadow
+					geometry={geometry}
+					material={
+						materials.get(selectedMaterial as EnumMaterial) ??
+						new THREE.MeshBasicMaterial()
+					}></mesh>
+				{selectedPart === EnumSelectablePart.TABLETOP && (
+					<lineSegments geometry={getEdgeGeometry()}>
+						<lineBasicMaterial color="#05df72" />
+					</lineSegments>
+				)}
+			</group>
+		</>
 	);
 };
 

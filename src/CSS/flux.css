@@ -50,3 +50,9 @@
 	backdrop-filter: blur(10px);
 	@apply text-nowrap;
 }
+
+.button {
+	@apply border border-green-400 rounded-lg overflow-hidden;
+	@apply flex items-center justify-center;
+	@apply px-4 py-1;
+}

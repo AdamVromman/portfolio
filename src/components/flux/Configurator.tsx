@@ -47,6 +47,8 @@ const Configurator = () => {
 	const loadManager = new THREE.LoadingManager();
 	const loader = new THREE.TextureLoader(loadManager);
 
+	const [hideMeasurements, setHideMeasurements] = useState(false);
+
 	useEffect(() => {
 		const materials = new Map<EnumMaterial, THREE.MeshBasicMaterial>();
 		Object.values(EnumMaterial).forEach((shape) => {
@@ -89,6 +91,7 @@ const Configurator = () => {
 					}}>
 					<pointLight position={[1, 1, 5]} intensity={50} />
 					<Table
+						hideMeasurements={hideMeasurements}
 						setSelectedPartHtml={setSelectedPartHtml}
 						materials={materials}
 						selectedPart={selectedPart}
@@ -112,7 +115,12 @@ const Configurator = () => {
 					/>
 				</Canvas>
 			</div>
-			<div className="absolute z-10 top-10 left-10">
+			<div className="absolute z-10 top-10 left-10 flex flex-col items-center gap-4">
+				<button
+					className={`button ${hideMeasurements ? "button-primary" : "button-secondary"}`}
+					onClick={() => setHideMeasurements(!hideMeasurements)}>
+					{hideMeasurements ? "Show Measurements" : "Hide Measurements"}
+				</button>
 				{selectedPartHtml ? (
 					selectedPartHtml
 				) : (

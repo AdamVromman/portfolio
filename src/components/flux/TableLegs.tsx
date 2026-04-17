@@ -26,6 +26,7 @@ interface TableLegsProps {
 	tableTopStarPoints: number;
 	materials: Map<EnumMaterial, THREE.MeshBasicMaterial>;
 	setSelectedPartHtml: (html: JSX.Element | null) => void;
+	hideMeasurements: boolean;
 }
 
 const TableLegs = ({
@@ -44,6 +45,7 @@ const TableLegs = ({
 	setSelectedMaterial,
 	materials,
 	setSelectedPartHtml,
+	hideMeasurements,
 }: TableLegsProps) => {
 	const [legHeight, setLegHeight] = useState(1);
 
@@ -336,18 +338,21 @@ const TableLegs = ({
 
 	return (
 		<group>
-			<group>
-				<mesh geometry={pointsToGeometry(calculateTableHeight())}>
-					<meshBasicMaterial color="#05df72" />
-				</mesh>
-				<Html position={calculateLegMeasurementPosition()} center>
-					<span className="measurement">
-						{(tableTopHeight * 100).toFixed(1)}cm +{" "}
-						{(legHeight * 100).toFixed(1)}cm ={" "}
-						{(tableTopHeight + legHeight).toFixed(2)}m
-					</span>
-				</Html>
-			</group>
+			{!hideMeasurements && (
+				<group>
+					<mesh geometry={pointsToGeometry(calculateTableHeight())}>
+						<meshBasicMaterial color="#05df72" />
+					</mesh>
+					<Html position={calculateLegMeasurementPosition()} center>
+						<span className="measurement">
+							{(tableTopHeight * 100).toFixed(1)}cm +{" "}
+							{(legHeight * 100).toFixed(1)}cm ={" "}
+							{(tableTopHeight + legHeight).toFixed(2)}m
+						</span>
+					</Html>
+				</group>
+			)}
+
 			{legs}
 		</group>
 	);

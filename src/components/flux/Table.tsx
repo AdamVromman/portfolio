@@ -25,9 +25,11 @@ interface TableProps {
 	setSelectedLegs: (legs: EnumTableLeg) => void;
 	materials: Map<EnumMaterial, THREE.MeshBasicMaterial>;
 	setSelectedPartHtml: (html: JSX.Element | null) => void;
+	hideMeasurements: boolean;
 }
 
 const Table = ({
+	hideMeasurements,
 	selectedShape,
 	selectedMaterialTop,
 	selectedMaterialLegs,
@@ -51,6 +53,7 @@ const Table = ({
 	return (
 		<group>
 			<TableTop
+				hideMeasurements={hideMeasurements}
 				selectedPart={selectedPart}
 				setSelectedShape={setSelectedShape}
 				setSelectedPart={setSelectedPart}
@@ -72,6 +75,7 @@ const Table = ({
 				setSelectedPartHtml={setSelectedPartHtml}
 				materials={materials}></TableTop>
 			<TableLegs
+				hideMeasurements={hideMeasurements}
 				selectedShape={selectedShape}
 				selectedMaterial={selectedMaterialLegs}
 				selectedLegs={selectedLegs}
