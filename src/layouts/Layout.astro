@@ -21,7 +21,7 @@ const { slug } = Astro.props;
 			rel="stylesheet"
 		/>
 		<ClientRouter />
-		<script>
+		<!-- <script>
 			if (import.meta.env.PUBLIC_STATISTICS === "true") {
 				var _paq = (window._paq = window._paq || []);
 				_paq.push(["disableCampaignParameters"]);
@@ -40,7 +40,7 @@ const { slug } = Astro.props;
 					s.parentNode.insertBefore(g, s);
 				})();
 			}
-		</script>
+		</script> -->
 	</head>
 	<body data-slug={slug} transition:persist>
 		<div id="grid-calculator"></div>

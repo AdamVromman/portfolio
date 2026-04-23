@@ -16,14 +16,14 @@ export default defineConfig({
 		plugins: [tailwindcss()],
 	},
 	integrations: [
-		matomo({
-			enabled: true,
-			host: "https://adam-vromman.be/analytics/",
-			siteId: 1,
-			heartBeatTimer: 5,
-			disableCookies: true,
-			debug: false,
-			viewTransition: true,
-		}),
+		// matomo({
+		// 	enabled: true,
+		// 	host: "https://adam-vromman.be/analytics/",
+		// 	siteId: 1,
+		// 	heartBeatTimer: 5,
+		// 	disableCookies: true,
+		// 	debug: false,
+		// 	viewTransition: true,
+		// }),
 	],
 });
